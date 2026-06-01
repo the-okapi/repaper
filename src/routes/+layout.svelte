@@ -41,11 +41,13 @@
 <main class="h-screen w-screen">
 	<nav class="fixed z-40 h-screen w-70 border-r border-(--o) bg-(--bg) pt-9">
 		<a href={resolve('/')}><h2 class="text-center text-4xl font-black">Repaper</h2></a>
-		<div class="pt-4 pl-7">
+		<div class="pt-4 px-7">
 			<button class="a" onclick={() => go('/create')}>Create a Document</button><br />
 			<button class="a" onclick={() => go('/open')}>Open a Document</button><br />
 			<button class="a" onclick={() => go('/recents')}>Recent Documents</button><br />
 			<button class="a" onclick={() => go('/settings')}>Settings</button><br />
+			<div class="w-full border-(--o) border-b my-2"></div>
+			<button class="a" onclick={() => go('/help')}>Help</button><br />
 		</div>
 	</nav>
 	<div class="flex">

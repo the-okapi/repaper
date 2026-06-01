@@ -4,6 +4,13 @@
 :root {
 	font-display: block;
 	--page: calc(8.5in - 40px);
+	overflow-x: auto;
+}
+
+@media (min-width: calc(8.5in + 17.5rem)) {
+  :root {
+    overflow-x: hidden;
+  }
 }
 
 ::selection {

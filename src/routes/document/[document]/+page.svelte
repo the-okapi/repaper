@@ -156,9 +156,10 @@
 	{/if}
 	{#if mode === 'viewer'}
 		<Viewer {document} {scale} />
-	{:else if showSettings}
-		<DocumentSettings {deleteFunc} {renameDocument} back={() => (showSettings = false)} />
 	{:else}
-		<Editor {document} {scale} {save} {settings} />
+		<Editor {document} {scale} {save} {settings} show={!showSettings} />
+		{#if showSettings}
+			<DocumentSettings {deleteFunc} {renameDocument} back={() => (showSettings = false)} />
+		{/if}
 	{/if}
 </div>
