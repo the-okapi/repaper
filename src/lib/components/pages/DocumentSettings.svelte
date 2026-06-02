@@ -23,7 +23,7 @@
 	<form onsubmit={rename} class="mb-10 block text-left">
 		<div class="inline w-full text-left">
 			<Label.Root for="rename" class="block">Rename Document:</Label.Root>
-			<input type="text" class="w-40" id="rename" required bind:value={renameTo} />
+			<input type="text" class="w-40 h-10" id="rename" required bind:value={renameTo} />
 		</div>
 		<Button.Root type="submit">Go</Button.Root>
 	</form>

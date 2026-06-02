@@ -34,6 +34,8 @@
 
 	let fullscreen = $state(false);
 
+	let editor: any = $state();
+
 	onMount(async () => {
 		if (page.url.searchParams.getAll('fullscreen').length > 0) {
 			fullscreen = true;
@@ -132,6 +134,7 @@
 
 	async function renameDocument(to: string) {
 		loading = true;
+		await editor.saveFunction();
 		const response = await fetch('/api/rename', {
 			method: 'POST',
 			body: JSON.stringify({
@@ -173,6 +176,7 @@
 			show={!showSettings}
 			{fullscreen}
 			bind:changesMadeSinceSave
+			bind:this={editor}
 		/>
 		{#if showSettings}
 			<DocumentSettings {deleteFunc} {renameDocument} back={() => (showSettings = false)} />
