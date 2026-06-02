@@ -48,7 +48,7 @@
 
 <main class="h-screen w-screen">
 	{#if fullscreen.length === 0}
-		<nav class="fixed z-40 h-screen w-[17.5vw] border-r border-(--o) bg-(--bg) pt-9">
+		<nav class="fixed z-40 h-screen w-70 border-r border-(--o) bg-(--bg) pt-9">
 			<a href={resolve('/')}><h2 class="text-center text-4xl font-black">Repaper</h2></a>
 			<div class="pt-4 px-7">
 				<button class="a" onclick={() => go('/create')}>Create a Document</button><br />

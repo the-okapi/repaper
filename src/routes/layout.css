@@ -122,10 +122,10 @@ input:focus {
 form {
 	text-align: center;
 }
-
+/*
 .content {
 	font-family: var(--font);
-	max-width: calc(8.5in - 40px);
+	max-width: calc(15in - 40px);
 	white-space: pre-wrap;
 	overflow-wrap: break-word;
 	letter-spacing: 0;
@@ -135,10 +135,10 @@ form {
 
 .content-cursor {
 	font-family: var(--font);
-	max-width: calc(8.5in - 40px);
+	max-width: calc(15in - 40px);
 	white-space: pre-wrap;
 	overflow-wrap: break-word;
-}
+}*/
 
 .cursor {
 	display: relative;
@@ -163,9 +163,9 @@ form {
 .tiptap {
 	outline: none;
 	border: 1px solid var(--o);
-	width: 8.5in;
-	min-height: 11in;
 	padding: 10px;
+	width: 14in;
 	border-radius: 5px;
 	margin: auto;
+	font-size: 29px;
 }

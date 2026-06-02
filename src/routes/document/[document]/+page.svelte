@@ -26,16 +26,19 @@
 
 	let mode = $state('viewer');
 
-	let scale = $state(100);
+	let scale = $state(70);
 
 	let token = $state('');
 
 	let showSettings = $state(false);
 
-	let fullscreen: string[] = $state([]);
+	let fullscreen = $state(false);
 
 	onMount(async () => {
-		fullscreen = page.url.searchParams.getAll('fullscreen');
+		if (page.url.searchParams.getAll('fullscreen').length > 0) {
+			fullscreen = true;
+			scale = 100;
+		}
 		const modeLS = page.url.searchParams.get('mode');
 		if (!modeLS) {
 			goto(resolve('/recents'), { replaceState: true });
@@ -107,8 +110,11 @@
 		showSettings = true;
 	}
 
+	let changesMadeSinceSave = $state(false);
+
 	async function deleteFunc() {
 		loading = true;
+		changesMadeSinceSave = false;
 		await fetch('/api/delete', {
 			method: 'POST',
 			body: JSON.stringify({
@@ -157,7 +163,7 @@
 		</div>
 	{/if}
 	{#if mode === 'viewer'}
-		<Viewer {document} {scale} />
+		<Viewer {document} {scale} {fullscreen} />
 	{:else}
 		<Editor
 			{document}
@@ -165,7 +171,8 @@
 			{save}
 			{settings}
 			show={!showSettings}
-			fullscreen={fullscreen.length > 0 ? true : false}
+			{fullscreen}
+			bind:changesMadeSinceSave
 		/>
 		{#if showSettings}
 			<DocumentSettings {deleteFunc} {renameDocument} back={() => (showSettings = false)} />

@@ -66,12 +66,13 @@
 				changed.set(true);
 			},
 			onSelectionUpdate: ({ editor }) => {
-				fontSize = (editor.getAttributes('textStyle').fontSize ?? '16px').split('p')[0];
+				fontSize = (editor.getAttributes('textStyle').fontSize ?? '29px').split('p')[0];
 			},
 			autofocus: editor,
 			editable: editor
 		});
-		fontSize = (editorState.editor.getAttributes('textStyle').fontSize ?? '16px').split('p')[0];
+		fontSize = (editorState.editor.getAttributes('textStyle').fontSize ?? '29px').split('p')[0];
+		editorState.editor.chain().focus().setFontSize(`${fontSize}px`).run();
 		loading = false;
 	});
 
@@ -85,7 +86,7 @@
 		}
 	}
 
-	let fontSize = $state(16);
+	let fontSize = $state(29);
 
 	function fontSizeChange() {
 		if (fontSize > 99) {
