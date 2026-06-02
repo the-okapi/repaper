@@ -13,7 +13,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		password = requestJson.password;
 	}
 	let editDocuments = [];
-	let viewDocuments = [];
+	let viewDocuments;
 	try {
 		if (password) {
 			editDocuments = await db

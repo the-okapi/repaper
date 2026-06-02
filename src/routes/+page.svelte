@@ -11,7 +11,7 @@
 		{#if length > 0}
 			<div class="m-auto mt-6.5 h-fit w-fit rounded-xl border border-(--fg)/30 bg-(--bg) p-4">
 				<h2 class="mb-3 text-center text-lg font-bold">Recent Documents</h2>
-				<Recents limit={4} bind:length />
+				<Recents limit={4} />
 			</div>
 		{/if}
 	</div>

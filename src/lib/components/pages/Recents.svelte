@@ -5,7 +5,7 @@
 	import { resolve } from '$app/paths';
 	import { goto } from '$app/navigation';
 
-	let { size = 'w-80 h-fit', limit = 10, empty = false, length = $bindable() } = $props();
+	let { size = 'w-80 h-fit', limit = 10, empty = false } = $props();
 
 	let loading = $state(true);
 
@@ -16,7 +16,6 @@
 		if (recentDocuments) {
 			recents = JSON.parse(recentDocuments);
 		}
-		length = recents.length;
 		if (recents.length > limit) {
 			recents = recents.slice(0, limit);
 		}

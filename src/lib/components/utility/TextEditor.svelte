@@ -23,14 +23,13 @@
 
 	let { initial, promise, save = () => {}, editor = true, scale, ...props } = $props();
 
-	async function saveFunc() {
+	export async function saveFunc() {
 		loading = true;
 		const status = await save(JSON.stringify(editorState.editor.getJSON()));
 		loading = false;
 		if (status === 200) {
 			localStorage.removeItem('repaper-document-unsaved');
 			changed.set(false);
-			alert('Document saved successfully.');
 		} else {
 			alert('Failed to save document. Please try again later.');
 		}

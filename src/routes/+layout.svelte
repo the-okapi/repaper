@@ -5,12 +5,16 @@
 	import { ModeWatcher } from 'mode-watcher';
 	import { goto } from '$app/navigation';
 	import { changed } from '$lib';
+	import { page } from '$app/state';
+	import { onMount } from 'svelte';
 
 	let { children } = $props();
 
 	function oncontextmenu(event: Event) {
 		event.preventDefault();
 	}
+
+	let fullscreen: string[] = $state([]);
 
 	function go(where: any) {
 		if ($changed) {
@@ -22,6 +26,10 @@
 			goto(resolve(where));
 		}
 	}
+
+	onMount(() => {
+		fullscreen = page.url.searchParams.getAll('fullscreen');
+	});
 </script>
 
 <svelte:head>
@@ -39,21 +47,28 @@
 />
 
 <main class="h-screen w-screen">
-	<nav class="fixed z-40 h-screen w-70 border-r border-(--o) bg-(--bg) pt-9">
-		<a href={resolve('/')}><h2 class="text-center text-4xl font-black">Repaper</h2></a>
-		<div class="pt-4 px-7">
-			<button class="a" onclick={() => go('/create')}>Create a Document</button><br />
-			<button class="a" onclick={() => go('/open')}>Open a Document</button><br />
-			<button class="a" onclick={() => go('/recents')}>Recent Documents</button><br />
-			<button class="a" onclick={() => go('/settings')}>Settings</button><br />
-			<div class="w-full border-(--o) border-b my-2"></div>
-			<button class="a" onclick={() => go('/help')}>Help</button><br />
+	{#if fullscreen.length === 0}
+		<nav class="fixed z-40 h-screen w-[17.5vw] border-r border-(--o) bg-(--bg) pt-9">
+			<a href={resolve('/')}><h2 class="text-center text-4xl font-black">Repaper</h2></a>
+			<div class="pt-4 px-7">
+				<button class="a" onclick={() => go('/create')}>Create a Document</button><br />
+				<button class="a" onclick={() => go('/open')}>Open a Document</button><br />
+				<button class="a" onclick={() => go('/recents')}>Recent Documents</button><br />
+				<button class="a" onclick={() => go('/settings')}>Settings</button><br />
+				<div class="w-full border-(--o) border-b my-2"></div>
+				<button class="a" onclick={() => go('/help')}>Help</button><br />
+				<button class="a" onclick={() => go('/about')}>About</button><br />
+			</div>
+		</nav>
+		<div class="flex">
+			<div class="w-70"></div>
+			<div class="flex h-screen items-center justify-center" style="width: calc(100vw - 17.5rem)">
+				{@render children()}
+			</div>
 		</div>
-	</nav>
-	<div class="flex">
-		<div class="w-70"></div>
-		<div class="flex h-screen items-center justify-center" style="width: calc(100vw - 17.5rem)">
+	{:else}
+		<div class="flex h-screen items-center justify-center">
 			{@render children()}
 		</div>
-	</div>
+	{/if}
 </main>

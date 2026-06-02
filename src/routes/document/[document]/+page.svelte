@@ -32,7 +32,10 @@
 
 	let showSettings = $state(false);
 
+	let fullscreen: string[] = $state([]);
+
 	onMount(async () => {
+		fullscreen = page.url.searchParams.getAll('fullscreen');
 		const modeLS = page.url.searchParams.get('mode');
 		if (!modeLS) {
 			goto(resolve('/recents'), { replaceState: true });
@@ -136,7 +139,6 @@
 		} else if (response.status === 500) {
 			alert('Failed to rename document. Please try again later');
 		} else {
-			alert('Document renamed successfully.');
 			location.reload();
 		}
 		loading = false;
@@ -157,7 +159,14 @@
 	{#if mode === 'viewer'}
 		<Viewer {document} {scale} />
 	{:else}
-		<Editor {document} {scale} {save} {settings} show={!showSettings} />
+		<Editor
+			{document}
+			{scale}
+			{save}
+			{settings}
+			show={!showSettings}
+			fullscreen={fullscreen.length > 0 ? true : false}
+		/>
 		{#if showSettings}
 			<DocumentSettings {deleteFunc} {renameDocument} back={() => (showSettings = false)} />
 		{/if}

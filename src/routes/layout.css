@@ -8,9 +8,9 @@
 }
 
 @media (min-width: calc(8.5in + 17.5rem)) {
-  :root {
-    overflow-x: hidden;
-  }
+	:root {
+		overflow-x: hidden;
+	}
 }
 
 ::selection {
