@@ -14,3 +14,4 @@ export { default as Slider } from '$lib/components/ui/Slider.svelte';
 export { default as DocumentSettings } from '$lib/components/pages/DocumentSettings.svelte';
 export { default as TextEditor } from '$lib/components/utility/TextEditor.svelte';
 export { default as Toggle } from '$lib/components/ui/Toggle.svelte';
+export { default as LinkButton } from '$lib/components/ui/LinkButton.svelte';

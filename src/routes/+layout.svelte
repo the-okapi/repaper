@@ -28,7 +28,9 @@
 	}
 
 	onMount(() => {
-		fullscreen = page.url.searchParams.getAll('fullscreen');
+		if (page.params.document != null) {
+			fullscreen = page.url.searchParams.getAll('fullscreen');
+		}
 	});
 </script>
 

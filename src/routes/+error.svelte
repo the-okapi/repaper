@@ -7,7 +7,7 @@
 	style="width: calc(100vw - 17.5rem)"
 >
 	<div class="h-fit w-fit">
-		<p class="rotate-90 text-[10rem] font-black">:(</p>
+		<p class="rotate-90 text-[10rem]">:(</p>
 		<h2 class="h1 mt-10 text-2xl">{page.status}: {page.error?.message}</h2>
 	</div>
 </main>
