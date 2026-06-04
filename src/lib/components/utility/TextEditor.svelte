@@ -114,7 +114,10 @@
 					bind:value={fontSize}
 					onchange={fontSizeChange}
 				/>
-				<span class="absolute top-[50%] right-10 translate-y-[-50%] text-(--fg)/50">px</span>
+				<span
+					class="absolute pointer-events-none top-[50%] right-10 translate-y-[-50%] text-(--fg)/50"
+					>px</span
+				>
 			</div>
 			<Toggle
 				onclick={() => editorState.editor.chain().focus().toggleBold().run()}
