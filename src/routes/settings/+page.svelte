@@ -24,7 +24,7 @@
 	let themes = [
 		{ value: 'default', label: 'Default', mode: 'light' },
 		{ value: 'coral', label: 'Coral', mode: 'light' },
-		{ value: 'cucumber', label: 'Cucumber', mode: 'light' },
+		{ value: 'graphite', label: 'Graphite', mode: 'light' },
 		{ value: 'wumpus', label: 'Wumpus', mode: 'dark' },
 		{ value: 'og', label: 'OG', mode: 'dark' },
 		{ value: 'nord', label: 'Nord', mode: 'dark' }

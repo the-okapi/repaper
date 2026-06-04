@@ -4,7 +4,7 @@
 
 <a
 	{href}
-	class="p-8 border rounded-xl text-xl m-auto block w-fit hover:bg-[#00000005] hover:shadow-xl"
+	class="p-8 border border-(--o) rounded-xl text-xl m-auto block w-fit hover:bg-(--fg)/5"
 >
 	{@render children()}
 </a>

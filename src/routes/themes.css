@@ -24,13 +24,13 @@
 	color: var(--fg);
 }
 
-[data-theme*='cucumber'] {
+[data-theme*='graphite'] {
 	color-scheme: light;
-	--bg: #f5fff5;
-	--fg: #010;
-	--p: #22c55e;
+	--bg: #eee;
+	--fg: #111;
+	--p: #777;
 	--p-fg: #f5fff5;
-	--o: #010;
+	--o: #111;
 	--red: #ef2e30;
 	background: var(--bg);
 	color: var(--fg);
@@ -62,7 +62,7 @@
 
 [data-theme*='og'] {
 	color-scheme: dark;
-	--bg: #0a0a0a;
+	--bg: #222;
 	--fg: #fafafa;
 	--p: #00dfdf;
 	--p-fg: #0a0a0a;
