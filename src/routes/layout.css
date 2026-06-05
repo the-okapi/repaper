@@ -5,12 +5,7 @@
 	font-display: block;
 	--page: calc(8.5in - 40px);
 	overflow-x: auto;
-}
-
-@media (min-width: calc(8.5in + 17.5rem)) {
-	:root {
-		overflow-x: hidden;
-	}
+	overscroll-behavior: none;
 }
 
 ::selection {
@@ -122,23 +117,6 @@ input:focus {
 form {
 	text-align: center;
 }
-/*
-.content {
-	font-family: var(--font);
-	max-width: calc(15in - 40px);
-	white-space: pre-wrap;
-	overflow-wrap: break-word;
-	letter-spacing: 0;
-	font-size: 0;
-	color: var(--fg);
-}
-
-.content-cursor {
-	font-family: var(--font);
-	max-width: calc(15in - 40px);
-	white-space: pre-wrap;
-	overflow-wrap: break-word;
-}*/
 
 .cursor {
 	display: relative;
