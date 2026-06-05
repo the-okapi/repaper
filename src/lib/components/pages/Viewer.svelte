@@ -14,6 +14,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>{document.title} - Repaper</title>
+</svelte:head>
+
 <div class="h-screen" style="width: calc(100vw{fullscreen ? '' : ' - 5rem'})">
 	<div class="flex m-auto mt-8 w-fit">
 		<h2 class="m-auto text-center text-lg font-bold text-(--fg)/60">View Mode</h2>

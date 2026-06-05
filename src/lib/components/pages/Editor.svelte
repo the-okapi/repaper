@@ -42,6 +42,10 @@
 
 <svelte:window {onbeforeunload} />
 
+<svelte:head>
+	<title>{document.title} - Repaper</title>
+</svelte:head>
+
 <div
 	class="h-screen"
 	style={!fullscreen ? 'width: calc(100vw - 5rem)' : 'width: 100vw'}
