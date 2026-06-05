@@ -1,8 +1,18 @@
 <script>
 	import { text } from '$lib/background';
 	import { Recents } from '$lib/components';
+	import { onMount } from 'svelte';
 
-	let length = $state(4);
+	let length = $state(0);
+
+	onMount(() => {
+		const recentDocuments = localStorage.getItem('repaper-recent-documents');
+		if (recentDocuments) {
+			length = JSON.parse(recentDocuments).length;
+		} else {
+			length = 0;
+		}
+	})
 </script>
 
 <div class="fixed inset-0 left-70 z-40 flex items-center justify-center">
