@@ -70,27 +70,37 @@
 
 <main class="h-screen w-screen">
 	{#if fullscreen.length === 0}
-		<nav class="fixed z-40 h-screen w-70 border-r border-(--o) bg-(--bg) pt-9">
-			<a href={resolve('/')}><h2 class="text-center text-4xl font-black">Repaper</h2></a>
-			<div class="pt-4 px-7">
-				<button class="a" onclick={() => go('/create')}
-					>{lang(languageState, 'Create a Document', 'Créer un Document')}</button
-				><br />
-				<button class="a" onclick={() => go('/open')}
-					>{lang(languageState, 'Open a Document', 'Ouvrir un Document')}</button
-				><br />
-				<button class="a" onclick={() => go('/recents')}
-					>{lang(languageState, 'Recent Documents', 'Documents Récents')}</button
-				><br />
-				<button class="a" onclick={() => go('/settings')}
-					>{lang(languageState, 'Settings', 'Paramètres')}</button
-				><br />
-				<div class="w-full border-(--o) border-b my-2"></div>
-				<button class="a" onclick={() => go('/help')}>{lang(languageState, 'Help', 'Aide')}</button
-				><br />
-				<button class="a" onclick={() => go('/about')}
-					>{lang(languageState, 'About', 'À Propos')}</button
-				><br />
+		<nav class="fixed z-40 h-screen w-70 border-r border-(--o) bg-(--bg) pt-9 flex flex-wrap">
+			<div>
+				<a href={resolve('/')}><h2 class="text-center text-4xl font-black">Repaper</h2></a>
+				<div class="pt-4 px-7">
+					<button class="a" onclick={() => go('/create')}
+						>{lang(languageState, 'Create a Document', 'Créer un Document')}</button
+					><br />
+					<button class="a" onclick={() => go('/open')}
+						>{lang(languageState, 'Open a Document', 'Ouvrir un Document')}</button
+					><br />
+					<button class="a" onclick={() => go('/recents')}
+						>{lang(languageState, 'Recent Documents', 'Documents Récents')}</button
+					><br />
+					<button class="a" onclick={() => go('/settings')}
+						>{lang(languageState, 'Settings', 'Paramètres')}</button
+					><br />
+					<div class="w-full border-(--o) border-b my-2"></div>
+					<button class="a" onclick={() => go('/help')}>{lang(languageState, 'Help', 'Aide')}</button
+					><br />
+					<button class="a" onclick={() => go('/about')}
+						>{lang(languageState, 'About', 'À Propos')}</button
+					><br />
+				</div>
+			</div><br />
+			<div class="px-7 pb-3 flex flex-col relative justify-end">
+				<div>
+					<p class="text-[0.8rem]">repaper@unlimitedstuffltd.com</p>
+					<button class="a text-left text-[0.8rem] underline underline-offset-2" onclick={() => window.open("https://github.com/the-okapi/repaper", "_blank")}>
+						https://github.com/the-okapi/repaper
+					</button>
+				</div>
 			</div>
 		</nav>
 		<div class="flex">
