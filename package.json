@@ -54,6 +54,7 @@
 		"@tiptap/extension-text-align": "^3.24.0",
 		"@tiptap/extension-text-style": "^3.24.0",
 		"@tiptap/extension-underline": "^3.24.0",
+		"@tiptap/extensions": "^3.25.0",
 		"@tiptap/pm": "^3.24.0",
 		"@vercel/analytics": "^2.0.1",
 		"@vercel/speed-insights": "^2.0.0",

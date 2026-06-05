@@ -9,6 +9,7 @@
 	import Bold from '@tiptap/extension-bold';
 	import Underline from '@tiptap/extension-underline';
 	import TextAlign from '@tiptap/extension-text-align';
+	import { UndoRedo } from '@tiptap/extensions';
 	import { Loading, Toggle } from '$lib/components';
 	import { Button } from 'bits-ui';
 	import { changed } from '$lib';
@@ -52,7 +53,8 @@
 				FontSize,
 				Italic,
 				Bold,
-				Underline
+				Underline,
+				UndoRedo
 			],
 			editorProps: {
 				handlePaste: () => true,
