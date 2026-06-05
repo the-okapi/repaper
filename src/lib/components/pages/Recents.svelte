@@ -1,9 +1,11 @@
 <script lang="ts">
+	// Translated
 	import { Loading } from '$lib/components';
 	import { onMount } from 'svelte';
 	import type { DocumentLink } from '$lib';
 	import { resolve } from '$app/paths';
 	import { goto } from '$app/navigation';
+	import lang, { languageState as lS } from '$lib/lang.svelte';
 
 	let { size = 'w-80 h-fit', limit = 10, empty = false } = $props();
 
@@ -34,7 +36,9 @@
 <div class="m-auto w-fit">
 	{#if recents.length < 1}
 		{#if empty}
-			<p class="text-center text-lg">Open a document to get started.</p>
+			<p class="text-center text-lg">
+				{lang(lS, 'Open a document to get started.', 'Ouvrir un document pour commencer.')}
+			</p>
 		{/if}
 	{:else}
 		<div class={size}>

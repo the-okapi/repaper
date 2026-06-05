@@ -1,7 +1,9 @@
 <script lang="ts">
+	// Translated
 	import { page } from '$app/state';
 	import { Loading, TextEditor } from '$lib/components';
 	import { Button } from 'bits-ui';
+	import lang, { languageState as lS } from '$lib/lang.svelte';
 
 	let {
 		document,
@@ -52,13 +54,19 @@
 	hidden={!show}
 >
 	<div class="m-auto mt-8 flex w-fit">
-		<h2 class="m-auto text-center font-bold text-lg text-(--fg)/60">Edit Mode</h2>
-		<Button.Root onclick={settings} class="m-auto ml-5 h-fit">Document Settings</Button.Root>
+		<h2 class="m-auto text-center font-bold text-lg text-(--fg)/60">
+			{lang(lS, 'Edit Mode', "Mode d'Éditeur")}
+		</h2>
+		<Button.Root onclick={settings} class="m-auto ml-5 h-fit"
+			>{lang(lS, 'Document Settings', 'Paramètres du Document')}</Button.Root
+		>
 		{#if !fullscreen}
-			<Button.Root onclick={enableFullscreen} class="m-auto ml-5 h-fit">Fullscreen</Button.Root>
+			<Button.Root onclick={enableFullscreen} class="m-auto ml-5 h-fit"
+				>{lang(lS, 'Fullscreen', 'Plein Écran')}</Button.Root
+			>
 		{:else}
 			<Button.Root onclick={disableFullscreen} class="m-auto ml-5 h-fit"
-				>Exit Fullscreen</Button.Root
+				>{lang(lS, 'Exit Fullscreen', 'Sortir de Plein Écran')}</Button.Root
 			>
 		{/if}
 	</div>

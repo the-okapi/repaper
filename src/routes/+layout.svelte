@@ -1,4 +1,5 @@
 <script lang="ts">
+	// Translated
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.png';
 	import { resolve } from '$app/paths';
@@ -7,7 +8,7 @@
 	import { changed } from '$lib';
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
-	import { setLanguage } from '$lib/lang.svelte';
+	import lang, { languageState, setLanguage } from '$lib/lang.svelte';
 	import { Loading } from '$lib/components';
 
 	let { children } = $props();
@@ -20,7 +21,15 @@
 
 	function go(where: any) {
 		if ($changed) {
-			if (confirm('Are you sure you want to leave this page? Changes may not be saved.')) {
+			if (
+				confirm(
+					lang(
+						languageState,
+						'Are you sure you want to leave this page? Changes may not be saved.',
+						'Vous êtes certains que vous voulez partir cette page. Vos changements peut-être ne seront pas enregistrés.'
+					)
+				)
+			) {
 				changed.set(false);
 				goto(resolve(where));
 			}
@@ -65,13 +74,24 @@
 		<nav class="fixed z-40 h-screen w-70 border-r border-(--o) bg-(--bg) pt-9">
 			<a href={resolve('/')}><h2 class="text-center text-4xl font-black">Repaper</h2></a>
 			<div class="pt-4 px-7">
-				<button class="a" onclick={() => go('/create')}>Create a Document</button><br />
-				<button class="a" onclick={() => go('/open')}>Open a Document</button><br />
-				<button class="a" onclick={() => go('/recents')}>Recent Documents</button><br />
-				<button class="a" onclick={() => go('/settings')}>Settings</button><br />
+				<button class="a" onclick={() => go('/create')}
+					>{lang(languageState, 'Create a Document', 'Créer un Document')}</button
+				><br />
+				<button class="a" onclick={() => go('/open')}
+					>{lang(languageState, 'Open a Document', 'Ouvrir un Document')}</button
+				><br />
+				<button class="a" onclick={() => go('/recents')}
+					>{lang(languageState, 'Recent Documents', 'Documents Récents')}</button
+				><br />
+				<button class="a" onclick={() => go('/settings')}
+					>{lang(languageState, 'Settings', 'Paramètres')}</button
+				><br />
 				<div class="w-full border-(--o) border-b my-2"></div>
-				<button class="a" onclick={() => go('/help')}>Help</button><br />
-				<button class="a" onclick={() => go('/about')}>About</button><br />
+				<button class="a" onclick={() => go('/help')}>{lang(languageState, 'Help', 'Aide')}</button
+				><br />
+				<button class="a" onclick={() => go('/about')}
+					>{lang(languageState, 'About', 'À Propos')}</button
+				><br />
 			</div>
 		</nav>
 		<div class="flex">

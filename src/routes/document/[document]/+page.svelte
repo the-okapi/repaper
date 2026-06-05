@@ -1,4 +1,5 @@
 <script lang="ts">
+	// Translated
 	import { onMount } from 'svelte';
 	import type { PageProps } from './$types';
 	import type { DocumentLink } from '$lib';
@@ -7,6 +8,7 @@
 	import { Loading, Viewer, Editor, DocumentSettings } from '$lib/components';
 	import { page } from '$app/state';
 	import { Slider } from '$lib/components';
+	import lang, { languageState as lS } from '$lib/lang.svelte';
 
 	let resolveP: (value: boolean) => void;
 
@@ -146,7 +148,13 @@
 		if (response.status === 401) {
 			goto(resolve('/'), { replaceState: true });
 		} else if (response.status === 500) {
-			alert('Failed to rename document. Please try again later');
+			alert(
+				lang(
+					lS,
+					'Failed to rename document. Please try again later',
+					"Échouait à renommer le document. Essayez plus tard s'il vous plaît."
+				)
+			);
 		} else {
 			location.reload();
 		}
@@ -159,7 +167,7 @@
 <div class="pt-20">
 	{#if !showSettings}
 		<div class="m-auto w-fit">
-			<p class="mt-7 mb-1 font-bold text-(--fg)/60">Zoom:</p>
+			<p class="mt-7 mb-1 font-bold text-(--fg)/60">{lang(lS, 'Zoom', 'Zoomer')}:</p>
 			<div class="m-auto w-120">
 				<Slider bind:value={scale} max={100} min={30} />
 			</div>

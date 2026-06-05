@@ -1,7 +1,9 @@
 <script lang="ts">
+	// Translated
 	import { TextEditor } from '$lib/components';
 	import { Button } from 'bits-ui';
 	import { page } from '$app/state';
+	import lang, { languageState as lS } from '$lib/lang.svelte';
 
 	let { document, scale, fullscreen } = $props();
 
@@ -20,12 +22,16 @@
 
 <div class="h-screen" style="width: calc(100vw{fullscreen ? '' : ' - 5rem'})">
 	<div class="flex m-auto mt-8 w-fit">
-		<h2 class="m-auto text-center text-lg font-bold text-(--fg)/60">View Mode</h2>
+		<h2 class="m-auto text-center text-lg font-bold text-(--fg)/60">
+			{lang(lS, 'View Mode', 'Mode de Spectateur')}
+		</h2>
 		{#if !fullscreen}
-			<Button.Root onclick={enableFullscreen} class="m-auto ml-5 h-fit">Fullscreen</Button.Root>
+			<Button.Root onclick={enableFullscreen} class="m-auto ml-5 h-fit"
+				>{lang(lS, 'Fullscreen', 'Plein Écran')}</Button.Root
+			>
 		{:else}
 			<Button.Root onclick={disableFullscreen} class="m-auto ml-5 h-fit"
-				>Exit Fullscreen</Button.Root
+				>{lang(lS, 'Exit Fullscreen', 'Quitter Plein Écran')}</Button.Root
 			>
 		{/if}
 	</div>

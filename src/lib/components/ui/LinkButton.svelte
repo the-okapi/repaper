@@ -1,4 +1,5 @@
 <script lang="ts">
+	// Translated
 	let { href, children } = $props();
 </script>
 

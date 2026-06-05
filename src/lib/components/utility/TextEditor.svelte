@@ -1,4 +1,5 @@
 <script lang="ts">
+	// Translated
 	import { onMount, onDestroy } from 'svelte';
 	import { Editor } from '@tiptap/core';
 	import Document from '@tiptap/extension-document';
@@ -16,6 +17,7 @@
 	import TextAlignLeft from '@lucide/svelte/icons/text-align-start';
 	import TextAlignCenter from '@lucide/svelte/icons/text-align-center';
 	import TextAlignRight from '@lucide/svelte/icons/text-align-end';
+	import lang, { languageState as lS } from '$lib/lang.svelte';
 
 	let element: any = $state();
 	let editorState: any = $state({ editor: null });
@@ -32,7 +34,13 @@
 			localStorage.removeItem('repaper-document-unsaved');
 			changed.set(false);
 		} else {
-			alert('Failed to save document. Please try again later.');
+			alert(
+				lang(
+					lS,
+					'Failed to save document. Please try again later.',
+					"Échoué à enregistrer le document. Essayez plus tard s'il vous plaît."
+				)
+			);
 		}
 	}
 
@@ -123,15 +131,16 @@
 			</div>
 			<Toggle
 				onclick={() => editorState.editor.chain().focus().toggleBold().run()}
-				active={editorState.editor.isActive('bold')}>Bold</Toggle
+				active={editorState.editor.isActive('bold')}>{lang(lS, 'Bold', 'Gras')}</Toggle
 			>
 			<Toggle
 				onclick={() => editorState.editor.chain().focus().toggleItalic().run()}
-				active={editorState.editor.isActive('italic')}>Italic</Toggle
+				active={editorState.editor.isActive('italic')}>{lang(lS, 'Italic', 'Italique')}</Toggle
 			>
 			<Toggle
 				onclick={() => editorState.editor.chain().focus().toggleUnderline().run()}
-				active={editorState.editor.isActive('underline')}>Underline</Toggle
+				active={editorState.editor.isActive('underline')}
+				>{lang(lS, 'Underline', 'Soulignement')}</Toggle
 			>
 			<div class="flex gap-1 rounded-xl border border-(--o) p-1.5">
 				<Toggle
@@ -156,7 +165,7 @@
 					<TextAlignRight size={20} /></Toggle
 				>
 			</div>
-			<Button.Root class="ml-10" onclick={saveFunc}>Save</Button.Root>
+			<Button.Root class="ml-10" onclick={saveFunc}>{lang(lS, 'Save', 'Enregistrer')}</Button.Root>
 		</div>
 	{/if}
 

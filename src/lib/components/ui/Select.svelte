@@ -1,4 +1,5 @@
 <script lang="ts">
+	// Translated
 	import { Select } from 'bits-ui';
 	import ChevronsUpDown from '@lucide/svelte/icons/chevrons-up-down';
 	import ChevronUp from '@lucide/svelte/icons/chevron-up';

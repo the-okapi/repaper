@@ -1,4 +1,5 @@
 <script lang="ts">
+	// Translated
 	import { Popover } from 'bits-ui';
 
 	let { children, ...props } = $props();

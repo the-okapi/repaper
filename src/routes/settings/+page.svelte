@@ -1,9 +1,10 @@
 <script lang="ts">
+	// Translated
 	import { SelectC, SelectItem } from '$lib/components';
 	import { setTheme, theme } from 'mode-watcher';
 	import { Label, Select } from 'bits-ui';
 	import { onMount } from 'svelte';
-	import { languageState, setLanguage } from '$lib/lang.svelte';
+	import lang, { languageState, setLanguage } from '$lib/lang.svelte';
 
 	type SelectItemType = {
 		value: string;
@@ -74,9 +75,9 @@
 </script>
 
 <div>
-	<h1 class="h1">Settings</h1>
+	<h1 class="h1">{lang(languageState, 'Settings', 'Paramètres')}</h1>
 	<div class="m-auto mb-5 w-fit">
-		<Label.Root for="theme">Theme:</Label.Root>
+		<Label.Root for="theme">{lang(languageState, 'Theme', 'Thème')}:</Label.Root>
 		<SelectC
 			bind:value={currentTheme}
 			id="theme"
@@ -84,7 +85,9 @@
 			trigger={selectedModeLabel?.label}
 		>
 			<Select.Group>
-				<Select.GroupHeading class="group-heading">Light Themes</Select.GroupHeading>
+				<Select.GroupHeading class="group-heading"
+					>{lang(languageState, 'Light Themes', 'Thèmes Clairs')}</Select.GroupHeading
+				>
 				{#each themes as theme, i (i + theme.value)}
 					{#if theme.mode === 'light'}
 						<SelectItem value={theme} />
@@ -92,7 +95,9 @@
 				{/each}
 			</Select.Group>
 			<Select.Group>
-				<Select.GroupHeading class="group-heading">Dark Themes</Select.GroupHeading>
+				<Select.GroupHeading class="group-heading"
+					>{lang(languageState, 'Dark Themes', 'Thèmes Sombres')}</Select.GroupHeading
+				>
 				{#each themes as theme, i (i + theme.value)}
 					{#if theme.mode === 'dark'}
 						<SelectItem value={theme} />
@@ -102,7 +107,7 @@
 		</SelectC>
 	</div>
 	<div class="m-auto w-fit mb-5">
-		<Label.Root for="font">Font:</Label.Root>
+		<Label.Root for="font">{lang(languageState, 'Font', 'Police')}:</Label.Root>
 		<SelectC
 			bind:value={currentFont}
 			font={currentFont}
@@ -116,7 +121,7 @@
 		</SelectC>
 	</div>
 	<div class="m-auto w-fit">
-		<Label.Root for="lang">Language:</Label.Root>
+		<Label.Root for="lang">{lang(languageState, 'Language', 'Langue')}:</Label.Root>
 		<SelectC
 			bind:value={languageState.lang}
 			id="lang"

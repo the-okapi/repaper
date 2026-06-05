@@ -1,4 +1,14 @@
-export const text = `
+// Translated
+
+export function text(aOrB: string) {
+	if (aOrB === 'a') {
+		return english;
+	} else {
+		return french;
+	}
+}
+
+const english = `
 		Tell me, O Muse, of that ingenious hero who travelled far and wide after he had sacked the famous 
 		town of Troy. Many cities did he visit, and many were the nations with whose manners and
 		customs he was acquainted; moreover he suffered much by sea while trying to save his own life
@@ -72,3 +82,85 @@ export const text = `
 		drew a clean table beside them. An upper servant brought them bread, and offered them many good
 		things of what there was in the house, the carver fetched them plates of all manner of meats and
 		set cups of gold by their side, and a manservant brought them wine and poured it out for them.`;
+
+const french = `
+		Dis-moi, Muse, cet homme subtil qui erra si longtemps, après qu'il eut renversé la citadelle
+		sacrée de Troiè. Et il vit les cités de peuples nombreux, et il connut leur esprit; et, dans son
+		coeur, il endura beaucoup de maux, sur la mer, pour sa propre vie et le retour de ses compagnons
+		Mais il ne les sauva point, contre son désir; et ils périrent par leur impiété, les insensés!
+		ayant mangé les boeufs de Hèlios Hypérionade. Et ce dernier leur ravit l'heure du retour.
+		Dis-moi une partie de ces choses, Déesse, fille de Zeus. Tous ceux qui avaient évité la noire
+		mort, échappés de la guerre et de la mer, étaient rentrés dans leurs demeures; mais Odysseus
+		restait seul, loin de son pays et de sa femme, et la vénérable Nymphe Kalypsô, la très-noble
+		déesse, le retenait dans ses grottes creuses, le désirant pour mari. Et quand le temps vint,
+		après le déroulement des années, où les Dieux voulurent qu'il revît sa demeure en Ithakè, même
+		alors il devait subir des combats au milieu des siens. Et tous les Dieux le prenaient en pitié,
+		excepté Poseidaôn, qui était toujours irrité contre le divin Odysseus, jusqu'à ce qu'il fût
+		rentré dans son pays. Et Poseidaôn était allé chez les Aithiopiens qui habitent au loin et sont
+		partagés en deux peuples, dont l'un regarde du côté de Hypériôn, au couchant, et l'autre au
+		levant. Et le Dieu y était allé pour une hécatombe de taureaux et d'agneaux. Et comme il se
+		réjouissait, assis à ce repas, les autres Dieux étaient réunis dans la demeure royale de Zeus
+		Olympien. Et le Père des hommes et des Dieux commença de leur parler, se rappelant dans son coeur
+		l'irréprochable Aigisthos que l'illustre Orestès Agamemnonide avait tué. Se souvenant de cela,
+		il dit ces paroles aux Immortels: — Ah! combien les hommes accusent les Dieux! Ils disent que
+		leurs maux viennent de nous, et, seuls, ils aggravent leur destinée par leur démence.
+		Maintenant, voici qu'Aigisthos, contre le destin, a épousé la femme de l'Atréide et a tué ce
+		dernier, sachant quelle serait sa mort terrible; car nous l'avions prévenu par Herméias, le
+		vigilant tueur d'Argos, de ne point tuer Agamemnôn et de ne point désirer sa femme, de peur
+		que l'Atréide Orestès se vengeât, ayant grandi et désirant revoir son pays. Herméias parla
+		ainsi, mais son conseil salutaire n'a point persuadé l'esprit d'Aigisthos, et, maintenant,
+		celui-ci a tout expié d'un coup. Et Athènè, la Déesse aux yeux clairs, lui répondit: — Ô notre
+		Père, Kronide, le plus haut des Rois! celui-ci du moins a été frappé d'une mort juste. Qu'il
+		meure ainsi celui qui agira de même! Mais mon coeur est déchiré au souvenir du brave Odysseus,
+		le malheureux! qui souffre depuis longtemps loin des siens, dans une île, au milieu de la mer,
+		et où en est le centre. Et, dans cette île plantée d'arbres, habite une Déesse, la fille
+		dangereuse d'Atlas, lui qui connaît les profondeurs de la mer, et qui porte les hautes colonnes
+		dressées entre la terre et l'Ouranos. Et sa fille retient ce malheureux qui se lamente et
+		qu'elle flatte toujours de molles et douces paroles, afin qu'il oublie Ithakè; mais il désire
+		revoir la fumée de son pays et souhaite de mourir. Et ton coeur n'est point touché, Olympien,
+		par les sacrifices qu'Odysseus accomplissait pour toi auprès des nefs Argiennes, devant la
+		grande Troiè. Zeus, pourquoi donc es-tu si irrité contre lui? Et Zeus qui amasse les nuées, lui
+		répondant, parla ainsi: — Mon enfant, quelle parole s'est échappée d'entre tes dents? Comment
+		pourrais-je oublier le divin Odysseus, qui, par l'intelligence, est au-dessus de tous les hommes,
+		et qui offrait le plus de sacrifices aux Dieux qui vivent toujours et qui habitent le large 
+		Ouranos? Mais Poseidaôn qui entoure la terre est constamment irrité à cause du Kyklôps qu'Odysseus
+		a aveuglé, Polyphèmos tel qu'un Dieu, le plus fort des Kyklôpes. La Nymphe Thoôsa, fille de
+		Phorkyn, maître de la mer sauvage, l'enfanta, s'étant unie à Poseidaôn dans ses grottes creuses.
+		C'est pour cela que Poseidaôn qui secoue la terre, ne tuant point Odysseus, le contraint d'errer
+		loin de son pays. Mais nous, qui sommes ici, assurons son retour; et Poseidaôn oubliera sa colère,
+		car il ne pourra rien, seul, contre tous les dieux immortels. Et la Déesse Athènè aux yeux clairs
+		lui répondit: — Ô notre Père, Kronide, le plus haut des Rois! s'il plaît aux Dieux heureux que le
+		sage Odysseus retourne en sa demeure, envoyons le Messager Herméias, tueur d'Argos, dans l'île
+		Ogygiè, afin qu'il avertisse la Nymphe à la belle chevelure que nous avons résolu le retour
+		d'Odysseus à l'âme forte et patiente. Et moi j'irai à Ithakè, et j'exciterai son fils et lui
+		inspirerai la force, ayant réuni l'agora des Akhaiens chevelus, de chasser tous les Prétendants qui
+		égorgent ses brebis nombreuses et ses boeufs aux jambes torses et aux cornes recourbées. Et je
+		l'enverrai à Spartè et dans la sablonneuse Pylos, afin qu'il s'informe du retour de son père
+		bien-aimé, et qu'il soit très honoré parmi les hommes. Ayant ainsi parlé, elle attacha à ses pieds
+		de belles sandales ambroisiennes, dorées, qui la portaient sur la mer et sur l'immense terre comme
+		le souffle du vent. Et elle prit une forte lance, armée d'un airain aigu, lourde, grande et solide,
+		avec laquelle elle dompte la foule des hommes héroïques contre qui, fille d'un père puissant, elle
+		est irritée. Et, s'étant élancée du faite de l'Olympos, elle descendit au milieu du peuple d'Ithakè,
+		dans le vestibule d'Odysseus, au seuil de la cour, avec la lance d'airain en main, et semblable à
+		un étranger, au chef des Taphiens, à Mentès. Et elle vit les prétendants insolents qui jouaient aux
+		jetons devant les portes, assis sur la peau des boeufs qu'ils avaient tués eux-mêmes. Et des
+		hérauts et des serviteurs s'empressaient autour d'eux; et les uns mêlaient l'eau et le vin dans les
+		kratères; et les autres lavaient les tables avec les éponges poreuses; et, les ayant dressées,
+		partageaient les viandes abondantes. Et, le premier de tous, le divin Tèlémakhos vit Athènè. Et il
+		était assis parmi les prétendants, le coeur triste, voyant en esprit son brave père revenir soudain,
+		chasser les prétendants hors de ses demeures, ressaisir sa puissance et régir ses biens. Or,
+		songeant à cela, assis parmi eux, il vit Athènè: et il alla dans le vestibule, indigné qu'un
+		étranger restât longtemps debout à la porte. Et il s'approcha, lui prit la main droite, reçut la
+		lance d'airain et dit ces paroles ailées: — Salut, Étranger. Tu nous seras ami, et, après le repas,
+		tu nous diras ce qu'il te faut. Ayant ainsi parlé, il le conduisit, et Pallas Athènè le suivit. Et
+		lorsqu'ils furent entrés dans la haute demeure, il appuya la lance contre une longue colonne, dans
+		un arsenal luisant où étaient déjà rangées beaucoup d'autres lances d'Odysseus à l'âme ferme et
+		patiente. Et il fit asseoir Athènè, ayant mis un beau tapis bien travaillé sur le thrône, et, sous
+		ses pieds, un escabeau. Pour lui-même il plaça auprès d'elle un siège sculpté, loin des
+		prétendants, afin que l'étranger ne souffert point du repas tumultueux, au milieu de convives
+		injurieux, et afin de l'interroger sur son père absent. Et une servante versa, pour les ablutions,
+		de l'eau dans un bassin d'argent, d'une belle aiguière d'or; et elle dressa auprès d'eux une table
+		luisante. Puis, une intendante vénérable apporta du pain et couvrit la table de mets nombreux et
+		réservés; et un découpeur servit les plats de viandes diverses et leur offrit des coupes d'or; et
+		un héraut leur servait souvent du vin.
+`;

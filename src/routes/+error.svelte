@@ -1,4 +1,5 @@
 <script lang="ts">
+	// Translated
 	import { page } from '$app/state';
 </script>
 

@@ -1,3 +1,4 @@
+// Translated
 import type { RequestHandler } from './$types';
 import { db } from '$lib/server/db';
 import { documents } from '$lib/server/db/schema';

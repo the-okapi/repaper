@@ -1,4 +1,3 @@
 # Repaper
 
-Paper (but on a computer
-)
+Paper (but on a computer)

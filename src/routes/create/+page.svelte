@@ -1,9 +1,11 @@
 <script lang="ts">
+	// Translated
 	import { goto } from '$app/navigation';
 	import { Checkbox, Popover, Loading, I } from '$lib/components';
 	import { Label, Button } from 'bits-ui';
 	import { onMount } from 'svelte';
 	import { resolve } from '$app/paths';
+	import lang, { languageState as lS } from '$lib/lang.svelte';
 
 	let account: string | null = $state(null);
 	let loading = $state(false);
@@ -43,25 +45,41 @@
 	function check() {
 		let errors = 0;
 		if (!checkCode(code)) {
-			codeText = 'Code can only contain numbers, lowercase letters and hyphens.';
+			codeText = lang(
+				lS,
+				'Code can only contain numbers, lowercase letters and hyphens.',
+				"Le code peut seulement contenir les nombres, les lettres miniscules et les traits d'union."
+			);
 			errors++;
 		} else {
 			codeText = '';
 		}
 		if (editorPassword === viewerPassword) {
-			viewerPText = 'Editor Password and Viewer Password cannot match.';
+			viewerPText = lang(
+				lS,
+				'Editor Password and Viewer Password cannot match.',
+				'Mot de Passe du Éditeur et Mot de Passe du Spectateur ne peuvent pas être les mêmes.'
+			);
 			errors++;
 		} else if (viewerPassword === confirmViewerPassword) {
 			viewerPText = '';
 		}
 		if (editorPassword !== confirmEditorPassword) {
-			editorPText = 'Editor Password and Confirm Editor Password do not match.';
+			editorPText = lang(
+				lS,
+				'Editor Password and Confirm Editor Password do not match.',
+				'Mot de Passe du Éditeur et Confirmer Mot de Passe du Éditeur ne sont pas les mêmes.'
+			);
 			errors++;
 		} else {
 			editorPText = '';
 		}
 		if (viewerPassword !== confirmViewerPassword) {
-			viewerPText = 'Viewer Password and Confirm Viewer Password do not match.';
+			viewerPText = lang(
+				lS,
+				'Viewer Password and Confirm Viewer Password do not match.',
+				'Mot de Passe du Spectateur et Confirmer Mot de Passe du Spectateur ne sont pas les mêmes.'
+			);
 			errors++;
 		}
 		return errors;
@@ -86,7 +104,7 @@
 			})
 		});
 		if (createResponse.status === 409) {
-			codeText = 'Document code is already taken.';
+			codeText = lang(lS, 'Document code is already taken.', 'Code du Document est déjà pris.');
 			loading = false;
 			return;
 		}
@@ -98,7 +116,11 @@
 			})
 		});
 		if (openResponse.status === 401 || openResponse.status === 500) {
-			codeText = 'Something unexpected happened on our end. Please try again later.';
+			codeText = lang(
+				lS,
+				'Something unexpected happened on our end. Please try again later.',
+				"Quelque chose inattendu s'est passé sur notre dimension. Essayez encore s'il vout plaît."
+			);
 			loading = false;
 			return;
 		}
@@ -111,13 +133,17 @@
 <Loading show={loading} />
 
 <div>
-	<h1 class="h1">Create a Document</h1>
+	<h1 class="h1">{lang(lS, 'Create a Document', 'Créer un Document')}</h1>
 	<form {onsubmit}>
 		<div class="m-auto mb-5 w-fit text-left">
 			<Label.Root for="title"
-				>Document Title:
+				>{lang(lS, 'Document Title', 'Titre du Document')}:
 				<Popover
-					>This is the title of the document.<br />This <strong>can</strong> be changed later.</Popover
+					>{@html lang(
+						lS,
+						'This is the title of the document.<br />This <strong>can</strong> be changed later.',
+						"Ceci c'est le titre du document.<br />Ceci <strong>peut</strong> être changé plus tard."
+					)}</Popover
 				>
 			</Label.Root><br />
 			<input
@@ -131,10 +157,14 @@
 		</div>
 		<div class="m-auto mb-0.5 w-fit text-left">
 			<Label.Root for="code"
-				>Document Code:
-				<Popover
-					>This is the code to access the document.<br />This <strong>cannot</strong> be changed later.</Popover
-				>
+				>{lang(lS, 'Document Code', 'Code du Document')}:
+				<Popover>
+					{@html lang(
+						lS,
+						'This is the code to access the document.<br />This <strong>cannot</strong> be changed later.',
+						"Ceci c'est le code pour accéder au document.<br />Ceci <strong>ne peut pas</strong> être changé plus tard."
+					)}
+				</Popover>
 			</Label.Root><br />
 			<input
 				id="code"
@@ -149,11 +179,14 @@
 		<div class="m-auto mb-0.5 inline-flex">
 			<div class="text-left">
 				<Label.Root for="editorPassword"
-					>Editor Password:
-					<Popover
-						>This is the password used to edit the document.<br />This <strong>cannot</strong> be changed
-						later.</Popover
-					>
+					>{lang(lS, 'Editor Password', 'Mot de Passe du Éditeur')}:
+					<Popover>
+						{@html lang(
+							lS,
+							'This is the password used to edit the document.<br />This <strong>cannot</strong> be changed later.',
+							"Ceci c'est le mot de passe utilisé pour changer le document.<br />Ceci <strong>ne peut pas</strong> être changé plus tard."
+						)}
+					</Popover>
 				</Label.Root><br />
 				<input
 					id="editorPassword"
@@ -165,7 +198,13 @@
 				/>
 			</div>
 			<div class="text-left">
-				<Label.Root for="confirmEditorPassword">Confirm Editor Password:</Label.Root><br />
+				<Label.Root for="confirmEditorPassword"
+					>{@html lang(
+						lS,
+						'Confirm Editor Password:',
+						'<span class="text-sm">Confirmer Mot de Passe du Éditeur:</span>'
+					)}</Label.Root
+				><br />
 				<input
 					id="confirmEditorPassword"
 					bind:value={confirmEditorPassword}
@@ -182,11 +221,14 @@
 				<Label.Root
 					for="viewerPassword"
 					class={passwordNotRequired ? 'cursor-not-allowed text-(--fg)/50' : ''}
-					>Viewer Password:
-					<Popover disabled={passwordNotRequired}
-						>This is the password used to view the document.<br />This <strong>cannot</strong> be changed
-						later.</Popover
-					>
+					>{lang(lS, 'Viewer Password', 'Mot de Passe du Spectateur')}:
+					<Popover disabled={passwordNotRequired}>
+						{@html lang(
+							lS,
+							'This is the password used to view the document.<br />This <strong>cannot</strong> be changed later.',
+							"Ceci c'est le mot de passe utilisé pour regarder le document.<br />Ceci <strong>ne peut pas</strong>être changé plus tard."
+						)}
+					</Popover>
 				</Label.Root><br />
 				<input
 					id="viewerPassword"
@@ -202,7 +244,11 @@
 				<Label.Root
 					for="confirmViewerPassword"
 					class={passwordNotRequired ? 'cursor-not-allowed text-(--fg)/50' : ''}
-					>Confirm Viewer Password:</Label.Root
+					>{@html lang(
+						lS,
+						'Confirm Viewer Password:',
+						'<span class="text-xs">Confirmer Mot de Passe du Spectateur:</span>'
+					)}</Label.Root
 				><br />
 				<input
 					id="confirmViewerPassword"
@@ -219,19 +265,24 @@
 		<div class="m-auto mb-7 flex w-fit">
 			<Checkbox bind:checked={passwordNotRequired} id="passwordNotRequired" />
 			<Label.Root class="ml-2" for="passwordNotRequired">
-				Password not required to view
+				{lang(lS, 'Password not required to view', 'Mot de Passe pas recquis pour regarder')}
 				<Popover>
-					If this is checked, anyone can view this document with just the document code.<br />
-					This <strong>cannot</strong> be changed later.
+					{@html lang(
+						lS,
+						'If this is checked, anyone can view this document with just the document code.<br />This <strong>cannot</strong> be changed later.',
+						"Si ceci est coché, n'importe qui pourrait voir ce document avec seulement le code du document.<br />Ceci <strong>ne peut pas</strong> être changé plus tard."
+					)}
 				</Popover>
 			</Label.Root>
 		</div>
 		{#if account}
 			<div class="m-auto mb-7 flex w-fit">
 				<Checkbox bind:checked={associateAccount} id="associateAccount" />
-				<Label.Root class="ml-2" for="associateAccount">Associate with account</Label.Root>
+				<Label.Root class="ml-2" for="associateAccount"
+					>{lang(lS, 'Associate with account', 'Associer avec un compte')}</Label.Root
+				>
 			</div>
 		{/if}
-		<Button.Root type="submit">Create</Button.Root>
+		<Button.Root type="submit">{lang(lS, 'Create', 'Créer')}</Button.Root>
 	</form>
 </div>

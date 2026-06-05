@@ -1,3 +1,4 @@
+// Translated
 import { db } from '$lib/server/db';
 import { sessions } from '$lib/server/db/schema';
 import { and, eq } from 'drizzle-orm';

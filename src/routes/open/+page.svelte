@@ -1,8 +1,10 @@
 <script lang="ts">
+	// Translated
 	import { goto } from '$app/navigation';
 	import { Loading, I } from '$lib/components';
 	import { Label, Button } from 'bits-ui';
 	import { resolve } from '$app/paths';
+	import lang, { languageState as lS } from '$lib/lang.svelte';
 
 	let loading = $state(false);
 
@@ -22,11 +24,19 @@
 			})
 		});
 		if (response.status === 401) {
-			text = 'Document code or password is wrong.';
+			text = lang(
+				lS,
+				'Document code or password is wrong.',
+				'Code du document ou mot de passe est incorrect.'
+			);
 			loading = false;
 			return;
 		} else if (response.status === 500) {
-			text = 'Something unexpected happened on our end. Please try again later.';
+			text = lang(
+				lS,
+				'Something unexpected happened on our end. Please try again later.',
+				"Quelque chose inattendu s'est passé sur notre dimension. Essayez encore s'il vout plaît."
+			);
 			loading = false;
 			return;
 		}
@@ -39,17 +49,17 @@
 <Loading show={loading} />
 
 <div>
-	<h1 class="h1">Open a Document</h1>
+	<h1 class="h1">{lang(lS, 'Open a Document', 'Ouvrir un Document')}</h1>
 	<form {onsubmit}>
 		<div class="m-auto mb-5 w-fit text-left">
-			<Label.Root for="code">Document Code:</Label.Root><br />
+			<Label.Root for="code">{lang(lS, 'Document Code', 'Code du Document')}:</Label.Root><br />
 			<input id="code" class="w-120" bind:value={code} maxlength="50" required />
 		</div>
 		<div class="m-auto mb-0.5 w-fit text-left">
-			<Label.Root for="password">Password:</Label.Root><br />
+			<Label.Root for="password">{lang(lS, 'Password', 'Mot de Passe')}:</Label.Root><br />
 			<input id="password" class="w-120" bind:value={password} type="password" />
 		</div>
 		<p class="mb-3 text-left text-sm text-(--red)"><I />{text}</p>
-		<Button.Root type="submit">Open</Button.Root>
+		<Button.Root type="submit">{lang(lS, 'Open', 'Ouvrir')}</Button.Root>
 	</form>
 </div>

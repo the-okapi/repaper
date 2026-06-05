@@ -1,4 +1,5 @@
 <script lang="ts">
+	// Translated
 	import { onMount } from 'svelte';
 
 	let { blinking, hidden = false } = $props();
