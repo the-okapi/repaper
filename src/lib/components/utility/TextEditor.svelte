@@ -160,5 +160,5 @@
 		</div>
 	{/if}
 
-	<div bind:this={element} style={scale}></div>
+	<div bind:this={element} style={scale} spellcheck="false"></div>
 </div>
