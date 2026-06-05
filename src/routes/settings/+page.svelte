@@ -3,6 +3,7 @@
 	import { setTheme, theme } from 'mode-watcher';
 	import { Label, Select } from 'bits-ui';
 	import { onMount } from 'svelte';
+	import { languageState, setLanguage } from '$lib/lang.svelte';
 
 	type SelectItemType = {
 		value: string;
@@ -30,6 +31,15 @@
 		{ value: 'nord', label: 'Nord', mode: 'dark' }
 	];
 
+	const selectedModeLabel = $derived(
+		themes.find((themeV: SelectItemType) => themeV.value === currentTheme)
+	);
+
+	function onThemeChange(value: string) {
+		currentTheme = value;
+		setTheme(`${currentTheme}-${currentFont}`);
+	}
+
 	let fonts = [
 		{ value: 'georgia', label: 'Georgia' },
 		{ value: 'arial', label: 'Arial' },
@@ -39,22 +49,27 @@
 		{ value: 'system', label: 'System' }
 	];
 
-	const selectedModeLabel = $derived(
-		themes.find((themeV: SelectItemType) => themeV.value === currentTheme)
-	);
-
 	const selectedFontLabel = $derived(
 		fonts.find((font: SelectItemType) => font.value === currentFont)
 	);
 
-	function onThemeChange(value: string) {
-		currentTheme = value;
-		setTheme(`${currentTheme}-${currentFont}`);
-	}
-
 	function onFontChange(value: string) {
 		currentFont = value;
 		setTheme(`${currentTheme}-${currentFont}`);
+	}
+
+	let languages = [
+		{ value: 'en', label: 'English' },
+		{ value: 'fr', label: 'Français' }
+	];
+
+	const selectedLangLabel = $derived(
+		languages.find((lang: SelectItemType) => lang.value === languageState.lang)
+	);
+
+	function onLangChange(value: string) {
+		localStorage.setItem('repaper-lang', value);
+		setLanguage(value);
 	}
 </script>
 
@@ -86,7 +101,7 @@
 			</Select.Group>
 		</SelectC>
 	</div>
-	<div class="m-auto w-fit">
+	<div class="m-auto w-fit mb-5">
 		<Label.Root for="font">Font:</Label.Root>
 		<SelectC
 			bind:value={currentFont}
@@ -95,8 +110,21 @@
 			onValueChange={onFontChange}
 			trigger={selectedFontLabel?.label}
 		>
-			{#each fonts as theme, i (i + theme.value)}
-				<SelectItem value={theme} />
+			{#each fonts as font, i (i + font.value)}
+				<SelectItem value={font} />
+			{/each}
+		</SelectC>
+	</div>
+	<div class="m-auto w-fit">
+		<Label.Root for="lang">Language:</Label.Root>
+		<SelectC
+			bind:value={languageState.lang}
+			id="lang"
+			onValueChange={onLangChange}
+			trigger={selectedLangLabel?.label}
+		>
+			{#each languages as lang, i (i + lang.value)}
+				<SelectItem value={lang} />
 			{/each}
 		</SelectC>
 	</div>

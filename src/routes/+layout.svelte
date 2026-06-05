@@ -7,6 +7,8 @@
 	import { changed } from '$lib';
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
+	import { setLanguage } from '$lib/lang.svelte';
+	import { Loading } from '$lib/components';
 
 	let { children } = $props();
 
@@ -27,7 +29,15 @@
 		}
 	}
 
+	let loading = $state(true);
+
 	onMount(() => {
+		let lang = localStorage.getItem('repaper-lang');
+		if (lang === 'en' || lang === 'fr') {
+			setLanguage(lang);
+		}
+		loading = false;
+
 		if (page.params.document != null) {
 			fullscreen = page.url.searchParams.getAll('fullscreen');
 		}
@@ -40,6 +50,8 @@
 </svelte:head>
 
 <svelte:window {oncontextmenu} />
+
+<Loading show={loading} />
 
 <ModeWatcher
 	lightClassNames={['light']}

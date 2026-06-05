@@ -12,7 +12,7 @@
 		} else {
 			length = 0;
 		}
-	})
+	});
 </script>
 
 <div class="fixed inset-0 left-70 z-40 flex items-center justify-center">
