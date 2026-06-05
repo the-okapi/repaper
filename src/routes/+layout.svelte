@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Translated
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.png';
 	import { resolve } from '$app/paths';

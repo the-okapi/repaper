@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Translated
 	import { onMount, onDestroy } from 'svelte';
 	import { Editor } from '@tiptap/core';
 	import Document from '@tiptap/extension-document';

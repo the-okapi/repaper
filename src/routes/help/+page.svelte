@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Translated
 	import { LinkButton } from '$lib/components';
 	import lang, { languageState as lS } from '$lib/lang.svelte';
 </script>

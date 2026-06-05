@@ -1,5 +1,3 @@
-// Translated
-
 export function text(aOrB: string) {
 	if (aOrB === 'a') {
 		return english;

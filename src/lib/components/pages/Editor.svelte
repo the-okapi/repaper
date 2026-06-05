@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Translated
 	import { page } from '$app/state';
 	import { Loading, TextEditor } from '$lib/components';
 	import { Button } from 'bits-ui';

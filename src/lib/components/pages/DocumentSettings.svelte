@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Translated
 	import { Button, Label } from 'bits-ui';
 	import lang, { languageState as lS } from '$lib/lang.svelte';
 

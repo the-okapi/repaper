@@ -1,4 +1,3 @@
-// Translated
 export { default as Checkbox } from '$lib/components/ui/Checkbox.svelte';
 export { default as Popover } from '$lib/components/ui/Popover.svelte';
 export { default as Loading } from '$lib/components/ui/Loading.svelte';

@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Translated
 	import { Cursor } from '$lib/components';
 
 	let { content, cursor = false, blinking = false, cursorPos = 0 } = $props();

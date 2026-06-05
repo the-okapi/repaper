@@ -1,4 +1,3 @@
-// Translated
 import { db } from '$lib/server/db';
 import { logs } from '$lib/server/db/schema';
 

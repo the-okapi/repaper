@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Translated
 	import { goto } from '$app/navigation';
 	import { Checkbox, Popover, Loading, I } from '$lib/components';
 	import { Label, Button } from 'bits-ui';

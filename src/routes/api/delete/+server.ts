@@ -1,4 +1,3 @@
-// Translated
 import { db } from '$lib/server/db';
 import { documents, sessions } from '$lib/server/db/schema';
 import { checkToken } from '$lib/server/db/token';

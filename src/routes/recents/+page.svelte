@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Translated
 	import { Recents } from '$lib/components';
 	import { resolve } from '$app/paths';
 	import lang, { languageState as lS } from '$lib/lang.svelte';

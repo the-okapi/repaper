@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Translated
 	let { content } = $props();
 </script>
 

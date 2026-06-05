@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Translated
 	import { onMount } from 'svelte';
 	import type { PageProps } from './$types';
 	import type { DocumentLink } from '$lib';

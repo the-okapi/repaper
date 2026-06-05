@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Translated
 	import { SelectC, SelectItem } from '$lib/components';
 	import { setTheme, theme } from 'mode-watcher';
 	import { Label, Select } from 'bits-ui';

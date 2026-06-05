@@ -1,4 +1,3 @@
-// Translated
 import type { RequestHandler } from './$types';
 import { checkToken } from '$lib/server/db/token';
 

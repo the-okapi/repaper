@@ -1,5 +1,4 @@
 <script>
-	// Translated
 	import { text } from '$lib/background';
 	import { Recents } from '$lib/components';
 	import lang, { languageState } from '$lib/lang.svelte';

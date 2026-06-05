@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Translated
 	import { Loading } from '$lib/components';
 	import { onMount } from 'svelte';
 	import type { DocumentLink } from '$lib';
@@ -29,6 +28,11 @@
 		localStorage.setItem('repaper-token', document.token);
 		goto(resolve(document.link));
 	}
+
+	function remove(index: number) {
+		recents.splice(index, 1);
+		localStorage.setItem('repaper-recent-documents', JSON.stringify(recents));
+	}
 </script>
 
 <Loading show={loading} />
@@ -41,7 +45,7 @@
 			</p>
 		{/if}
 	{:else}
-		<div class={size}>
+		<div class="{size} flex">
 			{#each recents as document, i (i)}
 				<button
 					onclick={() => click(i)}
@@ -51,6 +55,11 @@
 					><span class="font-semibold">{document.title}</span> - {document.mode === 'viewer'
 						? 'View'
 						: 'Edit'}</button
+				>
+				<button
+					onclick={() => remove(i)}
+					class="m-auto font-black ml-1.5 cursor-pointer border border-[#00000000] hover:border-(--o) h-9 w-10 rounded-md"
+					>X</button
 				>
 			{/each}
 		</div>

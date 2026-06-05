@@ -1,4 +1,3 @@
-// Translated
 import { writable } from 'svelte/store';
 
 export const changed = writable(false);

@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Translated
 	import Check from '@lucide/svelte/icons/check';
 	import { Checkbox } from 'bits-ui';
 

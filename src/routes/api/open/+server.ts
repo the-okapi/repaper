@@ -1,4 +1,3 @@
-// Translated
 import type { RequestHandler } from './$types';
 import { error } from '$lib/server/db/logs';
 import { db } from '$lib/server/db';

@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Translated
 	let { children, active, icon = false, ...props } = $props();
 </script>
 

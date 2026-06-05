@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Translated
 	import Loader from '@lucide/svelte/icons/loader-circle';
 
 	let { show } = $props();

@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Translated
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { Loading } from '$lib/components';
