@@ -110,7 +110,7 @@
 			<div class="relative inline-block">
 				<input
 					type="number"
-					class="h-full w-22"
+					class="h-full w-22 rounded-xl!"
 					min="1"
 					max="99"
 					bind:value={fontSize}
