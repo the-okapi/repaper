@@ -45,24 +45,26 @@
 			</p>
 		{/if}
 	{:else}
-		<div class="{size} flex">
+		<div class={size}>
 			{#each recents as document, i (i)}
-				<button
-					onclick={() => click(i)}
-					class="m-auto w-full cursor-pointer border-(--o) p-3 hover:bg-(--fg)/5 {i === 0
-						? 'rounded-t-lg'
-						: ''} {i === recents.length - 1 ? 'rounded-b-lg border' : ' border-x border-t'}"
-					><span class="font-semibold">{document.title}</span> - {document.mode === 'viewer'
-						? 'View'
-						: 'Edit'}</button
-				>
-				{#if x}
+				<div class="flex">
 					<button
-						onclick={() => remove(i)}
-						class="m-auto font-black ml-1.5 text-xs cursor-pointer border border-(--o) hover:bg-(--fg)/5 min-h-7 min-w-7 rounded-md"
-						>X</button
+						onclick={() => click(i)}
+						class="m-auto w-full cursor-pointer border-(--o) p-3 hover:bg-(--fg)/5 {i === 0
+							? 'rounded-t-lg'
+							: ''} {i === recents.length - 1 ? 'rounded-b-lg border' : ' border-x border-t'}"
+						><span class="font-semibold">{document.title}</span> - {document.mode === 'viewer'
+							? 'View'
+							: 'Edit'}</button
 					>
-				{/if}
+					{#if x}
+						<button
+							onclick={() => remove(i)}
+							class="m-auto font-black ml-1.5 text-xs cursor-pointer border border-(--o) hover:bg-(--fg)/5 min-h-7 min-w-7 rounded-md"
+							>X</button
+						>
+					{/if}
+				</div>
 			{/each}
 		</div>
 	{/if}
