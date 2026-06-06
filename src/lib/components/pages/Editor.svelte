@@ -25,7 +25,7 @@
 	}
 
 	export async function saveFunction() {
-		await editor.saveFunc();
+		await editor.saveFunc(true);
 	}
 
 	async function enableFullscreen() {

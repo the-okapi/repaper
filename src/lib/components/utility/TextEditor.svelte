@@ -25,10 +25,10 @@
 
 	let { initial, promise, save = () => {}, editor = true, scale, ...props } = $props();
 
-	export async function saveFunc() {
+	export async function saveFunc(after = false) {
 		loading = true;
 		const status = await save(JSON.stringify(editorState.editor.getJSON()));
-		loading = false;
+		loading = after
 		if (status === 200) {
 			localStorage.removeItem('repaper-document-unsaved');
 			changed.set(false);
@@ -164,7 +164,7 @@
 					<TextAlignRight size={20} /></Toggle
 				>
 			</div>
-			<Button.Root class="ml-10" onclick={saveFunc}>{lang(lS, 'Save', 'Enregistrer')}</Button.Root>
+			<Button.Root class="ml-10" onclick={() => saveFunc(false)}>{lang(lS, 'Save', 'Enregistrer')}</Button.Root>
 		</div>
 	{/if}
 
