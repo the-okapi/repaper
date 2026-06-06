@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Popover, Button } from 'bits-ui';
 
-	let { children, bClass = "", questionMark = true, message = "", ...props } = $props();
+	let { children, bClass = '', questionMark = true, message = '', ...props } = $props();
 </script>
 
 <Popover.Root>

@@ -1,16 +1,19 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import { Editor } from '@tiptap/core';
-	import Document from '@tiptap/extension-document';
-	import Text from '@tiptap/extension-text';
-	import Paragraph from '@tiptap/extension-paragraph';
-	import { TextStyle, FontSize } from '@tiptap/extension-text-style';
-	import Italic from '@tiptap/extension-italic';
-	import Bold from '@tiptap/extension-bold';
-	import Underline from '@tiptap/extension-underline';
-	import TextAlign from '@tiptap/extension-text-align';
-	import { UndoRedo } from '@tiptap/extensions';
 	import { Loading, Toggle, Popover } from '$lib/components';
+	import {
+		Document,
+		Text,
+		Paragraph,
+		TextStyle,
+		FontSize,
+		Italic,
+		Bold,
+		Underline,
+		TextAlign,
+		UndoRedo
+	} from '$lib/extensions';
 	import { Button } from 'bits-ui';
 	import { changed } from '$lib';
 	import TextAlignLeft from '@lucide/svelte/icons/text-align-start';
@@ -45,22 +48,22 @@
 		}
 	}
 
-	const CustomFontSize = FontSize.extend({
+	export const CustomFontSize = FontSize.extend({
 		addKeyboardShortcuts() {
 			return {
-				'F2': () => {
-					if (fontSize+1 < 100) {
+				F2: () => {
+					if (fontSize + 1 < 100) {
 						fontSize += 1;
 					}
 					this.editor.commands.setFontSize(`${fontSize}px`);
 				},
-				'F1': () => {
-					if (fontSize-1 > 0) {
+				F1: () => {
+					if (fontSize - 1 > 0) {
 						fontSize -= 1;
 					}
 					this.editor.commands.setFontSize(`${fontSize}px`);
 				}
-			}
+			};
 		}
 	});
 
@@ -101,7 +104,9 @@
 			autofocus: editor,
 			editable: editor
 		});
-		fontSize = Number((editorState.editor.getAttributes('textStyle').fontSize ?? '29px').split('p')[0]);
+		fontSize = Number(
+			(editorState.editor.getAttributes('textStyle').fontSize ?? '29px').split('p')[0]
+		);
 		editorState.editor.chain().focus().setFontSize(`${fontSize}px`).run();
 		loading = false;
 	});
@@ -140,7 +145,13 @@
 <div class="app relative" {...props}>
 	{#if editorState.editor && editor}
 		<div class="m-auto mb-5 flex w-fit gap-3">
-			<Popover questionMark={false} bClass="mr-10" message={lang(lS, 'Document Info', 'Info sur le Document')}>{lang(lS, 'Word Count', 'Nombre de Mots')}: <strong>{wordCount}</strong> {lang(lS, 'Words', 'Mots')}</Popover>
+			<Popover
+				questionMark={false}
+				bClass="mr-10"
+				message={lang(lS, 'Document Info', 'Info sur le Document')}
+				>{lang(lS, 'Word Count', 'Nombre de Mots')}: <strong>{wordCount}</strong>
+				{lang(lS, 'Words', 'Mots')}</Popover
+			>
 			<div class="relative inline-block">
 				<input
 					type="number"
