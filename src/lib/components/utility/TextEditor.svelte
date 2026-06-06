@@ -10,7 +10,7 @@
 	import Underline from '@tiptap/extension-underline';
 	import TextAlign from '@tiptap/extension-text-align';
 	import { UndoRedo } from '@tiptap/extensions';
-	import { Loading, Toggle } from '$lib/components';
+	import { Loading, Toggle, Popover } from '$lib/components';
 	import { Button } from 'bits-ui';
 	import { changed } from '$lib';
 	import TextAlignLeft from '@lucide/svelte/icons/text-align-start';
@@ -19,7 +19,7 @@
 	import lang, { languageState as lS } from '$lib/lang.svelte';
 
 	let element: any = $state();
-	let editorState: any = $state({ editor: null });
+	let editorState: { editor: Editor | null } = $state({ editor: null });
 
 	let loading = $state(true);
 
@@ -27,7 +27,7 @@
 
 	export async function saveFunc(after = false) {
 		loading = true;
-		const status = await save(JSON.stringify(editorState.editor.getJSON()));
+		const status = await save(JSON.stringify(editorState.editor?.getJSON()));
 		loading = after;
 		if (status === 200) {
 			localStorage.removeItem('repaper-document-unsaved');
@@ -103,8 +103,15 @@
 		} else if (fontSize < 1) {
 			fontSize = 1;
 		}
-		editorState.editor.chain().focus().setFontSize(`${fontSize}px`).run();
+		editorState.editor?.chain().focus().setFontSize(`${fontSize}px`).run();
 	}
+
+	let wordCount = $derived(
+		editorState.editor
+			?.getText()
+			.split(' ')
+			.filter((word) => word !== '').length
+	);
 </script>
 
 <svelte:window {onbeforeunload} />
@@ -114,6 +121,7 @@
 <div class="app relative" {...props}>
 	{#if editorState.editor && editor}
 		<div class="m-auto mb-5 flex w-fit gap-3">
+			<Popover questionMark={false} bClass="mr-10" message={lang(lS, 'Document Info', 'Info sur le Document')}>{lang(lS, 'Word Count', 'Nombre de Mots')}: <strong>{wordCount}</strong> {lang(lS, 'Words', 'Mots')}</Popover>
 			<div class="relative inline-block">
 				<input
 					type="number"
@@ -129,35 +137,35 @@
 				>
 			</div>
 			<Toggle
-				onclick={() => editorState.editor.chain().focus().toggleBold().run()}
+				onclick={() => editorState.editor?.chain().focus().toggleBold().run()}
 				active={editorState.editor.isActive('bold')}>{lang(lS, 'Bold', 'Gras')}</Toggle
 			>
 			<Toggle
-				onclick={() => editorState.editor.chain().focus().toggleItalic().run()}
+				onclick={() => editorState.editor?.chain().focus().toggleItalic().run()}
 				active={editorState.editor.isActive('italic')}>{lang(lS, 'Italic', 'Italique')}</Toggle
 			>
 			<Toggle
-				onclick={() => editorState.editor.chain().focus().toggleUnderline().run()}
+				onclick={() => editorState.editor?.chain().focus().toggleUnderline().run()}
 				active={editorState.editor.isActive('underline')}
 				>{lang(lS, 'Underline', 'Soulignement')}</Toggle
 			>
 			<div class="flex gap-1 rounded-xl border border-(--o) p-1.5">
 				<Toggle
-					onclick={() => editorState.editor.chain().focus().setTextAlign('left').run()}
+					onclick={() => editorState.editor?.chain().focus().setTextAlign('left').run()}
 					active={editorState.editor.isActive({ textAlign: 'left' })}
 					icon={true}
 				>
 					<TextAlignLeft size={20} /></Toggle
 				>
 				<Toggle
-					onclick={() => editorState.editor.chain().focus().setTextAlign('center').run()}
+					onclick={() => editorState.editor?.chain().focus().setTextAlign('center').run()}
 					active={editorState.editor.isActive({ textAlign: 'center' })}
 					icon={true}
 				>
 					<TextAlignCenter size={20} /></Toggle
 				>
 				<Toggle
-					onclick={() => editorState.editor.chain().focus().setTextAlign('right').run()}
+					onclick={() => editorState.editor?.chain().focus().setTextAlign('right').run()}
 					active={editorState.editor.isActive({ textAlign: 'right' })}
 					icon={true}
 				>
