@@ -25,6 +25,8 @@
 
 	let { initial, promise, save = () => {}, editor = true, scale, ...props } = $props();
 
+	let fontSize = $state(29);
+
 	export async function saveFunc(after = false) {
 		loading = true;
 		const status = await save(JSON.stringify(editorState.editor?.getJSON()));
@@ -43,6 +45,25 @@
 		}
 	}
 
+	const CustomFontSize = FontSize.extend({
+		addKeyboardShortcuts() {
+			return {
+				'F2': () => {
+					if (fontSize+1 < 100) {
+						fontSize += 1;
+					}
+					this.editor.commands.setFontSize(`${fontSize}px`);
+				},
+				'F1': () => {
+					if (fontSize-1 > 0) {
+						fontSize -= 1;
+					}
+					this.editor.commands.setFontSize(`${fontSize}px`);
+				}
+			}
+		}
+	});
+
 	onMount(async () => {
 		await promise;
 		editorState.editor = new Editor({
@@ -57,7 +78,7 @@
 					alignments: ['left', 'center', 'right'],
 					defaultAlignment: 'left'
 				}),
-				FontSize,
+				CustomFontSize,
 				Italic,
 				Bold,
 				Underline,
@@ -80,7 +101,7 @@
 			autofocus: editor,
 			editable: editor
 		});
-		fontSize = (editorState.editor.getAttributes('textStyle').fontSize ?? '29px').split('p')[0];
+		fontSize = Number((editorState.editor.getAttributes('textStyle').fontSize ?? '29px').split('p')[0]);
 		editorState.editor.chain().focus().setFontSize(`${fontSize}px`).run();
 		loading = false;
 	});
@@ -94,8 +115,6 @@
 			event.preventDefault();
 		}
 	}
-
-	let fontSize = $state(29);
 
 	function fontSizeChange() {
 		if (fontSize > 99) {
