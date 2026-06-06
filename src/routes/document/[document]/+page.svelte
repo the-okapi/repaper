@@ -168,7 +168,7 @@
 		<div class="m-auto w-fit">
 			<p class="mt-7 mb-1 font-bold text-(--fg)/60">{lang(lS, 'Zoom', 'Zoomer')}:</p>
 			<div class="m-auto w-120">
-				<Slider bind:value={scale} max={100} min={30} />
+				<Slider bind:value={scale} max={150} min={30} />
 			</div>
 		</div>
 	{/if}

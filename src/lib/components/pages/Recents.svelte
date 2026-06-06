@@ -6,7 +6,7 @@
 	import { goto } from '$app/navigation';
 	import lang, { languageState as lS } from '$lib/lang.svelte';
 
-	let { size = 'w-80 h-fit', limit = 10, empty = false } = $props();
+	let { size = 'w-80 h-fit', limit = 10, empty = false, x = true } = $props();
 
 	let loading = $state(true);
 
@@ -56,11 +56,13 @@
 						? 'View'
 						: 'Edit'}</button
 				>
-				<button
-					onclick={() => remove(i)}
-					class="m-auto font-black ml-1.5 cursor-pointer border border-[#00000000] hover:border-(--o) h-9 w-10 rounded-md"
-					>X</button
-				>
+				{#if x}
+					<button
+						onclick={() => remove(i)}
+						class="m-auto font-black ml-1.5 text-xs cursor-pointer border border-(--o) hover:bg-(--fg)/5 min-h-7 min-w-7 rounded-md"
+						>X</button
+					>
+				{/if}
 			{/each}
 		</div>
 	{/if}

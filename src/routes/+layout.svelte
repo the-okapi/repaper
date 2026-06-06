@@ -71,7 +71,7 @@
 <main class="h-screen w-screen">
 	{#if fullscreen.length === 0}
 		<nav class="fixed z-40 h-screen w-70 border-r border-(--o) bg-(--bg) pt-9 flex flex-wrap">
-			<div>
+			<div class="w-full">
 				<a href={resolve('/')}><h2 class="text-center text-4xl font-black">Repaper</h2></a>
 				<div class="pt-4 px-7">
 					<button class="a" onclick={() => go('/create')}
@@ -87,19 +87,25 @@
 						>{lang(languageState, 'Settings', 'Paramètres')}</button
 					><br />
 					<div class="w-full border-(--o) border-b my-2"></div>
-					<button class="a" onclick={() => go('/help')}>{lang(languageState, 'Help', 'Aide')}</button
+					<button class="a" onclick={() => go('/help')}
+						>{lang(languageState, 'Help', 'Aide')}</button
 					><br />
 					<button class="a" onclick={() => go('/about')}
 						>{lang(languageState, 'About', 'À Propos')}</button
 					><br />
 				</div>
-			</div><br />
-			<div class="px-7 pb-3 flex flex-col relative justify-end">
+			</div>
+			<br />
+			<div class="text-center pb-3 flex flex-col relative justify-end w-full">
 				<div>
 					<p class="text-[0.8rem]">repaper@unlimitedstuffltd.com</p>
-					<button class="a text-left text-[0.8rem] underline underline-offset-2" onclick={() => window.open("https://github.com/the-okapi/repaper", "_blank")}>
+					<a
+						class="a text-center text-[0.8rem] underline underline-offset-2"
+						href="https://github.com/the-okapi/repaper"
+						target="_blank"
+					>
 						https://github.com/the-okapi/repaper
-					</button>
+					</a>
 				</div>
 			</div>
 		</nav>

@@ -75,7 +75,7 @@
 		{save}
 		initial={document.content}
 		{fullscreen}
-		scale="transform: scale({scale / 100}); margin-top: -{(100 - scale) / 35}%"
+		scale="transform: scale({scale / 100}); transform-origin: top center;"
 		bind:this={editor}
 	/>
 	<div class="h-[2vw]"></div>
