@@ -68,14 +68,6 @@
 	});
 
 	onMount(async () => {
-		let i;
-
-		try {
-			i = JSON.parse(initial);
-		} catch {
-			i = initial;
-		}
-
 		await promise;
 		editorState.editor = new Editor({
 			element,
@@ -99,7 +91,7 @@
 				handlePaste: () => true,
 				handleDrop: () => true
 			},
-			content: i,
+			content: initial,
 			onTransaction: ({ editor }) => {
 				editorState = { editor };
 			},
