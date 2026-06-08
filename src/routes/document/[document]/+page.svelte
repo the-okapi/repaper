@@ -130,7 +130,7 @@
 		);
 		const newRecentDocuments = recentDocuments.filter((a) => a.code !== data.document);
 		localStorage.setItem('repaper-recent-documents', JSON.stringify(newRecentDocuments));
-		goto(resolve('/'), { replaceState: true });
+		window.location.assign('/');
 	}
 
 	async function renameDocument(to: string) {
@@ -155,7 +155,7 @@
 				)
 			);
 		} else {
-			location.reload();
+			window.location.reload();
 		}
 		loading = false;
 	}
