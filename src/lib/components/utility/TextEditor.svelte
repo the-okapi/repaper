@@ -32,7 +32,7 @@
 
 	export async function saveFunc(after = false) {
 		loading = true;
-		const status = await save(JSON.stringify(editorState.editor?.getJSON()));
+		const status = await save(editorState.editor?.getHTML());
 		loading = after;
 		if (status === 200) {
 			localStorage.removeItem('repaper-document-unsaved');
@@ -68,6 +68,14 @@
 	});
 
 	onMount(async () => {
+		let i;
+
+		try {
+			i = JSON.parse(initial);
+		} catch {
+			i = initial;
+		}
+
 		await promise;
 		editorState.editor = new Editor({
 			element,
@@ -91,7 +99,7 @@
 				handlePaste: () => true,
 				handleDrop: () => true
 			},
-			content: JSON.parse(initial),
+			content: i,
 			onTransaction: ({ editor }) => {
 				editorState = { editor };
 			},
