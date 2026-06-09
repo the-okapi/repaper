@@ -28,7 +28,8 @@
 		{ value: 'graphite', label: 'Graphite', mode: 'light' },
 		{ value: 'wumpus', label: 'Wumpus', mode: 'dark' },
 		{ value: 'og', label: 'OG', mode: 'dark' },
-		{ value: 'nord', label: 'Nord', mode: 'dark' }
+		{ value: 'nord', label: 'Nord', mode: 'dark' },
+		{ value: 'solarized', label: 'Solarized', mode: 'dark' }
 	];
 
 	const selectedModeLabel = $derived(
