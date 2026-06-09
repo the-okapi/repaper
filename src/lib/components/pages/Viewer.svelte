@@ -34,7 +34,7 @@
 			>
 		{/if}
 	</div>
-	<h1 class="h1">{document.title}</h1>
+	<h1 class="h1 mt-5">{document.title}</h1>
 	<TextEditor
 		promise={document.promise}
 		initial={document.content}
