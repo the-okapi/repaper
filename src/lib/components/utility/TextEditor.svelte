@@ -144,67 +144,69 @@
 
 <div class="app relative" {...props}>
 	{#if editorState.editor && editor}
-		<div class="m-auto mb-5 flex w-fit gap-3">
-			<Popover
-				questionMark={false}
-				bClass="mr-10"
-				message={lang(lS, 'Document Info', 'Info sur le Document')}
-				>{lang(lS, 'Word Count', 'Nombre de Mots')}: <strong>{wordCount}</strong>
-				{lang(lS, 'Words', 'Mots')}</Popover
-			>
-			<div class="relative inline-block">
-				<input
-					type="number"
-					class="h-full w-22 rounded-xl!"
-					min="1"
-					max="99"
-					bind:value={fontSize}
-					onchange={fontSizeChange}
-				/>
-				<span
-					class="absolute pointer-events-none top-[50%] right-10 translate-y-[-50%] text-(--fg)/50"
-					>px</span
+		<div class="mb-5 border-b border-(--o) py-5 bg-(--bg) sticky top-0 z-40">
+			<div class="m-auto flex w-fit gap-3">
+				<Popover
+					questionMark={false}
+					bClass="mr-10"
+					message={lang(lS, 'Document Info', 'Info sur le Document')}
+					>{lang(lS, 'Word Count', 'Nombre de Mots')}: <strong>{wordCount}</strong>
+					{lang(lS, 'Words', 'Mots')}</Popover
+				>
+				<div class="relative inline-block">
+					<input
+						type="number"
+						class="h-full w-22 rounded-xl!"
+						min="1"
+						max="99"
+						bind:value={fontSize}
+						onchange={fontSizeChange}
+					/>
+					<span
+						class="absolute pointer-events-none top-[50%] right-10 translate-y-[-50%] text-(--fg)/50"
+						>px</span
+					>
+				</div>
+				<Toggle
+					onclick={() => editorState.editor?.chain().focus().toggleBold().run()}
+					active={editorState.editor.isActive('bold')}>{lang(lS, 'Bold', 'Gras')}</Toggle
+				>
+				<Toggle
+					onclick={() => editorState.editor?.chain().focus().toggleItalic().run()}
+					active={editorState.editor.isActive('italic')}>{lang(lS, 'Italic', 'Italique')}</Toggle
+				>
+				<Toggle
+					onclick={() => editorState.editor?.chain().focus().toggleUnderline().run()}
+					active={editorState.editor.isActive('underline')}
+					>{lang(lS, 'Underline', 'Soulignement')}</Toggle
+				>
+				<div class="flex gap-1 rounded-xl border border-(--o) p-1.5">
+					<Toggle
+						onclick={() => editorState.editor?.chain().focus().setTextAlign('left').run()}
+						active={editorState.editor.isActive({ textAlign: 'left' })}
+						icon={true}
+					>
+						<TextAlignLeft size={20} /></Toggle
+					>
+					<Toggle
+						onclick={() => editorState.editor?.chain().focus().setTextAlign('center').run()}
+						active={editorState.editor.isActive({ textAlign: 'center' })}
+						icon={true}
+					>
+						<TextAlignCenter size={20} /></Toggle
+					>
+					<Toggle
+						onclick={() => editorState.editor?.chain().focus().setTextAlign('right').run()}
+						active={editorState.editor.isActive({ textAlign: 'right' })}
+						icon={true}
+					>
+						<TextAlignRight size={20} /></Toggle
+					>
+				</div>
+				<Button.Root class="ml-10" onclick={() => saveFunc(false)}
+					>{lang(lS, 'Save', 'Enregistrer')}</Button.Root
 				>
 			</div>
-			<Toggle
-				onclick={() => editorState.editor?.chain().focus().toggleBold().run()}
-				active={editorState.editor.isActive('bold')}>{lang(lS, 'Bold', 'Gras')}</Toggle
-			>
-			<Toggle
-				onclick={() => editorState.editor?.chain().focus().toggleItalic().run()}
-				active={editorState.editor.isActive('italic')}>{lang(lS, 'Italic', 'Italique')}</Toggle
-			>
-			<Toggle
-				onclick={() => editorState.editor?.chain().focus().toggleUnderline().run()}
-				active={editorState.editor.isActive('underline')}
-				>{lang(lS, 'Underline', 'Soulignement')}</Toggle
-			>
-			<div class="flex gap-1 rounded-xl border border-(--o) p-1.5">
-				<Toggle
-					onclick={() => editorState.editor?.chain().focus().setTextAlign('left').run()}
-					active={editorState.editor.isActive({ textAlign: 'left' })}
-					icon={true}
-				>
-					<TextAlignLeft size={20} /></Toggle
-				>
-				<Toggle
-					onclick={() => editorState.editor?.chain().focus().setTextAlign('center').run()}
-					active={editorState.editor.isActive({ textAlign: 'center' })}
-					icon={true}
-				>
-					<TextAlignCenter size={20} /></Toggle
-				>
-				<Toggle
-					onclick={() => editorState.editor?.chain().focus().setTextAlign('right').run()}
-					active={editorState.editor.isActive({ textAlign: 'right' })}
-					icon={true}
-				>
-					<TextAlignRight size={20} /></Toggle
-				>
-			</div>
-			<Button.Root class="ml-10" onclick={() => saveFunc(false)}
-				>{lang(lS, 'Save', 'Enregistrer')}</Button.Root
-			>
 		</div>
 	{/if}
 

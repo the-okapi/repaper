@@ -39,6 +39,7 @@
 		promise={document.promise}
 		initial={document.content}
 		editor={false}
+		{fullscreen}
 		scale="transform: scale({scale / 100}); transform-origin: top center;"
 	/>
 	<div class="h-[2vw]"></div>
