@@ -99,7 +99,7 @@
 				changed.set(true);
 			},
 			onSelectionUpdate: ({ editor }) => {
-				fontSize = (editor.getAttributes('textStyle').fontSize ?? '20pt').split('p')[0];
+				fontSize = Number((editor.getAttributes('textStyle').fontSize ?? '20pt').split('p')[0]);
 			},
 			autofocus: editor,
 			editable: editor
