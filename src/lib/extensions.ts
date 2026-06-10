@@ -9,6 +9,7 @@ export { UndoRedo } from '@tiptap/extensions';
 import ItalicTiptap from '@tiptap/extension-italic';
 import BoldTiptap from '@tiptap/extension-bold';
 import UnderlineTiptap from '@tiptap/extension-underline';
+import { Extension } from '@tiptap/core';
 
 export const Bold = BoldTiptap.extend({
 	addKeyboardShortcuts() {
@@ -33,6 +34,16 @@ export const Underline = UnderlineTiptap.extend({
 		return {
 			F5: () => this.editor.commands.toggleUnderline(),
 			'Mod-u': () => this.editor.commands.toggleUnderline()
+		};
+	}
+});
+
+export const Tab = Extension.create({
+	name: 'tab',
+
+	addKeyboardShortcuts() {
+		return {
+			Tab: () => this.editor.commands.insertContent('\t')
 		};
 	}
 });

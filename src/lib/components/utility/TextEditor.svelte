@@ -12,7 +12,8 @@
 		Bold,
 		Underline,
 		TextAlign,
-		UndoRedo
+		UndoRedo,
+		Tab
 	} from '$lib/extensions';
 	import { Button } from 'bits-ui';
 	import { changed } from '$lib';
@@ -85,7 +86,8 @@
 				Italic,
 				Bold,
 				Underline,
-				UndoRedo
+				UndoRedo,
+				Tab
 			],
 			editorProps: {
 				handlePaste: () => true,
