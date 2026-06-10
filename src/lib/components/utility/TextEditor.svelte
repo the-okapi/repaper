@@ -55,13 +55,13 @@
 					if (fontSize + 1 < 100) {
 						fontSize += 1;
 					}
-					this.editor.commands.setFontSize(`${fontSize}px`);
+					this.editor.commands.setFontSize(`${fontSize}pt`);
 				},
 				F1: () => {
 					if (fontSize - 1 > 0) {
 						fontSize -= 1;
 					}
-					this.editor.commands.setFontSize(`${fontSize}px`);
+					this.editor.commands.setFontSize(`${fontSize}pt`);
 				}
 			};
 		}
@@ -99,15 +99,15 @@
 				changed.set(true);
 			},
 			onSelectionUpdate: ({ editor }) => {
-				fontSize = (editor.getAttributes('textStyle').fontSize ?? '29px').split('p')[0];
+				fontSize = (editor.getAttributes('textStyle').fontSize ?? '29pt').split('p')[0];
 			},
 			autofocus: editor,
 			editable: editor
 		});
 		fontSize = Number(
-			(editorState.editor.getAttributes('textStyle').fontSize ?? '29px').split('p')[0]
+			(editorState.editor.getAttributes('textStyle').fontSize ?? '29pt').split('p')[0]
 		);
-		editorState.editor.chain().focus().setFontSize(`${fontSize}px`).run();
+		editorState.editor.chain().focus().setFontSize(`${fontSize}pt`).run();
 		loading = false;
 	});
 
@@ -127,7 +127,7 @@
 		} else if (fontSize < 1) {
 			fontSize = 1;
 		}
-		editorState.editor?.chain().focus().setFontSize(`${fontSize}px`).run();
+		editorState.editor?.chain().focus().setFontSize(`${fontSize}pt`).run();
 	}
 
 	let wordCount = $derived(
@@ -164,7 +164,7 @@
 					/>
 					<span
 						class="absolute pointer-events-none top-[50%] right-10 translate-y-[-50%] text-(--fg)/50"
-						>px</span
+						>pt</span
 					>
 				</div>
 				<Toggle
