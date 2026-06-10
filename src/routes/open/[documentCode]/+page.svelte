@@ -18,7 +18,8 @@
 		}
 		const json = await response.json();
 		localStorage.setItem('repaper-token', json.ls);
-		goto(resolve(json.link), { replaceState: true });
+		let fullscreen = page.url.searchParams.getAll('fullscreen');
+		window.location.assign(json.link + (fullscreen ? '&fullscreen' : ''), { replaceState: true });
 	});
 </script>
 
