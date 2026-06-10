@@ -65,6 +65,19 @@
 	color: var(--fg);
 }
 
+[data-theme*='solarized'] {
+	color-scheme: dark;
+	--bg: #015a6c;
+	--fg: #fff;
+	--p: #99e9e9;
+	--p-fg: #015a6c;
+	--red: #ff616a;
+	--o: #99e9e9;
+	--c: #99e9e9;
+	background-color: var(--bg);
+	color: var(--fg);
+}
+
 [data-theme*='og'] {
 	color-scheme: dark;
 	--bg: #222;
