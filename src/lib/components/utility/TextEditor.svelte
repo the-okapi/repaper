@@ -21,6 +21,7 @@
 	import TextAlignCenter from '$lib/components/ui/icons/AlignCenter.svelte';
 	import TextAlignRight from '$lib/components/ui/icons/AlignRight.svelte';
 	import lang, { languageState as lS } from '$lib/lang.svelte';
+	import { downloadDocument } from '$lib/pdf';
 
 	let element: any = $state();
 	let editorState: { editor: Editor | null } = $state({ editor: null });
@@ -138,6 +139,18 @@
 			.split(' ')
 			.filter((word) => word !== '').length
 	);
+
+	async function download() {
+		loading = true;
+		const bytes = await downloadDocument('Hello');
+		const blob = new Blob([bytes as Uint8Array<ArrayBuffer>], { type: 'application/pdf' });
+		const url = URL.createObjectURL(blob);
+		const a = document.createElement('a');
+		a.href = url;
+		a.download = 'Document.pdf';
+		a.click();
+		URL.revokeObjectURL(url);
+	}
 </script>
 
 <svelte:window {onbeforeunload} />
@@ -148,6 +161,7 @@
 	{#if editorState.editor && editor}
 		<div class="mb-5 border-b border-(--o) py-5 bg-(--bg) sticky top-0 z-40">
 			<div class="m-auto flex w-fit gap-3">
+				<Button.Root onclick={download}>Download PDF</Button.Root>
 				<Popover
 					questionMark={false}
 					bClass="mr-10"
