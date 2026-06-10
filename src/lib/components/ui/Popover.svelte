@@ -21,7 +21,7 @@
 	{/if}
 	<Popover.Portal>
 		<Popover.Content
-			class="w-fit rounded-md border border-(--o) bg-(--bg) px-5 py-3 text-center {bClass}"
+			class="w-fit z-50 rounded-md border border-(--o) bg-(--bg) px-5 py-3 text-center {bClass}"
 			sideOffset={5}
 			tabindex={-1}
 		>
