@@ -142,7 +142,7 @@
 
 	async function download() {
 		loading = true;
-		const bytes = await downloadDocument('Hello');
+		const bytes = await downloadDocument(editorState.editor?.getHTML() || '');
 		const blob = new Blob([bytes as Uint8Array<ArrayBuffer>], { type: 'application/pdf' });
 		const url = URL.createObjectURL(blob);
 		const a = document.createElement('a');
@@ -150,6 +150,7 @@
 		a.download = 'Document.pdf';
 		a.click();
 		URL.revokeObjectURL(url);
+		loading = false
 	}
 </script>
 
