@@ -54,8 +54,8 @@
 							? 'rounded-t-lg'
 							: ''} {i === recents.length - 1 ? 'rounded-b-lg border' : ' border-x border-t'}"
 						><span class="font-semibold">{document.title}</span> - {document.mode === 'viewer'
-							? 'View'
-							: 'Edit'}</button
+							? lang(lS, 'View', 'Spectateur')
+							: lang(lS, 'Edit', 'Éditeur')}</button
 					>
 					{#if x}
 						<button
