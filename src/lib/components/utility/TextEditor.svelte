@@ -16,9 +16,9 @@
 	} from '$lib/extensions';
 	import { Button } from 'bits-ui';
 	import { changed } from '$lib';
-	import TextAlignLeft from '@lucide/svelte/icons/text-align-start';
-	import TextAlignCenter from '@lucide/svelte/icons/text-align-center';
-	import TextAlignRight from '@lucide/svelte/icons/text-align-end';
+	import TextAlignLeft from '$lib/components/ui/icons/AlignLeft.svelte';
+	import TextAlignCenter from '$lib/components/ui/icons/AlignCenter.svelte';
+	import TextAlignRight from '$lib/components/ui/icons/AlignRight.svelte';
 	import lang, { languageState as lS } from '$lib/lang.svelte';
 
 	let element: any = $state();
@@ -99,13 +99,13 @@
 				changed.set(true);
 			},
 			onSelectionUpdate: ({ editor }) => {
-				fontSize = (editor.getAttributes('textStyle').fontSize ?? '29pt').split('p')[0];
+				fontSize = (editor.getAttributes('textStyle').fontSize ?? '20pt').split('p')[0];
 			},
 			autofocus: editor,
 			editable: editor
 		});
 		fontSize = Number(
-			(editorState.editor.getAttributes('textStyle').fontSize ?? '29pt').split('p')[0]
+			(editorState.editor.getAttributes('textStyle').fontSize ?? '20pt').split('p')[0]
 		);
 		editorState.editor.chain().focus().setFontSize(`${fontSize}pt`).run();
 		loading = false;
@@ -186,21 +186,21 @@
 						active={editorState.editor.isActive({ textAlign: 'left' })}
 						icon={true}
 					>
-						<TextAlignLeft size={20} /></Toggle
+						<TextAlignLeft /></Toggle
 					>
 					<Toggle
 						onclick={() => editorState.editor?.chain().focus().setTextAlign('center').run()}
 						active={editorState.editor.isActive({ textAlign: 'center' })}
 						icon={true}
 					>
-						<TextAlignCenter size={20} /></Toggle
+						<TextAlignCenter /></Toggle
 					>
 					<Toggle
 						onclick={() => editorState.editor?.chain().focus().setTextAlign('right').run()}
 						active={editorState.editor.isActive({ textAlign: 'right' })}
 						icon={true}
 					>
-						<TextAlignRight size={20} /></Toggle
+						<TextAlignRight /></Toggle
 					>
 				</div>
 				<Button.Root class="ml-10" onclick={() => saveFunc(false)}
