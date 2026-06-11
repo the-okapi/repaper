@@ -59,7 +59,7 @@
 input {
 	border: 1px var(--o) solid;
 	color: var(--fg);
-	border-radius: 7px;
+	border-radius: 0.75rem;
 	padding: 0.25rem 0.5rem;
 }
 

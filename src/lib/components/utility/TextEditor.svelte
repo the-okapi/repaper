@@ -168,7 +168,7 @@
 				<div class="relative inline-block">
 					<input
 						type="number"
-						class="h-full w-22 rounded-xl!"
+						class="h-full w-22"
 						min="1"
 						max="99"
 						bind:value={fontSize}
