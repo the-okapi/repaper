@@ -5,18 +5,16 @@
 	import { ModeWatcher } from 'mode-watcher';
 	import { goto } from '$app/navigation';
 	import { changed } from '$lib';
-	import { page } from '$app/state';
 	import { onMount } from 'svelte';
 	import lang, { languageState, setLanguage } from '$lib/lang.svelte';
 	import { Loading } from '$lib/components';
+	import fullscreen from '$lib/fullscreen.svelte';
 
 	let { children } = $props();
 
 	function oncontextmenu(event: Event) {
 		event.preventDefault();
 	}
-
-	let fullscreen: string[] = $state([]);
 
 	function go(where: any) {
 		if ($changed) {
@@ -45,10 +43,6 @@
 			setLanguage(lang);
 		}
 		loading = false;
-
-		if (page.params.document != null) {
-			fullscreen = page.url.searchParams.getAll('fullscreen');
-		}
 	});
 </script>
 
@@ -69,8 +63,8 @@
 />
 
 <main class="h-screen w-screen">
-	{#if fullscreen.length === 0}
-		<nav class="fixed z-50 h-screen w-70 border-r border-(--o) bg-(--bg) pt-9 flex flex-wrap">
+	{#if !fullscreen.value}
+		<nav class="fixed z-40 h-screen w-70 border-r border-(--o) bg-(--bg) pt-9 flex flex-wrap">
 			<div class="w-full">
 				<a href={resolve('/')}><h2 class="text-center text-4xl font-black">Repaper</h2></a>
 				<div class="pt-4 px-7">

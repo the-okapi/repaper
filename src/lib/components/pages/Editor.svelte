@@ -1,18 +1,10 @@
 <script lang="ts">
-	import { page } from '$app/state';
 	import { Loading, TextEditor } from '$lib/components';
 	import { Button } from 'bits-ui';
 	import lang, { languageState as lS } from '$lib/lang.svelte';
+	import fullscreen from '$lib/fullscreen.svelte';
 
-	let {
-		document,
-		scale,
-		save,
-		settings,
-		show,
-		fullscreen,
-		changesMadeSinceSave = $bindable()
-	} = $props();
+	let { document, scale, save, settings, show, changesMadeSinceSave = $bindable() } = $props();
 
 	let loading = $state(false);
 
@@ -29,13 +21,13 @@
 	}
 
 	async function enableFullscreen() {
-		await saveFunction();
-		window.location.assign(page.url.toString() + '&fullscreen');
+		fullscreen.value = true;
+		scale = 100;
 	}
 
 	async function disableFullscreen() {
-		await saveFunction();
-		window.location.assign(page.url.toString().split('&')[0]);
+		fullscreen.value = false;
+		scale = 70;
 	}
 </script>
 
@@ -49,7 +41,7 @@
 
 <div
 	class="h-screen"
-	style={!fullscreen ? 'width: calc(100vw - 5rem)' : 'width: 100vw'}
+	style={!fullscreen.value ? 'width: calc(100vw - 5rem)' : 'width: 100vw'}
 	hidden={!show}
 >
 	<div class="m-auto mt-8 flex w-fit">
@@ -58,8 +50,14 @@
 		</h2>
 		<Button.Root onclick={settings} class="m-auto ml-5 h-fit"
 			>{lang(lS, 'Document Settings', 'Paramètres du Document')}</Button.Root
-		>
-		{#if !fullscreen}
+		><!--
+		<Popover
+			questionMark={false}
+			bClass="m-auto ml-5 h-fit"
+			message={lang(lS, 'Share', 'Partager')}
+		>Hello</Popover
+	>-->
+		{#if !fullscreen.value}
 			<Button.Root onclick={enableFullscreen} class="m-auto ml-5 h-fit"
 				>{lang(lS, 'Fullscreen', 'Plein Écran')}</Button.Root
 			>
@@ -77,7 +75,7 @@
 		promise={document.promise}
 		{save}
 		initial={document.content}
-		{fullscreen}
+		fullscreen={fullscreen.value}
 		scale="transform: scale({scale / 100}); transform-origin: top center;"
 		bind:this={editor}
 	/>

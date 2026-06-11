@@ -8,6 +8,7 @@
 	import { page } from '$app/state';
 	import { Slider } from '$lib/components';
 	import lang, { languageState as lS } from '$lib/lang.svelte';
+	import fullscreen from '$lib/fullscreen.svelte';
 
 	let resolveP: (value: boolean) => void;
 
@@ -33,13 +34,10 @@
 
 	let showSettings = $state(false);
 
-	let fullscreen = $state(false);
-
 	let editor: any = $state();
 
 	onMount(async () => {
-		if (page.url.searchParams.getAll('fullscreen').length > 0) {
-			fullscreen = true;
+		if (fullscreen.value) {
 			scale = 100;
 		}
 		const modeLS = page.url.searchParams.get('mode');
@@ -173,7 +171,7 @@
 		</div>
 	{/if}
 	{#if mode === 'viewer'}
-		<Viewer {document} {scale} {fullscreen} />
+		<Viewer {document} {scale} />
 	{:else}
 		<Editor
 			{document}
@@ -181,7 +179,6 @@
 			{save}
 			{settings}
 			show={!showSettings}
-			{fullscreen}
 			bind:changesMadeSinceSave
 			bind:this={editor}
 		/>
