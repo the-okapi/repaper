@@ -3,6 +3,20 @@ import { db } from '$lib/server/db';
 import { documents } from '$lib/server/db/schema';
 import { success, error } from '$lib/server/db/logs';
 
+const codeCharacters = 'abcdefghijklmnopqrstuvwxyz0123456789-';
+
+function check(code: string, editorPassword: string, viewerPassword: string) {
+	for (let i = 0; i < code.length; i++) {
+		if (!codeCharacters.includes(code[i])) {
+			return false;
+		}
+	}
+	if (editorPassword === viewerPassword) {
+		return false;
+	}
+	return true;
+}
+
 export const POST: RequestHandler = async ({ request }) => {
 	const requestJson = await request.json();
 	const title = requestJson.title;
@@ -11,6 +25,9 @@ export const POST: RequestHandler = async ({ request }) => {
 	const viewerPassword = requestJson.viewerPassword;
 	const passwordRequired = requestJson.passwordRequired;
 	const userAgent = request.headers.get('user-agent') ?? 'not-found';
+	if (!check(code, editorPassword, viewerPassword)) {
+		return new Response('', { status: 400 });
+	}
 	try {
 		if (passwordRequired) {
 			await db.insert(documents).values({
