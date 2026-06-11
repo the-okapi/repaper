@@ -7,7 +7,8 @@ export const load: PageServerLoad = async ({ params }) => {
 	const document = db.query.documents.findFirst({
 		columns: {
 			title: true,
-			content: true
+			content: true,
+			passwordRequired: true
 		},
 		where: eq(documents.code, params.document)
 	});

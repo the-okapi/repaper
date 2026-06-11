@@ -20,9 +20,10 @@
 
 	let loading = $state(true);
 
-	let document = $state<{ title: string; content: string; promise: Promise<boolean> }>({
+	let document = $state<{ title: string; content: string; passwordRequired: boolean; promise: Promise<boolean> }>({
 		title: '',
 		content: '',
+		passwordRequired: false,
 		promise
 	});
 
@@ -75,6 +76,7 @@
 		}
 		document.title = documentCU.title;
 		document.content = documentCU.content;
+		document.passwordRequired = documentCU.passwordRequired === 1 ? true : false;
 		resolveP(true);
 		loading = false;
 		if (i !== -1) {

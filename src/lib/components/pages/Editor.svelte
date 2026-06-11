@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Loading, TextEditor } from '$lib/components';
+	import { Loading, TextEditor, Popover } from '$lib/components';
 	import { Button } from 'bits-ui';
 	import lang, { languageState as lS } from '$lib/lang.svelte';
 	import fullscreen from '$lib/fullscreen.svelte';
@@ -50,13 +50,20 @@
 		</h2>
 		<Button.Root onclick={settings} class="m-auto ml-5 h-fit"
 			>{lang(lS, 'Document Settings', 'Paramètres du Document')}</Button.Root
-		><!--
-		<Popover
-			questionMark={false}
-			bClass="m-auto ml-5 h-fit"
-			message={lang(lS, 'Share', 'Partager')}
-		>Hello</Popover
-	>-->
+		>
+		<Popover questionMark={false} bClass="m-auto ml-5 h-fit" message={lang(lS, 'Share', 'Partager')}>
+			{lang(
+				lS,
+				'Share the document code and editor password for other editors.',
+				"Partager le code du document et le mot de passe d'éditeur pour les autres éditeurs."
+			)}<br />
+			{#if document.passwordRequired}
+				{lang(lS, '', '')}
+			{:else}
+				{lang(lS, `Share this link for viewers`, 'Partager ce lien pour les spectateurs')}:
+				<span class="underline">https://repaper.unlimitedstuffltd.com/open/{document.code}</span>
+			{/if}
+		</Popover>
 		{#if !fullscreen.value}
 			<Button.Root onclick={enableFullscreen} class="m-auto ml-5 h-fit"
 				>{lang(lS, 'Fullscreen', 'Plein Écran')}</Button.Root
