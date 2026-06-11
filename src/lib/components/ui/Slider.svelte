@@ -10,6 +10,6 @@
 	</span>
 	<Slider.Thumb
 		index={0}
-		class="flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-(--fg) focus:outline-none"
+		class="flex h-6 w-6 cursor-pointer items-center justify-center rounded-full border border-(--p) bg-(--bg) focus:outline-none"
 	/>
 </Slider.Root>

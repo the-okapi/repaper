@@ -264,7 +264,7 @@
 		<div class="m-auto mb-7 flex w-fit">
 			<Checkbox bind:checked={passwordNotRequired} id="passwordNotRequired" />
 			<Label.Root class="ml-2" for="passwordNotRequired">
-				{lang(lS, 'Password not required to view', 'Mot de Passe pas recquis pour regarder')}
+				{lang(lS, 'Password not required to view', 'Mot de Passe pas requis pour regarder')}
 				<Popover>
 					{@html lang(
 						lS,
