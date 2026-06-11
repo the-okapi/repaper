@@ -5,6 +5,7 @@
 	import { resolve } from '$app/paths';
 	import { goto } from '$app/navigation';
 	import lang, { languageState as lS } from '$lib/lang.svelte';
+	import Trash from '$lib/components/ui/icons/X.svelte';
 
 	let { size = 'w-80 h-fit', limit = 10, empty = false, x = true } = $props();
 
@@ -60,8 +61,8 @@
 					{#if x}
 						<button
 							onclick={() => remove(i)}
-							class="m-auto font-black ml-1.5 text-xs cursor-pointer border border-(--o) hover:bg-(--fg)/5 min-h-7 min-w-7 rounded-md"
-							>X</button
+							class="m-auto font-black ml-1.5 text-xs cursor-pointer hover:bg-(--fg)/5 min-h-7 min-w-7 rounded-md"
+							><Trash /></button
 						>
 					{/if}
 				</div>
