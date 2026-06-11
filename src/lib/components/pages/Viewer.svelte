@@ -33,6 +33,9 @@
 				>{lang(lS, 'Exit Fullscreen', 'Quitter Plein Écran')}</Button.Root
 			>
 		{/if}
+		<Button.Root onclick={() => window.location.reload()} class="m-auto ml-5 h-fit"
+			>{lang(lS, 'Reload', 'Rafraîchir')}</Button.Root
+		>
 	</div>
 	<h1 class="h1 mt-5">{document.title}</h1>
 	<TextEditor
