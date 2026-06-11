@@ -142,14 +142,10 @@
 
 	async function download() {
 		loading = true;
-		const bytes = await downloadDocument('Hello');
-		const blob = new Blob([bytes as Uint8Array<ArrayBuffer>], { type: 'application/pdf' });
-		const url = URL.createObjectURL(blob);
-		const a = document.createElement('a');
-		a.href = url;
-		a.download = 'Document.pdf';
-		a.click();
-		URL.revokeObjectURL(url);
+
+		await downloadDocument(editorState.editor?.getHTML() ?? '');
+
+		loading = false;
 	}
 </script>
 
