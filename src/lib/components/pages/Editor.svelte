@@ -2,7 +2,7 @@
 	import { Loading, TextEditor, Popover } from '$lib/components';
 	import { Button } from 'bits-ui';
 	import lang, { languageState as lS } from '$lib/lang.svelte';
-	import fullscreen from '$lib/fullscreen.svelte';
+	import fullscreen from '$lib/fullscreen';
 
 	let { document, scale, save, settings, show, changesMadeSinceSave = $bindable() } = $props();
 
@@ -21,12 +21,12 @@
 	}
 
 	async function enableFullscreen() {
-		fullscreen.value = true;
+		fullscreen.set(true);
 		scale = 100;
 	}
 
 	async function disableFullscreen() {
-		fullscreen.value = false;
+		fullscreen.set(false);
 		scale = 70;
 	}
 </script>
@@ -40,8 +40,7 @@
 </svelte:head>
 
 <div
-	class="h-screen"
-	style={!fullscreen.value ? 'width: calc(100vw - 5rem)' : 'width: 100vw'}
+	class="h-screen w-fit"
 	hidden={!show}
 >
 	<div class="m-auto mt-8 flex w-fit">
@@ -68,7 +67,7 @@
 				<span class="underline">https://repaper.unlimitedstuffltd.com/open/{document.code}</span>
 			{/if}
 		</Popover>
-		{#if !fullscreen.value}
+		{#if !$fullscreen}
 			<Button.Root onclick={enableFullscreen} class="m-auto ml-5 h-fit"
 				>{lang(lS, 'Fullscreen', 'Plein Écran')}</Button.Root
 			>
@@ -86,7 +85,7 @@
 		promise={document.promise}
 		{save}
 		initial={document.content}
-		fullscreen={fullscreen.value}
+		fullscreen={$fullscreen}
 		scale="transform: scale({scale / 100}); transform-origin: top center;"
 		bind:this={editor}
 	/>

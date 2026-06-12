@@ -2,17 +2,17 @@
 	import { TextEditor } from '$lib/components';
 	import { Button } from 'bits-ui';
 	import lang, { languageState as lS } from '$lib/lang.svelte';
-	import fullscreen from '$lib/fullscreen.svelte';
+	import fullscreen from '$lib/fullscreen';
 
 	let { document, scale } = $props();
 
 	function enableFullscreen() {
-		fullscreen.value = true;
+		fullscreen.set(true);
 		scale = 100;
 	}
 
 	function disableFullscreen() {
-		fullscreen.value = false;
+		fullscreen.set(false);
 		scale = 70;
 	}
 </script>
@@ -21,12 +21,12 @@
 	<title>{document.title} - Repaper</title>
 </svelte:head>
 
-<div class="h-screen" style="width: calc(100vw{fullscreen.value ? '' : ' - 5rem'})">
+<div class="h-screen" style="width: calc(100vw{$fullscreen ? '' : ' - 5rem'})">
 	<div class="flex m-auto mt-8 w-fit">
 		<h2 class="m-auto text-center text-lg font-bold text-(--fg)/60">
 			{lang(lS, 'View Mode', 'Mode de Spectateur')}
 		</h2>
-		{#if !fullscreen.value}
+		{#if !$fullscreen}
 			<Button.Root onclick={enableFullscreen} class="m-auto ml-5 h-fit"
 				>{lang(lS, 'Fullscreen', 'Plein Écran')}</Button.Root
 			>
@@ -44,7 +44,7 @@
 		promise={document.promise}
 		initial={document.content}
 		editor={false}
-		fullscreen={fullscreen.value}
+		fullscreen={$fullscreen}
 		scale="transform: scale({scale / 100}); transform-origin: top center;"
 	/>
 	<div class="h-[2vw]"></div>

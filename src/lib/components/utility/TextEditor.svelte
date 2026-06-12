@@ -22,6 +22,7 @@
 	import TextAlignRight from '$lib/components/ui/icons/AlignRight.svelte';
 	import lang, { languageState as lS } from '$lib/lang.svelte';
 	import { downloadDocument } from '$lib/pdf';
+	import fullscreen from '$lib/fullscreen';
 
 	let element: any = $state();
 	let editorState: { editor: Editor | null } = $state({ editor: null });
@@ -153,9 +154,9 @@
 
 <Loading show={loading} />
 
-<div class="app relative" {...props}>
+<div class="app relative w-fit m-auto!" style={$fullscreen ? "" : "max-width: calc(100vw - 17.5rem)"} {...props}>
 	{#if editorState.editor && editor}
-		<div class="mb-5 border-b border-(--o) py-5 bg-(--bg) sticky top-0 z-30">
+		<div class="mb-5 border-b border-(--o) py-5 bg-(--bg) sticky top-0 z-30 {$fullscreen ? 'min-w-screen' : 'min-w-[calc(100vw-17.5rem)]'} m-auto">
 			<div class="m-auto flex w-fit gap-3">
 				<Button.Root onclick={download}>Download PDF</Button.Root>
 				<Popover

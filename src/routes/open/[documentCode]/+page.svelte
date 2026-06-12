@@ -4,7 +4,7 @@
 	import { Loading } from '$lib/components';
 	import { onMount } from 'svelte';
 	import { resolve } from '$app/paths';
-	import fullscreenState from '$lib/fullscreen.svelte';
+	import fullscreenState from '$lib/fullscreen';
 
 	onMount(async () => {
 		const code = page.params.documentCode;
@@ -21,7 +21,7 @@
 		localStorage.setItem('repaper-token', json.ls);
 		let fullscreen = page.url.searchParams.getAll('fullscreen');
 		if (fullscreen.length > 0) {
-			fullscreenState.value = true;
+			fullscreenState.set(true);
 		}
 		goto(json.link);
 	});

@@ -8,7 +8,7 @@
 	import { page } from '$app/state';
 	import { Slider } from '$lib/components';
 	import lang, { languageState as lS } from '$lib/lang.svelte';
-	import fullscreen from '$lib/fullscreen.svelte';
+	import fullscreen from '$lib/fullscreen';
 
 	let resolveP: (value: boolean) => void;
 
@@ -43,7 +43,7 @@
 	let editor: any = $state();
 
 	onMount(async () => {
-		if (fullscreen.value) {
+		if ($fullscreen) {
 			scale = 100;
 		}
 		const modeLS = page.url.searchParams.get('mode');
@@ -168,7 +168,7 @@
 
 <Loading show={loading} />
 
-<div class="pt-20">
+<div class="pt-20 w-fit">
 	{#if !showSettings}
 		<div class="m-auto w-fit">
 			<p class="mt-7 mb-1 font-bold text-(--fg)/60">Zoom:</p>

@@ -8,7 +8,7 @@
 	import { onMount } from 'svelte';
 	import lang, { languageState, setLanguage } from '$lib/lang.svelte';
 	import { Loading } from '$lib/components';
-	import fullscreen from '$lib/fullscreen.svelte';
+	import fullscreen from '$lib/fullscreen';
 
 	let { children } = $props();
 
@@ -63,8 +63,7 @@
 />
 
 <main class="h-screen w-screen">
-	{#if !fullscreen.value}
-		<nav class="fixed z-40 h-screen w-70 border-r border-(--o) bg-(--bg) pt-9 flex flex-wrap">
+		<nav class="fixed z-40 h-screen w-70 border-r border-(--o) bg-(--bg) pt-9 flex flex-wrap" class:hidden={$fullscreen}>
 			<div class="w-full">
 				<a href={resolve('/')}><h2 class="text-center text-4xl font-black">Repaper</h2></a>
 				<div class="pt-4 px-7">
@@ -103,15 +102,7 @@
 				</div>
 			</div>
 		</nav>
-		<div class="flex">
-			<div class="w-70"></div>
-			<div class="flex h-screen items-center justify-center" style="width: calc(100vw - 17.5rem)">
+			<div class="{$fullscreen ? '' : 'ml-70'} flex h-screen items-center justify-center w-fit">
 				{@render children()}
 			</div>
-		</div>
-	{:else}
-		<div class="flex h-screen items-center justify-center">
-			{@render children()}
-		</div>
-	{/if}
 </main>
