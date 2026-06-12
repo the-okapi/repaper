@@ -51,7 +51,11 @@
 		<Button.Root onclick={settings} class="m-auto ml-5 h-fit"
 			>{lang(lS, 'Document Settings', 'Paramètres du Document')}</Button.Root
 		>
-		<Popover questionMark={false} bClass="m-auto ml-5 h-fit" message={lang(lS, 'Share', 'Partager')}>
+		<Popover
+			questionMark={false}
+			bClass="m-auto ml-5 h-fit"
+			message={lang(lS, 'Share', 'Partager')}
+		>
 			{lang(
 				lS,
 				'Share the document code and editor password for other editors.',

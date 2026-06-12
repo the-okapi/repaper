@@ -52,11 +52,11 @@
 	<form {onsubmit}>
 		<div class="m-auto mb-5 w-fit text-left">
 			<Label.Root for="code">{lang(lS, 'Document Code', 'Code du Document')}:</Label.Root><br />
-			<input id="code" class="w-120" bind:value={code} maxlength="50" required />
+			<input id="code" class="w-120 h-10" bind:value={code} maxlength="50" required />
 		</div>
 		<div class="m-auto mb-0.5 w-fit text-left">
 			<Label.Root for="password">{lang(lS, 'Password', 'Mot de Passe')}:</Label.Root><br />
-			<input id="password" class="w-120" bind:value={password} type="password" />
+			<input id="password" class="w-120 h-10" bind:value={password} type="password" />
 		</div>
 		<p class="mb-3 text-left text-sm text-(--red)"><I />{text}</p>
 		<Button.Root type="submit">{lang(lS, 'Open', 'Ouvrir')}</Button.Root>

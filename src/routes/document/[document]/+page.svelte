@@ -20,7 +20,12 @@
 
 	let loading = $state(true);
 
-	let document = $state<{ title: string; content: string; passwordRequired: boolean; promise: Promise<boolean> }>({
+	let document = $state<{
+		title: string;
+		content: string;
+		passwordRequired: boolean;
+		promise: Promise<boolean>;
+	}>({
 		title: '',
 		content: '',
 		passwordRequired: false,

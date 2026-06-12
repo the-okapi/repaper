@@ -148,7 +148,7 @@
 			<input
 				id="title"
 				autocomplete="off"
-				class="mt-0.5 w-120"
+				class="mt-0.5 w-120 h-10"
 				bind:value={title}
 				maxlength="50"
 				required
@@ -168,7 +168,7 @@
 			<input
 				id="code"
 				autocomplete="off"
-				class="mt-0.5 w-120"
+				class="mt-0.5 w-120 h-10"
 				bind:value={code}
 				maxlength="50"
 				required
@@ -189,7 +189,7 @@
 				</Label.Root><br />
 				<input
 					id="editorPassword"
-					class="mt-0.5 mr-3 w-58"
+					class="mt-0.5 mr-3 w-58 h-10"
 					bind:value={editorPassword}
 					type="password"
 					autocomplete="off"
@@ -207,7 +207,7 @@
 				<input
 					id="confirmEditorPassword"
 					bind:value={confirmEditorPassword}
-					class="mt-0.5 w-58"
+					class="mt-0.5 w-58 h-10"
 					type="password"
 					autocomplete="off"
 					required
@@ -232,7 +232,7 @@
 				<input
 					id="viewerPassword"
 					autocomplete="off"
-					class="mt-0.5 mr-3 w-58 disabled:cursor-not-allowed disabled:bg-(--fg)/2"
+					class="mt-0.5 mr-3 h-10 w-58 disabled:cursor-not-allowed disabled:bg-(--fg)/2"
 					bind:value={viewerPassword}
 					type="password"
 					required={!passwordNotRequired}
@@ -253,7 +253,7 @@
 					id="confirmViewerPassword"
 					autocomplete="off"
 					bind:value={confirmViewerPassword}
-					class="mt-0.5 w-58 disabled:cursor-not-allowed disabled:bg-(--fg)/2"
+					class="mt-0.5 h-10 w-58 disabled:cursor-not-allowed disabled:bg-(--fg)/2"
 					type="password"
 					required={!passwordNotRequired}
 					disabled={passwordNotRequired}
