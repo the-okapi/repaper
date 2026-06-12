@@ -26,7 +26,7 @@
 	}
 </script>
 
-<h1 class="h1">Document Settings</h1>
+<h1 class="h1">{lang(lS, 'Document Settings', 'Paramètres du Document')}</h1>
 
 <div class="m-auto w-fit text-center">
 	<form onsubmit={rename} class="mb-10 block text-left">
