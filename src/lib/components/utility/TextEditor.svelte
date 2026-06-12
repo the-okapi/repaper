@@ -154,11 +154,21 @@
 
 <Loading show={loading} />
 
-<div class="app relative w-fit m-auto!" style={$fullscreen ? "" : "max-width: calc(100vw - 17.5rem)"} {...props}>
+<div
+	class="app relative w-fit m-auto!"
+	style={$fullscreen ? '' : 'max-width: calc(100vw - 17.5rem)'}
+	{...props}
+>
 	{#if editorState.editor && editor}
-		<div class="mb-5 border-b border-(--o) py-5 bg-(--bg) sticky top-0 z-30 {$fullscreen ? 'min-w-screen' : 'min-w-[calc(100vw-17.5rem)]'} m-auto">
+		<div
+			class="mb-5 border-b border-(--o) py-5 bg-(--bg) sticky top-0 z-30 {$fullscreen
+				? 'min-w-screen'
+				: 'min-w-[calc(100vw-17.5rem)]'} m-auto"
+		>
 			<div class="m-auto flex w-fit gap-3">
-				<Button.Root onclick={download}>{lang(lS, 'Download PDF', 'Télécharger comme PDF')}</Button.Root>
+				<Button.Root onclick={download}
+					>{lang(lS, 'Download PDF', 'Télécharger comme PDF')}</Button.Root
+				>
 				<Popover
 					questionMark={false}
 					bClass="mr-10"
@@ -223,7 +233,16 @@
 		</div>
 	{:else}
 		<div class="w-fit m-auto mb-6">
-			<Button.Root onclick={download}>{lang(lS, 'Download PDF', 'Télécharger comme PDF')}</Button.Root>
+			<Button.Root onclick={download}
+				>{lang(lS, 'Download PDF', 'Télécharger comme PDF')}</Button.Root
+			>
+			<Popover
+				questionMark={false}
+				bClass="mr-10"
+				message={lang(lS, 'Document Info', 'Info sur le Document')}
+				>{lang(lS, 'Word Count', 'Nombre de Mots')}: <strong>{wordCount}</strong>
+				{lang(lS, 'Words', 'Mots')}</Popover
+			>
 		</div>
 	{/if}
 

@@ -39,10 +39,7 @@
 	<title>{document.title} - Repaper</title>
 </svelte:head>
 
-<div
-	class="h-screen w-fit"
-	hidden={!show}
->
+<div class="h-screen w-fit" hidden={!show}>
 	<div class="m-auto mt-8 flex w-fit">
 		<h2 class="m-auto text-center font-bold text-lg text-(--fg)/60">
 			{lang(lS, 'Edit Mode', "Mode d'Éditeur")}
