@@ -62,7 +62,7 @@
 	defaultMode="light"
 />
 
-<main class="h-screen w-screen">
+<main class="h-screen w-screen text-center">
 		<nav class="fixed z-40 h-screen w-70 border-r border-(--o) bg-(--bg) pt-9 flex flex-wrap" class:hidden={$fullscreen}>
 			<div class="w-full">
 				<a href={resolve('/')}><h2 class="text-center text-4xl font-black">Repaper</h2></a>
@@ -102,7 +102,7 @@
 				</div>
 			</div>
 		</nav>
-			<div class="{$fullscreen ? '' : 'ml-70'} flex h-screen items-center justify-center w-fit">
+			<div class="{$fullscreen ? '' : 'ml-70'} inline-flex h-screen items-center justify-center w-fit">
 				{@render children()}
 			</div>
 </main>
