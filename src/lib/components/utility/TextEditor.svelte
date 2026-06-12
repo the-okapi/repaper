@@ -29,7 +29,7 @@
 
 	let loading = $state(true);
 
-	let { initial, promise, save = () => {}, editor = true, scale, ...props } = $props();
+	let { initial, promise, save = () => {}, editor = true, scale } = $props();
 
 	let fontSize = $state(29);
 
@@ -154,85 +154,13 @@
 
 <Loading show={loading} />
 
-<div
-	class="app relative w-fit m-auto!"
-	style={$fullscreen ? '' : 'max-width: calc(100vw - 17.5rem)'}
-	{...props}
->
-	{#if editorState.editor && editor}
-		<div
-			class="mb-5 border-b border-(--o) py-5 bg-(--bg) sticky top-0 z-30 {$fullscreen
-				? 'min-w-screen'
-				: 'min-w-[calc(100vw-17.5rem)]'} m-auto"
-		>
-			<div class="m-auto flex w-fit gap-3">
-				<Button.Root onclick={download}
-					>{lang(lS, 'Download PDF', 'Télécharger comme PDF')}</Button.Root
-				>
-				<Popover
-					questionMark={false}
-					bClass="mr-10"
-					message={lang(lS, 'Document Info', 'Info sur le Document')}
-					>{lang(lS, 'Word Count', 'Nombre de Mots')}: <strong>{wordCount}</strong>
-					{lang(lS, 'Words', 'Mots')}</Popover
-				>
-				<div class="relative inline-block">
-					<input
-						type="number"
-						class="h-full w-22"
-						min="1"
-						max="99"
-						bind:value={fontSize}
-						onchange={fontSizeChange}
-					/>
-					<span
-						class="absolute pointer-events-none top-[50%] right-10 translate-y-[-50%] text-(--fg)/50"
-						>pt</span
-					>
-				</div>
-				<Toggle
-					onclick={() => editorState.editor?.chain().focus().toggleBold().run()}
-					active={editorState.editor.isActive('bold')}>{lang(lS, 'Bold', 'Gras')}</Toggle
-				>
-				<Toggle
-					onclick={() => editorState.editor?.chain().focus().toggleItalic().run()}
-					active={editorState.editor.isActive('italic')}>{lang(lS, 'Italic', 'Italique')}</Toggle
-				>
-				<Toggle
-					onclick={() => editorState.editor?.chain().focus().toggleUnderline().run()}
-					active={editorState.editor.isActive('underline')}
-					>{lang(lS, 'Underline', 'Soulignement')}</Toggle
-				>
-				<div class="flex gap-1 rounded-xl border border-(--o) p-1.5">
-					<Toggle
-						onclick={() => editorState.editor?.chain().focus().setTextAlign('left').run()}
-						active={editorState.editor.isActive({ textAlign: 'left' })}
-						icon={true}
-					>
-						<TextAlignLeft /></Toggle
-					>
-					<Toggle
-						onclick={() => editorState.editor?.chain().focus().setTextAlign('center').run()}
-						active={editorState.editor.isActive({ textAlign: 'center' })}
-						icon={true}
-					>
-						<TextAlignCenter /></Toggle
-					>
-					<Toggle
-						onclick={() => editorState.editor?.chain().focus().setTextAlign('right').run()}
-						active={editorState.editor.isActive({ textAlign: 'right' })}
-						icon={true}
-					>
-						<TextAlignRight /></Toggle
-					>
-				</div>
-				<Button.Root class="ml-10" onclick={() => saveFunc(false)}
-					>{lang(lS, 'Save', 'Enregistrer')}</Button.Root
-				>
-			</div>
-		</div>
-	{:else}
-		<div class="w-fit m-auto mb-6">
+{#if editorState.editor && editor}
+	<div
+		class="mb-5 border-b border-(--o) py-5 bg-(--bg) sticky top-0 z-30 {$fullscreen
+			? 'min-w-screen'
+			: 'min-w-[calc(100vw-17.5rem)]'} m-auto"
+	>
+		<div class="m-auto flex w-fit gap-3">
 			<Button.Root onclick={download}
 				>{lang(lS, 'Download PDF', 'Télécharger comme PDF')}</Button.Root
 			>
@@ -243,8 +171,72 @@
 				>{lang(lS, 'Word Count', 'Nombre de Mots')}: <strong>{wordCount}</strong>
 				{lang(lS, 'Words', 'Mots')}</Popover
 			>
+			<div class="relative inline-block">
+				<input
+					type="number"
+					class="h-full w-22"
+					min="1"
+					max="99"
+					bind:value={fontSize}
+					onchange={fontSizeChange}
+				/>
+				<span
+					class="absolute pointer-events-none top-[50%] right-10 translate-y-[-50%] text-(--fg)/50"
+					>pt</span
+				>
+			</div>
+			<Toggle
+				onclick={() => editorState.editor?.chain().focus().toggleBold().run()}
+				active={editorState.editor.isActive('bold')}>{lang(lS, 'Bold', 'Gras')}</Toggle
+			>
+			<Toggle
+				onclick={() => editorState.editor?.chain().focus().toggleItalic().run()}
+				active={editorState.editor.isActive('italic')}>{lang(lS, 'Italic', 'Italique')}</Toggle
+			>
+			<Toggle
+				onclick={() => editorState.editor?.chain().focus().toggleUnderline().run()}
+				active={editorState.editor.isActive('underline')}
+				>{lang(lS, 'Underline', 'Soulignement')}</Toggle
+			>
+			<div class="flex gap-1 rounded-xl border border-(--o) p-1.5">
+				<Toggle
+					onclick={() => editorState.editor?.chain().focus().setTextAlign('left').run()}
+					active={editorState.editor.isActive({ textAlign: 'left' })}
+					icon={true}
+				>
+					<TextAlignLeft /></Toggle
+				>
+				<Toggle
+					onclick={() => editorState.editor?.chain().focus().setTextAlign('center').run()}
+					active={editorState.editor.isActive({ textAlign: 'center' })}
+					icon={true}
+				>
+					<TextAlignCenter /></Toggle
+				>
+				<Toggle
+					onclick={() => editorState.editor?.chain().focus().setTextAlign('right').run()}
+					active={editorState.editor.isActive({ textAlign: 'right' })}
+					icon={true}
+				>
+					<TextAlignRight /></Toggle
+				>
+			</div>
+			<Button.Root class="ml-10" onclick={() => saveFunc(false)}
+				>{lang(lS, 'Save', 'Enregistrer')}</Button.Root
+			>
 		</div>
-	{/if}
-
-	<div bind:this={element} style={scale} spellcheck="false"></div>
-</div>
+	</div>
+{:else}
+	<div class="w-fit m-auto mb-6">
+		<Button.Root onclick={download}>{lang(lS, 'Download PDF', 'Télécharger comme PDF')}</Button.Root
+		>
+		<Popover
+			questionMark={false}
+			bClass="mr-10"
+			message={lang(lS, 'Document Info', 'Info sur le Document')}
+			>{lang(lS, 'Word Count', 'Nombre de Mots')}: <strong>{wordCount}</strong>
+			{lang(lS, 'Words', 'Mots')}</Popover
+		>
+	</div>
+{/if}
+<div bind:this={element} style={scale} spellcheck="false" class="relative overflow-visible"></div>

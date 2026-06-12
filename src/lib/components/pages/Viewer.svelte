@@ -21,7 +21,7 @@
 	<title>{document.title} - Repaper</title>
 </svelte:head>
 
-<div class="h-screen" style="width: calc(100vw{$fullscreen ? '' : ' - 5rem'})">
+<div class="h-screen" style={$fullscreen ? '' : 'max-width: calc(100vw - 17.5rem)'}>
 	<div class="flex m-auto mt-8 w-fit">
 		<h2 class="m-auto text-center text-lg font-bold text-(--fg)/60">
 			{lang(lS, 'View Mode', 'Mode de Spectateur')}
@@ -39,13 +39,12 @@
 			>{lang(lS, 'Reload', 'Rafraîchir')}</Button.Root
 		>
 	</div>
-	<h1 class="h1 mt-5">{document.title}</h1>
+	<h1 class="h1 mt-5 w-fit m-auto">{document.title}</h1>
 	<TextEditor
 		promise={document.promise}
 		initial={document.content}
 		editor={false}
-		fullscreen={$fullscreen}
-		scale="transform: scale({scale / 100}); transform-origin: top center;"
+		scale="zoom: {scale / 100}; transform-origin: top center;"
 	/>
 	<div class="h-[2vw]"></div>
 </div>

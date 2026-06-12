@@ -89,9 +89,7 @@
 		promise={document.promise}
 		{save}
 		initial={document.content}
-		fullscreen={$fullscreen}
-		scale="transform: scale({scale / 100}); transform-origin: top center;"
+		scale="zoom: {scale / 100}; transform-origin: top center;"
 		bind:this={editor}
 	/>
-	<div class="h-[2vw]"></div>
 </div>

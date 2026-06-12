@@ -144,7 +144,10 @@ form {
 	padding: 2rem;
 	width: 14in;
 	border-radius: 0.85rem;
-	margin: auto;
+	display: inline-block;
 	font-size: 29px;
 	caret-color: var(--c);
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
 }

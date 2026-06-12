@@ -64,7 +64,7 @@
 
 <main class="h-screen w-screen text-center">
 	<nav
-		class="fixed z-40 h-screen w-70 border-r border-(--o) bg-(--bg) pt-9 flex flex-wrap"
+		class="fixed z-40 text-left h-screen w-70 border-r border-(--o) bg-(--bg) pt-9 flex flex-wrap"
 		class:hidden={$fullscreen}
 	>
 		<div class="w-full">
