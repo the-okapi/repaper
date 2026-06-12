@@ -4,7 +4,14 @@
 	import lang, { languageState as lS } from '$lib/lang.svelte';
 	import fullscreen from '$lib/fullscreen';
 
-	let { document, scale, save, settings, show, changesMadeSinceSave = $bindable() } = $props();
+	let {
+		document,
+		scale = $bindable(),
+		save,
+		settings,
+		show,
+		changesMadeSinceSave = $bindable()
+	} = $props();
 
 	let loading = $state(false);
 

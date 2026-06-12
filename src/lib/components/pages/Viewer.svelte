@@ -4,7 +4,7 @@
 	import lang, { languageState as lS } from '$lib/lang.svelte';
 	import fullscreen from '$lib/fullscreen';
 
-	let { document, scale } = $props();
+	let { document, scale = $bindable() } = $props();
 
 	function enableFullscreen() {
 		fullscreen.set(true);

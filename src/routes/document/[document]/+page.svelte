@@ -178,11 +178,11 @@
 		</div>
 	{/if}
 	{#if mode === 'viewer'}
-		<Viewer {document} {scale} />
+		<Viewer {document} bind:scale />
 	{:else}
 		<Editor
 			{document}
-			{scale}
+			bind:scale
 			{save}
 			{settings}
 			show={!showSettings}
