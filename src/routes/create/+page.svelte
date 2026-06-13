@@ -20,7 +20,7 @@
 	let viewerPassword = $state('');
 	let confirmViewerPassword = $state('');
 
-	let passwordNotRequired = $state(false);
+	let passwordRequired = $state(false);
 	let associateAccount = $state(false);
 
 	onMount(() => {
@@ -99,7 +99,7 @@
 				code,
 				editorPassword,
 				viewerPassword,
-				passwordRequired: !passwordNotRequired
+				passwordRequired
 			})
 		});
 		if (createResponse.status === 409) {
@@ -223,9 +223,9 @@
 			<div class="text-left">
 				<Label.Root
 					for="viewerPassword"
-					class={passwordNotRequired ? 'cursor-not-allowed text-(--fg)/50' : ''}
+					class={passwordRequired ? '' : 'cursor-not-allowed text-(--fg)/50'}
 					>{lang(lS, 'Viewer Password', 'Mot de Passe du Spectateur')}:
-					<Popover disabled={passwordNotRequired}>
+					<Popover disabled={!passwordRequired}>
 						{@html lang(
 							lS,
 							'This is the password used to view the document.<br />This <strong>cannot</strong> be changed later.',
@@ -239,14 +239,14 @@
 					class="mt-0.5 mr-3 h-10 w-58 disabled:cursor-not-allowed disabled:bg-(--fg)/2"
 					bind:value={viewerPassword}
 					type="password"
-					required={!passwordNotRequired}
-					disabled={passwordNotRequired}
+					required={passwordRequired}
+					disabled={!passwordRequired}
 				/>
 			</div>
 			<div class="text-left">
 				<Label.Root
 					for="confirmViewerPassword"
-					class={passwordNotRequired ? 'cursor-not-allowed text-(--fg)/50' : ''}
+					class={passwordRequired ? '' : 'cursor-not-allowed text-(--fg)/50'}
 					>{@html lang(
 						lS,
 						'Confirm Viewer Password:',
@@ -259,16 +259,16 @@
 					bind:value={confirmViewerPassword}
 					class="mt-0.5 h-10 w-58 disabled:cursor-not-allowed disabled:bg-(--fg)/2"
 					type="password"
-					required={!passwordNotRequired}
-					disabled={passwordNotRequired}
+					required={passwordRequired}
+					disabled={!passwordRequired}
 				/>
 			</div>
 		</div>
 		<p class="text-left text-sm text-(--red)"><I />{viewerPText}</p>
 		<div class="m-auto mb-7 flex w-fit">
-			<Checkbox bind:checked={passwordNotRequired} id="passwordNotRequired" />
-			<Label.Root class="ml-2" for="passwordNotRequired">
-				{lang(lS, 'Password not required to view', 'Mot de Passe pas requis pour regarder')}
+			<Checkbox bind:checked={passwordRequired} id="passwordRequired" />
+			<Label.Root class="ml-2" for="passwordRequired">
+				{lang(lS, 'Password required to view', 'Mot de Passe requis pour regarder')}
 				<Popover>
 					{@html lang(
 						lS,
