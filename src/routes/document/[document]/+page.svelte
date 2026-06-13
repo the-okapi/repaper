@@ -162,6 +162,7 @@
 		} else {
 			window.location.reload();
 		}
+		showSettings = false;
 		loading = false;
 	}
 </script>

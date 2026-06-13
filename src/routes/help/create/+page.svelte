@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import lang, { languageState as lS } from '$lib/lang.svelte';
+	import English from '$lib/help/create/English.svelte';
+	import French from '$lib/help/create/French.svelte';
 </script>
 
 <div>
@@ -12,14 +14,9 @@
 		)}
 	</h3>
 
-	<h1 class="h1">{lang(lS, 'How to Create a Document', 'Comment Créer un Document')}</h1>
-	{@html lang(
-		lS,
-		`
-	<p>First, head to <b><i>Create a Document</i></b> in the sidebar.</p>
-	`,
-		`
-	<p>En premier, allez à <b><i>Créer un Document</i></b> dans l'encadré.</p>
-	`
-	)}
+	{#if lS.lang === 'en'}
+		<English />
+	{:else}
+		<French />
+	{/if}
 </div>

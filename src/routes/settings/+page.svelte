@@ -66,7 +66,7 @@
 	}
 </script>
 
-<div>
+<div class="text-left">
 	<h1 class="h1">{lang(languageState, 'Settings', 'Paramètres')}</h1>
 	<div class="m-auto mb-5 w-fit">
 		<Label.Root for="theme">{lang(languageState, 'Theme', 'Thème')}:</Label.Root>

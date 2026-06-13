@@ -114,6 +114,13 @@
 			.filter((word) => word !== '').length
 	);
 
+	let selectionWordCount = $derived(
+		editorState.editor?.state.doc
+			.textBetween(editorState.editor?.state.selection.from, editorState.editor?.state.selection.to)
+			.split(' ')
+			.filter((word) => word !== '').length
+	);
+
 	async function download() {
 		loading = true;
 
@@ -165,7 +172,10 @@
 				bClass="mr-10"
 				message={lang(lS, 'Document Info', 'Info sur le Document')}
 				>{lang(lS, 'Word Count', 'Nombre de Mots')}: <strong>{wordCount}</strong>
-				{lang(lS, 'Words', 'Mots')}</Popover
+				{lang(lS, 'Words', 'Mots')}<br />{#if selectionWordCount || 0 > 0}
+					{lang(lS, 'Selection Word Count', 'Nombre de Mots de la Sélection')}:
+					<strong>{selectionWordCount}</strong>
+					{lang(lS, 'Words', 'Mots')}{/if}</Popover
 			>
 			<Select
 				options={textStyles}
@@ -201,7 +211,10 @@
 			bClass="mr-10"
 			message={lang(lS, 'Document Info', 'Info sur le Document')}
 			>{lang(lS, 'Word Count', 'Nombre de Mots')}: <strong>{wordCount}</strong>
-			{lang(lS, 'Words', 'Mots')}</Popover
+			{lang(lS, 'Words', 'Mots')}<br />{#if selectionWordCount || 0 > 0}
+				{lang(lS, 'Selection Word Count', 'Nombre de Mots de la Sélection')}:
+				<strong>{selectionWordCount}</strong>
+				{lang(lS, 'Words', 'Mots')}{/if}</Popover
 		>
 	</div>
 {/if}
