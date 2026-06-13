@@ -44,6 +44,7 @@
 		promise={document.promise}
 		initial={document.content}
 		editor={false}
+		title={document.title}
 		scale="zoom: {scale / 100}; transform-origin: top center;"
 	/>
 	<div class="h-[2vw]"></div>

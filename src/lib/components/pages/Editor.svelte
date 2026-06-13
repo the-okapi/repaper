@@ -87,6 +87,7 @@
 		promise={document.promise}
 		{save}
 		initial={document.content}
+		title={document.title}
 		scale="zoom: {scale / 100}; transform-origin: top center;"
 		bind:this={editor}
 	/>

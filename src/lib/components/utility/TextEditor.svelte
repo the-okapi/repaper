@@ -25,7 +25,7 @@
 
 	let loading = $state(true);
 
-	let { initial, promise, save = () => {}, editor = true, scale } = $props();
+	let { initial, promise, save = () => {}, title, editor = true, scale } = $props();
 
 	export async function saveFunc(after = false) {
 		loading = true;
@@ -124,7 +124,7 @@
 	async function download() {
 		loading = true;
 
-		await downloadDocument(editorState.editor?.getHTML() ?? '');
+		await downloadDocument(title, editorState.editor?.getHTML() ?? '');
 
 		loading = false;
 	}
