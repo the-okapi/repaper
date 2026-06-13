@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { SelectC, SelectItem, Select as EnhancedSelect } from '$lib/components';
+	import { Select as EnhancedSelect } from '$lib/components';
 	import { setTheme, theme } from 'mode-watcher';
-	import { Label, Select } from 'bits-ui';
+	import { Label } from 'bits-ui';
 	import { onMount } from 'svelte';
 	import lang, { languageState as lS, setLanguage } from '$lib/lang.svelte';
-	import type { SelectItemType } from '$lib';
 
 	let currentTheme = $state('');
 	let currentFont = $state('');
@@ -19,18 +18,9 @@
 	// Light/Dark
 
 	let themes = [
-		{ value: 'default', label: 'Default', mode: 'light' },
-		{ value: 'coral', label: 'Coral', mode: 'light' },
-		{ value: 'graphite', label: 'Graphite', mode: 'light' },
-		{ value: 'wumpus', label: 'Wumpus', mode: 'dark' },
-		{ value: 'og', label: 'OG', mode: 'dark' },
-		{ value: 'nord', label: 'Nord', mode: 'dark' },
-		{ value: 'solarized', label: 'Solarized', mode: 'dark' }
+		{ value: 'default', label: 'Light', mode: 'light' },
+		{ value: 'og', label: 'Dark', mode: 'dark' },
 	];
-
-	const selectedModeLabel = $derived(
-		themes.find((themeV: SelectItemType) => themeV.value === currentTheme)
-	);
 
 	function onThemeChange(value: string) {
 		currentTheme = value;
@@ -74,33 +64,7 @@
 	<h1 class="h1">{lang(lS, 'Settings', 'Paramètres')}</h1>
 	<div class="m-auto mb-5 w-fit">
 		<Label.Root for="theme">{lang(lS, 'Theme', 'Thème')}:</Label.Root>
-		<SelectC
-			bind:value={currentTheme}
-			id="theme"
-			onValueChange={onThemeChange}
-			trigger={selectedModeLabel?.label}
-		>
-			<Select.Group>
-				<Select.GroupHeading class="group-heading"
-					>{lang(lS, 'Light Themes', 'Thèmes Clairs')}</Select.GroupHeading
-				>
-				{#each themes as theme, i (i + theme.value)}
-					{#if theme.mode === 'light'}
-						<SelectItem value={theme} b="o" />
-					{/if}
-				{/each}
-			</Select.Group>
-			<Select.Group>
-				<Select.GroupHeading class="group-heading"
-					>{lang(lS, 'Dark Themes', 'Thèmes Sombres')}</Select.GroupHeading
-				>
-				{#each themes as theme, i (i + theme.value)}
-					{#if theme.mode === 'dark'}
-						<SelectItem value={theme} b={i === themes.length - 1 ? 'b' : ''} />
-					{/if}
-				{/each}
-			</Select.Group>
-		</SelectC>
+		<EnhancedSelect bind:value={currentTheme} options={themes} onValueChange={onThemeChange} />
 	</div>
 	<div class="m-auto w-fit mb-5">
 		<Label.Root for="font">{lang(lS, 'Font', 'Police')}:</Label.Root>
