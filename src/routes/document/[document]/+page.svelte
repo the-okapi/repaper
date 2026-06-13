@@ -170,10 +170,12 @@
 
 <div class="pt-20 w-fit">
 	{#if !showSettings}
-		<div class="m-auto w-fit text-left">
-			<p class="mt-7 mb-1 font-bold text-(--fg)/60">Zoom:</p>
-			<div class="m-auto w-120">
-				<Slider bind:value={scale} max={150} min={30} />
+		<div class="sticky {$fullscreen ? 'w-screen left-0' : 'left-70 w-[calc(100vw-17.5rem)]'}">
+			<div class="text-left w-fit m-auto">
+				<p class="mt-7 mb-1 font-bold text-(--fg)/60">Zoom:</p>
+				<div class="m-auto w-120">
+					<Slider bind:value={scale} max={150} min={30} />
+				</div>
 			</div>
 		</div>
 	{/if}

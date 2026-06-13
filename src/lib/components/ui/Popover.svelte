@@ -14,7 +14,7 @@
 		>
 	{:else}
 		<Popover.Trigger>
-			<Button.Root class="{bClass} h-full">
+			<Button.Root class={bClass}>
 				{message}
 			</Button.Root>
 		</Popover.Trigger>

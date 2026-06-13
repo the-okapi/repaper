@@ -10,16 +10,12 @@
 		Italic,
 		Bold,
 		Underline,
-		TextAlign,
 		UndoRedo,
 		Tab,
 		Heading as HeadingTiptap
 	} from '$lib/extensions';
 	import { Button } from 'bits-ui';
 	import { changed } from '$lib';
-	import TextAlignLeft from '$lib/components/ui/icons/AlignLeft.svelte';
-	import TextAlignCenter from '$lib/components/ui/icons/AlignCenter.svelte';
-	import TextAlignRight from '$lib/components/ui/icons/AlignRight.svelte';
 	import lang, { languageState as lS } from '$lib/lang.svelte';
 	import { downloadDocument } from '$lib/pdf';
 	import fullscreen from '$lib/fullscreen';
@@ -68,11 +64,6 @@
 				Text,
 				Paragraph,
 				TextStyle,
-				TextAlign.configure({
-					types: ['paragraph'],
-					alignments: ['left', 'center', 'right'],
-					defaultAlignment: 'left'
-				}),
 				Heading,
 				Italic,
 				Bold,
@@ -162,8 +153,8 @@
 {#if editorState.editor && editor}
 	<div
 		class="mb-5 border-b border-(--o) py-5 bg-(--bg) sticky top-0 z-30 {$fullscreen
-			? 'min-w-screen'
-			: 'min-w-[calc(100vw-17.5rem)]'} m-auto"
+			? 'w-screen left-0'
+			: 'w-[calc(100vw-17.5rem)] left-70'}"
 	>
 		<div class="m-auto flex w-fit gap-3">
 			<Button.Root onclick={download}
@@ -196,29 +187,6 @@
 				active={editorState.editor.isActive('underline')}
 				>{lang(lS, 'Underline', 'Soulignement')}</Toggle
 			>
-			<div class="flex gap-1 rounded-xl border border-(--o) p-1.5">
-				<Toggle
-					onclick={() => editorState.editor?.chain().focus().setTextAlign('left').run()}
-					active={editorState.editor.isActive({ textAlign: 'left' })}
-					icon={true}
-				>
-					<TextAlignLeft /></Toggle
-				>
-				<Toggle
-					onclick={() => editorState.editor?.chain().focus().setTextAlign('center').run()}
-					active={editorState.editor.isActive({ textAlign: 'center' })}
-					icon={true}
-				>
-					<TextAlignCenter /></Toggle
-				>
-				<Toggle
-					onclick={() => editorState.editor?.chain().focus().setTextAlign('right').run()}
-					active={editorState.editor.isActive({ textAlign: 'right' })}
-					icon={true}
-				>
-					<TextAlignRight /></Toggle
-				>
-			</div>
 			<Button.Root class="ml-10" onclick={() => saveFunc(false)}
 				>{lang(lS, 'Save', 'Enregistrer')}</Button.Root
 			>
@@ -237,4 +205,5 @@
 		>
 	</div>
 {/if}
+
 <div bind:this={element} style={scale} spellcheck="false" class="relative overflow-visible"></div>

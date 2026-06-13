@@ -46,45 +46,43 @@
 	<title>{document.title} - Repaper</title>
 </svelte:head>
 
-<div class="h-screen w-fit" hidden={!show}>
-	<div class="m-auto mt-8 flex w-fit">
-		<h2 class="m-auto text-center font-bold text-lg text-(--fg)/60">
-			{lang(lS, 'Edit Mode', "Mode d'Éditeur")}
-		</h2>
-		<Button.Root onclick={settings} class="m-auto ml-5 h-fit"
-			>{lang(lS, 'Document Settings', 'Paramètres du Document')}</Button.Root
-		>
-		<Popover
-			questionMark={false}
-			bClass="m-auto ml-5 h-fit"
-			message={lang(lS, 'Share', 'Partager')}
-		>
-			{lang(
-				lS,
-				'Share the document code and editor password for other editors.',
-				"Partager le code du document et le mot de passe d'éditeur pour les autres éditeurs."
-			)}<br />
-			{#if document.passwordRequired}
-				{lang(lS, '', '')}
+<div class="w-fit" hidden={!show}>
+	<div class="sticky {$fullscreen ? 'w-screen left-0' : 'left-70 w-[calc(100vw-17.5rem)]'}">
+		<div class="mt-8 flex w-fit m-auto">
+			<h2 class="m-auto text-center font-bold text-lg text-(--fg)/60">
+				{lang(lS, 'Edit Mode', "Mode d'Éditeur")}
+			</h2>
+			<Button.Root onclick={settings} class="m-auto ml-5 h-fit"
+				>{lang(lS, 'Document Settings', 'Paramètres du Document')}</Button.Root
+			>
+			<Popover questionMark={false} bClass="m-auto ml-5" message={lang(lS, 'Share', 'Partager')}>
+				{lang(
+					lS,
+					'Share the document code and editor password for other editors.',
+					"Partager le code du document et le mot de passe d'éditeur pour les autres éditeurs."
+				)}<br />
+				{#if document.passwordRequired}
+					{lang(lS, '', '')}
+				{:else}
+					{lang(lS, `Share this link for viewers`, 'Partager ce lien pour les spectateurs')}:
+					<span class="underline">https://repaper.unlimitedstuffltd.com/open/{document.code}</span>
+				{/if}
+			</Popover>
+			{#if !$fullscreen}
+				<Button.Root onclick={enableFullscreen} class="m-auto ml-5 h-fit"
+					>{lang(lS, 'Fullscreen', 'Plein Écran')}</Button.Root
+				>
 			{:else}
-				{lang(lS, `Share this link for viewers`, 'Partager ce lien pour les spectateurs')}:
-				<span class="underline">https://repaper.unlimitedstuffltd.com/open/{document.code}</span>
+				<Button.Root onclick={disableFullscreen} class="m-auto ml-5 h-fit"
+					>{lang(lS, 'Exit Fullscreen', 'Sortir de Plein Écran')}</Button.Root
+				>
 			{/if}
-		</Popover>
-		{#if !$fullscreen}
-			<Button.Root onclick={enableFullscreen} class="m-auto ml-5 h-fit"
-				>{lang(lS, 'Fullscreen', 'Plein Écran')}</Button.Root
+			<Button.Root onclick={() => window.location.reload()} class="m-auto ml-5 h-fit"
+				>{lang(lS, 'Reload', 'Rafraîchir')}</Button.Root
 			>
-		{:else}
-			<Button.Root onclick={disableFullscreen} class="m-auto ml-5 h-fit"
-				>{lang(lS, 'Exit Fullscreen', 'Sortir de Plein Écran')}</Button.Root
-			>
-		{/if}
-		<Button.Root onclick={() => window.location.reload()} class="m-auto ml-5 h-fit"
-			>{lang(lS, 'Reload', 'Rafraîchir')}</Button.Root
-		>
+		</div>
+		<h1 class="h1 mb-0! mt-5">{document.title}</h1>
 	</div>
-	<h1 class="h1 mb-0! mt-5">{document.title}</h1>
 	<TextEditor
 		promise={document.promise}
 		{save}
@@ -92,4 +90,5 @@
 		scale="zoom: {scale / 100}; transform-origin: top center;"
 		bind:this={editor}
 	/>
+	<div class="h-[2vw]"></div>
 </div>

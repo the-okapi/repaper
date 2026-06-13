@@ -148,16 +148,17 @@ form {
 	font-size: 29px;
 	caret-color: var(--c);
 	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
+	text-align: left;
 }
 
-h1 {
+.tiptap h1 {
 	font-weight: bold;
 	font-size: 40pt;
+	text-align: center;
 }
 
-h2 {
+.tiptap h2 {
 	font-weight: bold;
 	font-size: 26pt;
+	text-align: center;
 }
