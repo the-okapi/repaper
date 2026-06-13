@@ -19,7 +19,7 @@
 
 	let themes = [
 		{ value: 'default', label: 'Light', mode: 'light' },
-		{ value: 'og', label: 'Dark', mode: 'dark' },
+		{ value: 'og', label: 'Dark', mode: 'dark' }
 	];
 
 	function onThemeChange(value: string) {
