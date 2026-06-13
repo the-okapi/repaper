@@ -5,38 +5,12 @@ export { default as Paragraph } from '@tiptap/extension-paragraph';
 export { TextStyle, FontSize } from '@tiptap/extension-text-style';
 export { default as TextAlign } from '@tiptap/extension-text-align';
 export { UndoRedo } from '@tiptap/extensions';
+export { default as Bold } from '@tiptap/extension-bold';
+export { default as Italic } from '@tiptap/extension-italic';
+export { default as Underline } from '@tiptap/extension-underline';
+export { default as Heading } from '@tiptap/extension-heading';
 
-import ItalicTiptap from '@tiptap/extension-italic';
-import BoldTiptap from '@tiptap/extension-bold';
-import UnderlineTiptap from '@tiptap/extension-underline';
 import { Extension } from '@tiptap/core';
-
-export const Bold = BoldTiptap.extend({
-	addKeyboardShortcuts() {
-		return {
-			F3: () => this.editor.commands.toggleBold(),
-			'Mod-b': () => this.editor.commands.toggleBold()
-		};
-	}
-});
-
-export const Italic = ItalicTiptap.extend({
-	addKeyboardShortcuts() {
-		return {
-			F4: () => this.editor.commands.toggleItalic(),
-			'Mod-i': () => this.editor.commands.toggleItalic()
-		};
-	}
-});
-
-export const Underline = UnderlineTiptap.extend({
-	addKeyboardShortcuts() {
-		return {
-			F5: () => this.editor.commands.toggleUnderline(),
-			'Mod-u': () => this.editor.commands.toggleUnderline()
-		};
-	}
-});
 
 export const Tab = Extension.create({
 	name: 'tab',

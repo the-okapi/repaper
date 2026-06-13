@@ -151,3 +151,13 @@ form {
 	left: 50%;
 	transform: translateX(-50%);
 }
+
+h1 {
+	font-weight: bold;
+	font-size: 40pt;
+}
+
+h2 {
+	font-weight: bold;
+	font-size: 26pt;
+}

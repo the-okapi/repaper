@@ -2,7 +2,7 @@ export { default as Checkbox } from '$lib/components/ui/Checkbox.svelte';
 export { default as Popover } from '$lib/components/ui/Popover.svelte';
 export { default as Loading } from '$lib/components/ui/Loading.svelte';
 export { default as I } from '$lib/components/utility/Invisible.svelte';
-export { default as SelectC } from '$lib/components/ui/Select.svelte';
+export { default as SelectC } from '$lib/components/ui/SelectC.svelte';
 export { default as SelectItem } from '$lib/components/ui/SelectItem.svelte';
 export { default as Viewer } from '$lib/components/pages/Viewer.svelte';
 export { default as Editor } from '$lib/components/pages/Editor.svelte';
@@ -12,3 +12,4 @@ export { default as DocumentSettings } from '$lib/components/pages/DocumentSetti
 export { default as TextEditor } from '$lib/components/utility/TextEditor.svelte';
 export { default as Toggle } from '$lib/components/ui/Toggle.svelte';
 export { default as LinkButton } from '$lib/components/ui/LinkButton.svelte';
+export { default as Select } from '$lib/components/ui/Select.svelte';

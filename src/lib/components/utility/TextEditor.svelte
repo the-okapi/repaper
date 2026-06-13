@@ -1,19 +1,19 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import { Editor } from '@tiptap/core';
-	import { Loading, Toggle, Popover } from '$lib/components';
+	import { Loading, Toggle, Popover, Select } from '$lib/components';
 	import {
 		Document,
 		Text,
 		Paragraph,
 		TextStyle,
-		FontSize,
 		Italic,
 		Bold,
 		Underline,
 		TextAlign,
 		UndoRedo,
-		Tab
+		Tab,
+		Heading as HeadingTiptap
 	} from '$lib/extensions';
 	import { Button } from 'bits-ui';
 	import { changed } from '$lib';
@@ -30,8 +30,6 @@
 	let loading = $state(true);
 
 	let { initial, promise, save = () => {}, editor = true, scale } = $props();
-
-	let fontSize = $state(29);
 
 	export async function saveFunc(after = false) {
 		loading = true;
@@ -51,21 +49,12 @@
 		}
 	}
 
-	export const CustomFontSize = FontSize.extend({
+	export const Heading = HeadingTiptap.extend({
 		addKeyboardShortcuts() {
 			return {
-				F2: () => {
-					if (fontSize + 1 < 100) {
-						fontSize += 1;
-					}
-					this.editor.commands.setFontSize(`${fontSize}pt`);
-				},
-				F1: () => {
-					if (fontSize - 1 > 0) {
-						fontSize -= 1;
-					}
-					this.editor.commands.setFontSize(`${fontSize}pt`);
-				}
+				F1: () => this.editor.commands.setHeading({ level: 1 }),
+				F2: () => this.editor.commands.setHeading({ level: 2 }),
+				F3: () => this.editor.commands.setParagraph()
 			};
 		}
 	});
@@ -84,7 +73,7 @@
 					alignments: ['left', 'center', 'right'],
 					defaultAlignment: 'left'
 				}),
-				CustomFontSize,
+				Heading,
 				Italic,
 				Bold,
 				Underline,
@@ -102,16 +91,18 @@
 			onUpdate: () => {
 				changed.set(true);
 			},
-			onSelectionUpdate: ({ editor }) => {
-				fontSize = Number((editor.getAttributes('textStyle').fontSize ?? '20pt').split('p')[0]);
+			onSelectionUpdate: () => {
+				if (editorState.editor?.isActive('heading', { level: 1 })) {
+					textStyle = 'h1';
+				} else if (editorState.editor?.isActive('heading', { level: 2 })) {
+					textStyle = 'h2';
+				} else if (editorState.editor?.isActive('paragraph')) {
+					textStyle = 'p';
+				}
 			},
 			autofocus: editor,
 			editable: editor
 		});
-		fontSize = Number(
-			(editorState.editor.getAttributes('textStyle').fontSize ?? '20pt').split('p')[0]
-		);
-		editorState.editor.chain().focus().setFontSize(`${fontSize}pt`).run();
 		loading = false;
 	});
 
@@ -123,15 +114,6 @@
 		if ($changed) {
 			event.preventDefault();
 		}
-	}
-
-	function fontSizeChange() {
-		if (fontSize > 99) {
-			fontSize = 99;
-		} else if (fontSize < 1) {
-			fontSize = 1;
-		}
-		editorState.editor?.chain().focus().setFontSize(`${fontSize}pt`).run();
 	}
 
 	let wordCount = $derived(
@@ -147,6 +129,29 @@
 		await downloadDocument(editorState.editor?.getHTML() ?? '');
 
 		loading = false;
+	}
+
+	let textStyles = [
+		{ value: 'h1', label: 'Heading' },
+		{ value: 'h2', label: 'Subheading' },
+		{ value: 'p', label: 'Body' }
+	];
+
+	let textStyle = $state('p');
+
+	function textStyleChange(value: string) {
+		textStyle = value;
+		switch (value) {
+			case 'h1':
+				editorState.editor?.chain().focus().setHeading({ level: 1 }).run();
+				break;
+			case 'h2':
+				editorState.editor?.chain().focus().setHeading({ level: 2 }).run();
+				break;
+			case 'p':
+				editorState.editor?.chain().focus().setParagraph().run();
+				break;
+		}
 	}
 </script>
 
@@ -171,20 +176,13 @@
 				>{lang(lS, 'Word Count', 'Nombre de Mots')}: <strong>{wordCount}</strong>
 				{lang(lS, 'Words', 'Mots')}</Popover
 			>
-			<div class="relative inline-block">
-				<input
-					type="number"
-					class="h-full w-22"
-					min="1"
-					max="99"
-					bind:value={fontSize}
-					onchange={fontSizeChange}
-				/>
-				<span
-					class="absolute pointer-events-none top-[50%] right-10 translate-y-[-50%] text-(--fg)/50"
-					>pt</span
-				>
-			</div>
+			<Select
+				options={textStyles}
+				onValueChange={textStyleChange}
+				itemClass="z-50!"
+				styling={false}
+				bind:value={textStyle}
+			/>
 			<Toggle
 				onclick={() => editorState.editor?.chain().focus().toggleBold().run()}
 				active={editorState.editor.isActive('bold')}>{lang(lS, 'Bold', 'Gras')}</Toggle

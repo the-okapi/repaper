@@ -9,3 +9,8 @@ export type DocumentLink = {
 	link: any;
 	token: string;
 };
+
+export type SelectItemType = {
+	value: string;
+	label: string;
+};
