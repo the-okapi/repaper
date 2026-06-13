@@ -5,7 +5,7 @@ export const documents = sqliteTable('documents', {
 	id: text('id')
 		.primaryKey()
 		.$default(() => crypto.randomUUID()),
-	title: text('title').notNull(),
+	title: text('title'),
 	code: text('code').unique().notNull(),
 	editorPassword: text('editor_password').notNull(),
 	viewerPassword: text('viewer_password'),
@@ -33,7 +33,7 @@ export const sessions = sqliteTable('sessions', {
 	permissions: text('permissions').notNull().default('viewer'),
 	documentCode: text('document_code')
 		.notNull()
-		.references(() => documents.code),
+		.references(() => documents.code, { onDelete: 'cascade', onUpdate: 'cascade' }),
 	date: text('date')
 		.$default(() => new Date().toISOString())
 		.notNull(),

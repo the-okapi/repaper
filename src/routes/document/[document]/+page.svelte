@@ -79,7 +79,7 @@
 			goto(resolve('/recents'), { replaceState: true });
 			return;
 		}
-		document.title = documentCU.title;
+		document.title = documentCU.title ?? '';
 		document.content = documentCU.content;
 		document.passwordRequired = documentCU.passwordRequired === 1 ? true : false;
 		resolveP(true);
@@ -141,7 +141,7 @@
 	async function changePassword(oldPassword: string, newPassword: string, editorPassword: boolean) {
 		loading = true;
 		await editor.saveFunction();
-		const response = await fetch('/api/password', {
+		const response = await fetch('/api/change/password', {
 			method: 'POST',
 			body: JSON.stringify({
 				code: data.document,
@@ -161,7 +161,7 @@
 				lang(
 					lS,
 					'Failed to change password. Please try again later',
-					"Échouait à changer le mot de passe. Essayez plus tard s'il vous plaît."
+					"Impossible de changer le mot de passe. Essayez plus tard s'il vous plaît."
 				)
 			);
 		} else {
@@ -171,10 +171,46 @@
 		loading = false;
 	}
 
+	async function changeCode(to: string) {
+		loading = true;
+		await editor.saveFunction();
+		const response = await fetch('/api/change/code', {
+			method: 'POST',
+			body: JSON.stringify({
+				code: data.document,
+				token,
+				newCode: to
+			})
+		});
+		if (response.status === 401) {
+			goto(resolve('/'), { replaceState: true });
+			return;
+		} else if (response.status === 500) {
+			alert(
+				lang(
+					lS,
+					'Failed to change document code. Please try again later',
+					"Impossible de changer le code du document. Essayez plus tard s'il vous plaît."
+				)
+			);
+			return;
+		} else {
+			const recentDocuments = JSON.parse(localStorage.getItem('repaper-recent-documents') ?? '[]');
+			const index = recentDocuments.findIndex((a: any) => a.code === data.document);
+			recentDocuments.splice(index, 1);
+			const document = recentDocuments[index];
+			document.code = to;
+			recentDocuments.splice(0, 0, document);
+			localStorage.setItem('repaper-recent-documents', JSON.stringify(recentDocuments));
+			window.location.assign(`/document/${to}?mode=editor`);
+			return;
+		}
+	}
+
 	async function renameDocument(to: string) {
 		loading = true;
 		await editor.saveFunction();
-		const response = await fetch('/api/rename', {
+		const response = await fetch('/api/change/title', {
 			method: 'POST',
 			body: JSON.stringify({
 				code: data.document,
@@ -184,19 +220,27 @@
 		});
 		if (response.status === 401) {
 			goto(resolve('/'), { replaceState: true });
+			return;
 		} else if (response.status === 500) {
 			alert(
 				lang(
 					lS,
 					'Failed to rename document. Please try again later',
-					"Échouait à renommer le document. Essayez plus tard s'il vous plaît."
+					"Impossible de renommer le document. Essayez plus tard s'il vous plaît."
 				)
 			);
+			return;
 		} else {
+			const recentDocuments = JSON.parse(localStorage.getItem('repaper-recent-documents') ?? '[]');
+			const index = recentDocuments.findIndex((a: any) => a.code === data.document);
+			recentDocuments.splice(index, 1);
+			const document = recentDocuments[index];
+			document.title = to;
+			recentDocuments.splice(0, 0, document);
+			localStorage.setItem('repaper-recent-documents', JSON.stringify(recentDocuments));
 			window.location.reload();
+			return;
 		}
-		showSettings = false;
-		loading = false;
 	}
 </script>
 
@@ -230,6 +274,8 @@
 				{deleteFunc}
 				{renameDocument}
 				{changePassword}
+				{changeCode}
+				viewerPasswordRequired={document.passwordRequired}
 				back={() => (showSettings = false)}
 			/>
 		{/if}
