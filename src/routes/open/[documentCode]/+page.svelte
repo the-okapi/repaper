@@ -27,4 +27,8 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Repaper</title>
+</svelte:head>
+
 <Loading show={true} />

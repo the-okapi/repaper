@@ -3,6 +3,10 @@
 	import lang, { languageState as lS } from '$lib/lang.svelte';
 </script>
 
+<svelte:head>
+	<title>{lang(lS, 'Repaper Help', 'Aide pour Repaper')}</title>
+</svelte:head>
+
 <div>
 	<h1 class="h1">{lang(lS, 'Repaper Help', 'Aide pour Repaper')}</h1>
 

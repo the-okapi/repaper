@@ -5,6 +5,12 @@
 	import French from '$lib/help/create/French.svelte';
 </script>
 
+<svelte:head>
+	<title
+		>{lang(lS, 'How to Create a Document - Repaper', 'Comment Créer un Document - Repaper')}</title
+	>
+</svelte:head>
+
 <div>
 	<h3 class="text-center">
 		<a class="underline underline-offset-2" href={resolve('/help')}>{lang(lS, 'Help', 'Aide')}</a> → {lang(

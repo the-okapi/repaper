@@ -129,6 +129,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>{lang(lS, 'Create a Document - Repaper', 'Créer un Document - Repaper')}</title>
+</svelte:head>
+
 <Loading show={loading} />
 
 <div>
@@ -284,4 +288,7 @@
 		{/if}
 		<Button.Root type="submit">{lang(lS, 'Create', 'Créer')}</Button.Root>
 	</form>
+	<a class="a block mt-6" href="/help/create" target="_blank"
+		>{lang(lS, 'Need Help?', "Besoin d'Aide?")}</a
+	>
 </div>

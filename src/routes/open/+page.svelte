@@ -45,6 +45,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>{lang(lS, 'Open a Document - Repaper', 'Ouvrir un Document - Repaper')}</title>
+</svelte:head>
+
 <Loading show={loading} />
 
 <div>

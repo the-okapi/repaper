@@ -2,6 +2,10 @@
 	import { page } from '$app/state';
 </script>
 
+<svelte:head>
+	<title>Repaper</title>
+</svelte:head>
+
 <main
 	class="flex h-screen items-center justify-center text-center"
 	style="width: calc(100vw - 17.5rem)"

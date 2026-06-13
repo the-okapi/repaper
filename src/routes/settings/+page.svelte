@@ -3,7 +3,7 @@
 	import { setTheme, theme } from 'mode-watcher';
 	import { Label, Select } from 'bits-ui';
 	import { onMount } from 'svelte';
-	import lang, { languageState, setLanguage } from '$lib/lang.svelte';
+	import lang, { languageState as lS, setLanguage } from '$lib/lang.svelte';
 	import type { SelectItemType } from '$lib';
 
 	let currentTheme = $state('');
@@ -66,10 +66,14 @@
 	}
 </script>
 
+<svelte:head>
+	<title>{lang(lS, 'Settings - Repaper', 'Paramètres - Repaper')}</title>
+</svelte:head>
+
 <div class="text-left">
-	<h1 class="h1">{lang(languageState, 'Settings', 'Paramètres')}</h1>
+	<h1 class="h1">{lang(lS, 'Settings', 'Paramètres')}</h1>
 	<div class="m-auto mb-5 w-fit">
-		<Label.Root for="theme">{lang(languageState, 'Theme', 'Thème')}:</Label.Root>
+		<Label.Root for="theme">{lang(lS, 'Theme', 'Thème')}:</Label.Root>
 		<SelectC
 			bind:value={currentTheme}
 			id="theme"
@@ -78,7 +82,7 @@
 		>
 			<Select.Group>
 				<Select.GroupHeading class="group-heading"
-					>{lang(languageState, 'Light Themes', 'Thèmes Clairs')}</Select.GroupHeading
+					>{lang(lS, 'Light Themes', 'Thèmes Clairs')}</Select.GroupHeading
 				>
 				{#each themes as theme, i (i + theme.value)}
 					{#if theme.mode === 'light'}
@@ -88,7 +92,7 @@
 			</Select.Group>
 			<Select.Group>
 				<Select.GroupHeading class="group-heading"
-					>{lang(languageState, 'Dark Themes', 'Thèmes Sombres')}</Select.GroupHeading
+					>{lang(lS, 'Dark Themes', 'Thèmes Sombres')}</Select.GroupHeading
 				>
 				{#each themes as theme, i (i + theme.value)}
 					{#if theme.mode === 'dark'}
@@ -99,15 +103,11 @@
 		</SelectC>
 	</div>
 	<div class="m-auto w-fit mb-5">
-		<Label.Root for="font">{lang(languageState, 'Font', 'Police')}:</Label.Root>
+		<Label.Root for="font">{lang(lS, 'Font', 'Police')}:</Label.Root>
 		<EnhancedSelect bind:value={currentFont} options={fonts} onValueChange={onFontChange} />
 	</div>
 	<div class="m-auto w-fit">
-		<Label.Root for="lang">{lang(languageState, 'Language', 'Langue')}:</Label.Root>
-		<EnhancedSelect
-			bind:value={languageState.lang}
-			options={languages}
-			onValueChange={onLangChange}
-		/>
+		<Label.Root for="lang">{lang(lS, 'Language', 'Langue')}:</Label.Root>
+		<EnhancedSelect bind:value={lS.lang} options={languages} onValueChange={onLangChange} />
 	</div>
 </div>

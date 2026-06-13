@@ -16,6 +16,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Repaper</title>
+</svelte:head>
+
 <div class="fixed inset-0 left-70 z-30 flex items-center justify-center">
 	<div>
 		<h1 class="rounded-2xl p-5 text-8xl font-black">Repaper</h1>

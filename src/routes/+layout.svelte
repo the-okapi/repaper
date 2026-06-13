@@ -48,7 +48,6 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
-	<title>Repaper</title>
 </svelte:head>
 
 <svelte:window {oncontextmenu} />

@@ -4,6 +4,10 @@
 	import lang, { languageState as lS } from '$lib/lang.svelte';
 </script>
 
+<svelte:head>
+	<title>{lang(lS, 'Recent Documents - Repaper', 'Documents Récents - Repaper')}</title>
+</svelte:head>
+
 <div>
 	<h1 class="h1">{lang(lS, 'Recent Documents', 'Documents Récents')}</h1>
 	<Recents empty={true} />
