@@ -169,7 +169,7 @@
 
 <Loading show={loading} />
 
-<div class="pt-20 w-fit">
+<div class="w-fit">
 	{#if !showSettings}
 		<div class="sticky {$fullscreen ? 'w-screen left-0' : 'left-70 w-[calc(100vw-17.5rem)]'}">
 			<div class="text-left w-fit m-auto">

@@ -70,7 +70,7 @@ input:focus {
 [data-select-trigger] {
 	border: 1px var(--o) solid;
 	color: var(--fg);
-	border-radius: 7px;
+	border-radius: 0.75rem;
 	padding: 0.5rem;
 	outline-color: var(--fg);
 	display: grid;
@@ -145,7 +145,7 @@ form {
 	width: 14in;
 	border-radius: 0.85rem;
 	display: inline-block;
-	font-size: 29px;
+	font-size: 20pt;
 	caret-color: var(--c);
 	position: absolute;
 	text-align: left;
