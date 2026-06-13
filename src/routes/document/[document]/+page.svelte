@@ -138,6 +138,39 @@
 		window.location.assign('/');
 	}
 
+	async function changePassword(oldPassword: string, newPassword: string, editorPassword: boolean) {
+		loading = true;
+		await editor.saveFunction();
+		const response = await fetch('/api/password', {
+			method: 'POST',
+			body: JSON.stringify({
+				code: data.document,
+				token,
+				oldPassword,
+				newPassword,
+				editor: editorPassword
+			})
+		});
+		if (response.status === 401) {
+			goto(resolve('/'), { replaceState: true });
+		} else if (response.status === 400) {
+			loading = false;
+			return 1;
+		} else if (response.status === 500) {
+			alert(
+				lang(
+					lS,
+					'Failed to change password. Please try again later',
+					"Échouait à changer le mot de passe. Essayez plus tard s'il vous plaît."
+				)
+			);
+		} else {
+			window.location.reload();
+		}
+		showSettings = false;
+		loading = false;
+	}
+
 	async function renameDocument(to: string) {
 		loading = true;
 		await editor.saveFunction();
@@ -193,7 +226,12 @@
 			bind:this={editor}
 		/>
 		{#if showSettings}
-			<DocumentSettings {deleteFunc} {renameDocument} back={() => (showSettings = false)} />
+			<DocumentSettings
+				{deleteFunc}
+				{renameDocument}
+				{changePassword}
+				back={() => (showSettings = false)}
+			/>
 		{/if}
 	{/if}
 </div>

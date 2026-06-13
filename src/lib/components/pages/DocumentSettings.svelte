@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { Button, Label } from 'bits-ui';
 	import lang, { languageState as lS } from '$lib/lang.svelte';
+	import { I } from '$lib/components';
 
-	let { deleteFunc, renameDocument, back } = $props();
+	let { deleteFunc, renameDocument, changePassword, back } = $props();
 
 	let renameTo = $state('');
 
@@ -24,23 +25,125 @@
 		event.preventDefault();
 		await renameDocument(renameTo);
 	}
+
+	async function changePasswordFunc(event: Event) {
+		event.preventDefault();
+		if (newPassword !== confirmNewPassword) {
+			text = editor
+				? lang(
+						lS,
+						"New Editor Password and Confirm New Editor Password aren't the same.",
+						"Mot de Passe de l'Éditeur Nouveau et Confirmer Mot de Passe de l'Éditeur Nouveau ne sont pas les mêmes."
+					)
+				: lang(
+						lS,
+						"New Viewer Password and Confirm New Viewer Password aren't the same.",
+						'Mot de Passe du Spectateur Nouveau et Confirmer Mot de Passe du Spectateur Nouveau ne sont pas les mêmes.'
+					);
+			return;
+		} else {
+			text = '';
+		}
+		const response = await changePassword(oldPassword, newPassword, editor);
+		if (response === 1) {
+			text = lang(
+				lS,
+				'Current Editor Password is Incorrect.',
+				"Mot de Passe de l'Éditeur Actuel est Incorrect."
+			);
+		}
+	}
+
+	// Change Password
+	let editor = $state(true);
+	let oldPassword = $state('');
+	let newPassword = $state('');
+	let confirmNewPassword = $state('');
+
+	let text = $state('');
 </script>
 
-<h1 class="h1">{lang(lS, 'Document Settings', 'Paramètres du Document')}</h1>
+<h1 class="h1 mb-0!">{lang(lS, 'Document Settings', 'Paramètres du Document')}</h1>
 
-<div class="m-auto w-fit text-center">
-	<form onsubmit={rename} class="mb-10 block text-left">
-		<div class="inline w-full text-left">
-			<Label.Root for="rename" class="block"
+<div class="m-auto w-200 text-center">
+	<form onsubmit={rename} class="block text-left">
+		<div class="w-fit text-left m-auto">
+			<Label.Root for="rename" class="block w-fit"
 				>{lang(lS, 'Rename Document', 'Renommer ce Document')}:</Label.Root
 			>
-			<input type="text" class="w-40 h-10" id="rename" required bind:value={renameTo} />
+			<div class="flex">
+				<input type="text" class="w-50 h-10" id="rename" required bind:value={renameTo} />
+				<Button.Root type="submit" class="w-fit ml-2">{lang(lS, 'Go', 'Aller')}</Button.Root>
+			</div>
 		</div>
-		<Button.Root type="submit">{lang(lS, 'Go', 'Aller')}</Button.Root>
 	</form>
+	<hr class="m-auto w-100 mt-6 mb-4" />
+	<form onsubmit={changePasswordFunc} class="block text-left">
+		<h2 class="font-bold text-3xl mb-3">
+			{lang(lS, 'Change a Password', 'Changer un Mot de Passe')}
+		</h2>
+		<div>
+			<Label.Root class="block"
+				>{lang(lS, 'Change Password for', 'Changer le Mot de Passe pour')}
+				{editor ? lang(lS, 'Editor', 'Éditeur') : lang(lS, 'Viewer', 'Spectateur')}</Label.Root
+			>
+			<div class="flex gap-5 w-fit m-auto">
+				<Button.Root
+					class="disabled:bg-(--fg)/20! disabled:opacity-100! disabled:cursor-not-allowed!"
+					onclick={() => (editor = true)}
+					disabled={editor}>{lang(lS, 'Editor', 'Éditeur')}</Button.Root
+				>
+				<Button.Root
+					class="disabled:bg-(--fg)/20! disabled:opacity-100! disabled:cursor-not-allowed!"
+					onclick={() => (editor = false)}
+					disabled={!editor}>{lang(lS, 'Viewer', 'Spectateur')}</Button.Root
+				>
+			</div>
+		</div>
+		<div class="block m-auto w-fit text-left my-4">
+			<Label.Root for="oldPassword" class="block"
+				>{lang(lS, 'Current Editor Password:', "Mot de Passe de l'Éditeur Actuel:")}</Label.Root
+			>
+			<input type="password" class="w-80 h-10" id="oldPassword" required bind:value={oldPassword} />
+		</div>
+		<div class="block m-auto w-fit text-left">
+			<Label.Root for="newPassword" class="block"
+				>{editor
+					? lang(lS, 'New Editor Password', "Mot de Passe de l'Éditeur Nouveau")
+					: lang(lS, 'New Viewer Password', 'Mot de Passe du Spectateur Nouveau')}:</Label.Root
+			>
+			<input type="password" class="w-80 h-10" id="newPassword" required bind:value={newPassword} />
+		</div>
+		<div class="m-auto w-fit text-left">
+			<Label.Root for="confirmNewPassword" class="block"
+				>{editor
+					? lang(lS, 'Confirm New Editor Password', "Confirmer Mot de Passe de l'Éditeur Nouveau")
+					: lang(
+							lS,
+							'Confirm New Viewer Password',
+							'Confirmer Mot de Passe du Spectateur Nouveau'
+						)}:</Label.Root
+			>
+			<div class="flex">
+				<input
+					type="password"
+					class="w-66 h-10"
+					id="confirmewPassword"
+					required
+					bind:value={confirmNewPassword}
+				/>
+				<Button.Root class="w-fit ml-2" type="submit">{lang(lS, 'Go', 'Aller')}</Button.Root>
+			</div>
+		</div>
+		<div class="absolute w-200">
+			<p class="text-(--red) text-center">{text}<I /></p>
+		</div>
+	</form>
+	<hr class="m-auto my-8 w-100" />
 	<Button.Root onclick={deleteF} class="red-button m-auto"
 		>{lang(lS, 'Delete Document', 'Supprimer ce Document')}</Button.Root
 	>
+	<hr class="m-auto w-100 mb-4 mt-8" />
 </div>
 
 <button class="a m-auto mt-5 block" onclick={back}>{lang(lS, 'Back', 'Retourner')}</button>

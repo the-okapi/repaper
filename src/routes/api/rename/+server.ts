@@ -29,6 +29,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			action: 'rename-document',
 			error: JSON.stringify(errorV)
 		});
+		return new Response(null, { status: 500 });
 	}
 	success({
 		userAgent,

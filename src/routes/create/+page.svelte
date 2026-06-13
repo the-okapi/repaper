@@ -57,7 +57,7 @@
 			viewerPText = lang(
 				lS,
 				'Editor Password and Viewer Password cannot match.',
-				'Mot de Passe du Éditeur et Mot de Passe du Spectateur ne peuvent pas être les mêmes.'
+				"Mot de Passe de l'Éditeur et Mot de Passe du Spectateur ne peuvent pas être les mêmes."
 			);
 			errors++;
 		} else if (viewerPassword === confirmViewerPassword) {
@@ -67,7 +67,7 @@
 			editorPText = lang(
 				lS,
 				'Editor Password and Confirm Editor Password do not match.',
-				'Mot de Passe du Éditeur et Confirmer Mot de Passe du Éditeur ne sont pas les mêmes.'
+				"Mot de Passe de l'Éditeur et Confirmer Mot de Passe de l'Éditeur ne sont pas les mêmes."
 			);
 			errors++;
 		} else {
@@ -182,7 +182,7 @@
 		<div class="m-auto mb-0.5 inline-flex">
 			<div class="text-left">
 				<Label.Root for="editorPassword"
-					>{lang(lS, 'Editor Password', 'Mot de Passe du Éditeur')}:
+					>{lang(lS, 'Editor Password', "Mot de Passe de l'Éditeur")}:
 					<Popover>
 						{@html lang(
 							lS,
@@ -205,7 +205,7 @@
 					>{@html lang(
 						lS,
 						'Confirm Editor Password:',
-						'<span class="text-sm">Confirmer Mot de Passe du Éditeur:</span>'
+						'<span class="text-sm">Confirmer Mot de Passe de l\'Éditeur:</span>'
 					)}</Label.Root
 				><br />
 				<input
