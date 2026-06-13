@@ -86,7 +86,7 @@
 				>
 				{#each themes as theme, i (i + theme.value)}
 					{#if theme.mode === 'light'}
-						<SelectItem value={theme} />
+						<SelectItem value={theme} b="o" />
 					{/if}
 				{/each}
 			</Select.Group>
@@ -96,7 +96,7 @@
 				>
 				{#each themes as theme, i (i + theme.value)}
 					{#if theme.mode === 'dark'}
-						<SelectItem value={theme} />
+						<SelectItem value={theme} b={i === themes.length - 1 ? 'b' : ''} />
 					{/if}
 				{/each}
 			</Select.Group>

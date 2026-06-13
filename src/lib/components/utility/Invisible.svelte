@@ -1,1 +1,1 @@
-<span class="text-transparent">I</span>
+<span class="text-transparent select-none">I</span>

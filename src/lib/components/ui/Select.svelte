@@ -23,6 +23,11 @@
 
 <SelectC bind:value onValueChange={onC} trigger={selectedOptionLabel?.label} {...props}>
 	{#each options as option, i (i + option.value)}
-		<SelectItem value={option} {styling} class="rounded-xl {itemClass}" />
+		<SelectItem
+			value={option}
+			{styling}
+			c={itemClass}
+			b={i === 0 ? 't' : i === options.length - 1 ? 'b' : 'o'}
+		/>
 	{/each}
 </SelectC>
