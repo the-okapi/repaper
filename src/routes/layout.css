@@ -86,7 +86,7 @@ input:focus {
 
 [data-select-content] {
 	width: 10rem;
-	border-radius: 7px;
+	border-radius: 0.75rem;
 	outline: none;
 	height: fit-content;
 	background-color: var(--bg);

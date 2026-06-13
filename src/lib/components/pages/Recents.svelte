@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { Loading } from '$lib/components';
+	import { Loading, ContextMenu } from '$lib/components';
 	import { onMount } from 'svelte';
 	import type { DocumentLink } from '$lib';
 	import { resolve } from '$app/paths';
 	import { goto } from '$app/navigation';
 	import lang, { languageState as lS } from '$lib/lang.svelte';
 
-	let { size = 'w-80 h-fit', limit = 10, empty = false, x = true } = $props();
+	let { size = 'w-80 h-fit', limit = 10, empty = false } = $props();
 
 	let loading = $state(true);
 
@@ -47,7 +47,15 @@
 	{:else}
 		<div class={size}>
 			{#each recents as document, i (i)}
-				<div class="flex">
+				<ContextMenu
+					actions={[
+						{
+							label: lang(lS, 'Forget this Document', 'Oublier ce Document'),
+							action: () => remove(i)
+						}
+					]}
+					class="flex"
+				>
 					<button
 						onclick={() => click(i)}
 						class="m-auto w-full cursor-pointer border-(--o) p-3 hover:bg-(--fg)/5 {i === 0
@@ -57,14 +65,7 @@
 							? lang(lS, 'View', 'Spectateur')
 							: lang(lS, 'Edit', 'Éditeur')}</button
 					>
-					{#if x}
-						<button
-							onclick={() => remove(i)}
-							class="m-auto font-black ml-1.5 text-xs cursor-pointer hover:bg-(--fg)/5 min-h-7 min-w-7 rounded-md"
-							>X</button
-						>
-					{/if}
-				</div>
+				</ContextMenu>
 			{/each}
 		</div>
 	{/if}

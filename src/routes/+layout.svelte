@@ -6,8 +6,8 @@
 	import { goto } from '$app/navigation';
 	import { changed } from '$lib';
 	import { onMount } from 'svelte';
-	import lang, { languageState, setLanguage } from '$lib/lang.svelte';
-	import { Loading } from '$lib/components';
+	import lang, { languageState as lS, setLanguage } from '$lib/lang.svelte';
+	import { ContextMenu, Loading } from '$lib/components';
 	import fullscreen from '$lib/fullscreen';
 
 	let { children } = $props();
@@ -21,7 +21,7 @@
 			if (
 				confirm(
 					lang(
-						languageState,
+						lS,
 						'Are you sure you want to leave this page? Changes may not be saved.',
 						'Vous êtes certains que vous voulez partir cette page. Vos changements peut-être ne seront pas enregistrés.'
 					)
@@ -70,24 +70,81 @@
 		<div class="w-full">
 			<a href={resolve('/')}><h2 class="text-center text-4xl font-black">Repaper</h2></a>
 			<div class="pt-4 px-7">
-				<button class="a" onclick={() => go('/create')}
-					>{lang(languageState, 'Create a Document', 'Créer un Document')}</button
-				><br />
-				<button class="a" onclick={() => go('/open')}
-					>{lang(languageState, 'Open a Document', 'Ouvrir un Document')}</button
-				><br />
-				<button class="a" onclick={() => go('/recents')}
-					>{lang(languageState, 'Recent Documents', 'Documents Récents')}</button
-				><br />
-				<button class="a" onclick={() => go('/settings')}
-					>{lang(languageState, 'Settings', 'Paramètres')}</button
-				><br />
+				<ContextMenu
+					class="w-fit"
+					actions={[
+						{
+							label: lang(lS, 'Open in New Tab', 'Ouvrir dans un Nouvel Onglet'),
+							action: () => window.open('/create', '_blank')
+						}
+					]}
+				>
+					<button class="a" onclick={() => go('/create')}
+						>{lang(lS, 'Create a Document', 'Créer un Document')}</button
+					>
+				</ContextMenu>
+				<ContextMenu
+					class="w-fit"
+					actions={[
+						{
+							label: lang(lS, 'Open in New Tab', 'Ouvrir dans un Nouvel Onglet'),
+							action: () => window.open('/open', '_blank')
+						}
+					]}
+				>
+					<button class="a" onclick={() => go('/open')}
+						>{lang(lS, 'Open a Document', 'Ouvrir un Document')}</button
+					>
+				</ContextMenu>
+				<ContextMenu
+					class="w-fit"
+					actions={[
+						{
+							label: lang(lS, 'Open in New Tab', 'Ouvrir dans un Nouvel Onglet'),
+							action: () => window.open('/recents', '_blank')
+						}
+					]}
+				>
+					<button class="a" onclick={() => go('/recents')}
+						>{lang(lS, 'Recent Documents', 'Documents Récents')}</button
+					>
+				</ContextMenu>
+				<ContextMenu
+					class="w-fit"
+					actions={[
+						{
+							label: lang(lS, 'Open in New Tab', 'Ouvrir dans un Nouvel Onglet'),
+							action: () => window.open('/settings', '_blank')
+						}
+					]}
+				>
+					<button class="a" onclick={() => go('/settings')}
+						>{lang(lS, 'Settings', 'Paramètres')}</button
+					>
+				</ContextMenu>
 				<div class="w-full border-(--o) border-b my-2"></div>
-				<button class="a" onclick={() => go('/help')}>{lang(languageState, 'Help', 'Aide')}</button
-				><br />
-				<button class="a" onclick={() => go('/about')}
-					>{lang(languageState, 'About', 'À Propos')}</button
-				><br />
+				<ContextMenu
+					class="w-fit"
+					actions={[
+						{
+							label: lang(lS, 'Open in New Tab', 'Ouvrir dans un Nouvel Onglet'),
+							action: () => window.open('/help', '_blank')
+						}
+					]}
+				>
+					<button class="a" onclick={() => go('/help')}>{lang(lS, 'Help', 'Aide')}</button>
+				</ContextMenu>
+				<ContextMenu
+					class="w-fit"
+					actions={[
+						{
+							label: lang(lS, 'Open in New Tab', 'Ouvrir dans un Nouvel Onglet'),
+							action: () => window.open('/about', '_blank')
+						}
+					]}
+				>
+					<button class="a" onclick={() => go('/about')}>{lang(lS, 'About', 'À Propos')}</button>
+				</ContextMenu>
 			</div>
 		</div>
 		<br />

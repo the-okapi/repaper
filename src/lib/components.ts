@@ -13,3 +13,4 @@ export { default as TextEditor } from '$lib/components/utility/TextEditor.svelte
 export { default as Toggle } from '$lib/components/ui/Toggle.svelte';
 export { default as LinkButton } from '$lib/components/ui/LinkButton.svelte';
 export { default as Select } from '$lib/components/ui/Select.svelte';
+export { default as ContextMenu } from '$lib/components/ui/ContextMenu.svelte';

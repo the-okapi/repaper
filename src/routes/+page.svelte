@@ -24,7 +24,7 @@
 				<h2 class="mb-3 text-center text-lg font-bold">
 					{lang(languageState, 'Recent Documents', 'Documents Récents')}
 				</h2>
-				<Recents limit={4} x={false} />
+				<Recents limit={4} />
 			</div>
 		{/if}
 	</div>
