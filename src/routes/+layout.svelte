@@ -138,11 +138,11 @@
 					actions={[
 						{
 							label: lang(lS, 'Open in New Tab', 'Ouvrir dans un Nouvel Onglet'),
-							action: () => window.open('/about', '_blank')
+							action: () => window.open('/articles', '_blank')
 						}
 					]}
 				>
-					<button class="a" onclick={() => go('/about')}>{lang(lS, 'About', 'À Propos')}</button>
+					<button class="a" onclick={() => go('/articles')}>Articles</button>
 				</ContextMenu>
 			</div>
 		</div>

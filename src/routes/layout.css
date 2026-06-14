@@ -166,3 +166,7 @@ form {
 	line-height: 2.3rem;
 	margin-bottom: 0.8rem;
 }
+
+hr {
+	border-color: var(--o);
+}

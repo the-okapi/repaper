@@ -27,14 +27,21 @@
 
 	let { initial, promise, save = () => {}, title, editor = true, scale } = $props();
 
-	export async function saveFunc(after = false) {
-		loading = true;
+	export async function saveFunc(after = false, failed = true, l = true) {
+		loading = l;
 		const status = await save(JSON.stringify(editorState.editor?.getJSON()));
+		lastSaved = `${lang(lS, 'Last saved at', 'Enregistré en dernier à')} ${new Date().toLocaleTimeString(
+			'en-US',
+			{
+				hour: '2-digit',
+				minute: '2-digit'
+			}
+		)}`;
 		loading = after;
 		if (status === 200) {
 			localStorage.removeItem('repaper-document-unsaved');
 			changed.set(false);
-		} else {
+		} else if (failed) {
 			alert(
 				lang(
 					lS,
@@ -94,8 +101,19 @@
 			autofocus: editor,
 			editable: editor
 		});
+		setInterval(autosave, 60 * 1000);
 		loading = false;
 	});
+
+	let lastSaved = $state('');
+	let saving = $state(false);
+
+	async function autosave() {
+		saving = true;
+		lastSaved = lang(lS, 'Saving', 'En train de enregister');
+		await saveFunc(false, false, false);
+		saving = false;
+	}
 
 	onDestroy(() => {
 		editorState.editor?.destroy();
@@ -200,6 +218,9 @@
 			<Button.Root class="ml-10" onclick={() => saveFunc(false)}
 				>{lang(lS, 'Save', 'Enregistrer')}</Button.Root
 			>
+			<Popover button={false} questionMark={false} {saving}>
+				<p>{lastSaved}</p>
+			</Popover>
 		</div>
 	</div>
 {:else}
