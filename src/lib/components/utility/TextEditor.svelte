@@ -105,14 +105,25 @@
 		loading = false;
 	});
 
-	let lastSaved = $state('');
+	let lastSaved = $state(
+		`${lang(lS, 'Last saved at', 'Enregistré en dernier à')} ${new Date().toLocaleTimeString(
+			'en-US',
+			{
+				hour: '2-digit',
+				minute: '2-digit'
+			}
+		)}`
+	);
+
 	let saving = $state(false);
 
 	async function autosave() {
-		saving = true;
-		lastSaved = lang(lS, 'Saving', 'En train de enregister');
-		await saveFunc(false, false, false);
-		saving = false;
+		if (editor) {
+			saving = true;
+			lastSaved = lang(lS, 'Saving', 'En train de enregister');
+			await saveFunc(false, false, false);
+			saving = false;
+		}
 	}
 
 	onDestroy(() => {

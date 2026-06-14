@@ -98,7 +98,7 @@
 					>
 				</div>
 			{/if}
-			<div class="block m-auto w-fit text-left my-4">
+			<div class="block m-auto w-fit text-left mt-4">
 				<Label.Root for="oldPassword" class="block"
 					>{lang(lS, 'Current Editor Password:', "Mot de Passe de l'Éditeur Actuel:")}</Label.Root
 				>
