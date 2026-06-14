@@ -8,9 +8,9 @@ import { eq } from 'drizzle-orm';
 export const POST: RequestHandler = async ({ request }) => {
 	const userAgent = request.headers.get('user-agent') ?? '';
 	const json = await request.json();
-	const code = json.code;
-	const token = json.token;
-	const newCode = json.newCode;
+	const code: string = json.code;
+	const token: string = json.token;
+	const newCode: string = json.newCode;
 	const tokenCheck = await checkToken(userAgent, token, code, 'editor');
 	if (!tokenCheck) {
 		return new Response(null, { status: 401 });

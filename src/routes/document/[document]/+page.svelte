@@ -103,7 +103,7 @@
 			method: 'POST',
 			body: JSON.stringify({
 				content,
-				code: data.document,
+				code: page.params.document,
 				token
 			})
 		});
@@ -207,6 +207,42 @@
 		}
 	}
 
+	async function changePasswordRequired(to: boolean) {
+		loading = true;
+		await editor.saveFunction();
+		const response = await fetch('/api/change/passwordrequired', {
+			method: 'POST',
+			body: JSON.stringify({
+				code: data.document,
+				token,
+				passwordRequired: to
+			})
+		});
+		if (response.status === 401) {
+			goto(resolve('/'), { replaceState: true });
+			return;
+		} else if (response.status === 500) {
+			alert(
+				lang(
+					lS,
+					'Failed to change if password is required to view. Please try again later',
+					"Impossible de changer si le mot de passe est requis pour spectater. Essayez plus tard s'il vous plaît."
+				)
+			);
+			return;
+		} else {
+			const recentDocuments = JSON.parse(localStorage.getItem('repaper-recent-documents') ?? '[]');
+			const index = recentDocuments.findIndex((a: any) => a.code === data.document);
+			recentDocuments.splice(index, 1);
+			const document = recentDocuments[index];
+			document.passwordRequired = to;
+			recentDocuments.splice(0, 0, document);
+			localStorage.setItem('repaper-recent-documents', JSON.stringify(recentDocuments));
+			window.location.reload();
+			return;
+		}
+	}
+
 	async function renameDocument(to: string) {
 		loading = true;
 		await editor.saveFunction();
@@ -275,6 +311,7 @@
 				{renameDocument}
 				{changePassword}
 				{changeCode}
+				{changePasswordRequired}
 				viewerPasswordRequired={document.passwordRequired}
 				back={() => (showSettings = false)}
 			/>

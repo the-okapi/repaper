@@ -3,8 +3,15 @@
 	import lang, { languageState as lS } from '$lib/lang.svelte';
 	import { I } from '$lib/components';
 
-	let { deleteFunc, renameDocument, viewerPasswordRequired, changePassword, changeCode, back } =
-		$props();
+	let {
+		deleteFunc,
+		renameDocument,
+		viewerPasswordRequired,
+		changePassword,
+		changeCode,
+		changePasswordRequired,
+		back
+	} = $props();
 
 	let renameTo = $state('');
 
@@ -30,6 +37,10 @@
 	async function changeCodeFunc(event: Event) {
 		event.preventDefault();
 		await changeCode(newCode);
+	}
+
+	async function togglePassordRequired() {
+		await changePasswordRequired(!viewerPasswordRequired);
 	}
 
 	async function changePasswordFunc(event: Event) {
@@ -174,6 +185,26 @@
 				</div>
 			</div>
 		</form>
+		<hr class="m-auto my-8 w-100" />
+		<div>
+			<p>
+				{lang(
+					lS,
+					'Password required to view document',
+					'Mot de Passe requis pour spectater le document'
+				)}
+			</p>
+			<Button.Root
+				class="disabled:bg-(--fg)/20! disabled:opacity-100! disabled:cursor-not-allowed!"
+				onclick={togglePassordRequired}
+				disabled={viewerPasswordRequired}>{lang(lS, 'Yes', 'Oui')}</Button.Root
+			>
+			<Button.Root
+				class="disabled:bg-(--fg)/20! disabled:opacity-100! disabled:cursor-not-allowed!"
+				onclick={togglePassordRequired}
+				disabled={!viewerPasswordRequired}>{lang(lS, 'No', 'Non')}</Button.Root
+			>
+		</div>
 		<hr class="m-auto my-8 w-100" />
 		<Button.Root onclick={deleteF} class="red-button m-auto"
 			>{lang(lS, 'Delete Document', 'Supprimer ce Document')}</Button.Root

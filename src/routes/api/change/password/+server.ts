@@ -8,11 +8,11 @@ import { eq } from 'drizzle-orm';
 export const POST: RequestHandler = async ({ request }) => {
 	const userAgent = request.headers.get('user-agent') ?? '';
 	const json = await request.json();
-	const code = json.code;
-	const token = json.token;
-	const oldEditorPassword = json.oldPassword;
-	const editor = json.editor;
-	const newPassword = json.newPassword;
+	const code: string = json.code;
+	const token: string = json.token;
+	const oldEditorPassword: string = json.oldPassword;
+	const editor: boolean = json.editor;
+	const newPassword: string = json.newPassword;
 
 	const tokenCheck = await checkToken(userAgent, token, code, 'editor');
 	if (!tokenCheck) {

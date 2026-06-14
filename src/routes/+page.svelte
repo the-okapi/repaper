@@ -24,7 +24,7 @@
 	<div>
 		<h1
 			class="rounded-2xl p-5 text-8xl font-black"
-			style="-webkit-text-stroke: 2rem var(--bg); paint-order: stroke fill;"
+			style="-webkit-text-stroke: 1rem var(--bg); paint-order: stroke fill;"
 		>
 			Repaper
 		</h1>
