@@ -50,10 +50,13 @@ export async function downloadDocument(title: string, text: string) {
 		.from(main)
 		.set({
 			margin: 10,
-			filename: 'Document.pdf',
+			filename: title + '.pdf',
 			// @ts-expect-error For some reason doesn't detect this property
 			pagebreak: {
 				mode: 'avoid-all'
+			},
+			jsPDF: {
+				format: 'letter'
 			}
 		})
 		.save();

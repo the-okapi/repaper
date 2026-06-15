@@ -29,7 +29,7 @@
 
 	export async function saveFunc(after = false, failed = true, l = true) {
 		loading = l;
-		const status = await save(JSON.stringify(editorState.editor?.getJSON()));
+		const status = await save(editorState.editor?.getHTML());
 		lastSaved = `${lang(lS, 'Last saved at', 'Enregistré en dernier à')} ${new Date().toLocaleTimeString(
 			'en-US',
 			{
@@ -64,6 +64,10 @@
 
 	onMount(async () => {
 		await promise;
+		let i = initial;
+		if (i[0] === '{') {
+			i = JSON.parse(initial);
+		}
 		editorState.editor = new Editor({
 			element,
 			extensions: [
@@ -82,7 +86,7 @@
 				handlePaste: () => true,
 				handleDrop: () => true
 			},
-			content: JSON.parse(initial),
+			content: i,
 			onTransaction: ({ editor }) => {
 				editorState = { editor };
 			},
