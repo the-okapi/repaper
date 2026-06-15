@@ -49,7 +49,7 @@ export async function downloadDocument(title: string, text: string) {
 	html2pdf()
 		.from(main)
 		.set({
-			margin: 10,
+			margin: 24,
 			filename: title + '.pdf',
 			// @ts-expect-error For some reason doesn't detect this property
 			pagebreak: {
