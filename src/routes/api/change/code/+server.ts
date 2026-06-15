@@ -29,6 +29,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			action: 'change-doc-code',
 			error: JSON.stringify(errorV)
 		});
+		return new Response(null, { status: 500 });
 	}
 	success({
 		userAgent,

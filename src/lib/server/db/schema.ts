@@ -13,6 +13,7 @@ export const documents = sqliteTable('documents', {
 		.notNull()
 		.$default(() => JSON.stringify('')),
 	passwordRequired: integer('passwordRequired').notNull().default(1),
+	autosave: integer('autosave').notNull().default(1),
 	createdAt: text('created_at')
 		.notNull()
 		.$default(() => new Date().toISOString()),
