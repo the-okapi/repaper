@@ -41,6 +41,10 @@
 	opacity: 0.9;
 }
 
+[data-toggle-root]:hover {
+	opacity: 1;
+}
+
 .red-button {
 	background-color: var(--red);
 }
