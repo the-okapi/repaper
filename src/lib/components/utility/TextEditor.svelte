@@ -184,9 +184,16 @@
 				break;
 		}
 	}
+
+	function onkeydown(event: KeyboardEvent) {
+		if (event.key === 'p' && (event.ctrlKey || event.metaKey)) {
+			event.preventDefault();
+			download();
+		}
+	}
 </script>
 
-<svelte:window {onbeforeunload} />
+<svelte:window {onbeforeunload} {onkeydown} />
 
 <Loading show={loading} />
 
