@@ -1,6 +1,6 @@
 import { checkToken } from '$lib/server/db/token';
 import type { RequestHandler } from './$types';
-import { error, success } from '$lib/server/db/logs';
+import { error } from '$lib/server/db/logs';
 import { db } from '$lib/server/db';
 import { documents } from '$lib/server/db/schema';
 import { eq } from 'drizzle-orm';
@@ -31,10 +31,5 @@ export const POST: RequestHandler = async ({ request }) => {
 		});
 		return new Response(null, { status: 500 });
 	}
-	success({
-		userAgent,
-		info: `code:${code},token:${token}`,
-		action: 'save-file'
-	});
 	return new Response(null, { status: 200 });
 };

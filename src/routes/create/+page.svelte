@@ -22,6 +22,7 @@
 
 	let passwordRequired = $state(false);
 	let associateAccount = $state(false);
+	let autosave = $state(true);
 
 	onMount(() => {
 		const accountLS = localStorage.getItem('repaper-account');
@@ -144,8 +145,8 @@
 				<Popover
 					>{@html lang(
 						lS,
-						'This is the title of the document.<br />This <strong>can</strong> be changed later.',
-						"Ceci c'est le titre du document.<br />Ceci <strong>peut</strong> être changé plus tard."
+						'This is the title of the document.',
+						"Ceci c'est le titre du document."
 					)}</Popover
 				>
 			</Label.Root><br />
@@ -164,8 +165,8 @@
 				<Popover>
 					{@html lang(
 						lS,
-						'This is the code to access the document.<br />This <strong>cannot</strong> be changed later.',
-						"Ceci c'est le code pour accéder au document.<br />Ceci <strong>ne peut pas</strong> être changé plus tard."
+						'This is the code to access the document.',
+						"Ceci c'est le code pour accéder au document."
 					)}
 				</Popover>
 			</Label.Root><br />
@@ -186,8 +187,8 @@
 					<Popover>
 						{@html lang(
 							lS,
-							'This is the password used to edit the document.<br />This <strong>cannot</strong> be changed later.',
-							"Ceci c'est le mot de passe utilisé pour changer le document.<br />Ceci <strong>ne peut pas</strong> être changé plus tard."
+							'This is the password used to edit the document.',
+							"Ceci c'est le mot de passe utilisé pour changer le document."
 						)}
 					</Popover>
 				</Label.Root><br />
@@ -228,8 +229,8 @@
 					<Popover disabled={!passwordRequired}>
 						{@html lang(
 							lS,
-							'This is the password used to view the document.<br />This <strong>cannot</strong> be changed later.',
-							"Ceci c'est le mot de passe utilisé pour regarder le document.<br />Ceci <strong>ne peut pas</strong>être changé plus tard."
+							'This is the password used to view the document.',
+							"Ceci c'est le mot de passe utilisé pour regarder le document."
 						)}
 					</Popover>
 				</Label.Root><br />
@@ -265,18 +266,33 @@
 			</div>
 		</div>
 		<p class="text-left text-sm text-(--red)"><I />{viewerPText}</p>
-		<div class="m-auto mb-7 flex w-fit">
-			<Checkbox bind:checked={passwordRequired} id="passwordRequired" />
-			<Label.Root class="ml-2" for="passwordRequired">
-				{lang(lS, 'Password required to view', 'Mot de Passe requis pour regarder')}
-				<Popover>
-					{@html lang(
-						lS,
-						'If this is checked, anyone can view this document with just the document code.<br />This <strong>cannot</strong> be changed later.',
-						"Si ceci est coché, n'importe qui pourrait voir ce document avec seulement le code du document.<br />Ceci <strong>ne peut pas</strong> être changé plus tard."
-					)}
-				</Popover>
-			</Label.Root>
+		<div class="flex">
+			<div class="m-auto mb-7 flex w-fit">
+				<Checkbox bind:checked={passwordRequired} id="passwordRequired" />
+				<Label.Root class="ml-2" for="passwordRequired">
+					{lang(lS, 'Password required to view', 'Mot de Passe requis pour regarder')}
+					<Popover>
+						{@html lang(
+							lS,
+							'If this is checked, anyone can view this document with just the document code.',
+							"Si ceci est coché, n'importe qui pourrait voir ce document avec seulement le code du document."
+						)}
+					</Popover>
+				</Label.Root>
+			</div>
+			<div class="m-auto mb-7 flex w-fit">
+				<Checkbox bind:checked={autosave} id="autosave" />
+				<Label.Root class="ml-2" for="autosave">
+					{lang(lS, 'Autosave', 'Enregistrement Automatique')}
+					<Popover>
+						{@html lang(
+							lS,
+							'If this is checked, this document will automatically save in the background.',
+							'Si ceci est coché, ce document enregistera automatique dans le fond.'
+						)}
+					</Popover>
+				</Label.Root>
+			</div>
 		</div>
 		{#if account}
 			<div class="m-auto mb-7 flex w-fit">

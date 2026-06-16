@@ -24,11 +24,13 @@
 		title: string;
 		content: string;
 		passwordRequired: boolean;
+		autosave: boolean;
 		promise: Promise<boolean>;
 	}>({
 		title: '',
 		content: '',
 		passwordRequired: false,
+		autosave: true,
 		promise
 	});
 
@@ -82,6 +84,7 @@
 		document.title = documentCU.title ?? '';
 		document.content = documentCU.content;
 		document.passwordRequired = documentCU.passwordRequired === 1 ? true : false;
+		document.autosave = documentCU.autosave === 1 ? true : false;
 		resolveP(true);
 		loading = false;
 		if (i !== -1) {
@@ -207,6 +210,42 @@
 		}
 	}
 
+	async function changeAutosave(to: boolean) {
+		loading = true;
+		await editor.saveFunction();
+		const response = await fetch('/api/change/autosave', {
+			method: 'POST',
+			body: JSON.stringify({
+				code: data.document,
+				token,
+				autosave: to
+			})
+		});
+		if (response.status === 401) {
+			goto(resolve('/'), { replaceState: true });
+			return;
+		} else if (response.status === 500) {
+			alert(
+				lang(
+					lS,
+					'Failed to change autosave. Please try again later',
+					"Impossible de changer l'enregistrement automatique. Essayez plus tard s'il vous plaît."
+				)
+			);
+			return;
+		} else {
+			const recentDocuments = JSON.parse(localStorage.getItem('repaper-recent-documents') ?? '[]');
+			const index = recentDocuments.findIndex((a: any) => a.code === data.document);
+			recentDocuments.splice(index, 1);
+			const document = recentDocuments[index];
+			document.autosave = to;
+			recentDocuments.splice(0, 0, document);
+			localStorage.setItem('repaper-recent-documents', JSON.stringify(recentDocuments));
+			window.location.reload();
+			return;
+		}
+	}
+
 	async function changePasswordRequired(to: boolean) {
 		loading = true;
 		await editor.saveFunction();
@@ -301,6 +340,7 @@
 			bind:scale
 			{save}
 			{settings}
+			autosave={document.autosave}
 			show={!showSettings}
 			bind:changesMadeSinceSave
 			bind:this={editor}
@@ -312,6 +352,8 @@
 				{changePassword}
 				{changeCode}
 				{changePasswordRequired}
+				{changeAutosave}
+				autosave={document.autosave}
 				viewerPasswordRequired={document.passwordRequired}
 				back={() => (showSettings = false)}
 			/>

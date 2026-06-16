@@ -25,18 +25,11 @@
 
 	let loading = $state(true);
 
-	let { initial, promise, save = () => {}, title, editor = true, scale } = $props();
+	let { initial, promise, save = () => {}, autosave: as, title, editor = true, scale } = $props();
 
 	export async function saveFunc(after = false, failed = true, l = true) {
 		loading = l;
 		const status = await save(editorState.editor?.getHTML());
-		lastSaved = `${lang(lS, 'Last saved at', 'Enregistré en dernier à')} ${new Date().toLocaleTimeString(
-			'en-US',
-			{
-				hour: '2-digit',
-				minute: '2-digit'
-			}
-		)}`;
 		loading = after;
 		if (status === 200) {
 			localStorage.removeItem('repaper-document-unsaved');
@@ -109,24 +102,9 @@
 		loading = false;
 	});
 
-	let lastSaved = $state(
-		`${lang(lS, 'Last saved at', 'Enregistré en dernier à')} ${new Date().toLocaleTimeString(
-			'en-US',
-			{
-				hour: '2-digit',
-				minute: '2-digit'
-			}
-		)}`
-	);
-
-	let saving = $state(false);
-
 	async function autosave() {
-		if (editor) {
-			saving = true;
-			lastSaved = lang(lS, 'Saving', 'En train de enregister');
+		if (editor && as) {
 			await saveFunc(false, false, false);
-			saving = false;
 		}
 	}
 
@@ -240,9 +218,6 @@
 			<Button.Root class="ml-10" onclick={() => saveFunc(false)}
 				>{lang(lS, 'Save', 'Enregistrer')}</Button.Root
 			>
-			<Popover button={false} questionMark={false} {saving}>
-				<p>{lastSaved}</p>
-			</Popover>
 		</div>
 	</div>
 {:else}

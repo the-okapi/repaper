@@ -10,6 +10,7 @@
 		save,
 		settings,
 		show,
+		autosave,
 		changesMadeSinceSave = $bindable()
 	} = $props();
 
@@ -88,6 +89,7 @@
 		{save}
 		initial={document.content}
 		title={document.title}
+		{autosave}
 		scale="zoom: {scale / 100}; transform-origin: top center;"
 		bind:this={editor}
 	/>

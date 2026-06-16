@@ -8,7 +8,8 @@ export const load: PageServerLoad = async ({ params }) => {
 		columns: {
 			title: true,
 			content: true,
-			passwordRequired: true
+			passwordRequired: true,
+			autosave: true
 		},
 		where: eq(documents.code, params.document)
 	});

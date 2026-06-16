@@ -1,6 +1,4 @@
 <script lang="ts">
-	import Loader from '@lucide/svelte/icons/loader-circle';
-	import Check from '@lucide/svelte/icons/check';
 	import { Popover, Button } from 'bits-ui';
 
 	let {
@@ -8,7 +6,6 @@
 		bClass = '',
 		questionMark = true,
 		button = true,
-		saving = false,
 		message = '',
 		...props
 	} = $props();
@@ -27,17 +24,6 @@
 			<Button.Root class={bClass}>
 				{message}
 			</Button.Root>
-		</Popover.Trigger>
-	{:else}
-		<Popover.Trigger
-			tabindex={-1}
-			{...props}
-			class="m-auto h-6 w-6 cursor-pointer items-center justify-center rounded-[50%] align-baseline hover:bg-(--fg)/10 disabled:cursor-not-allowed disabled:hover:bg-transparent data-[state=open]:bg-(--fg)/10"
-		>
-			{#if saving}
-				<Loader class="animate-spin m-auto" size={17} />
-			{:else}<Check size={17} class="m-auto" />
-			{/if}
 		</Popover.Trigger>
 	{/if}
 	<Popover.Portal>

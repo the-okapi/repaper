@@ -7,9 +7,11 @@
 		deleteFunc,
 		renameDocument,
 		viewerPasswordRequired,
+		autosave,
 		changePassword,
 		changeCode,
 		changePasswordRequired,
+		changeAutosave,
 		back
 	} = $props();
 
@@ -41,6 +43,10 @@
 
 	async function togglePassordRequired() {
 		await changePasswordRequired(!viewerPasswordRequired);
+	}
+
+	async function toggleAutosave() {
+		await changeAutosave(!autosave);
 	}
 
 	async function changePasswordFunc(event: Event) {
@@ -160,6 +166,22 @@
 				<p class="text-(--red) text-center">{text}<I /></p>
 			</div>
 		</form>
+		<hr class="m-auto my-8 w-100" />
+		<div>
+			<p>
+				{lang(lS, 'Autosave', 'Enregistrement automatique')}
+			</p>
+			<Button.Root
+				class="disabled:bg-(--fg)/20! disabled:opacity-100! disabled:cursor-not-allowed!"
+				onclick={toggleAutosave}
+				disabled={autosave}>{lang(lS, 'Yes', 'Oui')}</Button.Root
+			>
+			<Button.Root
+				class="disabled:bg-(--fg)/20! disabled:opacity-100! disabled:cursor-not-allowed!"
+				onclick={toggleAutosave}
+				disabled={!autosave}>{lang(lS, 'No', 'Non')}</Button.Root
+			>
+		</div>
 	</div>
 	<div class="h-fit m-auto">
 		<form onsubmit={rename} class="block text-left">
