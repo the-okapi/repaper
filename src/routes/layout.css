@@ -6,6 +6,7 @@
 	--page: calc(8.5in - 40px);
 	overflow-x: auto;
 	overscroll-behavior: none;
+	scrollbar-gutter: stable;
 }
 
 ::selection {
