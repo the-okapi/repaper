@@ -20,7 +20,7 @@
 	"devDependencies": {
 		"@eslint/compat": "^2.1.0",
 		"@eslint/js": "^10.0.1",
-		"@sveltejs/adapter-cloudflare": "^7.2.9",
+		"@sveltejs/adapter-vercel": "^6.3.3",
 		"@sveltejs/kit": "^2.61.1",
 		"@sveltejs/vite-plugin-svelte": "^7.1.2",
 		"@tailwindcss/vite": "^4.3.0",
@@ -42,7 +42,6 @@
 		"vite": "^8.0.14"
 	},
 	"dependencies": {
-		"@google/genai": "^2.7.0",
 		"@lucide/svelte": "^1.17.0",
 		"@tiptap/core": "^3.24.0",
 		"@tiptap/extension-bold": "^3.24.0",

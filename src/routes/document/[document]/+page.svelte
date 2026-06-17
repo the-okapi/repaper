@@ -69,7 +69,7 @@
 			method: 'POST',
 			body: JSON.stringify({
 				token,
-				documentCode: data.document,
+				documentCode: page.params.document,
 				mode
 			})
 		});
@@ -83,8 +83,8 @@
 		}
 		document.title = documentCU.title ?? '';
 		document.content = documentCU.content;
-		document.passwordRequired = documentCU.passwordRequired === 1 ? true : false;
-		document.autosave = documentCU.autosave === 1 ? true : false;
+		document.passwordRequired = documentCU.passwordRequired;
+		document.autosave = documentCU.autosave;
 		resolveP(true);
 		loading = false;
 		if (i !== -1) {
