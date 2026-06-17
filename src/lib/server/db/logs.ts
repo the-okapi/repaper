@@ -19,7 +19,8 @@ export async function success(data: SuccessData) {
 		await db.insert(logs).values({
 			userAgent: data.userAgent,
 			action: data.action,
-			info: data.info
+			info: data.info,
+			success: true
 		});
 	} catch (error) {
 		console.log(error);
@@ -33,7 +34,7 @@ export async function error(data: ErrorData) {
 			action: data.action,
 			info: data.info,
 			error: data.error,
-			success: 0
+			success: false
 		});
 	} catch (error) {
 		console.log(error);

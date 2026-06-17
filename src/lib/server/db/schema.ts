@@ -11,7 +11,7 @@ export const documents = pgTable('documents', {
 	viewerPassword: text('viewer_password'),
 	content: text('content')
 		.notNull()
-		.$default(() => JSON.stringify('')),
+		.$default(() => ''),
 	passwordRequired: boolean('passwordRequired').notNull(),
 	autosave: boolean('autosave').notNull(),
 	createdAt: text('created_at')
