@@ -8,9 +8,6 @@ export const POST: RequestHandler = async ({ request }) => {
 	const permissions = json.mode;
 	const userAgent = request.headers.get('user-agent') ?? '';
 	const tokenCheck = await checkToken(userAgent, token, documentCode, permissions);
-	if (tokenCheck) {
-		return new Response(null, { status: 200 });
-	} else {
-		return new Response(null, { status: 401 });
-	}
+	
+	return new Response(null, { status: tokenCheck ? 200 : 401 });
 };
