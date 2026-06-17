@@ -3,5 +3,7 @@ allowBuilds:
   core-js: true
   esbuild: false
   protobufjs: false
+  sharp: set this to true or false
+  workerd: set this to true or false
 onlyBuiltDependencies:
   - esbuild
