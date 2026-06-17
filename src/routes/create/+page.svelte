@@ -100,7 +100,8 @@
 				code,
 				editorPassword,
 				viewerPassword,
-				passwordRequired
+				passwordRequired,
+				autosave
 			})
 		});
 		if (createResponse.status === 409) {

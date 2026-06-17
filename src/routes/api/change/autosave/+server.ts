@@ -19,7 +19,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		await db
 			.update(documents)
 			.set({
-				autosave: autosave ? 1 : 0
+				autosave
 			})
 			.where(eq(documents.code, code));
 	} catch (errorV) {

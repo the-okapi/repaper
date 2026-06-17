@@ -20,7 +20,6 @@
 	"devDependencies": {
 		"@eslint/compat": "^2.1.0",
 		"@eslint/js": "^10.0.1",
-		"@libsql/client": "^0.17.3",
 		"@sveltejs/adapter-vercel": "^6.3.3",
 		"@sveltejs/kit": "^2.61.1",
 		"@sveltejs/vite-plugin-svelte": "^7.1.2",
@@ -61,6 +60,7 @@
 		"@vercel/speed-insights": "^2.0.0",
 		"bits-ui": "^2.18.1",
 		"html2pdf.js": "^0.14.0",
-		"mode-watcher": "^1.1.0"
+		"mode-watcher": "^1.1.0",
+		"postgres": "^3.4.9"
 	}
 }

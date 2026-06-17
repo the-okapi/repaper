@@ -19,7 +19,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		await db
 			.update(documents)
 			.set({
-				passwordRequired: passwordRequired ? 1 : 0
+				passwordRequired
 			})
 			.where(eq(documents.code, code));
 	} catch (errorV) {

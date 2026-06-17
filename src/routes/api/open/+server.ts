@@ -28,7 +28,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			viewDocuments = await db
 				.select()
 				.from(documents)
-				.where(and(eq(documents.code, code), eq(documents.passwordRequired, 0)));
+				.where(and(eq(documents.code, code), eq(documents.passwordRequired, false)));
 		}
 	} catch (errorO) {
 		error({

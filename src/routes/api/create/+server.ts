@@ -24,6 +24,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	const editorPassword = requestJson.editorPassword;
 	const viewerPassword = requestJson.viewerPassword;
 	const passwordRequired = requestJson.passwordRequired;
+	const autosave = requestJson.autosave;
 	const userAgent = request.headers.get('user-agent') ?? 'not-found';
 	if (!check(code, editorPassword, viewerPassword)) {
 		return new Response('', { status: 400 });
@@ -35,14 +36,16 @@ export const POST: RequestHandler = async ({ request }) => {
 				code,
 				editorPassword,
 				viewerPassword,
-				passwordRequired: 1
+				passwordRequired: true,
+				autosave
 			});
 		} else {
 			await db.insert(documents).values({
 				title,
 				code,
 				editorPassword,
-				passwordRequired: 0
+				passwordRequired: false,
+				autosave
 			});
 		}
 	} catch (errorO) {
