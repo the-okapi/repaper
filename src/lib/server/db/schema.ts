@@ -14,6 +14,7 @@ export const documents = pgTable('documents', {
 		.$default(() => ''),
 	passwordRequired: boolean('passwordRequired').notNull(),
 	autosave: boolean('autosave').notNull(),
+	classroom: boolean('classroom').notNull().default(false),
 	createdAt: text('created_at')
 		.notNull()
 		.$default(() => new Date().toISOString()),

@@ -25,9 +25,10 @@ export const POST: RequestHandler = async ({ request }) => {
 	const viewerPassword = requestJson.viewerPassword;
 	const passwordRequired = requestJson.passwordRequired;
 	const autosave = requestJson.autosave;
+	const classroom = requestJson.classroom ?? false;
 	const userAgent = request.headers.get('user-agent') ?? 'not-found';
 	if (!check(code, editorPassword, viewerPassword)) {
-		return new Response('', { status: 400 });
+		return new Response(null, { status: 400 });
 	}
 	try {
 		if (passwordRequired) {
@@ -36,6 +37,7 @@ export const POST: RequestHandler = async ({ request }) => {
 				code,
 				editorPassword,
 				viewerPassword,
+				classroom,
 				passwordRequired: true,
 				autosave
 			});
@@ -44,6 +46,7 @@ export const POST: RequestHandler = async ({ request }) => {
 				title,
 				code,
 				editorPassword,
+				classroom,
 				passwordRequired: false,
 				autosave
 			});
