@@ -7,7 +7,7 @@ export const documents = pgTable('documents', {
 		.$default(() => crypto.randomUUID()),
 	title: text('title').notNull(),
 	code: text('code').unique().notNull(),
-	editorPassword: text('editor_password').notNull(),
+	editorPassword: text('editor_password'),
 	viewerPassword: text('viewer_password'),
 	content: text('content')
 		.notNull()
