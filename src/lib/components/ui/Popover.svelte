@@ -20,11 +20,9 @@
 			>?</Popover.Trigger
 		>
 	{:else if button}
-		<Popover.Trigger>
-			<Button.Root class={bClass}>
-				{message}
-			</Button.Root>
-		</Popover.Trigger>
+		<Button.Root class={bClass}>
+			{message}
+		</Button.Root>
 	{/if}
 	<Popover.Portal>
 		<Popover.Content

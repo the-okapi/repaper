@@ -73,7 +73,7 @@
 				mode
 			})
 		});
-		if (!documentCU || response.status === 401) {
+		if (!documentCU || response.status !== 200) {
 			if (i !== -1) {
 				recentDocuments.splice(i, 1);
 				localStorage.setItem('repaper-recent-documents', JSON.stringify(recentDocuments));

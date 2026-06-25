@@ -6,11 +6,13 @@
 	import { goto } from '$app/navigation';
 	import lang, { languageState as lS } from '$lib/lang.svelte';
 
-	let { size = 'w-80 h-fit', limit = 10, empty = false } = $props();
+	let { size = 'w-80 h-fit', limit = 10, empty = false, length = $bindable() } = $props();
 
 	let loading = $state(true);
 
 	let recents: DocumentLink[] = $state([]);
+
+	//$inspect(recents);
 
 	onMount(() => {
 		const recentDocuments = localStorage.getItem('repaper-recent-documents');
@@ -20,6 +22,7 @@
 		if (recents.length > limit) {
 			recents = recents.slice(0, limit);
 		}
+		length = recents.length;
 		loading = false;
 	});
 
@@ -29,8 +32,15 @@
 		goto(resolve(document.link));
 	}
 
-	function remove(index: number) {
+	async function remove(index: number) {
+		fetch('/api/forget', {
+			method: 'POST',
+			body: JSON.stringify({
+				token: recents[index].token
+			})
+		});
 		recents.splice(index, 1);
+		length = recents.length;
 		localStorage.setItem('repaper-recent-documents', JSON.stringify(recents));
 	}
 </script>
@@ -38,13 +48,7 @@
 <Loading show={loading} />
 
 <div class="m-auto w-fit">
-	{#if recents.length < 1}
-		{#if empty}
-			<p class="text-center text-lg">
-				{lang(lS, 'Open a document to get started.', 'Ouvrir un document pour commencer.')}
-			</p>
-		{/if}
-	{:else}
+	{#if length >= 1}
 		<div class={size}>
 			{#each recents as document, i (i)}
 				<ContextMenu
@@ -68,5 +72,11 @@
 				</ContextMenu>
 			{/each}
 		</div>
+	{:else}
+		{#if empty}
+			<p class="text-center text-lg">
+				{lang(lS, 'Open a document to get started.', 'Ouvrir un document pour commencer.')}
+			</p>
+		{/if}
 	{/if}
 </div>
