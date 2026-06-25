@@ -23,8 +23,8 @@
 <div class="fixed inset-0 left-70 z-30 flex items-center justify-center">
 	<div>
 		<h1
-			class="rounded-2xl p-5 text-8xl font-black"
-			style="-webkit-text-stroke: 0.4rem var(--bg); paint-order: stroke fill;"
+			class="rounded-2xl p-5 text-8xl font-black text-shadow-(color:--p) text-shadow-lg"
+			
 		>
 			Repaper
 		</h1>
