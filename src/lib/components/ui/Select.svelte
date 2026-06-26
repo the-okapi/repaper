@@ -27,7 +27,6 @@
 			value={option}
 			{styling}
 			c={itemClass}
-			b={i === 0 ? 't' : i === options.length - 1 ? 'b' : 'o'}
 		/>
 	{/each}
 </SelectC>

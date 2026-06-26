@@ -18,8 +18,8 @@
 	// Light/Dark
 
 	let themes = [
-		{ value: 'default', label: 'Light', mode: 'light' },
-		{ value: 'og', label: 'Dark', mode: 'dark' }
+		{ value: 'default', label: '1', mode: 'light' },
+		{ value: 'og', label: 'OG', mode: 'dark' }
 	];
 
 	function onThemeChange(value: string) {
