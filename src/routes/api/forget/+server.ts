@@ -6,7 +6,7 @@ import { error } from '$lib/server/db/logs';
 
 export const POST: RequestHandler = async ({ url, request }) => {
 	const host = url.hostname;
-	if (host !== 'localhost' && host !== 'repaper.unlimitedstuffltd.com') {
+	if (!(host === 'localhost' && import.meta.env.DEV) && host !== 'repaper.unlimitedstuffltd.com') {
 		return new Response(null, { status: 401 });
 	}
 
