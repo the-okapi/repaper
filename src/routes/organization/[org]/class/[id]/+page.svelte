@@ -19,7 +19,7 @@
 </script>
 
 <svelte:head>
-	<title>{data.title} - Repaper Classroom</title>
+	<title>{data.title} - Repaper</title>
 </svelte:head>
 
 <div class="flex gap-7 px-10 pt-25">

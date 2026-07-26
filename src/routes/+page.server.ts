@@ -8,6 +8,6 @@ export const load: PageServerLoad = async ({ parent }) => {
 	}
 
 	return {
-		title: 'Repaper Classroom'
+		title: 'Repaper'
 	};
 };

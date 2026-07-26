@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>Create Account - Repaper Classroom</title>
+	<title>Create Account - Repaper</title>
 </svelte:head>
 
 <div class="flex h-screen w-screen items-center justify-center">

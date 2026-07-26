@@ -15,7 +15,7 @@
 </script>
 
 <svelte:head>
-	<title>Sign Up - Repaper Classroom</title>
+	<title>Sign Up - Repaper</title>
 </svelte:head>
 
 <div class="m-auto flex h-screen w-screen items-center justify-center p-20">

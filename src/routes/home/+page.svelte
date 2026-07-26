@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-	<title>Home - Repaper Classroom</title>
+	<title>Home - Repaper</title>
 </svelte:head>
 
 {#await load(data.user)}

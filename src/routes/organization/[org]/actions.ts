@@ -122,7 +122,7 @@ export const create = async ({ locals, request, params }: ActionData) => {
 		);
 
 		await resend.emails.send({
-			from: 'Repaper Classroom <repaper-classroom@unlimitedstuffltd.com>',
+			from: 'Repaper <repaper@unlimitedstuffltd.com>',
 			to: email,
 			template: {
 				id: 'invitation-email',
@@ -130,7 +130,7 @@ export const create = async ({ locals, request, params }: ActionData) => {
 					NAME: name,
 					ORGANIZATION: check[0].organization.name,
 					LINK:
-						'https://classroom.repaper.unlimitedstuffltd.com/invitation/' +
+						'https://repaper.unlimitedstuffltd.com/invitation/' +
 						params.org +
 						'/' +
 						invitation[0].id

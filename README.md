@@ -1,4 +1,4 @@
-# Repaper Classroom
+# Repaper
 
 ## Error Codes
 

@@ -1,3 +1,3 @@
 <svelte:head>
-	<title>Repaper Classroom</title>
+	<title>Repaper</title>
 </svelte:head>
