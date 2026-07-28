@@ -1,3 +1,4 @@
+// Translated
 export { default as NavBar } from '$lib/components/NavBar.svelte';
 export { default as Select } from '$lib/components/ui/Select.svelte';
 export { default as SelectC } from '$lib/components/ui/SelectC.svelte';

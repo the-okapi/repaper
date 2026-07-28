@@ -1,9 +1,11 @@
+<!-- Translated -->
 <script lang="ts">
 	import { page } from '$app/state';
 	import { Settings, Login, AlertDialog } from '$lib/components';
 	import { slide } from 'svelte/transition';
 	import { Button } from 'bits-ui';
 	import { signOut } from '$lib/actions.remote';
+	import { m } from '$lib/paraglide/messages';
 
 	let { loggedIn } = $props();
 
@@ -37,10 +39,10 @@
 </script>
 
 <AlertDialog bind:open={logOutOpen}>
-	<p class="mb-8 text-center text-2xl font-semibold">Are you sure you would like to log out?</p>
+	<p class="mb-8 text-center text-2xl font-semibold">{m.are_you_sure()} {m.confirm_log_out()}</p>
 	<div class="m-auto flex w-fit gap-4">
 		<Button.Root class="px-5! py-2.5! text-lg" onclick={() => (logOutOpen = false)}
-			>Cancel</Button.Root
+			>{m.cancel()}</Button.Root
 		>
 		<form
 			{...signOut.enhance(async (form) => {
@@ -49,7 +51,7 @@
 				await form.submit();
 			})}
 		>
-			<Button.Root class="px-5! py-2.5! text-lg" type="submit">Go</Button.Root>
+			<Button.Root class="px-5! py-2.5! text-lg" type="submit">{m.go()}</Button.Root>
 		</form>
 	</div>
 </AlertDialog>
@@ -67,24 +69,24 @@
 		class="fixed top-5 left-17 z-40! flex h-10 rounded-xl px-3 py-1.5 outline outline-(--o) backdrop-blur-xs"
 	>
 		{#if loggedIn}
-			<a class="m-auto mx-2 h-fit hover:underline" href="/home" onclick={link}>Home</a>
+			<a class="m-auto mx-2 h-fit hover:underline" href="/home" onclick={link}>{m.home()}</a>
 			<button
 				class="mx-2 cursor-pointer whitespace-nowrap hover:underline"
 				onclick={() => (logOutOpen = true)}
 			>
-				Log Out
+				{m.log_out()}
 			</button>
 		{:else}
-			<a class="m-auto mx-2 h-fit hover:underline" href="/" onclick={link}>Home</a>
+			<a class="m-auto mx-2 h-fit hover:underline" href="/" onclick={link}>{m.home()}</a>
 			<a
 				class="m-auto mx-2 h-fit whitespace-nowrap hover:underline"
 				href="/signup"
-				onclick={link}>Sign Up</a
+				onclick={link}>{m.sign_up()}</a
 			>
 			<div class="cardButton m-auto h-fit {login ? 'z-50!' : 'z-40!'}">
 				<button
 					class="mx-2 cursor-pointer whitespace-nowrap hover:underline"
-					onclick={showLogin}>Log In</button
+					onclick={showLogin}>{m.log_in()}</button
 				>
 				{#if login}
 					<Login class="card" />
@@ -94,7 +96,7 @@
 		<div class="cardButton m-auto h-fit {settings ? 'z-50!' : 'z-40!'}">
 			<button
 				class="mx-2 cursor-pointer whitespace-nowrap hover:underline"
-				onclick={showSettings}>Settings</button
+				onclick={showSettings}>{m.settings()}</button
 			>
 			{#if settings}
 				<Settings class="card" />

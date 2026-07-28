@@ -1,6 +1,8 @@
+<!-- Translated -->
 <script lang="ts">
 	import { Button } from 'bits-ui';
 	import { page } from '$app/state';
+	import { m } from '$lib/paraglide/messages';
 </script>
 
 <div class="flex h-screen w-screen items-center justify-center">
@@ -8,7 +10,7 @@
 		<h1 class="text-9xl font-bold">{page.status}: {page.error?.message}</h1>
 		<br />
 		<Button.Root href="/" class="m-auto mt-10 block w-fit rounded-2xl! px-8! py-5! text-4xl"
-			>Home</Button.Root
+			>{m.home()}</Button.Root
 		>
 	</div>
 </div>

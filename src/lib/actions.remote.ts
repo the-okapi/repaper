@@ -1,16 +1,17 @@
+// Translated
 import { form, getRequestEvent } from '$app/server';
 import { object, string } from 'valibot';
 import { redirect } from '@sveltejs/kit';
 import { unwrap, unwrapNoData } from '$lib/error';
+import { m } from '$lib/paraglide/messages';
 
 export const signOut = form(async () => {
 	const { locals } = getRequestEvent();
 
-	const { error } = await locals.supabase.auth.signOut();
-
-	if (error) {
-		console.error(error, 'Error Code 84');
-		return { status: 500, message: error.message };
+	try {
+		unwrapNoData(await locals.supabase.auth.signOut(), 84);
+	} catch {
+		return { status: 500, message: m.something_happened() };
 	}
 
 	return redirect(303, '/');
@@ -34,7 +35,7 @@ export const logIn = form(LogInSchema, async ({ email, password }) => {
 		});
 
 		if (error) {
-			return { status: 400, message: 'Invalid Email or Password' };
+			return { status: 400, message: m.user_not_found() };
 		}
 
 		if (!user) {
@@ -58,8 +59,8 @@ export const logIn = form(LogInSchema, async ({ email, password }) => {
 
 		unwrapNoData(await locals.supabase.auth.signOut(), 86);
 
-		return { status: 400, message: 'Invalid email or password' };
-	} catch (error: any) {
-		return { status: 500, message: error.message };
+		return { status: 400, message: m.user_not_found() };
+	} catch {
+		return { status: 500, message: m.something_happened() };
 	}
 });

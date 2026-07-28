@@ -1,3 +1,4 @@
+// Translated
 export class HttpError extends Error {
 	statusCode: number;
 
@@ -7,8 +8,6 @@ export class HttpError extends Error {
 		this.statusCode = statusCode;
 	}
 }
-
-export const ERROR_MESSAGE = 'Something went wrong. Please try again later.';
 
 export function unwrap(response: { data: any; error: any }, code: number) {
 	if (response.error) {

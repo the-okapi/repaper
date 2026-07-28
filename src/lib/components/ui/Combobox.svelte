@@ -1,3 +1,4 @@
+<!-- Translated -->
 <script lang="ts">
 	import expand from '$lib/assets/icons/expand.svg';
 	import check from '$lib/assets/icons/check.svg';

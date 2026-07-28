@@ -1,3 +1,4 @@
+<!-- Translated -->
 <script lang="ts">
 	import type { PageProps } from './$types';
 	import { Combobox, Loader, AlertDialog } from '$lib/components';
@@ -6,6 +7,7 @@
 	import { enhance } from '$app/forms';
 	import type { OrganizationMember } from '$lib/types';
 	import { fade } from 'svelte/transition';
+	import { m } from '$lib/paraglide/messages';
 
 	let { data, params, form }: PageProps = $props();
 
@@ -36,7 +38,7 @@
 							class="text-center text-2xl
 							font-bold"
 						>
-							Add Member
+							{m.add_member()}
 						</h2>
 						{#if form?.add}
 							<div class="absolute left-0 w-full">
@@ -50,9 +52,7 @@
 								: ''
 						)}
 						<div class="m-auto mt-5 mb-1 w-fit">
-							<Label.Root for="member" class="text-sm"
-								>Choose Someone to Add:</Label.Root
-							>
+							<Label.Root for="member" class="text-sm">{m.choose_add()}:</Label.Root>
 							<Combobox id="member" options={members} bind:value={memberToAdd} />
 						</div>
 						{#if memberToAdd !== ''}
@@ -70,7 +70,7 @@
 							</div>
 							<input type="hidden" name="userId" value={member.user.id} />
 						{/if}
-						<Button.Root type="submit" class="m-auto mt-8 block">Go</Button.Root>
+						<Button.Root type="submit" class="m-auto mt-8 block">{m.go()}</Button.Root>
 					</form>
 				{/await}
 			</div>
@@ -79,25 +79,25 @@
 		<div class="h-full w-full rounded-xl border border-(--o) bg-(--bg) p-5"></div>
 	</div>
 	<div class="relative z-10 h-[80vh] w-full rounded-xl border border-(--o) bg-(--bg) p-5">
-		<h2 class="text-center text-3xl font-bold">Class List</h2>
+		<h2 class="text-center text-3xl font-bold">{m.class_list()}</h2>
 		{#each data.members as member, i (i)}
 			<div class="flex px-5 py-3" in:fade out:fade>
 				<div class="flex w-fit items-center">
 					{#if member.owner}
-						<p class="badge bg-yellow-600">Admin</p>
+						<p class="badge bg-yellow-600">{m.admin()}</p>
 					{:else}
-						<p class="badge bg-(--p)">Member</p>
+						<p class="badge bg-(--p)">{m.member()}</p>
 					{/if}
 				</div>
 				<p class="m-auto mx-4 w-full overflow-x-scroll text-xl whitespace-nowrap">
 					<span class="font-bold">{member.user.name}</span>
 					{#if member.user.id === data.user}
-						<span class="text-base opacity-50">(You)</span>
+						<span class="text-base opacity-50">({m.you()})</span>
 					{/if} -
 					<span class="overflow-hidden font-mono text-base">{member.user.email}</span>
 				</p>
 				<Button.Root onclick={() => confirmRemove(i)} class="bg-(--red)!"
-					>Remove</Button.Root
+					>{m.remove()}</Button.Root
 				>
 			</div>
 			{#if i !== data.members.length - 1}
@@ -109,10 +109,11 @@
 
 <AlertDialog bind:open={showConfirm}>
 	<p class="mb-8 text-center text-lg">
-		Are you sure you would like to remove {data.members[remove].user.name} from this class?
+		{m.are_you_sure()}
+		{m.remove_from_class({ name: data.members[remove].user.name })}
 	</p>
 	<div class="m-auto flex w-fit gap-4">
-		<Button.Root onclick={() => (showConfirm = false)}>Cancel</Button.Root>
+		<Button.Root onclick={() => (showConfirm = false)}>{m.cancel()}</Button.Root>
 		<form
 			action="?/remove"
 			method="POST"
@@ -121,7 +122,7 @@
 			}}
 		>
 			<input type="hidden" value={data.members[remove].user.id} name="userId" />
-			<Button.Root type="submit" class="bg-(--red)!">Go</Button.Root>
+			<Button.Root type="submit" class="bg-(--red)!">{m.go()}</Button.Root>
 		</form>
 	</div>
 </AlertDialog>

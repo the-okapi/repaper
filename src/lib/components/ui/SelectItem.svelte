@@ -1,3 +1,4 @@
+<!-- Translated -->
 <script lang="ts">
 	import check from '$lib/assets/icons/check.svg';
 	import { Select } from 'bits-ui';

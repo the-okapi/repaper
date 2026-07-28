@@ -1,7 +1,9 @@
+// Translated
 import type { Actions, PageServerLoad } from './$types';
 import { fail, redirect } from '@sveltejs/kit';
 import { object, string, safeParse } from 'valibot';
 import { unwrap, unwrapNoData } from '$lib/error';
+import { m } from '$lib/paraglide/messages';
 
 export const load: PageServerLoad = async ({ locals, params }) => {
 	try {
@@ -18,7 +20,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		}
 
 		return {
-			title: 'Create Account'
+			title: m.create_account()
 		};
 	} catch {
 		return redirect(303, '/error');
@@ -38,7 +40,7 @@ export const actions = {
 		if (!formData.success) {
 			return fail(400, {
 				fail: true,
-				message: 'Must be text, not file',
+				message: m.something_happened(),
 				email: ''
 			});
 		}
@@ -48,7 +50,7 @@ export const actions = {
 		if (password !== confirmPassword) {
 			return fail(400, {
 				fail: true,
-				message: 'Password and Confirm Password must be the same.',
+				message: m.password_confirm_dont_match(),
 				email
 			});
 		}
@@ -64,7 +66,7 @@ export const actions = {
 			);
 
 			if (data === '') {
-				return fail(500, { fail: true, message: 'Incorrect Email', email });
+				return fail(500, { fail: true, message: m.email_incorrect(), email });
 			}
 
 			unwrapNoData(
@@ -85,8 +87,8 @@ export const actions = {
 				await locals.supabase.from('invitations').delete().eq('id', params.id),
 				75
 			);
-		} catch (error: any) {
-			return fail(500, { fail: true, message: error.message, email });
+		} catch {
+			return fail(500, { fail: true, message: m.something_happened(), email });
 		}
 
 		return redirect(303, '/home');

@@ -1,8 +1,10 @@
+<!-- Translated -->
 <script lang="ts">
 	import { Button, Label } from 'bits-ui';
 	import type { PageProps } from './$types';
 	import { Loader } from '$lib/components';
 	import { enhance } from '$app/forms';
+	import { m } from '$lib/paraglide/messages';
 
 	let { form }: PageProps = $props();
 
@@ -15,7 +17,7 @@
 </script>
 
 <svelte:head>
-	<title>Sign Up - Repaper</title>
+	<title>{m.sign_up()} - Repaper</title>
 </svelte:head>
 
 <div class="m-auto flex h-screen w-screen items-center justify-center p-20">
@@ -32,7 +34,7 @@
 					if (password !== confirmPassword) {
 						loading = false;
 						cancel();
-						error = "Password and Confirm Password don't match.";
+						error = m.password_confirm_dont_match();
 					}
 
 					return ({ update, result }) => {
@@ -44,7 +46,7 @@
 				}}
 			>
 				<div class="mb-5 text-left">
-					<Label.Root for="name">Your Name:</Label.Root><br />
+					<Label.Root for="name">{m.your()} {m.name()}:</Label.Root><br />
 					<input
 						id="name"
 						type="text"
@@ -55,7 +57,7 @@
 					/>
 				</div>
 				<div class="mb-5 text-left">
-					<Label.Root for="email">Your Email:</Label.Root><br />
+					<Label.Root for="email">{m.your()} {m.email()}:</Label.Root><br />
 					<input
 						id="email"
 						type="email"
@@ -66,7 +68,7 @@
 					/>
 				</div>
 				<div class="mb-5 text-left">
-					<Label.Root for="password">Password:</Label.Root><br />
+					<Label.Root for="password">{m.password()}:</Label.Root><br />
 					<input
 						id="password"
 						type="password"
@@ -77,7 +79,7 @@
 					/>
 				</div>
 				<div class="text-left">
-					<Label.Root for="password">Confirm Password:</Label.Root><br />
+					<Label.Root for="password">{m.confirm()} {m.password()}:</Label.Root><br />
 					<input
 						id="confirm-password"
 						type="password"
@@ -91,7 +93,7 @@
 						<p class="absolute text-(--red)">{form?.message || error}</p>
 					</div>
 				{/if}
-				<Button.Root type="submit" class="mt-10 w-fit">Go</Button.Root>
+				<Button.Root type="submit" class="mt-10 w-fit">{m.go()}</Button.Root>
 			</form>
 		</div>
 	{/if}

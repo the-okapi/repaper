@@ -1,3 +1,4 @@
+// Translated
 import { Resend } from 'resend';
 import { PRIVATE_RESEND_API_KEY } from '$env/static/private';
 

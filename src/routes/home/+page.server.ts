@@ -1,6 +1,8 @@
+// Translated
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { unwrap, unwrapNoData } from '$lib/error';
+import { m } from '$lib/paraglide/messages';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const {
@@ -47,8 +49,8 @@ export const actions = {
 				}),
 				80
 			);
-		} catch (error: any) {
-			return fail(500, { createFailure: true, message: error.message });
+		} catch {
+			return fail(500, { createFailure: true, message: m.something_happened() });
 		}
 
 		return { success: true };
@@ -82,8 +84,8 @@ export const actions = {
 					.eq('id', user.id),
 				83
 			);
-		} catch (error: any) {
-			return fail(500, { orgFailure: true, message: error.message });
+		} catch {
+			return fail(500, { orgFailure: true, message: m.something_happened() });
 		}
 
 		return { success: true };

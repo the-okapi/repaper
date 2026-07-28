@@ -3,18 +3,19 @@
 	import { mode, setMode, setTheme, theme } from 'mode-watcher';
 	import { Label } from 'bits-ui';
 	import { slide } from 'svelte/transition';
+	import { m } from '$lib/paraglide/messages';
 
 	// Light/Dark
-	let modes = [
+	let modes = $derived([
 		{
-			label: 'Light',
+			label: m.light(),
 			value: 'light'
 		},
 		{
-			label: 'Dark',
+			label: m.dark(),
 			value: 'dark'
 		}
-	];
+	]);
 
 	let currentMode: any = $state(mode.current);
 
@@ -68,7 +69,7 @@
 	</div>
 
 	<div class="m-auto w-fit">
-		<Label.Root for="font">Font:</Label.Root>
+		<Label.Root for="font">{m.font()}:</Label.Root>
 		<Select id="font" options={fonts} bind:value={currentFont} onChange={onFontChange} />
 	</div>
 </div>

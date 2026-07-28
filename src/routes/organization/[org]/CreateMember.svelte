@@ -1,7 +1,9 @@
+<!-- Translated -->
 <script lang="ts">
 	import { Loader } from '$lib/components';
 	import { enhance } from '$app/forms';
 	import { Label, Button } from 'bits-ui';
+	import { m } from '$lib/paraglide/messages';
 
 	let { form } = $props();
 
@@ -16,11 +18,11 @@
 	{:else if loading}
 		<div class="absolute w-60 text-center">
 			<p>
-				An email has been sent to <span class="font-mono text-sm">{form.email}</span> to finish
-				setting up the account.
+				{m.email_sent()} <span class="font-mono text-sm">{form.email}</span>
+				{m.finish_setting_up()}
 			</p>
 			<Button.Root onclick={() => (loading = false)} class="mt-7"
-				>Create another Member</Button.Root
+				>{m.create_another_member()}</Button.Root
 			>
 		</div>
 	{/if}
@@ -39,16 +41,16 @@
 			};
 		}}
 	>
-		<h2 class="mt-5 text-center text-3xl font-bold whitespace-nowrap">Create Member</h2>
+		<h2 class="mt-5 text-center text-3xl font-bold whitespace-nowrap">{m.create_member()}</h2>
 		<div class="m-auto mt-3 w-fit">
-			<Label.Root for="name">Name:</Label.Root><br />
+			<Label.Root for="name">{m.name()}:</Label.Root><br />
 			<input id="name" name="name" type="text" required />
 		</div>
 		<div class="m-auto mt-3 w-fit">
-			<Label.Root for="email">Email:</Label.Root><br />
+			<Label.Root for="email">{m.email()}:</Label.Root><br />
 			<input id="email" name="email" type="email" required />
 		</div>
-		<Button.Root type="submit" class="m-auto mt-3 mb-10 block w-fit">Go</Button.Root>
+		<Button.Root type="submit" class="m-auto mt-3 mb-10 block w-fit">{m.go()}</Button.Root>
 		{#if form?.createError}
 			<p class="absolute bottom-2 left-3 text-sm text-(--red)">{form.message}</p>
 		{/if}

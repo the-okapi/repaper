@@ -1,8 +1,10 @@
+<!-- Translated -->
 <script lang="ts">
 	import { Button, Label } from 'bits-ui';
 	import { slide } from 'svelte/transition';
 	import { Loader } from '$lib/components';
 	import { logIn } from '$lib/actions.remote';
+	import { m } from '$lib/paraglide/messages';
 
 	let { class: c, ...props } = $props();
 
@@ -36,11 +38,13 @@
 		class={loading ? 'invisible' : 'visible'}
 	>
 		<div class="mb-5 w-50">
-			<Label.Root for="email" class={loading ? 'opacity-50' : ''}>Email:</Label.Root>
+			<Label.Root for="email" class={loading ? 'opacity-50' : ''}>{m.email()}:</Label.Root>
 			<input type="email" id="email" name="email" class="w-50" bind:value={email} required />
 		</div>
 		<div class="mb-0.5 w-50">
-			<Label.Root for="password" class={loading ? 'opacity-50' : ''}>Password:</Label.Root>
+			<Label.Root for="password" class={loading ? 'opacity-50' : ''}
+				>{m.password()}:</Label.Root
+			>
 			<input
 				type="password"
 				id="password"
@@ -53,6 +57,6 @@
 		<div class="absolute w-50 text-center">
 			<p class="text-xs text-(--red)">{error}</p>
 		</div>
-		<Button.Root type="submit" class="m-auto mt-7 block w-fit">Go</Button.Root>
+		<Button.Root type="submit" class="m-auto mt-7 block w-fit">{m.go()}</Button.Root>
 	</form>
 </div>

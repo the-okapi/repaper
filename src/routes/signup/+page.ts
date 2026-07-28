@@ -1,5 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
+import { m } from '$lib/paraglide/messages';
 
 export const load: PageLoad = async ({ parent }) => {
 	const data = await parent();
@@ -8,6 +9,6 @@ export const load: PageLoad = async ({ parent }) => {
 	}
 
 	return {
-		title: 'Sign Up'
+		title: m.sign_up()
 	};
 };

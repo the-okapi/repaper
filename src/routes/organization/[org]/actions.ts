@@ -1,9 +1,11 @@
+// Translated
 import { redirect, fail } from '@sveltejs/kit';
 import resend from '$lib/resend';
 import { object, string, safeParse } from 'valibot';
 import type { RouteParams } from './$types';
 import { UserIdSchema } from '$lib/types';
 import { unwrap, unwrapNoData } from '$lib/error';
+import { m } from '$lib/paraglide/messages';
 
 type ActionData = {
 	request: Request;
@@ -55,8 +57,8 @@ export const rename = async ({ request, params, locals }: ActionData) => {
 				.eq('name', check[0].organization.name),
 			41
 		);
-	} catch (error: any) {
-		return fail(500, { renameError: true, message: error.message });
+	} catch {
+		return fail(500, { renameError: true, message: m.something_happened() });
 	}
 
 	return { success: true };
@@ -71,7 +73,7 @@ export const create = async ({ locals, request, params }: ActionData) => {
 	const formData = safeParse(CreateSchema, Object.fromEntries(await request.formData()));
 
 	if (!formData.success) {
-		return fail(400, { createError: true, message: 'Must be text, not file' });
+		return fail(400, { createError: true, message: m.something_happened() });
 	}
 
 	const { name, email } = formData.output;
@@ -91,7 +93,7 @@ export const create = async ({ locals, request, params }: ActionData) => {
 		if (foundData.length > 0) {
 			return fail(409, {
 				createError: true,
-				message: 'A user with that email already exists.'
+				message: m.user_exists()
 			});
 		}
 
@@ -137,8 +139,8 @@ export const create = async ({ locals, request, params }: ActionData) => {
 				}
 			}
 		});
-	} catch (error: any) {
-		return fail(500, { createError: true, message: error.message });
+	} catch {
+		return fail(500, { createError: true, message: m.something_happened() });
 	}
 
 	return { createSuccess: true, success: true, email };
@@ -202,7 +204,7 @@ export const renameMember = async ({ request, locals, params }: ActionData) => {
 	const formData = safeParse(RenameMemberSchema, Object.fromEntries(await request.formData()));
 
 	if (!formData.success) {
-		return fail(400, { renameMemberError: true, message: 'Must be text, not files' });
+		return fail(400, { renameMemberError: true, message: m.something_happened() });
 	}
 
 	const { user: userId, name } = formData.output;
@@ -238,7 +240,7 @@ export const renameMember = async ({ request, locals, params }: ActionData) => {
 		);
 
 		if (!check2?.[0]) {
-			return fail(400, { renameMemberError: true, message: 'User does not exist.' });
+			return fail(400, { renameMemberError: true, message: m.nonexistant_user() });
 		}
 
 		unwrapNoData(
@@ -250,8 +252,8 @@ export const renameMember = async ({ request, locals, params }: ActionData) => {
 				.eq('id', userId),
 			52
 		);
-	} catch (error: any) {
-		return fail(500, { renameMemberError: true, message: error.message });
+	} catch {
+		return fail(500, { renameMemberError: true, message: m.something_happened() });
 	}
 
 	return { success: true };
@@ -435,7 +437,7 @@ export const demote = async ({ request, params, locals }: ActionData) => {
 		}
 
 		if (userId === user.id) {
-			return fail(400, { demoteFailure: true, message: 'You cannot demote yourself.' });
+			return fail(400, { demoteFailure: true, message: m.demote_yourself() });
 		}
 
 		const check = unwrap(

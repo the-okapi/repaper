@@ -1,8 +1,10 @@
+// Translated
 import { fail, redirect } from '@sveltejs/kit';
 import type { RouteParams } from './$types';
 import { object, string, safeParse } from 'valibot';
 import { HttpError, unwrap, unwrapNoData } from '$lib/error';
 import { UserIdSchema } from '$lib/types';
+import { m } from '$lib/paraglide/messages';
 
 type ActionData = {
 	request: Request;
@@ -19,7 +21,7 @@ export const add = async ({ request, locals, params }: ActionData) => {
 	const formData = safeParse(AddSchema, Object.fromEntries(await request.formData()));
 
 	if (!formData.success) {
-		return fail(400, { add: 'Must be text, not file', user: '' });
+		return fail(400, { add: m.something_happened(), user: '' });
 	}
 
 	const { userId, email } = formData.output;
@@ -42,7 +44,7 @@ export const add = async ({ request, locals, params }: ActionData) => {
 		);
 
 		if (!check?.[0]) {
-			throw new HttpError('Invalid Permissions', 403);
+			throw new HttpError(m.invalid_permissions(), 403);
 		}
 
 		const check2 = unwrap(
@@ -55,7 +57,7 @@ export const add = async ({ request, locals, params }: ActionData) => {
 		);
 
 		if (!check2 || check2[0].organization !== params.org) {
-			throw new HttpError('Class Not Found', 404);
+			throw new HttpError(m.class_not_found(), 404);
 		}
 
 		const check3 = unwrap(
@@ -69,7 +71,7 @@ export const add = async ({ request, locals, params }: ActionData) => {
 		);
 
 		if (!check3?.[0]) {
-			throw new HttpError('User not found', 400);
+			throw new HttpError(m.user_not_found(), 400);
 		}
 
 		const check4 = unwrap(
@@ -82,7 +84,7 @@ export const add = async ({ request, locals, params }: ActionData) => {
 		);
 
 		if (check4?.[0]) {
-			throw new HttpError('User is already in class', 409);
+			throw new HttpError(m.user_already_class(), 409);
 		}
 
 		unwrapNoData(
@@ -94,7 +96,11 @@ export const add = async ({ request, locals, params }: ActionData) => {
 			5
 		);
 	} catch (error: any) {
-		return fail(error.statusCode, { add: error.message, user: userId });
+		if (error.statusCode !== 500) {
+			return fail(error.statusCode, { add: error.message, user: userId });
+		} else {
+			return fail(500, { add: m.something_happened(), user: userId });
+		}
 	}
 
 	return { success: true };
@@ -104,7 +110,7 @@ export const remove = async ({ request, locals, params }: ActionData) => {
 	const formData = safeParse(UserIdSchema, Object.fromEntries(await request.formData()));
 
 	if (!formData.success) {
-		return fail(400, { remove: 'Must be text, not file' });
+		return fail(400, { remove: m.something_happened() });
 	}
 
 	const { userId } = formData.output;
@@ -127,7 +133,7 @@ export const remove = async ({ request, locals, params }: ActionData) => {
 		);
 
 		if (!check?.[0]) {
-			return new HttpError('Invalid Permissions', 403);
+			return new HttpError(m.invalid_permissions(), 403);
 		}
 
 		unwrapNoData(
@@ -139,7 +145,11 @@ export const remove = async ({ request, locals, params }: ActionData) => {
 			8
 		);
 	} catch (error: any) {
-		return fail(error.statusCode, { remove: error.message, userId });
+		if (error.statusCode !== 500) {
+			return fail(error.statusCode, { remove: error.message, userId });
+		} else {
+			return fail(500, { remove: m.something_happened(), userId });
+		}
 	}
 
 	return { success: true };

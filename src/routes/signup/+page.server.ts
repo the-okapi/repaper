@@ -1,6 +1,8 @@
+// Translated
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import { object, string, safeParse } from 'valibot';
+import { m } from '$lib/paraglide/messages';
 
 const SignupSchema = object({
 	name: string(),
@@ -15,7 +17,7 @@ export const actions = {
 		if (!formData.success) {
 			return fail(400, {
 				fail: true,
-				message: 'Must be text, not file',
+				message: m.something_happened(),
 				name: '',
 				email: ''
 			});
