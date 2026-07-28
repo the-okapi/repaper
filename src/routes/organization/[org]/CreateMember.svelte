@@ -1,4 +1,3 @@
-<!-- Translated -->
 <script lang="ts">
 	import { Loader } from '$lib/components';
 	import { enhance } from '$app/forms';

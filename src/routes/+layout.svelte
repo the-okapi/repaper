@@ -1,4 +1,3 @@
-<!-- Translated -->
 <script lang="ts">
 	import type { Pathname } from '$app/types';
 	import { resolve } from '$app/paths';

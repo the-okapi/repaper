@@ -1,4 +1,3 @@
-// Translated
 import { getRequestEvent, query } from '$app/server';
 import { redirect } from '@sveltejs/kit';
 import { string } from 'valibot';

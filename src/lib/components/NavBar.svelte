@@ -1,4 +1,3 @@
-<!-- Translated -->
 <script lang="ts">
 	import { page } from '$app/state';
 	import { Settings, Login, AlertDialog } from '$lib/components';

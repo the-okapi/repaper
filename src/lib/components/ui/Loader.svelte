@@ -1,4 +1,3 @@
-<!-- Translated -->
 <script lang="ts">
 	import loader from '$lib/assets/icons/loader.svg';
 </script>

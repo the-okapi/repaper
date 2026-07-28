@@ -1,4 +1,3 @@
-<!-- Translated -->
 <script lang="ts">
 	import type { PageProps } from './$types';
 	import { Button, Label } from 'bits-ui';

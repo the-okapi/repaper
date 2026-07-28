@@ -1,4 +1,3 @@
-// Translated
 import { fail, redirect } from '@sveltejs/kit';
 import type { RouteParams } from './$types';
 import { object, string, safeParse } from 'valibot';

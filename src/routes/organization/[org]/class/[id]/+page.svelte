@@ -1,4 +1,3 @@
-<!-- Translated -->
 <script lang="ts">
 	import type { PageProps } from './$types';
 	import { Combobox, Loader, AlertDialog } from '$lib/components';

@@ -1,4 +1,3 @@
-<!-- Translated -->
 <script lang="ts">
 	import { AlertDialog } from '$lib/components';
 	import { Button, Label } from 'bits-ui';

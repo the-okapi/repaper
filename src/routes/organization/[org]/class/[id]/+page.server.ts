@@ -1,4 +1,3 @@
-// Translated
 import type { Actions, PageServerLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
 import { add, remove } from './actions';

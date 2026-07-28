@@ -1,4 +1,3 @@
-<!-- Translated -->
 <script lang="ts">
 	import { Button } from 'bits-ui';
 	import { m } from '$lib/paraglide/messages';

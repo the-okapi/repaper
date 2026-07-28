@@ -1,4 +1,3 @@
-// Translated
 import type { PageLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
 

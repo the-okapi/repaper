@@ -1,4 +1,3 @@
-<!-- Translated -->
 <script lang="ts">
 	import { Button, Label } from 'bits-ui';
 	import { slide } from 'svelte/transition';

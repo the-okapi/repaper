@@ -1,4 +1,3 @@
-<!-- Translated -->
 <script lang="ts">
 	import { fade, slide } from 'svelte/transition';
 

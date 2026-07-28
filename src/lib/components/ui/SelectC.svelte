@@ -1,4 +1,3 @@
-<!-- Translated -->
 <script lang="ts">
 	import { Select } from 'bits-ui';
 	import expand from '$lib/assets/icons/expand.svg';

@@ -1,4 +1,3 @@
-// Translated
 import { redirect, fail } from '@sveltejs/kit';
 import resend from '$lib/resend';
 import { object, string, safeParse } from 'valibot';
