@@ -6,7 +6,9 @@ import { unwrap } from '$lib/error';
 export const load = query(string(), async (organization: string) => {
 	const { locals } = getRequestEvent();
 	try {
-		const { user } = unwrap(await locals.supabase.auth.getUser(), 33);
+		const {
+			data: { user }
+		} = await locals.supabase.auth.getUser();
 
 		if (!user) {
 			return redirect(303, '/');

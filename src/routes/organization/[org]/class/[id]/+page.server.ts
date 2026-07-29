@@ -5,7 +5,9 @@ import { unwrap } from '$lib/error';
 
 export const load: PageServerLoad = async ({ locals, params }) => {
 	try {
-		const { user } = unwrap(await locals.supabase.auth.getUser(), 30);
+		const {
+			data: { user }
+		} = await locals.supabase.auth.getUser();
 
 		if (!user) {
 			return redirect(303, '/');

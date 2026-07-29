@@ -26,7 +26,9 @@ export const add = async ({ request, locals, params }: ActionData) => {
 	const { userId, email } = formData.output;
 
 	try {
-		const { user } = unwrap(await locals.supabase.auth.getUser(), 1);
+		const {
+			data: { user }
+		} = await locals.supabase.auth.getUser();
 
 		if (!user) {
 			return redirect(303, '/');
@@ -115,7 +117,9 @@ export const remove = async ({ request, locals, params }: ActionData) => {
 	const { userId } = formData.output;
 
 	try {
-		const { user } = unwrap(await locals.supabase.auth.getUser(), 6);
+		const {
+			data: { user }
+		} = await locals.supabase.auth.getUser();
 
 		if (!user) {
 			return redirect(303, '/');

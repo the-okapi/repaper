@@ -8,7 +8,9 @@ export const load: LayoutServerLoad = async ({ cookies, locals, route }) => {
 	}
 
 	try {
-		const { user } = unwrap(await locals.supabase.auth.getUser(), 36);
+		const {
+			data: { user }
+		} = await locals.supabase.auth.getUser();
 
 		if (!user) {
 			return {

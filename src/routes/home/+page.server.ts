@@ -20,7 +20,9 @@ export const actions = {
 		const { className, organization } = Object.fromEntries(await request.formData());
 
 		try {
-			const { user } = unwrap(await locals.supabase.auth.getUser(), 78);
+			const {
+				data: { user }
+			} = await locals.supabase.auth.getUser();
 
 			if (!user) {
 				return redirect(303, '/');
@@ -57,7 +59,9 @@ export const actions = {
 	organization: async ({ request, locals }) => {
 		const { orgName } = Object.fromEntries(await request.formData());
 		try {
-			const { user } = unwrap(await locals.supabase.auth.getUser(), 81);
+			const {
+				data: { user }
+			} = await locals.supabase.auth.getUser();
 
 			if (!user) {
 				return redirect(303, '/');

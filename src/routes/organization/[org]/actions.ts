@@ -26,7 +26,9 @@ export const rename = async ({ request, params, locals }: ActionData) => {
 	const { name } = formData.output;
 
 	try {
-		const { user } = unwrap(await locals.supabase.auth.getUser(), 39);
+		const {
+			data: { user }
+		} = await locals.supabase.auth.getUser();
 
 		if (!user) {
 			return redirect(303, '/');
@@ -78,7 +80,9 @@ export const create = async ({ locals, request, params }: ActionData) => {
 	const { name, email } = formData.output;
 
 	try {
-		const { user } = unwrap(await locals.supabase.auth.getUser(), 42);
+		const {
+			data: { user }
+		} = await locals.supabase.auth.getUser();
 
 		if (!user) {
 			return redirect(303, '/');
@@ -159,7 +163,9 @@ export const revoke = async ({ request, locals, params }: ActionData) => {
 	const { invitation } = formData.output;
 
 	try {
-		const { user } = unwrap(await locals.supabase.auth.getUser(), 46);
+		const {
+			data: { user }
+		} = await locals.supabase.auth.getUser();
 
 		if (!user) {
 			return redirect(303, '/');
@@ -209,7 +215,9 @@ export const renameMember = async ({ request, locals, params }: ActionData) => {
 	const { user: userId, name } = formData.output;
 
 	try {
-		const { user } = unwrap(await locals.supabase.auth.getUser(), 49);
+		const {
+			data: { user }
+		} = await locals.supabase.auth.getUser();
 
 		if (!user) {
 			return redirect(303, '/');
@@ -268,7 +276,9 @@ export const deleteMember = async ({ request, params, locals }: ActionData) => {
 	const { userId } = formData.output;
 
 	try {
-		const { user } = unwrap(await locals.supabase.auth.getUser(), 53);
+		const {
+			data: { user }
+		} = await locals.supabase.auth.getUser();
 
 		if (!user) {
 			return redirect(303, '/');
@@ -325,7 +335,9 @@ export const restore = async ({ request, locals, params }: ActionData) => {
 	const { userId } = formData.output;
 
 	try {
-		const { user } = unwrap(await locals.supabase.auth.getUser(), 57);
+		const {
+			data: { user }
+		} = await locals.supabase.auth.getUser();
 
 		if (!user) {
 			return redirect(303, '/');
@@ -381,7 +393,9 @@ export const promote = async ({ request, locals, params }: ActionData) => {
 	const { userId } = formData.output;
 
 	try {
-		const { user } = unwrap(await locals.supabase.auth.getUser(), 61);
+		const {
+			data: { user }
+		} = await locals.supabase.auth.getUser();
 
 		if (!user) {
 			return redirect(303, '/');
@@ -429,7 +443,9 @@ export const demote = async ({ request, params, locals }: ActionData) => {
 	const { userId } = formData.output;
 
 	try {
-		const { user } = unwrap(await locals.supabase.auth.getUser(), 64);
+		const {
+			data: { user }
+		} = await locals.supabase.auth.getUser();
 
 		if (!user) {
 			return redirect(303, '/');
