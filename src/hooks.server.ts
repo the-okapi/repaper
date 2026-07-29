@@ -3,12 +3,12 @@ import { getTextDirection } from '$lib/paraglide/runtime';
 import { paraglideMiddleware } from '$lib/paraglide/server';
 import type { Handle } from '@sveltejs/kit';
 import { createServerClient } from '@supabase/ssr';
-import { PUBLIC_SUPABASE_PUBLISHABLE_KEY, PUBLIC_SUPABASE_URL } from '$env/static/public';
+import { PRIVATE_SUPABASE_PUBLISHABLE_KEY, PRIVATE_SUPABASE_URL } from '$env/static/private';
 
 const originalHandle: Handle = async ({ event, resolve }) => {
 	event.locals.supabase = createServerClient(
-		PUBLIC_SUPABASE_URL,
-		PUBLIC_SUPABASE_PUBLISHABLE_KEY,
+		PRIVATE_SUPABASE_URL,
+		PRIVATE_SUPABASE_PUBLISHABLE_KEY,
 		{
 			cookies: {
 				getAll() {
