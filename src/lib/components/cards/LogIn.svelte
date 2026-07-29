@@ -37,21 +37,12 @@
 		class={loading ? 'invisible' : 'visible'}
 	>
 		<div class="mb-5 w-50">
-			<Label.Root for="email" class={loading ? 'opacity-50' : ''}>{m.email()}:</Label.Root>
-			<input type="email" id="email" name="email" class="w-50" bind:value={email} required />
+			<Label.Root class={loading ? 'opacity-50' : ''}>{m.email()}:</Label.Root>
+			<input type="email" name="email" class="w-50" bind:value={email} required />
 		</div>
 		<div class="mb-0.5 w-50">
-			<Label.Root for="password" class={loading ? 'opacity-50' : ''}
-				>{m.password()}:</Label.Root
-			>
-			<input
-				type="password"
-				id="password"
-				name="password"
-				class="w-50"
-				bind:value={password}
-				required
-			/>
+			<Label.Root class={loading ? 'opacity-50' : ''}>{m.password()}:</Label.Root>
+			<input type="password" name="password" class="w-50" bind:value={password} required />
 		</div>
 		<div class="absolute w-50 text-center">
 			<p class="text-xs text-(--red)">{error}</p>

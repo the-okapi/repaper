@@ -4,6 +4,8 @@
 	import { Label } from 'bits-ui';
 	import { slide } from 'svelte/transition';
 	import { m } from '$lib/paraglide/messages';
+	import { getLocale } from '$lib/paraglide/runtime';
+	import { setLocale } from '$lib/paraglide/runtime';
 
 	// Light/Dark
 	let modes = $derived([
@@ -21,6 +23,24 @@
 
 	function onModeChange() {
 		setMode(currentMode);
+	}
+
+	// Language
+	let languages = [
+		{
+			label: 'English',
+			value: 'en'
+		},
+		{
+			label: 'Français',
+			value: 'fr'
+		}
+	];
+
+	let currentLang = $state(getLocale());
+
+	function onLangChange() {
+		setLocale(currentLang);
 	}
 
 	// Font
@@ -42,6 +62,10 @@
 			value: 'trebuchet'
 		},
 		{
+			label: 'Monospace',
+			value: 'monospace'
+		},
+		{
 			label: 'System UI',
 			value: 'system'
 		}
@@ -58,18 +82,17 @@
 
 <div in:slide out:slide class="rounded-xl bg-(--bg) p-6 outline outline-(--o) {c}" {...props}>
 	<div class="m-auto mb-8 w-fit">
-		<Label.Root for="mode">Mode:</Label.Root>
-		<Select
-			id="mode"
-			options={modes}
-			styling={false}
-			bind:value={currentMode}
-			onChange={onModeChange}
-		/>
+		<Label.Root>Mode:</Label.Root>
+		<Select options={modes} styling={false} bind:value={currentMode} onChange={onModeChange} />
+	</div>
+
+	<div class="m-auto mb-8 w-fit">
+		<Label.Root>{m.font()}:</Label.Root>
+		<Select options={fonts} bind:value={currentFont} onChange={onFontChange} />
 	</div>
 
 	<div class="m-auto w-fit">
-		<Label.Root for="font">{m.font()}:</Label.Root>
-		<Select id="font" options={fonts} bind:value={currentFont} onChange={onFontChange} />
+		<Label.Root>{m.language()}:</Label.Root>
+		<Select options={languages} bind:value={currentLang} onChange={onLangChange} />
 	</div>
 </div>

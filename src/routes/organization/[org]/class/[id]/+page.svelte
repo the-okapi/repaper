@@ -51,8 +51,8 @@
 								: ''
 						)}
 						<div class="m-auto mt-5 mb-1 w-fit">
-							<Label.Root for="member" class="text-sm">{m.choose_add()}:</Label.Root>
-							<Combobox id="member" options={members} bind:value={memberToAdd} />
+							<Label.Root class="text-sm">{m.choose_add()}:</Label.Root>
+							<Combobox options={members} bind:value={memberToAdd} />
 						</div>
 						{#if memberToAdd !== ''}
 							{const member = $derived(
@@ -63,8 +63,7 @@
 								<p
 									class="block overflow-hidden text-center text-sm text-ellipsis whitespace-nowrap"
 								>
-									{member.user.name} -
-									<span class="font-mono">{member.user.email} </span>
+									{member.user.name} -{member.user.email}
 								</p>
 							</div>
 							<input type="hidden" name="userId" value={member.user.id} />
@@ -93,9 +92,9 @@
 					{#if member.user.id === data.user}
 						<span class="text-base opacity-50">({m.you()})</span>
 					{/if} -
-					<span class="overflow-hidden font-mono text-base">{member.user.email}</span>
+					<span class="overflow-hidden text-base">{member.user.email}</span>
 				</p>
-				<Button.Root onclick={() => confirmRemove(i)} class="bg-(--red)!"
+				<Button.Root onclick={() => confirmRemove(i)} class="red-button"
 					>{m.remove()}</Button.Root
 				>
 			</div>
@@ -121,7 +120,7 @@
 			}}
 		>
 			<input type="hidden" value={data.members[remove].user.id} name="userId" />
-			<Button.Root type="submit" class="bg-(--red)!">{m.go()}</Button.Root>
+			<Button.Root type="submit" class="red-button">{m.go()}</Button.Root>
 		</form>
 	</div>
 </AlertDialog>

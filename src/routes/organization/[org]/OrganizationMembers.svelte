@@ -56,7 +56,7 @@
 						{#if member.user.id === user}
 							<span class="text-base opacity-50">({m.you()})</span>
 						{/if} -
-						<span class="overflow-hidden font-mono text-base">{member.user.email}</span>
+						<span class="overflow-hidden text-base">{member.user.email}</span>
 					</p>
 					<Button.Root onclick={() => (focus = i)}>{m.manage()}</Button.Root>
 				</div>
@@ -78,11 +78,11 @@
 						>({m.you()})</span
 					>{/if}
 			</h2>
-			<h3 class="text-center font-mono text-lg">{member.user.email}</h3>
+			<h3 class="text-center">{member.user.email}</h3>
 			<form action="?/renameMember" method="POST" class="m-auto my-8 w-fit">
-				<Label.Root for="name">{m.rename_to()}:</Label.Root>
+				<Label.Root>{m.rename_to()}:</Label.Root>
 				<div class="m-auto flex gap-1">
-					<input name="name" id="name" required />
+					<input name="name" required />
 					<Button.Root type="submit">{m.go()}</Button.Root>
 				</div>
 				<input type="hidden" name="user" value={member.user.id} />
@@ -96,7 +96,7 @@
 			{#if members.length > 0 && member.user.id !== user}
 				{#if (member.owner && members.filter((member: OrganizationMember) => member.owner).length > 1) || !member.owner}
 					<Button.Root
-						class="m-auto block bg-(--red)!"
+						class="red-button m-auto block"
 						onclick={() => (confirmDeleteOpen = true)}>{m.delete_user()}</Button.Root
 					>
 				{/if}
@@ -147,12 +147,13 @@
 			</p>
 		{:else if confirmPage === 1}
 			<p class="text-center">
-				{m.please_type()} <span class="font-mono">{member.user.email}</span>
+				{m.please_type()}
+				{member.user.email}
 				{m.below_confirm()}
 			</p>
 			<div class="m-auto mt-4 w-fit">
-				<Label.Root for="confirm">{m.email()}:</Label.Root><br />
-				<input type="text" id="confirm" class="w-80 font-mono" bind:value={confirmText} />
+				<Label.Root>{m.email()}:</Label.Root><br />
+				<input type="text" class="w-80" bind:value={confirmText} />
 			</div>
 		{:else}
 			<p class="mb-8 text-center text-lg">{m.after_delete({ name: member.user.name })}</p>
@@ -164,7 +165,7 @@
 					<Button.Root onclick={cancel}>{m.cancel()}</Button.Root>
 				{/if}
 				{#if confirmPage === 0}
-					<Button.Root class="bg-(--red)!" onclick={() => (confirmPage = 1)}
+					<Button.Root class="red-button" onclick={() => (confirmPage = 1)}
 						>{m.next()}</Button.Root
 					>
 				{:else if confirmPage === 1}
@@ -181,7 +182,7 @@
 							confirmPage = 2;
 						}}
 					>
-						<Button.Root class="bg-(--red)!" type="submit">{m.go()}</Button.Root>
+						<Button.Root class="red-button" type="submit">{m.go()}</Button.Root>
 						<input type="hidden" name="userId" value={member.user.id} />
 					</form>
 				{:else}

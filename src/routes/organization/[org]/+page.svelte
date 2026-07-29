@@ -43,12 +43,12 @@
 				{/if}
 				{#each data.invitations as invitation, i (i)}
 					<div class="mb-2.5 flex w-80">
-						<p class="my-auto w-70 overflow-hidden font-mono text-ellipsis">
+						<p class="my-auto w-70 overflow-hidden text-ellipsis">
 							{invitation.email}
 						</p>
 						<Button.Root
 							onclick={() => revokeInvitation(i)}
-							class="ml-1 rounded-[0.625rem]! bg-(--red)! px-3! py-1.5!"
+							class="red-button ml-1 rounded-[0.625rem]! px-3! py-1.5!"
 							>{m.revoke()}</Button.Root
 						>
 					</div>
@@ -85,8 +85,8 @@
 				<form action="?/rename" method="POST" class="m-auto">
 					<h2 class="text-center text-2xl font-bold">{m.rename_organization()}</h2>
 					<div class="mx-auto my-5 w-fit">
-						<Label.Root for="name">{m.rename_to()}:</Label.Root><br />
-						<input type="text" name="name" id="name" required />
+						<Label.Root>{m.rename_to()}:</Label.Root><br />
+						<input type="text" name="name" required />
 					</div>
 					<Button.Root type="submit" class="m-auto block">{m.go()}</Button.Root>
 					{#if form?.renameError}
@@ -103,7 +103,7 @@
 	<p class="mb-8 text-center text-lg">
 		{m.are_you_sure()}
 		{m.confirm_revoke()} <span class="font-bold">{data.invitations[invitation].name}</span>,
-		<span class="font-mono text-base">{data.invitations[invitation].email}?</span>
+		{data.invitations[invitation].email}?
 	</p>
 	<div class="m-auto flex w-fit gap-4">
 		<Button.Root onclick={() => (confirmRevoke = false)}>{m.cancel()}</Button.Root>
@@ -115,7 +115,7 @@
 			}}
 		>
 			<input type="hidden" value={data.invitations[invitation].id} name="invitation" />
-			<Button.Root type="submit" class="bg-(--red)!">{m.go()}</Button.Root>
+			<Button.Root type="submit" class="red-button">{m.go()}</Button.Root>
 		</form>
 	</div>
 </AlertDialog>

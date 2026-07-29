@@ -26,10 +26,6 @@
 	color: var(--fg);
 }
 
-input[type='email'] {
-	font-family: monospace;
-}
-
 .nav-bar * {
 	z-index: 20;
 }
@@ -44,8 +40,14 @@ main * {
 }
 
 [data-theme='georgia'],
-.georgie {
+.georgia {
 	--font: 'Georgia';
+	font-family: var(--font);
+}
+
+[data-theme='monospace'],
+.monospace {
+	--font: monospace;
 	font-family: var(--font);
 }
 
@@ -90,10 +92,15 @@ main * {
 	width: 10rem;
 	margin: auto;
 	background-color: var(--bg);
+	transition: box-shadow 100ms;
+	margin: 0.2rem auto;
 }
 
+[data-select-trigger]:hover,
 [data-select-trigger]:focus {
-	outline: 2px solid var(--p);
+	box-shadow:
+		0 0 0 1.5px var(--bg),
+		0 0 0 3.5px var(--p);
 }
 
 [data-select-content] {
@@ -137,6 +144,20 @@ input {
 	border-radius: 0.75rem;
 	padding: 0.25rem 0.5rem;
 	background-color: var(--bg);
+	transition: box-shadow 100ms;
+	margin-top: 0.2rem;
+	margin-bottom: 0.2rem;
+}
+
+input:hover,
+input:focus {
+	box-shadow:
+		0 0 0 1.5px var(--bg),
+		0 0 0 3.5px var(--p);
+}
+
+input:focus {
+	outline: none;
 }
 
 input:disabled {
@@ -146,26 +167,20 @@ input:disabled {
 	cursor: not-allowed;
 }
 
-[data-button-root]:disabled,
-[data-button-root][data-disabled] {
-	color: color-mix(in oklab, var(--fg) 50%, transparent);
-	background-color: color-mix(in oklab, var(--fg) 10%, transparent);
-	opacity: 1;
-	cursor: not-allowed;
-}
-
-input:focus {
-	outline: 2px solid var(--p);
-}
-
 [data-button-root] {
 	background: var(--p);
 	color: var(--p-fg);
 	padding: 0.5rem 1rem;
 	border-radius: 0.75rem;
 	cursor: pointer;
-	opacity: 0.9;
-	@apply transition-opacity;
+	outline: 2px solid var(--p);
+	outline-offset: -5px;
+	transition: outline-offset 100ms;
+}
+
+.red-button {
+	background-color: var(--red);
+	outline-color: var(--red);
 }
 
 [data-button-root][href] {
@@ -173,11 +188,15 @@ input:focus {
 }
 
 [data-button-root]:hover {
-	opacity: 1;
+	outline-offset: 1px;
 }
 
-[data-button-root]:focus {
-	outline: none !important;
+[data-button-root]:disabled,
+[data-button-root][data-disabled] {
+	color: color-mix(in oklab, var(--fg) 50%, transparent);
+	background-color: color-mix(in oklab, var(--fg) 10%, transparent);
+	opacity: 1;
+	cursor: not-allowed;
 }
 
 [data-alert-dialog-overlay] {
@@ -201,7 +220,7 @@ input:focus {
 	height: fit-content;
 	padding: 2.5rem;
 	border: 1px solid var(--o);
-	border-radius: 1.5rem;
+	border-radius: 1rem;
 }
 
 [data-tabs-list] {

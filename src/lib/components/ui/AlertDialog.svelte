@@ -1,13 +1,11 @@
 <script lang="ts">
-	import { fade, slide } from 'svelte/transition';
-
 	let { open = $bindable(), children } = $props();
 </script>
 
 <div class="absolute z-50!">
 	{#if open}
-		<div data-alert-dialog-overlay in:fade out:fade></div>
-		<div data-alert-dialog-content in:slide out:slide>
+		<div data-alert-dialog-overlay></div>
+		<div data-alert-dialog-content>
 			{@render children?.()}
 		</div>
 	{/if}

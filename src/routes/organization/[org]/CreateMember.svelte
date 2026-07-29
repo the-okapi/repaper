@@ -17,7 +17,8 @@
 	{:else if loading}
 		<div class="absolute w-60 text-center">
 			<p>
-				{m.email_sent()} <span class="font-mono text-sm">{form.email}</span>
+				{m.email_sent()}
+				{form.email}
 				{m.finish_setting_up()}
 			</p>
 			<Button.Root onclick={() => (loading = false)} class="mt-7"
@@ -42,12 +43,12 @@
 	>
 		<h2 class="mt-5 text-center text-3xl font-bold whitespace-nowrap">{m.create_member()}</h2>
 		<div class="m-auto mt-3 w-fit">
-			<Label.Root for="name">{m.name()}:</Label.Root><br />
-			<input id="name" name="name" type="text" required />
+			<Label.Root>{m.name()}:</Label.Root><br />
+			<input name="name" type="text" required />
 		</div>
 		<div class="m-auto mt-3 w-fit">
-			<Label.Root for="email">{m.email()}:</Label.Root><br />
-			<input id="email" name="email" type="email" required />
+			<Label.Root>{m.email()}:</Label.Root><br />
+			<input name="email" type="email" required />
 		</div>
 		<Button.Root type="submit" class="m-auto mt-3 mb-10 block w-fit">{m.go()}</Button.Root>
 		{#if form?.createError}

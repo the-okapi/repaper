@@ -35,8 +35,8 @@
 				<div class="box" in:fade>
 					<form method="POST" action="?/create">
 						<h2 class="mb-10 text-center text-3xl font-bold">{m.create_class()}</h2>
-						<Label.Root for="className">{m.class_name()}:</Label.Root><br />
-						<input type="text" id="className" name="className" class="h-10" required />
+						<Label.Root>{m.class_name()}:</Label.Root><br />
+						<input type="text" name="className" class="h-10" required />
 						<Button.Root type="submit">{m.go()}</Button.Root>
 						{#if form?.createFailure}
 							<p class="absolute text-(--red)">{form?.message}</p>
@@ -66,8 +66,8 @@
 			<div class="box" out:fade>
 				<form method="POST" action="?/organization">
 					<h2 class="mb-10 text-center text-2xl font-bold">{m.create_organization()}</h2>
-					<Label.Root for="orgName">{m.organization_name()}:</Label.Root><br />
-					<input type="text" id="orgName" name="orgName" class="h-10" required />
+					<Label.Root>{m.organization_name()}:</Label.Root><br />
+					<input type="text" name="orgName" class="h-10" required />
 					<Button.Root type="submit">{m.go()}</Button.Root>
 					{#if form?.orgFailure}
 						<p class="absolute text-(--red)">{form.message}</p>
