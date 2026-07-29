@@ -2,14 +2,13 @@
 
 .light {
 	color-scheme: light;
-	--bg: #fff0d5;
-	--a: #eedfc2;
+	--bg: #ffffff;
+	--a: #eeeeee;
 	--fg: #000000;
-	--p: #774e24;
-	--p-fg: #fff0d5;
+	--p: #00978b;
+	--p-fg: #ffffff;
 	--o: #000000;
 	--red: #991b1b;
-	--c: #774e24;
 	background-color: var(--bg);
 	color: var(--fg);
 }
@@ -23,7 +22,6 @@
 	--p-fg: #0a0a0a;
 	--red: #de4e45;
 	--o: #444444;
-	--c: #00dfdf;
 	background-color: var(--bg);
 	color: var(--fg);
 }
