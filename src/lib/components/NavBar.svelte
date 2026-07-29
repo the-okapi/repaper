@@ -56,10 +56,10 @@
 </AlertDialog>
 
 <button
-	class="fixed top-5 left-5 z-50! h-10 w-10 cursor-pointer rounded-lg font-[TimesNewRoman] text-2xl font-black outline outline-(--o) backdrop-blur-lg"
+	class="fixed top-5 left-5 z-50! inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg font-[TimesNewRoman] text-2xl font-black outline outline-(--o) backdrop-blur-lg"
 	onclick={show}
 >
-	R
+	<div class="size-7">R</div>
 </button>
 {#if shown}
 	<div

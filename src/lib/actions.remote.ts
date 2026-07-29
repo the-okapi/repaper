@@ -59,7 +59,9 @@ export const logIn = form(LogInSchema, async ({ email, password }) => {
 		unwrapNoData(await locals.supabase.auth.signOut(), 86);
 
 		return { status: 400, message: m.user_not_found() };
-	} catch {
-		return { status: 500, message: m.something_happened() };
+	} catch (error: any) {
+		if (error.status !== 303) {
+			return { status: 500, fail: true, message: m.something_happened() };
+		}
 	}
 });

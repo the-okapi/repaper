@@ -29,7 +29,7 @@
 			loading = true;
 			await form.submit();
 
-			if (form.result?.status !== 200) {
+			if (form.result?.status === 400 || form.result?.status === 500) {
 				error = form.result?.message ?? '';
 				loading = false;
 			}
