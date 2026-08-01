@@ -9,3 +9,4 @@ export { default as Loader } from '$lib/components/ui/Loader.svelte';
 export { default as AlertDialog } from '$lib/components/ui/AlertDialog.svelte';
 export { default as Background } from '$lib/components/ui/Background.svelte';
 export { default as Combobox } from '$lib/components/ui/Combobox.svelte';
+export { default as Switch } from '$lib/components/ui/Switch.svelte';

@@ -33,7 +33,7 @@
 	"email_sent": "An email has been sent to",
 	"finish_setting_up": "to finish setting up the account.",
 	"create_another_member": "Create another member",
-	"create_member": "Create Member",
+	"create_member": "Create a Member",
 	"user_exists": "A user with that email already exists.",
 	"nonexistant_user": "User doesn't exist",
 	"demote_yourself": "You cannot demote yourself",
@@ -54,7 +54,7 @@
 	"class_list": "Class List",
 	"remove": "Remove",
 	"remove_from_class": "remove {name} from this class?",
-	"create_account": "Create Account",
+	"create_account": "Create an Account",
 	"email_sent_to": "Use the email the invitation was sent to.",
 	"organization": "Organization",
 	"create_class": "Create a Class",
@@ -69,5 +69,10 @@
 	"log_out": "Log Out",
 	"log_in": "Log In",
 	"settings": "Settings",
-	"language": "Language"
+	"language": "Language",
+	"create_assignment": "Create an Assigment",
+	"assign_to_everyone": "Assign to Everyone",
+	"student": "Student",
+	"students_selected": "Student{s} Selected",
+	"please_select_student": "Please select at least one student"
 }

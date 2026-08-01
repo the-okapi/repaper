@@ -27,7 +27,9 @@
 			value={option}
 			{styling}
 			class={itemClass}
-			rounded={i === 0 ? 't' : i === options.length - 1 ? 'b' : ''}
+			rounded="{i === 0 ? 'rounded-t-xl border-t' : ''} {i === options.length - 1
+				? 'rounded-b-xl border-b'
+				: ''}"
 		/>
 	{/each}
 </SelectC>

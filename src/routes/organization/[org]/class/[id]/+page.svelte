@@ -7,6 +7,7 @@
 	import type { OrganizationMember } from '$lib/types';
 	import { fade } from 'svelte/transition';
 	import { m } from '$lib/paraglide/messages';
+	import CreateAssignment from './CreateAssignment.svelte';
 
 	let { data, params, form }: PageProps = $props();
 
@@ -24,13 +25,15 @@
 </svelte:head>
 
 <div class="flex gap-7 px-10 pt-25">
-	<div class="flex h-[80vh] w-full flex-col gap-4">
-		<div class="flex h-70 w-full gap-4">
+	<div class="flex h-[80vh] w-full gap-4">
+		<div class="flex h-full w-full flex-col gap-4">
 			<div
 				class="flex h-57 w-full items-center justify-center rounded-xl border border-(--o) bg-(--bg)"
 			>
 				{#await load(params.org)}
-					<Loader />
+					<div class="flex h-57 items-center justify-center">
+						<Loader />
+					</div>
 				{:then { data: members }}
 					<form class="relative h-full w-full p-5" method="POST" action="?/add">
 						<h2
@@ -52,7 +55,15 @@
 						)}
 						<div class="m-auto mt-5 mb-1 w-fit">
 							<Label.Root class="text-sm">{m.choose_add()}:</Label.Root>
-							<Combobox options={members} bind:value={memberToAdd} />
+							<Combobox
+								options={members.map(
+									(user: {
+										user: { name: string; email: string };
+										owner: boolean;
+									}) => ({ value: user.user.name, label: user.user.name })
+								)}
+								bind:value={memberToAdd}
+							/>
 						</div>
 						{#if memberToAdd !== ''}
 							{const member = $derived(
@@ -63,7 +74,7 @@
 								<p
 									class="block overflow-hidden text-center text-sm text-ellipsis whitespace-nowrap"
 								>
-									{member.user.name} -{member.user.email}
+									{member.user.name} - {member.user.email}
 								</p>
 							</div>
 							<input type="hidden" name="userId" value={member.user.id} />
@@ -74,7 +85,7 @@
 			</div>
 			<div class="h-full w-full rounded-xl border border-(--o) bg-(--bg) p-5"></div>
 		</div>
-		<div class="h-full w-full rounded-xl border border-(--o) bg-(--bg) p-5"></div>
+		<CreateAssignment />
 	</div>
 	<div class="relative z-10 h-[80vh] w-full rounded-xl border border-(--o) bg-(--bg) p-5">
 		<h2 class="text-center text-3xl font-bold">{m.class_list()}</h2>
@@ -84,7 +95,7 @@
 					{#if member.owner}
 						<p class="badge bg-yellow-600">{m.admin()}</p>
 					{:else}
-						<p class="badge bg-(--p)">{m.member()}</p>
+						<p class="badge bg-(--p)">{m.student()}</p>
 					{/if}
 				</div>
 				<p class="m-auto mx-4 w-full overflow-x-scroll text-xl whitespace-nowrap">

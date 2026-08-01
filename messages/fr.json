@@ -49,7 +49,7 @@
 	"user_not_found": "Utilisateur Pas Trouvé",
 	"user_already_class": "Utilisateur est déjà dans la classe.",
 	"add_member": "Ajouter un Membre",
-	"chose_add": "Choisir quelqu'un à ajouter",
+	"choose_add": "Choisir quelqu'un à ajouter",
 	"class_list": "Liste de la Classe",
 	"remove": "Enlever",
 	"remove_from_class": "enlever {name} de cette classe?",
@@ -68,5 +68,10 @@
 	"log_out": "Se Déconnecter",
 	"log_in": "Se Connecter",
 	"settings": "Paramètres",
-	"language": "Langue"
+	"language": "Langue",
+	"create_assignment": "Créer un Devoir",
+	"assign_to_everyone": "Assigner à tout le monde",
+	"student": "Élève",
+	"selected_students": "Élève{s} Choisis",
+	"please_select_student": "Choisissez au moins un élève, s'il vous plaît."
 }
