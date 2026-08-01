@@ -1,6 +1,14 @@
 <script lang="ts">
 	let { open = $bindable(), children } = $props();
+
+	function onkeydown(event: KeyboardEvent) {
+		if (event.key === 'Escape') {
+			open = false;
+		}
+	}
 </script>
+
+<svelte:window {onkeydown} />
 
 <div class="absolute z-50!">
 	{#if open}
