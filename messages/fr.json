@@ -70,11 +70,12 @@
 	"language": "Langue",
 	"create_assignment": "Créer un Devoir",
 	"assign_to_everyone": "Assigner à tout le monde",
+	"assign_to": "Assigner à",
 	"student": "Élève",
-	"selected_students": "Élève{s} Choisis",
 	"please_select_student": "Choisissez au moins un élève, s'il vous plaît.",
 	"created_assignment": "Le devoir a été créé avec succès.",
 	"create_another": "Créer un Autre",
 	"go_to": "Aller à",
-	"assignments": "Devoirs"
+	"assignments": "Devoirs",
+	"no_assignments": "À ce moment, il n'y a aucun devoir. Retournez à la page de la classe pour en créer un."
 }

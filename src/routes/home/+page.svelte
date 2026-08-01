@@ -36,7 +36,7 @@
 					<form method="POST" action="?/create">
 						<h2 class="mb-10 text-center text-3xl font-bold">{m.create_class()}</h2>
 						<Label.Root>{m.class_name()}:</Label.Root><br />
-						<input type="text" name="className" class="h-10" required />
+						<input type="text" name="className" class="mr-1 h-10" required />
 						<Button.Root type="submit">{m.go()}</Button.Root>
 						{#if form?.createFailure}
 							<p class="absolute text-(--red)">{form?.message}</p>

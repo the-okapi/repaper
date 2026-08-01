@@ -40,7 +40,7 @@
 		</div>
 	{:else}
 		<div class="flex h-full w-full flex-col items-center">
-			<h1 class="mb-5 text-center text-2xl font-bold">{m.create_assignment()}</h1>
+			<h1 class="mb-1 text-center text-2xl font-bold">{m.create_assignment()}</h1>
 			<form
 				{...createAssignment.enhance(async (form: any) => {
 					if (!everyone && selectedStudents.length === 0) {
@@ -65,7 +65,7 @@
 						required
 					/>
 				</div>
-				<div class="mb-3">
+				<div class="mb-5">
 					<Label.Root>Description:</Label.Root>
 					<textarea
 						value={createAssignment.result?.description}
@@ -73,7 +73,7 @@
 						maxlength={500}
 						name="description"></textarea>
 				</div>
-				<div class="flex w-fit justify-center gap-4">
+				<div class="m-auto flex w-fit justify-center gap-4">
 					<Switch
 						class="my-auto"
 						bind:checked={everyone}
@@ -84,21 +84,21 @@
 					>
 					<input type="hidden" value={everyone} name="everyone" />
 				</div>
-				<div class="mt-4 flex h-15 w-full items-center justify-center">
+				<div class="mt-8 flex h-15 w-full items-center justify-center">
 					{#if !everyone}
 						{#if students.length > 0}
 							<div>
+								<Label.Root
+									>{m.assign_to()}: {selectedStudents.length}
+									{m.student()}{selectedStudents.length !== 1
+										? 's'
+										: ''}</Label.Root
+								>
 								<Combobox
 									options={students}
 									multiple
 									bind:value={selectedStudents}
 								/>
-								<p class="text-center">
-									{selectedStudents.length}
-									{m.students_selected({
-										s: selectedStudents.length !== 1 ? 's' : ''
-									})}
-								</p>
 								<input
 									type="hidden"
 									value={JSON.stringify(selectedStudents)}

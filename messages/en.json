@@ -71,11 +71,12 @@
 	"language": "Language",
 	"create_assignment": "Create an Assigment",
 	"assign_to_everyone": "Assign to Everyone",
+	"assign_to": "Assign to",
 	"student": "Student",
-	"students_selected": "Student{s} Selected",
 	"please_select_student": "Please select at least one student",
 	"created_assignment": "The assignment was successfully created.",
 	"create_another": "Create Another",
 	"go_to": "Go to",
-	"assignments": "Assignments"
+	"assignments": "Assignments",
+	"no_assignments": "There are currently no assignments. Go back to the class page to create one."
 }

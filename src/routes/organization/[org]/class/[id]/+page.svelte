@@ -29,14 +29,14 @@
 	<div class="flex h-[80vh] w-full gap-4">
 		<div class="flex h-full w-full flex-col gap-4">
 			<div
-				class="flex h-57 w-full items-center justify-center rounded-xl border border-(--o) bg-(--bg)"
+				class="flex h-full w-full items-center justify-center rounded-xl border border-(--o) bg-(--bg)"
 			>
 				{#await load(params.org)}
 					<div class="flex h-57 items-center justify-center">
 						<Loader />
 					</div>
 				{:then { data: members }}
-					<form class="relative h-full w-full p-5" method="POST" action="?/add">
+					<form class="relative h-fit w-full p-5" method="POST" action="?/add">
 						<h2
 							class="text-center text-2xl
 							font-bold"
@@ -84,11 +84,15 @@
 					</form>
 				{/await}
 			</div>
-			<div class="h-full w-full rounded-xl border border-(--o) bg-(--bg)">
+			<div class="h-80 w-full rounded-xl border border-(--o) bg-(--bg)">
 				<a href={page.url.pathname + '/assignments'}>
-					<div class="h-full w-full cursor-pointer rounded-xl p-5 hover:bg-(--fg)/10">
-						<h2 class="text-center text-2xl font-bold">{m.assignments()}</h2>
-						<p>{m.go_to()} {m.assignments()}</p>
+					<div
+						class="flex h-full w-full cursor-pointer items-center justify-center rounded-xl p-5 hover:bg-(--fg)/10"
+					>
+						<div class="w-fit text-center">
+							<h2 class="text-center text-2xl font-bold">{m.assignments()}</h2>
+							<p>{m.go_to()} {m.assignments()}</p>
+						</div>
 					</div>
 				</a>
 			</div>
