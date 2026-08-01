@@ -74,5 +74,7 @@
 	"selected_students": "Élève{s} Choisis",
 	"please_select_student": "Choisissez au moins un élève, s'il vous plaît.",
 	"created_assignment": "Le devoir a été créé avec succès.",
-	"create_another": "Créer un Autre"
+	"create_another": "Créer un Autre",
+	"go_to": "Aller à",
+	"assignments": "Devoirs"
 }

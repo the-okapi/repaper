@@ -8,6 +8,7 @@
 	import { fade } from 'svelte/transition';
 	import { m } from '$lib/paraglide/messages';
 	import CreateAssignment from './CreateAssignment.svelte';
+	import { page } from '$app/state';
 
 	let { data, params, form }: PageProps = $props();
 
@@ -21,10 +22,10 @@
 </script>
 
 <svelte:head>
-	<title>{data.title} - Repaper</title>
+	<title>{data.title} | Repaper</title>
 </svelte:head>
 
-<div class="flex gap-7 px-10 pt-25">
+<div class="grid grid-cols-2 gap-7 px-10 pt-25">
 	<div class="flex h-[80vh] w-full gap-4">
 		<div class="flex h-full w-full flex-col gap-4">
 			<div
@@ -83,7 +84,14 @@
 					</form>
 				{/await}
 			</div>
-			<div class="h-full w-full rounded-xl border border-(--o) bg-(--bg) p-5"></div>
+			<div class="h-full w-full rounded-xl border border-(--o) bg-(--bg)">
+				<a href={page.url.pathname + '/assignments'}>
+					<div class="h-full w-full cursor-pointer rounded-xl p-5 hover:bg-(--fg)/10">
+						<h2 class="text-center text-2xl font-bold">{m.assignments()}</h2>
+						<p>{m.go_to()} {m.assignments()}</p>
+					</div>
+				</a>
+			</div>
 		</div>
 		<CreateAssignment />
 	</div>

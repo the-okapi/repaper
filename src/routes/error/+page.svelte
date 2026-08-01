@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>{m.something_happened()} - Repaper</title>
+	<title>{m.something_happened()} | Repaper</title>
 </svelte:head>
 
 <div class="flex h-screen w-screen items-center justify-center">

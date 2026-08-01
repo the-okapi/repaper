@@ -16,7 +16,7 @@
 </script>
 
 <svelte:head>
-	<title>{m.sign_up()} - Repaper</title>
+	<title>{m.sign_up()} | Repaper</title>
 </svelte:head>
 
 <div class="m-auto flex h-screen w-screen items-center justify-center p-20">

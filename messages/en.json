@@ -75,5 +75,7 @@
 	"students_selected": "Student{s} Selected",
 	"please_select_student": "Please select at least one student",
 	"created_assignment": "The assignment was successfully created.",
-	"create_another": "Create Another"
+	"create_another": "Create Another",
+	"go_to": "Go to",
+	"assignments": "Assignments"
 }

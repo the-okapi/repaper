@@ -2,7 +2,7 @@
 	let { open = $bindable(), children } = $props();
 
 	function onkeydown(event: KeyboardEvent) {
-		if (event.key === 'Escape') {
+		if (event.key === 'Escape' && open) {
 			open = false;
 		}
 	}

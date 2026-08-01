@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-	<title>{m.home()} - Repaper</title>
+	<title>{m.home()} | Repaper</title>
 </svelte:head>
 
 {#await load(data.user)}
