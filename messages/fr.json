@@ -77,5 +77,8 @@
 	"create_another": "Créer un Autre",
 	"go_to": "Aller à",
 	"assignments": "Devoirs",
-	"no_assignments": "À ce moment, il n'y a aucun devoir. Retournez à la page de la classe pour en créer un."
+	"no_assignments": "À ce moment, il n'y a aucun devoir. Retournez à la page de la classe pour en créer un.",
+	"due": "À Rendre",
+	"please_future_date": "Choisissez une date dans le futur, s'il vous plaît.",
+	"date_within_five": "Choisissez une date dans cinq années."
 }

@@ -7,16 +7,23 @@ import { m } from '$lib/paraglide/messages';
 const CreateAssignmentSchema = object({
 	name: string(),
 	description: string(),
+	due: string(),
 	everyone: string(),
 	students: optional(string())
 });
 
 export const createAssignment = form(
 	CreateAssignmentSchema,
-	async (data: { name: string; description: string; everyone: string; students?: string }) => {
+	async (data: {
+		name: string;
+		description: string;
+		due: string;
+		everyone: string;
+		students?: string;
+	}) => {
 		const everyone = data.everyone === 'true' ? true : false;
 		const students = JSON.parse(data.students ?? 'null');
-		const { name, description } = data;
+		const { name, description, due } = data;
 
 		const { locals, params } = getRequestEvent();
 
@@ -49,7 +56,8 @@ export const createAssignment = form(
 					.insert({
 						name,
 						description,
-						class: params.id
+						class: params.id,
+						due
 					})
 					.select('id'),
 				11
@@ -100,6 +108,7 @@ export const createAssignment = form(
 				students,
 				name,
 				description,
+				due,
 				message: m.something_happened()
 			};
 		}

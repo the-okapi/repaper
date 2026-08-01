@@ -24,6 +24,10 @@
 	let errorText = $state('');
 
 	let showSuccess = $state(true);
+
+	function createAnother() {
+		showSuccess = false;
+	}
 </script>
 
 <div
@@ -34,7 +38,7 @@
 	{:else if createAssignment.result?.success && showSuccess}
 		<div>
 			<p>{m.created_assignment()}</p>
-			<Button.Root class="m-auto mt-10 block" onclick={() => (showSuccess = false)}
+			<Button.Root class="m-auto mt-10 block" onclick={createAnother}
 				>{m.create_another()}</Button.Root
 			>
 		</div>
@@ -47,6 +51,17 @@
 						errorText = m.please_select_student();
 						return;
 					}
+					const date = new Date();
+					const selectedDate = new Date(createAssignment.fields.due.value() ?? '');
+					if (date > selectedDate) {
+						errorText = m.please_future_date();
+						return;
+					}
+					if (new Date(date.setFullYear(date.getFullYear() + 5)) < selectedDate) {
+						errorText = m.date_within_five();
+						return;
+					}
+					errorText = '';
 					loading = true;
 					await form.submit();
 					if (createAssignment.result?.success) {
@@ -59,7 +74,7 @@
 				<div class="mb-3 w-fit">
 					<Label.Root>{m.name()}:</Label.Root><br />
 					<input
-						value={createAssignment.result?.name}
+						value={createAssignment.result?.name ?? ''}
 						class="w-60"
 						name="name"
 						required
@@ -68,10 +83,20 @@
 				<div class="mb-5">
 					<Label.Root>Description:</Label.Root>
 					<textarea
-						value={createAssignment.result?.description}
-						class="h-40 w-60"
+						value={createAssignment.result?.description ?? ''}
+						class="h-20 w-60"
 						maxlength={500}
 						name="description"></textarea>
+				</div>
+				<div class="mb-5">
+					<Label.Root>{m.due()}:</Label.Root><br />
+					<input
+						type="datetime-local"
+						name="due"
+						value={createAssignment.result?.due}
+						required
+						class="w-60"
+					/>
 				</div>
 				<div class="m-auto flex w-fit justify-center gap-4">
 					<Switch
@@ -104,11 +129,6 @@
 									value={JSON.stringify(selectedStudents)}
 									name="students"
 								/>
-								<div class="absolute left-0 w-full text-center">
-									<p class="text-(--red)">
-										{errorText}
-									</p>
-								</div>
 							</div>
 						{:else}
 							<Loader />
@@ -117,7 +137,7 @@
 				</div>
 				<div class="absolute bottom-10 left-0 w-full">
 					<p class="mb-2 text-center leading-4 text-(--red)">
-						{createAssignment.result?.message}
+						{createAssignment.result?.message}{errorText}
 					</p>
 					<Button.Root type="submit" class="m-auto block">{m.go()}</Button.Root>
 				</div>
