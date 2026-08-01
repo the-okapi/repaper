@@ -8,7 +8,9 @@
 	let loading = $state(false);
 	let everyone = $derived(createAssignment.result?.everyone ?? true);
 
-	let students: { label: string; value: string }[] = $state([]);
+	let students: { label: string; value: string }[] = $state(
+		createAssignment.result?.students ?? []
+	);
 
 	async function loadStudents() {
 		if (everyone === false && students.length === 0) {
@@ -20,6 +22,8 @@
 	let selectedStudents = $state([]);
 
 	let errorText = $state('');
+
+	let showSuccess = $state(true);
 </script>
 
 <div
@@ -27,6 +31,13 @@
 >
 	{#if loading}
 		<Loader />
+	{:else if createAssignment.result?.success && showSuccess}
+		<div>
+			<p>{m.created_assignment()}</p>
+			<Button.Root class="m-auto mt-10 block" onclick={() => (showSuccess = false)}
+				>{m.create_another()}</Button.Root
+			>
+		</div>
 	{:else}
 		<div class="flex h-full w-full flex-col items-center">
 			<h1 class="mb-5 text-center text-2xl font-bold">{m.create_assignment()}</h1>
@@ -38,6 +49,9 @@
 					}
 					loading = true;
 					await form.submit();
+					if (createAssignment.result?.success) {
+						showSuccess = true;
+					}
 					loading = false;
 				})}
 				class="w-60"
@@ -57,8 +71,7 @@
 						value={createAssignment.result?.description}
 						class="h-40 w-60"
 						maxlength={500}
-						name="description"
-						required></textarea>
+						name="description"></textarea>
 				</div>
 				<div class="flex w-fit justify-center gap-4">
 					<Switch
@@ -71,7 +84,7 @@
 					>
 					<input type="hidden" value={everyone} name="everyone" />
 				</div>
-				<div class="mt-4 flex h-25 w-full items-center justify-center">
+				<div class="mt-4 flex h-15 w-full items-center justify-center">
 					{#if !everyone}
 						{#if students.length > 0}
 							<div>
@@ -92,7 +105,9 @@
 									name="students"
 								/>
 								<div class="absolute left-0 w-full text-center">
-									<p class="text-(--red)">{errorText}</p>
+									<p class="text-(--red)">
+										{errorText}
+									</p>
 								</div>
 							</div>
 						{:else}
@@ -100,7 +115,10 @@
 						{/if}
 					{/if}
 				</div>
-				<div class="absolute bottom-7 left-0 w-full">
+				<div class="absolute bottom-10 left-0 w-full">
+					<p class="mb-2 text-center leading-4 text-(--red)">
+						{createAssignment.result?.message}
+					</p>
 					<Button.Root type="submit" class="m-auto block">{m.go()}</Button.Root>
 				</div>
 			</form>

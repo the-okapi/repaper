@@ -32,7 +32,6 @@
 	"email_incorrect": "Email is incorrect",
 	"email_sent": "An email has been sent to",
 	"finish_setting_up": "to finish setting up the account.",
-	"create_another_member": "Create another member",
 	"create_member": "Create a Member",
 	"user_exists": "A user with that email already exists.",
 	"nonexistant_user": "User doesn't exist",
@@ -74,5 +73,7 @@
 	"assign_to_everyone": "Assign to Everyone",
 	"student": "Student",
 	"students_selected": "Student{s} Selected",
-	"please_select_student": "Please select at least one student"
+	"please_select_student": "Please select at least one student",
+	"created_assignment": "The assignment was successfully created.",
+	"create_another": "Create Another"
 }

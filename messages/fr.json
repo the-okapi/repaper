@@ -31,7 +31,6 @@
 	"email_incorrect": "Courriel est incorrect",
 	"email_sent": "Un courriel a été envoyé à",
 	"finish_setting_up": "pour finir d'organiser le compte.",
-	"create_another_member": "Créer un autre membre",
 	"create_member": "Créer un Membre",
 	"user_exists": "Un utilisateur avec ce courriel existe déjà.",
 	"nonexistant_user": "Utilisateur n'existe pas",
@@ -73,5 +72,7 @@
 	"assign_to_everyone": "Assigner à tout le monde",
 	"student": "Élève",
 	"selected_students": "Élève{s} Choisis",
-	"please_select_student": "Choisissez au moins un élève, s'il vous plaît."
+	"please_select_student": "Choisissez au moins un élève, s'il vous plaît.",
+	"created_assignment": "Le devoir a été créé avec succès.",
+	"create_another": "Créer un Autre"
 }

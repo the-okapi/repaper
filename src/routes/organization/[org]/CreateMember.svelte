@@ -22,7 +22,7 @@
 				{m.finish_setting_up()}
 			</p>
 			<Button.Root onclick={() => (loading = false)} class="mt-7"
-				>{m.create_another_member()}</Button.Root
+				>{m.create_another()}</Button.Root
 			>
 		</div>
 	{/if}
