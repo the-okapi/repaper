@@ -18,7 +18,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 				.from('class_memberships')
 				.select('class ( name )')
 				.eq('user', user.id)
-				.eq('owner', true)
+				.eq('admin', true)
 				.eq('class', params.id),
 			15
 		);
@@ -30,7 +30,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		const assignments = unwrap(
 			await locals.supabase
 				.from('assignments')
-				.select('name, description')
+				.select('id, name, description')
 				.eq('class', params.id),
 			16
 		);

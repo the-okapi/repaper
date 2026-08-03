@@ -42,7 +42,7 @@
 	<Combobox.Portal>
 		<Combobox.Content data-select-content class="z-50 mt-2 w-48! border-0!">
 			<Combobox.Viewport>
-				{#each filteredOptions as option, i (i)}
+				{#each filteredOptions as option, i (option.value)}
 					<Combobox.Item
 						data-select-item
 						value={option.label}

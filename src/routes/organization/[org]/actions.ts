@@ -40,7 +40,7 @@ export const rename = async ({ request, params, locals }: ActionData) => {
 				.select('organization ( name )')
 				.eq('organization', params.org)
 				.eq('user', user.id)
-				.eq('owner', true),
+				.eq('admin', true),
 			40
 		);
 
@@ -105,7 +105,7 @@ export const create = async ({ locals, request, params }: ActionData) => {
 				.from('organization_memberships')
 				.select('organization ( name )')
 				.eq('user', user.id)
-				.eq('owner', true)
+				.eq('admin', true)
 				.eq('organization', params.org),
 			44
 		);
@@ -177,7 +177,7 @@ export const revoke = async ({ request, locals, params }: ActionData) => {
 				.select('id')
 				.eq('organization', params.org)
 				.eq('user', user.id)
-				.eq('owner', true),
+				.eq('admin', true),
 			47
 		);
 
@@ -229,7 +229,7 @@ export const renameMember = async ({ request, locals, params }: ActionData) => {
 				.select('id')
 				.eq('user', user.id)
 				.eq('organization', params.org)
-				.eq('owner', true),
+				.eq('admin', true),
 			50
 		);
 
@@ -289,7 +289,7 @@ export const deleteMember = async ({ request, params, locals }: ActionData) => {
 				.from('organization_memberships')
 				.select('id')
 				.eq('organization', params.org)
-				.eq('owner', true)
+				.eq('admin', true)
 				.eq('user', user.id),
 			54
 		);
@@ -349,7 +349,7 @@ export const restore = async ({ request, locals, params }: ActionData) => {
 				.select('id')
 				.eq('organization', params.org)
 				.eq('user', user.id)
-				.eq('owner', true),
+				.eq('admin', true),
 			58
 		);
 
@@ -361,7 +361,7 @@ export const restore = async ({ request, locals, params }: ActionData) => {
 			await locals.supabase.from('organization_memberships').insert({
 				user: userId,
 				organization: params.org,
-				owner: false
+				admin: false
 			}),
 			59
 		);
@@ -406,7 +406,7 @@ export const promote = async ({ request, locals, params }: ActionData) => {
 				.from('organization_memberships')
 				.select('id')
 				.eq('organization', params.org)
-				.eq('owner', true)
+				.eq('admin', true)
 				.eq('user', user.id),
 			62
 		);
@@ -419,11 +419,11 @@ export const promote = async ({ request, locals, params }: ActionData) => {
 			await locals.supabase
 				.from('organization_memberships')
 				.update({
-					owner: true
+					admin: true
 				})
 				.eq('user', userId)
 				.eq('organization', params.org)
-				.eq('owner', false),
+				.eq('admin', false),
 			63
 		);
 	} catch {
@@ -460,7 +460,7 @@ export const demote = async ({ request, params, locals }: ActionData) => {
 				.from('organization_memberships')
 				.select('id')
 				.eq('organization', params.org)
-				.eq('owner', true)
+				.eq('admin', true)
 				.eq('user', user.id),
 			65
 		);
@@ -473,11 +473,11 @@ export const demote = async ({ request, params, locals }: ActionData) => {
 			await locals.supabase
 				.from('organization_memberships')
 				.update({
-					owner: false
+					admin: false
 				})
 				.eq('user', userId)
 				.eq('organization', params.org)
-				.eq('owner', true),
+				.eq('admin', true),
 			66
 		);
 	} catch {

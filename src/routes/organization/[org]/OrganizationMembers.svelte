@@ -42,10 +42,10 @@
 	{#if focus === -1}
 		<div class="h-full w-full">
 			<h2 class="mb-5 text-center text-3xl font-bold">{m.list_members()}</h2>
-			{#each members as member, i (i)}
+			{#each members as member, i (member.user.id)}
 				<div class="flex px-5 py-3">
 					<div class="flex w-fit items-center">
-						{#if member.owner}
+						{#if member.admin}
 							<p class=" badge bg-violet-500">{m.admin()}</p>
 						{:else}
 							<p class="badge bg-(--p)">{m.member()}</p>
@@ -67,7 +67,7 @@
 		</div>
 	{:else}
 		<div class="relative h-full w-full">
-			{#if member.owner}
+			{#if member.admin}
 				<p class="badge m-auto mb-1 bg-violet-500">{m.admin()}</p>
 			{:else}
 				<p class="badge m-auto mb-1 bg-(--p)">{m.member()}</p>
@@ -87,14 +87,14 @@
 				</div>
 				<input type="hidden" name="user" value={member.user.id} />
 			</form>
-			{#if !member.owner && member.user.id !== user}
+			{#if !member.admin && member.user.id !== user}
 				<Button.Root class="m-auto mb-8 block" onclick={promote}>{m.promote()}</Button.Root>
 			{/if}
-			{#if members.filter((member: OrganizationMember) => member.owner).length > 1 && member.owner && member.user.id !== user}
+			{#if members.filter((member: OrganizationMember) => member.admin).length > 1 && member.admin && member.user.id !== user}
 				<Button.Root class="m-auto mb-8 block" onclick={demote}>{m.demote()}</Button.Root>
 			{/if}
 			{#if members.length > 0 && member.user.id !== user}
-				{#if (member.owner && members.filter((member: OrganizationMember) => member.owner).length > 1) || !member.owner}
+				{#if (member.admin && members.filter((member: OrganizationMember) => member.admin).length > 1) || !member.admin}
 					<Button.Root
 						class="red-button m-auto block"
 						onclick={() => (confirmDeleteOpen = true)}>{m.delete_user()}</Button.Root

@@ -79,7 +79,7 @@
 	"go_to": "Go to",
 	"assignments": "Assignments",
 	"no_assignments": "There are currently no assignments. Go back to the class page to create one.",
-	"due": "Due",
+	"due": "Due Date",
 	"please_future_date": "Please choose a date in the future.",
 	"date_within_five": "Please choose a date within 5 years."
 }

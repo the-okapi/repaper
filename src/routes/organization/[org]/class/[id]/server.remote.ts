@@ -41,7 +41,7 @@ export const createAssignment = form(
 					.from('class_memberships')
 					.select('id')
 					.eq('user', user.id)
-					.eq('owner', true)
+					.eq('admin', true)
 					.eq('class', params.id),
 				10
 			);
@@ -70,7 +70,7 @@ export const createAssignment = form(
 						.from('class_memberships')
 						.select('user ( id )')
 						.eq('class', params.id)
-						.eq('owner', false),
+						.eq('admin', false),
 					12
 				);
 
@@ -131,7 +131,7 @@ export const getStudents = query(string(), async (classId: string) => {
 			.from('class_memberships')
 			.select('id')
 			.eq('class', classId)
-			.eq('owner', true)
+			.eq('admin', true)
 			.eq('user', user.id),
 		1
 	);
@@ -145,7 +145,7 @@ export const getStudents = query(string(), async (classId: string) => {
 			.from('class_memberships')
 			.select('user ( id, name )')
 			.eq('class', classId)
-			.eq('owner', false),
+			.eq('admin', false),
 		6
 	);
 

@@ -12,7 +12,20 @@ export const load: PageServerLoad = async ({ locals }) => {
 		return redirect(303, '/');
 	}
 
-	return { user: user.id };
+	const { data: orgMembership, error } = await locals.supabase
+		.from('organization_memberships')
+		.select('admin')
+		.eq('user', user.id);
+
+	if (error) {
+		console.error(error, 'Error Code 16');
+	}
+
+	if (!orgMembership || orgMembership.length !== 1) {
+		return redirect(303, '/error');
+	}
+
+	return { user: user.id, admin: orgMembership[0].admin };
 };
 
 export const actions = {
@@ -33,7 +46,7 @@ export const actions = {
 					.from('organization_memberships')
 					.select('id')
 					.eq('organization', organization)
-					.eq('owner', true)
+					.eq('admin', true)
 					.eq('user', user.id),
 				79
 			);

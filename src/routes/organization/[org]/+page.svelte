@@ -41,7 +41,7 @@
 				{#if data.invitations.length === 0}
 					<p class="w-80">{m.no_invitations()}</p>
 				{/if}
-				{#each data.invitations as invitation, i (i)}
+				{#each data.invitations as invitation, i (invitation.id)}
 					<div class="mb-2.5 flex w-80">
 						<p class="my-auto w-70 overflow-hidden text-ellipsis">
 							{invitation.email}
@@ -61,7 +61,7 @@
 				{#if data.deletions.length === 0}
 					<p class="w-80">{m.no_deletions()}</p>
 				{/if}
-				{#each data.deletions as deletion, i (i)}
+				{#each data.deletions as deletion, i (deletion.id)}
 					<div class="mb-2.5 flex w-80">
 						<p class="my-auto w-70 overflow-x-scroll whitespace-nowrap">
 							<span class="font-mono text-sm"

@@ -60,7 +60,7 @@
 								options={members.map(
 									(user: {
 										user: { name: string; email: string };
-										owner: boolean;
+										admin: boolean;
 									}) => ({ value: user.user.name, label: user.user.name })
 								)}
 								bind:value={memberToAdd}
@@ -101,10 +101,10 @@
 	</div>
 	<div class="relative z-10 h-[80vh] w-full rounded-xl border border-(--o) bg-(--bg) p-5">
 		<h2 class="text-center text-3xl font-bold">{m.class_list()}</h2>
-		{#each data.members as member, i (i)}
+		{#each data.members as member, i (member.user.id)}
 			<div class="flex px-5 py-3" in:fade out:fade>
 				<div class="flex w-fit items-center">
-					{#if member.owner}
+					{#if member.admin}
 						<p class="badge bg-yellow-600">{m.admin()}</p>
 					{:else}
 						<p class="badge bg-(--p)">{m.student()}</p>

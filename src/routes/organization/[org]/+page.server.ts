@@ -27,7 +27,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 				.from('organization_memberships')
 				.select('organization ( name )')
 				.eq('user', user.id)
-				.eq('owner', true)
+				.eq('admin', true)
 				.eq('organization', params.org),
 			68
 		);
@@ -39,7 +39,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		const members = unwrap(
 			await locals.supabase
 				.from('organization_memberships')
-				.select('user ( id, name, email ), owner')
+				.select('user ( id, name, email ), admin')
 				.eq('organization', params.org),
 			69
 		);

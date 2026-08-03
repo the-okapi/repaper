@@ -40,7 +40,7 @@ export const add = async ({ request, locals, params }: ActionData) => {
 				.select('id')
 				.eq('organization', params.org)
 				.eq('user', user.id)
-				.eq('owner', true),
+				.eq('admin', true),
 			2
 		);
 
@@ -92,7 +92,7 @@ export const add = async ({ request, locals, params }: ActionData) => {
 			await locals.supabase.from('class_memberships').insert({
 				user: userId,
 				class: params.id,
-				owner: false
+				admin: false
 			}),
 			5
 		);
@@ -130,7 +130,7 @@ export const remove = async ({ request, locals, params }: ActionData) => {
 				.from('organization_memberships')
 				.select('id')
 				.eq('user', user.id)
-				.eq('owner', true)
+				.eq('admin', true)
 				.eq('organization', params.org),
 			7
 		);

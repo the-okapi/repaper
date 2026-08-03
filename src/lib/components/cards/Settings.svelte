@@ -68,6 +68,10 @@
 		{
 			label: 'System UI',
 			value: 'system'
+		},
+		{
+			label: 'Fira Sans',
+			value: 'fira'
 		}
 	];
 

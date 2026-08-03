@@ -15,5 +15,5 @@ export type OrganizationMember = {
 		name: string;
 		email: string;
 	};
-	owner: boolean;
+	admin: boolean;
 };

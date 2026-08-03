@@ -17,7 +17,7 @@
 	</div>
 {:else}
 	<div class="grid grid-cols-3 gap-8 px-10 pt-25">
-		{#each data.assignments as assignment, i (i)}
+		{#each data.assignments as assignment (assignment.id)}
 			<div class="rounded-xl border border-(--o) bg-(--bg)">{assignment.title}</div>
 		{/each}
 	</div>

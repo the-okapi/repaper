@@ -19,7 +19,7 @@ export const load = query(string(), async (organization: string) => {
 				.from('organization_memberships')
 				.select('id')
 				.eq('organization', organization)
-				.eq('owner', true)
+				.eq('admin', true)
 				.eq('user', user.id),
 			34
 		);
@@ -31,7 +31,7 @@ export const load = query(string(), async (organization: string) => {
 		const data = unwrap(
 			await locals.supabase
 				.from('organization_memberships')
-				.select('user ( id, name, email ), owner')
+				.select('user ( id, name, email ), admin')
 				.eq('organization', organization),
 			35
 		);

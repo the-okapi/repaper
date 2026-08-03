@@ -7,6 +7,7 @@
 | `getStudents`      | `src/routes/organization/[org]/class/[id]/server.remote.ts`         | 1, 6     |
 | `createAssignment` | same                                                                | 10 → 14  |
 | `load`             | `src/routes/organization/[org]/class/[id]/assignments/+page.svelte` | 15       |
+| `load`             | `src/routes/home/+page.server.ts`                                   | 16       |
 | `add`              | `src/routes/organization/[org]/class/[id]/actions.ts`               | 2 → 5, 9 |
 | `remove`           | same                                                                | 7, 8     |
 | `load`             | `src/routes/organization/[org]/class/[id]/+page.server.ts`          | 31, 32   |
@@ -23,7 +24,8 @@
 | `load`             | `src/routes/organization/[org]/+page.server.ts`                     | 68 → 71  |
 | `load`             | `src/routes/invitation/[org]/[id]/+page.server.ts`                  | 72       |
 | `default`          | same                                                                | 73 → 75  |
-| `load`             | `src/routes/home/load.remote.ts`                                    | 76, 77   |
+| `loadAdmin`        | `src/routes/home/load.remote.ts`                                    | 76, 77   |
+| `loadStudent`      | same                                                                | 17       |
 | `create`           | `src/routes/home/+page.server.ts`                                   | 79, 80   |
 | `organization`     | same                                                                | 82, 83   |
 | `signOut`          | `src/lib/actions.remote.ts`                                         | 84       |
