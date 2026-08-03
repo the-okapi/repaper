@@ -24,9 +24,7 @@ export const load: LayoutServerLoad = async ({ cookies, locals, route }) => {
 			37
 		);
 
-		const date = new Date(check[0].can_delete);
-
-		if (new Date() < date || check[0].can_delete === null) {
+		if (check[0].can_delete === null) {
 			return {
 				cookies: cookies.getAll(),
 				loggedIn: true

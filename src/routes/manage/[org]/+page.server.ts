@@ -63,7 +63,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 
 		const deletions = d.filter(
 			(a: { id: string; name: string; email: string; can_delete: string }) =>
-				new Date(a.can_delete) < new Date()
+				new Date(a.can_delete) > new Date()
 		);
 
 		return {
