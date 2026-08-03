@@ -57,7 +57,7 @@ export const createAssignment = form(
 						name,
 						description,
 						class: params.class,
-						due
+						due_date: due
 					})
 					.select('id'),
 				11

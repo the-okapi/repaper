@@ -25,7 +25,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 		return redirect(303, '/error');
 	}
 
-	return { user: user.id, admin: orgMembership[0].admin };
+	return { admin: orgMembership[0].admin };
 };
 
 export const actions = {

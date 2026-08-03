@@ -12,7 +12,7 @@
 </svelte:head>
 
 {#if data.admin}
-	<AdminHome {form} user={data.user} />
+	<AdminHome {form} />
 {:else}
-	<StudentHome {form} user={data.user} />
+	<StudentHome />
 {/if}

@@ -26,6 +26,7 @@
 | `default`          | same                                                    | 73 → 75  |
 | `loadAdmin`        | `src/routes/home/load.remote.ts`                        | 76, 77   |
 | `loadStudent`      | same                                                    | 17       |
+| `loadAssignments`  | same                                                    | 18       |
 | `create`           | `src/routes/home/+page.server.ts`                       | 79, 80   |
 | `organization`     | same                                                    | 82, 83   |
 | `signOut`          | `src/lib/actions.remote.ts`                             | 84       |

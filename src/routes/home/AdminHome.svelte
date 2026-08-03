@@ -5,10 +5,10 @@
 	import { Loader } from '$lib/components';
 	import { loadAdmin } from './load.remote';
 
-	let { form, user } = $props();
+	let { form } = $props();
 </script>
 
-{#await loadAdmin(user)}
+{#await loadAdmin()}
 	<div class="fixed top-0 left-0 flex h-screen w-screen items-center justify-center">
 		<Loader />
 	</div>

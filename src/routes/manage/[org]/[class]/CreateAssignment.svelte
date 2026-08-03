@@ -23,7 +23,7 @@
 
 	let errorText = $state('');
 
-	let showSuccess = $state(true);
+	let showSuccess = $state(false);
 
 	function createAnother() {
 		showSuccess = false;

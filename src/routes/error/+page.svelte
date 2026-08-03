@@ -3,6 +3,8 @@
 	import { m } from '$lib/paraglide/messages';
 </script>
 
+<svelte:window {onbeforeunload} />
+
 <svelte:head>
 	<title>{m.something_happened()} | Repaper</title>
 </svelte:head>
