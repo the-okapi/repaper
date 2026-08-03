@@ -113,12 +113,13 @@
 					{#if !everyone}
 						{#if students.length > 0}
 							<div>
-								<Label.Root
-									>{m.assign_to()}: {selectedStudents.length}
-									{m.student()}{selectedStudents.length !== 1
-										? 's'
-										: ''}</Label.Root
-								>
+								<div class="grid grid-cols-2">
+									<p class="text-left">{m.assign_to()}:</p>
+									<p class="text-right">
+										{selectedStudents.length}
+										{m.student()}{selectedStudents.length !== 1 ? 's' : ''}
+									</p>
+								</div>
 								<Combobox
 									options={students}
 									multiple

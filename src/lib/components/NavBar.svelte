@@ -38,7 +38,7 @@
 </script>
 
 <AlertDialog bind:open={logOutOpen}>
-	<p class="mb-8 text-center text-2xl font-semibold">{m.are_you_sure()} {m.confirm_log_out()}</p>
+	<p class="mb-8 text-center text-2xl">{m.are_you_sure()} {m.confirm_log_out()}</p>
 	<div class="m-auto flex w-fit gap-4">
 		<Button.Root class="px-5! py-2.5! text-lg" onclick={() => (logOutOpen = false)}
 			>{m.cancel()}</Button.Root
@@ -56,7 +56,7 @@
 </AlertDialog>
 
 <button
-	class="fixed top-5 left-5 z-50! inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg font-[TimesNewRoman] text-2xl font-black outline outline-(--o) backdrop-blur-lg"
+	class="fixed top-5 left-5 z-50! inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg font-[TimesNewRoman] text-2xl font-black outline outline-(--o)"
 	onclick={show}
 >
 	<div class="size-7">R</div>
@@ -65,7 +65,7 @@
 	<div
 		in:slide={{ axis: 'x' }}
 		out:slide={{ axis: 'x' }}
-		class="fixed top-5 left-17 z-40! flex h-10 rounded-xl px-3 py-1.5 outline outline-(--o) backdrop-blur-xs"
+		class="fixed top-5 left-17 z-40! flex h-10 rounded-xl px-3 py-1.5 outline outline-(--o)"
 	>
 		{#if loggedIn}
 			<a class="m-auto mx-2 h-fit hover:underline" href="/home" onclick={link}>{m.home()}</a>
@@ -104,7 +104,7 @@
 	</div>
 {/if}
 <h1
-	class="fixed top-0 w-screen border-b border-(--o) py-5 text-center text-4xl font-bold backdrop-blur-md"
+	class="fixed top-0 w-screen border-b border-(--o) bg-(--bg) py-5 text-center text-4xl font-bold"
 >
 	{page.data.title ?? 'Repaper'}
 </h1>
