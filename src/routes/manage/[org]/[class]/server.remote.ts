@@ -42,7 +42,7 @@ export const createAssignment = form(
 					.select('id')
 					.eq('user', user.id)
 					.eq('admin', true)
-					.eq('class', params.id),
+					.eq('class', params.class),
 				10
 			);
 
@@ -56,7 +56,7 @@ export const createAssignment = form(
 					.insert({
 						name,
 						description,
-						class: params.id,
+						class: params.class,
 						due
 					})
 					.select('id'),
@@ -69,7 +69,7 @@ export const createAssignment = form(
 					await locals.supabase
 						.from('class_memberships')
 						.select('user ( id )')
-						.eq('class', params.id)
+						.eq('class', params.class)
 						.eq('admin', false),
 					12
 				);
@@ -80,7 +80,7 @@ export const createAssignment = form(
 						await locals.supabase.from('assignment_submissions').insert({
 							user: allStudents[i].user.id,
 							assignment: assignment[0].id,
-							class: params.id
+							class: params.class
 						}),
 						13
 					);
@@ -91,7 +91,7 @@ export const createAssignment = form(
 						await locals.supabase.from('assignment_submissions').insert({
 							user: students[i],
 							assignment: assignment[0].id,
-							class: params.id
+							class: params.class
 						}),
 						14
 					);

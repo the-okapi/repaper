@@ -52,7 +52,7 @@ export const add = async ({ request, locals, params }: ActionData) => {
 			await locals.supabase
 				.from('classes')
 				.select('organization')
-				.eq('id', params.id)
+				.eq('id', params.class)
 				.eq('organization', params.org),
 			9
 		);
@@ -79,7 +79,7 @@ export const add = async ({ request, locals, params }: ActionData) => {
 			await locals.supabase
 				.from('class_memberships')
 				.select('class ( organization )')
-				.eq('class', params.id)
+				.eq('class', params.class)
 				.eq('user', userId),
 			4
 		);
@@ -91,7 +91,7 @@ export const add = async ({ request, locals, params }: ActionData) => {
 		unwrapNoData(
 			await locals.supabase.from('class_memberships').insert({
 				user: userId,
-				class: params.id,
+				class: params.class,
 				admin: false
 			}),
 			5
@@ -144,7 +144,7 @@ export const remove = async ({ request, locals, params }: ActionData) => {
 				.from('class_memberships')
 				.delete()
 				.eq('user', userId)
-				.eq('class', params.id),
+				.eq('class', params.class),
 			8
 		);
 	} catch (error: any) {

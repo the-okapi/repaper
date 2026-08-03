@@ -10,7 +10,11 @@
 		<Loader />
 	</div>
 {:then userData}
-	{#each userData.classes as classMembership (classMembership.id)}
-
-	{/each}
+	<div class="grid grid-cols-3 gap-7 px-20 pt-24 pb-10">
+		{#each userData.classes as classMembership (classMembership.id)}
+			<div class="box">
+				{classMembership.class.name}
+			</div>
+		{/each}
+	</div>
 {/await}

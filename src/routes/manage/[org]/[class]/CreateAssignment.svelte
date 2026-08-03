@@ -14,7 +14,7 @@
 
 	async function loadStudents() {
 		if (everyone === false && students.length === 0) {
-			const result = await getStudents(page.params.id ?? '');
+			const result = await getStudents(page.params.class ?? '');
 			students = result.students;
 		}
 	}

@@ -20,7 +20,7 @@
 					<button
 						class="box absolute cursor-pointer transition-colors hover:bg-(--fg)/5!"
 						onclick={() =>
-							window.location.assign('/organization/' + userData.organization.id)}
+							window.location.assign('/manage/' + userData.organization.id)}
 					>
 						<div>
 							<h2 class="text-center text-4xl font-bold">
@@ -50,10 +50,7 @@
 						class="box absolute cursor-pointer transition-colors hover:bg-(--fg)/5!"
 						onclick={() =>
 							window.location.assign(
-								'/organization/' +
-									userData.organization.id +
-									'/class/' +
-									classData.id
+								'/manage/' + userData.organization.id + '/' + classData.id
 							)}
 					>
 						<div>

@@ -9,7 +9,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		const data = unwrap(
 			await locals.supabase.rpc('check_invitation_exists', {
 				o: params.org,
-				i: params.id
+				i: params.class
 			}),
 			72
 		);
@@ -58,7 +58,7 @@ export const actions = {
 			const data = unwrap(
 				await locals.supabase.rpc('check_invitation', {
 					e: email,
-					i: params.id,
+					i: params.class,
 					o: params.org
 				}),
 				73
@@ -83,7 +83,7 @@ export const actions = {
 			);
 
 			unwrapNoData(
-				await locals.supabase.from('invitations').delete().eq('id', params.id),
+				await locals.supabase.from('invitations').delete().eq('id', params.class),
 				75
 			);
 		} catch {
