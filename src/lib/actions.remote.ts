@@ -1,4 +1,4 @@
-import { form, getRequestEvent } from '$app/server';
+import { command, form, getRequestEvent } from '$app/server';
 import { object, string } from 'valibot';
 import { redirect } from '@sveltejs/kit';
 import { unwrap, unwrapNoData } from '$lib/error';
@@ -10,7 +10,8 @@ export const signOut = form(async () => {
 	try {
 		unwrapNoData(await locals.supabase.auth.signOut(), 84);
 	} catch {
-		return { status: 500, message: m.something_happened() };
+		console.log('Log Out Error');
+		return redirect(303, '/error');
 	}
 
 	return redirect(303, '/');
@@ -21,7 +22,7 @@ const LogInSchema = object({
 	password: string()
 });
 
-export const logIn = form(LogInSchema, async ({ email, password }) => {
+export const logIn = command(LogInSchema, async ({ email, password }) => {
 	const { locals } = getRequestEvent();
 
 	try {
@@ -33,12 +34,8 @@ export const logIn = form(LogInSchema, async ({ email, password }) => {
 			password
 		});
 
-		if (error) {
-			return { status: 400, message: m.user_not_found() };
-		}
-
-		if (!user) {
-			return redirect(303, '/');
+		if (error || !user) {
+			return { status: 404, message: m.user_not_found() };
 		}
 
 		const check = unwrap(
@@ -47,15 +44,14 @@ export const logIn = form(LogInSchema, async ({ email, password }) => {
 		);
 
 		if (!check[0].can_delete) {
-			return redirect(303, '/home');
+			return { status: 200 };
 		}
 
 		unwrapNoData(await locals.supabase.auth.signOut(), 86);
 
-		return { status: 400, message: m.user_not_found() };
+		return { status: 404, message: m.user_not_found() };
 	} catch (error: any) {
-		if (error.status !== 303) {
-			return { status: 500, fail: true, message: m.something_happened() };
-		}
+		console.log(error);
+		return { status: 500, message: m.something_happened() };
 	}
 });

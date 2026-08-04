@@ -4,6 +4,7 @@
 	import { Loader } from '$lib/components';
 	import { logIn } from '$lib/actions.remote';
 	import { m } from '$lib/paraglide/messages';
+	import { goto } from '$app/navigation';
 
 	let { class: c, ...props } = $props();
 
@@ -13,6 +14,24 @@
 	let error = $state('');
 
 	let loading = $state(false);
+
+	async function onsubmit(event: Event) {
+		event.preventDefault();
+
+		loading = true;
+
+		const response = await logIn({
+			email,
+			password
+		});
+
+		if (response.status === 200) {
+			return goto('/home', { replaceState: true });
+		} else {
+			error = response.message ?? '';
+			loading = false;
+		}
+	}
 </script>
 
 <div
@@ -24,25 +43,14 @@
 	{#if loading}
 		<Loader />
 	{/if}
-	<form
-		{...logIn.enhance(async (form) => {
-			loading = true;
-			await form.submit();
-
-			if (form.result?.status === 400 || form.result?.status === 500) {
-				error = form.result?.message ?? '';
-				loading = false;
-			}
-		})}
-		class={loading ? 'invisible' : 'visible'}
-	>
+	<form {onsubmit} class={loading ? 'invisible' : 'visible'}>
 		<div class="mb-5 w-50">
 			<Label.Root class={loading ? 'opacity-50' : ''}>{m.email()}:</Label.Root>
-			<input type="email" name="email" class="w-50" bind:value={email} required />
+			<input type="email" class="w-50" bind:value={email} required />
 		</div>
 		<div class="mb-0.5 w-50">
 			<Label.Root class={loading ? 'opacity-50' : ''}>{m.password()}:</Label.Root>
-			<input type="password" name="password" class="w-50" bind:value={password} required />
+			<input type="password" class="w-50" bind:value={password} required />
 		</div>
 		<div class="absolute w-50 text-center">
 			<p class="text-xs text-(--red)">{error}</p>
