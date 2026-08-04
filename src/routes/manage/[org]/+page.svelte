@@ -30,7 +30,9 @@
 	<title>{data.title} | Repaper</title>
 </svelte:head>
 
-<div class="flex gap-4 px-10 pt-25">
+<div class="h-22"></div>
+<a href="/home" class="relative ml-10 hover:underline">← {m.back()}</a>
+<div class="flex gap-4 px-10 pt-2">
 	<OrganizationMembers {...data} />
 	<div class="flex h-[80vh] w-full gap-4">
 		<div class="flex h-full w-full flex-col gap-4">

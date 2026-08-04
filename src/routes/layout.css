@@ -91,6 +91,11 @@ main * {
 :root {
 	font-family: var(--font);
 	vector-effect: non-scaling-stroke;
+	text-decoration-thickness: 1px;
+}
+
+* {
+	text-decoration-thickness: 1.5px;
 }
 
 [data-select-trigger] {

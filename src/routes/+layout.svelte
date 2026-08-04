@@ -13,7 +13,7 @@
 </script>
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
-<Background class="fixed top-0 left-0 z-0" />
+<Background class="fixed top-0 left-0" />
 
 <ModeWatcher
 	darkClassNames={['dark']}

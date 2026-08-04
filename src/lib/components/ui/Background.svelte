@@ -12,7 +12,7 @@
 		xmlns="http://www.w3.org/2000/svg"
 		xmlns:xlink="http://www.w3.org/1999/xlink"
 		xml:space="preserve"
-		style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
+		style="z-index:0;fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
 	>
 		<path
 			d="M-0,626.137L-0,268.08C83.59,206.737 119.983,99.589 180.827,0L805.806,0C779.92,22.659 754.619,46.176 728.914,70.358C588.734,202.245 436.582,353.922 291.506,459.92C284.605,464.962 277.721,469.901 270.854,474.729C174.562,542.436 81.826,588.431 -0,626.137Z"
