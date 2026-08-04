@@ -14,5 +14,5 @@
 {#if data.admin}
 	<AdminHome {form} />
 {:else}
-	<StudentHome />
+	<StudentHome organization={data.organization} />
 {/if}

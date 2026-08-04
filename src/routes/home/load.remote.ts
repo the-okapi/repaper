@@ -1,6 +1,7 @@
 import { getRequestEvent, query } from '$app/server';
 import { redirect } from '@sveltejs/kit';
 import { unwrap } from '$lib/error';
+import type { Assignment } from '$lib/types';
 
 export const loadAdmin = query(async () => {
 	const { locals } = getRequestEvent();
@@ -78,15 +79,6 @@ export const loadStudent = query(async () => {
 	}
 });
 
-type Assignment = {
-	id: string;
-	assignment: {
-		id: string;
-		name: string;
-		due_date: string;
-	};
-};
-
 export const loadAssignments = query(async () => {
 	const { locals } = getRequestEvent();
 
@@ -102,7 +94,7 @@ export const loadAssignments = query(async () => {
 		const assignments: Assignment[] = unwrap(
 			await locals.supabase
 				.from('assignment_submissions')
-				.select('id, assignment ( id, name, due_date ) '),
+				.select('id, assignment ( id, name, description, due_date, class ) '),
 			18
 		);
 

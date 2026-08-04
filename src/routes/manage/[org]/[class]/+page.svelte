@@ -87,7 +87,7 @@
 			<div class="h-80 w-full rounded-xl border border-(--o) bg-(--bg)">
 				<a href={page.url.pathname + '/assignments'}>
 					<div
-						class="flex h-full w-full cursor-pointer items-center justify-center rounded-xl p-5 hover:bg-(--fg)/10"
+						class="flex h-full w-full cursor-pointer items-center justify-center rounded-xl p-5 transition-colors hover:bg-(--fg)/10"
 					>
 						<div class="w-fit text-center">
 							<h2 class="text-center text-2xl font-bold">{m.assignments()}</h2>

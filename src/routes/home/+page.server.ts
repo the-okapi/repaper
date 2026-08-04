@@ -14,7 +14,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 	const { data: orgMembership, error } = await locals.supabase
 		.from('organization_memberships')
-		.select('admin')
+		.select('organization, admin')
 		.eq('user', user.id);
 
 	if (error) {
@@ -25,7 +25,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 		return redirect(303, '/error');
 	}
 
-	return { admin: orgMembership[0].admin };
+	return { admin: orgMembership[0].admin, organization: orgMembership[0].organization };
 };
 
 export const actions = {

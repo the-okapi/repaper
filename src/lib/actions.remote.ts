@@ -50,12 +50,6 @@ export const logIn = form(LogInSchema, async ({ email, password }) => {
 			return redirect(303, '/home');
 		}
 
-		const date = new Date(check[0].can_delete);
-
-		if (new Date() < date) {
-			return redirect(303, '/home');
-		}
-
 		unwrapNoData(await locals.supabase.auth.signOut(), 86);
 
 		return { status: 400, message: m.user_not_found() };

@@ -36,6 +36,11 @@ main * {
 	z-index: 10 !important;
 }
 
+::selection {
+	background-color: var(--p);
+	color: var(--p-fg);
+}
+
 :root::selection {
 	background-color: var(--p);
 	color: var(--p-fg);

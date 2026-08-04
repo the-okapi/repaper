@@ -25,6 +25,8 @@
 
 	let showSuccess = $state(false);
 
+	let dueDate = $state(createAssignment.result?.due ?? new Date().toISOString());
+
 	function createAnother() {
 		showSuccess = false;
 	}
@@ -90,13 +92,8 @@
 				</div>
 				<div class="mb-5">
 					<Label.Root>{m.due()}:</Label.Root><br />
-					<input
-						type="datetime-local"
-						name="due"
-						value={createAssignment.result?.due}
-						required
-						class="w-60"
-					/>
+					<input type="datetime-local" bind:value={dueDate} required class="w-60" />
+					<input type="hidden" name="due" value={new Date(dueDate).toISOString()} />
 				</div>
 				<div class="m-auto flex w-fit justify-center gap-4">
 					<Switch

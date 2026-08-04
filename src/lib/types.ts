@@ -17,3 +17,14 @@ export type OrganizationMember = {
 	};
 	admin: boolean;
 };
+
+export type Assignment = {
+	id: string;
+	assignment: {
+		id: string;
+		name: string;
+		description: string;
+		due_date: string;
+		class: string;
+	};
+};
