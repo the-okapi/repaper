@@ -5,6 +5,7 @@
 	import { Button } from 'bits-ui';
 	import { signOut } from '$lib/actions.remote';
 	import { m } from '$lib/paraglide/messages';
+	import { goto } from '$app/navigation';
 
 	let { loggedIn } = $props();
 
@@ -35,6 +36,19 @@
 	function link() {
 		shown = false;
 	}
+
+	async function signOutForm(event: Event) {
+		event.preventDefault();
+		logOutOpen = false;
+		login = false;
+		const response = await signOut();
+
+		if (response.status === 200) {
+			return goto('/', { replaceState: true });
+		} else {
+			return goto('/error', { replaceState: true });
+		}
+	}
 </script>
 
 <AlertDialog bind:open={logOutOpen}>
@@ -43,13 +57,7 @@
 		<Button.Root class="px-5! py-2.5! text-lg" onclick={() => (logOutOpen = false)}
 			>{m.cancel()}</Button.Root
 		>
-		<form
-			{...signOut.enhance(async (form) => {
-				logOutOpen = false;
-				login = false;
-				await form.submit();
-			})}
-		>
+		<form onsubmit={signOutForm}>
 			<Button.Root class="px-5! py-2.5! text-lg" type="submit">{m.go()}</Button.Root>
 		</form>
 	</div>

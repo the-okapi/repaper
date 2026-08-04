@@ -1,20 +1,19 @@
-import { command, form, getRequestEvent } from '$app/server';
+import { command, getRequestEvent } from '$app/server';
 import { object, string } from 'valibot';
-import { redirect } from '@sveltejs/kit';
 import { unwrap, unwrapNoData } from '$lib/error';
 import { m } from '$lib/paraglide/messages';
 
-export const signOut = form(async () => {
+export const signOut = command(async () => {
 	const { locals } = getRequestEvent();
 
 	try {
 		unwrapNoData(await locals.supabase.auth.signOut(), 84);
 	} catch {
 		console.log('Log Out Error');
-		return redirect(303, '/error');
+		return { status: 500 };
 	}
 
-	return redirect(303, '/');
+	return { status: 200 };
 });
 
 const LogInSchema = object({
