@@ -26,7 +26,9 @@
 							<h2 class="text-center text-4xl font-bold">
 								{userData.organization.name}
 							</h2>
-							<h3 class="mt-3 text-center">{m.manage()} {m.organization()}</h3>
+						</div>
+						<div class="absolute bottom-2 left-0 w-full">
+							<p>{m.manage()} {m.organization()}</p>
 						</div>
 					</button>
 				</div>
@@ -55,7 +57,9 @@
 					>
 						<div>
 							<h2 class="text-center text-4xl font-bold">{classData.name}</h2>
-							<h3 class="mt-3 text-center">{m.manage_class()}</h3>
+						</div>
+						<div class="absolute bottom-2 left-0 w-full">
+							<p>{m.manage_class()}</p>
 						</div>
 					</button>
 				</div>

@@ -186,12 +186,7 @@
 						<input type="hidden" name="userId" value={member.user.id} />
 					</form>
 				{:else}
-					<Button.Root
-						onclick={() => {
-							confirmDeleteOpen = false;
-							confirmPage = 0;
-						}}>OK</Button.Root
-					>
+					<Button.Root onclick={() => window.location.reload()}>OK</Button.Root>
 				{/if}
 			</div>
 		</div>

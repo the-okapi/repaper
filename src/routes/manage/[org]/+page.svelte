@@ -127,13 +127,7 @@
 	</p>
 	<div class="m-auto flex w-fit gap-4">
 		<Button.Root onclick={() => (restoreOpen = false)}>{m.cancel()}</Button.Root>
-		<form
-			action="?/restore"
-			method="POST"
-			use:enhance={() => {
-				restoreOpen = false;
-			}}
-		>
+		<form action="?/restore" method="POST">
 			<input type="hidden" value={data.deletions[restore].id} name="userId" />
 			<Button.Root type="submit">{m.go()}</Button.Root>
 		</form>
