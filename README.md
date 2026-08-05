@@ -10,6 +10,7 @@
 | `changeName`        | `src/routes/manage/[org]/[class]/assignments/actions.ts`      | 19, 20   |
 | `changeDescription` | same                                                          | 21, 22   |
 | `changeDueDate`     | same                                                          | 23, 24   |
+| `deleteAssignment`  | same                                                          | 25, 26   |
 | `load`              | `src/routes/home/+page.server.ts`                             | 16       |
 | `add`               | `src/routes/manage/[org]/[class]/actions.ts`                  | 2 → 5, 9 |
 | `remove`            | same                                                          | 7, 8     |

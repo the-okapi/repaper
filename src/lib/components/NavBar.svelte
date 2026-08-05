@@ -66,15 +66,12 @@
 <svelte:window {onkeydown} />
 
 <AlertDialog bind:open={logOutOpen}>
-	<p class="mb-8 text-center text-2xl">{m.are_you_sure()} {m.confirm_log_out()}</p>
-	<div class="m-auto flex w-fit gap-4">
-		<Button.Root class="px-5! py-2.5! text-lg" onclick={() => (logOutOpen = false)}
-			>{m.cancel()}</Button.Root
-		>
+	<p class="mb-8 text-center text-lg">{m.are_you_sure()} {m.confirm_log_out()}</p>
+	{#snippet go()}
 		<form onsubmit={signOutForm}>
-			<Button.Root class="px-5! py-2.5! text-lg" type="submit">{m.go()}</Button.Root>
+			<Button.Root type="submit">{m.go()}</Button.Root>
 		</form>
-	</div>
+	{/snippet}
 </AlertDialog>
 
 <button

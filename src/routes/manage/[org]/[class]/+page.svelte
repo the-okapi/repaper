@@ -3,9 +3,7 @@
 	import { Combobox, Loader, AlertDialog } from '$lib/components';
 	import { Label, Button } from 'bits-ui';
 	import { load } from './load.remote';
-	import { enhance } from '$app/forms';
 	import type { OrganizationMember } from '$lib/types';
-	import { fade } from 'svelte/transition';
 	import { m } from '$lib/paraglide/messages';
 	import CreateAssignment from './CreateAssignment.svelte';
 	import { page } from '$app/state';
@@ -19,6 +17,14 @@
 		remove = i;
 		showConfirm = true;
 	}
+
+	type User = {
+		user: {
+			name: string;
+			email: string;
+		};
+		admin: boolean;
+	};
 </script>
 
 <svelte:head>
@@ -45,55 +51,69 @@
 						>
 							{m.add_member()}
 						</h2>
-						{#if form?.add}
-							<div class="absolute left-0 w-full">
-								<p class="text-center text-sm text-(--red)">{form.add}</p>
-							</div>
-						{/if}
-						{let memberToAdd = $state(
-							form?.user
-								? members.find((o: OrganizationMember) => (o.user.id = form.user))
-										.user.name
-								: ''
-						)}
-						<div class="m-auto mt-5 mb-1 w-fit">
-							<Label.Root class="text-sm">{m.choose_add()}:</Label.Root>
-							<Combobox
-								options={members.map(
-									(user: {
-										user: { name: string; email: string };
-										admin: boolean;
-									}) => ({ value: user.user.name, label: user.user.name })
-								)}
-								bind:value={memberToAdd}
-							/>
-						</div>
-						{#if memberToAdd !== ''}
-							{const member = $derived(
-								members.find((o: OrganizationMember) => o.user.name === memberToAdd)
+						{let options = members
+							.filter(
+								(user: User) =>
+									data.members.find(
+										(u: User) => u.user.email === user.user.email
+									) === undefined
+							)
+							.map((user: User) => ({
+								value: user.user.name,
+								label: user.user.name
+							}))}
+						{#if options.length === 0}
+							<p class="px-5 text-center">{m.no_users()}</p>
+						{:else}
+							{#if form?.add}
+								<div class="absolute left-0 w-full">
+									<p class="text-center text-sm text-(--red)">{form.add}</p>
+								</div>
+							{/if}
+							{let memberToAdd = $state(
+								form?.user
+									? members.find(
+											(o: OrganizationMember) => (o.user.id = form.user)
+										).user.name
+									: ''
 							)}
-							<input type="hidden" name="email" value={member.user.email} />
-							<div class="absolute left-0 w-full">
-								<p
-									class="block overflow-hidden text-center text-sm text-ellipsis whitespace-nowrap"
-								>
-									{member.user.name} - {member.user.email}
-								</p>
+							<div class="m-auto mt-5 mb-1 w-fit">
+								<Label.Root class="text-sm">{m.choose_add()}:</Label.Root>
+								<Combobox {options} bind:value={memberToAdd} />
 							</div>
-							<input type="hidden" name="userId" value={member.user.id} />
+							{#if memberToAdd !== ''}
+								{const member = $derived(
+									members.find(
+										(o: OrganizationMember) => o.user.name === memberToAdd
+									)
+								)}
+								<input type="hidden" name="email" value={member.user.email} />
+								<div class="absolute left-0 w-full">
+									<p
+										class="block overflow-hidden text-center text-sm text-ellipsis whitespace-nowrap"
+									>
+										{member.user.name} - {member.user.email}
+									</p>
+								</div>
+								<input type="hidden" name="userId" value={member.user.id} />
+							{/if}
+							<Button.Root type="submit" class="m-auto mt-8 block"
+								>{m.go()}</Button.Root
+							>
 						{/if}
-						<Button.Root type="submit" class="m-auto mt-8 block">{m.go()}</Button.Root>
 					</form>
 				{/await}
 			</div>
 			<div class="h-80 w-full rounded-xl border border-(--o) bg-(--bg)">
 				<a href={page.url.pathname + '/assignments'}>
 					<div
-						class="flex h-full w-full cursor-pointer items-center justify-center rounded-xl p-5 transition-colors hover:bg-(--fg)/10"
+						class="relative flex h-full w-full cursor-pointer items-center justify-center rounded-xl p-5 transition-colors hover:bg-(--fg)/10"
 					>
 						<div class="w-fit text-center">
 							<h2 class="text-center text-2xl font-bold">{m.assignments()}</h2>
-							<p>{m.go_to()} {m.assignments()}</p>
+						</div>
+						<div class="absolute bottom-2 left-0 w-full text-center">
+							<p>{m.go_to()} {m.assignment()}</p>
 						</div>
 					</div>
 				</a>
@@ -104,7 +124,7 @@
 	<div class="relative z-10 h-[80vh] w-full rounded-xl border border-(--o) bg-(--bg) p-5">
 		<h2 class="text-center text-3xl font-bold">{m.class_list()}</h2>
 		{#each data.members as member, i (member.user.id)}
-			<div class="flex px-5 py-3" in:fade out:fade>
+			<div class="flex h-16 px-5 py-3">
 				<div class="flex w-fit items-center">
 					{#if member.admin}
 						<p class="badge bg-yellow-600">{m.admin()}</p>
@@ -119,33 +139,28 @@
 					{/if} -
 					<span class="overflow-hidden text-base">{member.user.email}</span>
 				</p>
-				<Button.Root onclick={() => confirmRemove(i)} class="red-button"
-					>{m.remove()}</Button.Root
-				>
+				{#if member.user.id !== data.user && data.members.length > 1}
+					<Button.Root onclick={() => confirmRemove(i)} class="red-button"
+						>{m.remove()}</Button.Root
+					>
+				{/if}
 			</div>
 			{#if i !== data.members.length - 1}
-				<hr in:fade out:fade class="m-auto w-[80%] border-(--o)" />
+				<hr class="m-auto w-[80%] border-(--o)" />
 			{/if}
 		{/each}
 	</div>
 </div>
 
 <AlertDialog bind:open={showConfirm}>
-	<p class="mb-8 text-center text-lg">
+	<p class="mb-8 w-100 text-center text-lg">
 		{m.are_you_sure()}
 		{m.remove_from_class({ name: data.members[remove].user.name })}
 	</p>
-	<div class="m-auto flex w-fit gap-4">
-		<Button.Root onclick={() => (showConfirm = false)}>{m.cancel()}</Button.Root>
-		<form
-			action="?/remove"
-			method="POST"
-			use:enhance={() => {
-				showConfirm = false;
-			}}
-		>
+	{#snippet go()}
+		<form action="?/remove" method="POST">
 			<input type="hidden" value={data.members[remove].user.id} name="userId" />
 			<Button.Root type="submit" class="red-button">{m.go()}</Button.Root>
 		</form>
-	</div>
+	{/snippet}
 </AlertDialog>

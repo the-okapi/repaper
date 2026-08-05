@@ -23,7 +23,7 @@
 	--p-fg: #0a0a0a;
 	--red: #de4e45;
 	--o: #444444;
-	--s: #424242;
+	--s: #313131;
 	background-color: var(--bg);
 	color: var(--fg);
 }
@@ -263,9 +263,10 @@ input:disabled {
 	top: 50%;
 	left: 50%;
 	transform: translateX(-50%) translateY(-50%);
-	width: 35rem;
+	min-width: 25rem;
+	width: fit-content;
 	height: fit-content;
-	padding: 2.5rem;
+	padding: 2rem;
 	border: 1px solid var(--o);
 	border-radius: 1rem;
 }

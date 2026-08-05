@@ -87,5 +87,8 @@
 	"assignment": "Assignment",
 	"late": "Late",
 	"change": "Change",
-	"successfully_changed": "Successfully Changed"
+	"successfully_changed": "Successfully Changed",
+	"delete": "Delete",
+	"confirm_delete_assignment": "delete {name}? This action is permanent and cannot be undone.",
+	"no_users": "There are no users to add that are not already in this class."
 }

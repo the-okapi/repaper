@@ -168,3 +168,53 @@ export const changeDueDate = async ({ request, locals, params }: ActionData) => 
 
 	return { dueDateMessage: m.successfully_changed(), dueDate: '' };
 };
+
+const DeleteSchema = object({
+	assignment: string()
+});
+
+export const deleteAssignment = async ({ request, locals, params }: ActionData) => {
+	const formData = safeParse(DeleteSchema, Object.fromEntries(await request.formData()));
+
+	if (!formData.success) {
+		return fail(400, { deleteMessage: m.something_happened });
+	}
+
+	const { assignment } = formData.output;
+
+	const {
+		data: { user }
+	} = await locals.supabase.auth.getUser();
+
+	if (!user) {
+		return redirect(303, '/');
+	}
+
+	try {
+		const check = unwrap(
+			await locals.supabase
+				.from('class_memberships')
+				.select('id')
+				.eq('class', params.class)
+				.eq('user', user.id),
+			25
+		);
+
+		if (!check?.[0]) {
+			return fail(403, { deleteMessage: m.something_happened() });
+		}
+
+		unwrapNoData(
+			await locals.supabase
+				.from('assignments')
+				.delete()
+				.eq('id', assignment)
+				.eq('class', params.class),
+			26
+		);
+	} catch {
+		return fail(500, { deleteMessage: m.something_happened() });
+	}
+
+	return { success: true };
+};

@@ -18,7 +18,7 @@
 	}
 
 	let restore = $state(0);
-	let restoreOpen = $state();
+	let restoreOpen = $state(false);
 
 	function restoreMember(i: number) {
 		restore = i;
@@ -102,13 +102,12 @@
 </div>
 
 <AlertDialog bind:open={confirmRevoke}>
-	<p class="mb-8 text-center text-lg">
+	<p class="mb-8 w-100 text-center text-lg">
 		{m.are_you_sure()}
 		{m.confirm_revoke()} <span class="font-bold">{data.invitations[invitation].name}</span>,
 		{data.invitations[invitation].email}?
 	</p>
-	<div class="m-auto flex w-fit gap-4">
-		<Button.Root onclick={() => (confirmRevoke = false)}>{m.cancel()}</Button.Root>
+	{#snippet go()}
 		<form
 			action="?/revoke"
 			method="POST"
@@ -119,19 +118,18 @@
 			<input type="hidden" value={data.invitations[invitation].id} name="invitation" />
 			<Button.Root type="submit" class="red-button">{m.go()}</Button.Root>
 		</form>
-	</div>
+	{/snippet}
 </AlertDialog>
 
 <AlertDialog bind:open={restoreOpen}>
-	<p class="mb-8 text-center text-lg">
+	<p class="mb-8 w-100 text-center text-lg">
 		{m.are_you_sure()}
 		{m.confirm_restore()} <span class="font-bold">{data.deletions[restore].name}</span>?
 	</p>
-	<div class="m-auto flex w-fit gap-4">
-		<Button.Root onclick={() => (restoreOpen = false)}>{m.cancel()}</Button.Root>
+	{#snippet go()}
 		<form action="?/restore" method="POST">
 			<input type="hidden" value={data.deletions[restore].id} name="userId" />
 			<Button.Root type="submit">{m.go()}</Button.Root>
 		</form>
-	</div>
+	{/snippet}
 </AlertDialog>

@@ -2,13 +2,16 @@
 	import { m } from '$lib/paraglide/messages';
 	import { Button, Label } from 'bits-ui';
 	import { page } from '$app/state';
-	import { Tabs } from '$lib/components';
+	import { Tabs, AlertDialog } from '$lib/components';
 	import { formatDate } from '$lib/util';
 
 	let { data, form } = $props();
 
-	// svelte-ignore state_referenced_locally
-	let dueDate = $state(form?.dueDate ?? new Date().toISOString());
+	let dueDate = $derived(form?.dueDate ?? new Date().toISOString());
+
+	let confirmDeleteOpen = $state(false);
+	let assignmentIndex = $state(0);
+	let assignment = $derived(data.assignments[assignmentIndex]);
 </script>
 
 <svelte:head>
@@ -27,7 +30,7 @@
 		class="relative ml-10 hover:underline">← {m.back()}</a
 	>
 	<div class="mt-2 grid grid-cols-3 gap-8 px-2">
-		{#each data.assignments as assignment (assignment.id)}
+		{#each data.assignments as assignment, i (assignment.id)}
 			<div class="box">
 				<div>
 					<p class="text-center italic">{formatDate(assignment.due_date)}</p>
@@ -81,9 +84,25 @@
 							</form>
 							<p class="text-center">{form?.dueDateMessage}</p>
 						{/snippet}
+						{#snippet deleteAssignment()}
+							<div class="mt-5 w-full">
+								<Button.Root
+									class="red-button m-auto block"
+									onclick={() => {
+										assignmentIndex = i;
+										confirmDeleteOpen = true;
+									}}>{m.delete()} {m.assignment()}</Button.Root
+								>
+							</div>
+						{/snippet}
 						<Tabs
-							labels={[m.name(), 'Description', m.due_date()]}
-							snippets={[changeName, changeDescription, changeDueDate]}
+							labels={[m.name(), 'Description', m.due_date(), m.delete()]}
+							snippets={[
+								changeName,
+								changeDescription,
+								changeDueDate,
+								deleteAssignment
+							]}
 							class="m-auto"
 						/>
 					</div>
@@ -92,3 +111,16 @@
 		{/each}
 	</div>
 {/if}
+
+<AlertDialog bind:open={confirmDeleteOpen}>
+	<p class="mb-5 w-100">
+		{m.are_you_sure()}
+		{m.confirm_delete_assignment({ name: assignment.name })}
+	</p>
+	{#snippet go()}
+		<form action="?/delete" method="POST">
+			<input type="hidden" value={assignment.id} name="assignment" />
+			<Button.Root type="submit" class="red-button">{m.go()}</Button.Root>
+		</form>
+	{/snippet}
+</AlertDialog>

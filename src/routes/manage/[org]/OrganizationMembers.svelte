@@ -111,34 +111,32 @@
 </div>
 
 <AlertDialog bind:open={promoteOpen}>
-	<p class="mb-8 text-center text-lg">
+	<p class="mb-8 w-100 text-center text-lg">
 		{m.are_you_sure()}
 		{m.confirm_promote({ name: member.user.name })}
 	</p>
-	<div class="m-auto flex w-fit gap-4">
-		<Button.Root onclick={() => (promoteOpen = false)}>{m.cancel()}</Button.Root>
+	{#snippet go()}
 		<form action="?/promote" method="POST">
 			<input type="hidden" value={member.user.id} name="userId" />
 			<Button.Root type="submit">{m.go()}</Button.Root>
 		</form>
-	</div>
+	{/snippet}
 </AlertDialog>
 
 <AlertDialog bind:open={demoteOpen}>
-	<p class="mb-8 text-center text-lg">
+	<p class="mb-8 w-100 text-center text-lg">
 		{m.are_you_sure()}
 		{m.confirm_demote({ name: member.user.name })}
 	</p>
-	<div class="m-auto flex w-fit gap-4">
-		<Button.Root onclick={() => (demoteOpen = false)}>{m.cancel()}</Button.Root>
+	{#snippet go()}
 		<form action="?/demote" method="POST">
 			<input type="hidden" value={member.user.id} name="userId" />
 			<Button.Root type="submit">{m.go()}</Button.Root>
 		</form>
-	</div>
+	{/snippet}
 </AlertDialog>
 
-<AlertDialog bind:open={confirmDeleteOpen}>
+<AlertDialog bind:open={confirmDeleteOpen} go={null}>
 	<div class="relative h-46 w-120">
 		{#if confirmPage === 0}
 			<p class="mb-8 text-center text-lg">
@@ -155,14 +153,16 @@
 				<Label.Root>{m.email()}:</Label.Root><br />
 				<input type="text" class="w-80" bind:value={confirmText} />
 			</div>
+			<p class="absolute bottom-12 left-20 text-(--red)">{confirmError}</p>
 		{:else}
 			<p class="mb-8 text-center text-lg">{m.after_delete({ name: member.user.name })}</p>
 		{/if}
-		<p class="absolute bottom-14 left-20 text-(--red)">{confirmError}</p>
 		<div class="absolute bottom-0 m-auto flex w-full items-center justify-center">
 			<div class="flex gap-4">
-				{#if confirmPage !== 2}
+				{#if confirmPage === 0}
 					<Button.Root onclick={cancel}>{m.cancel()}</Button.Root>
+				{:else if confirmPage === 1}
+					<Button.Root onclick={() => (confirmPage = 0)}>{m.back()}</Button.Root>
 				{/if}
 				{#if confirmPage === 0}
 					<Button.Root class="red-button" onclick={() => (confirmPage = 1)}

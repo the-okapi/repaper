@@ -193,6 +193,8 @@ export const revoke = async ({ request, locals, params }: ActionData) => {
 				.eq('organization', params.org),
 			48
 		);
+
+		// TODO: send email when invitation revoked
 	} catch {
 		return redirect(303, '/error');
 	}

@@ -3,7 +3,7 @@ import type { PageServerLoad } from './$types';
 import { unwrap } from '$lib/error';
 import { m } from '$lib/paraglide/messages';
 import type { Actions } from './$types';
-import { changeName, changeDescription, changeDueDate } from './actions';
+import { changeName, changeDescription, changeDueDate, deleteAssignment } from './actions';
 
 export const load: PageServerLoad = async ({ locals, params }) => {
 	const {
@@ -49,5 +49,6 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 export const actions = {
 	changeName,
 	changeDescription,
-	changeDueDate
+	changeDueDate,
+	delete: deleteAssignment
 } satisfies Actions;

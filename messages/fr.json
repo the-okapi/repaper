@@ -86,5 +86,8 @@
 	"assignment": "Devoir",
 	"late": "En Retard",
 	"change": "Changez",
-	"successfully_changed": "Changé avec Succès"
+	"successfully_changed": "Changé avec Succès",
+	"delete": "Supprimer",
+	"confirm_delete_assignment": "supprimer {name}? Cette action est permanente et ne peut pas être refaite.",
+	"no_users": "Il n'y a aucun utilisateur qui n'est pas déjà dans cette classe."
 }
