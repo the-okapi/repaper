@@ -185,7 +185,7 @@ textarea {
 }
 
 input {
-	padding: 0.25rem 0.5rem;
+	padding: 0.5rem;
 }
 
 textarea {
@@ -344,4 +344,26 @@ input:disabled {
 
 [data-switch-thumb][data-state='checked'] {
 	transform: translateX(22px);
+}
+
+[data-tabs-list] {
+	border-radius: 0.75rem;
+	padding: 0.25rem;
+	width: fit-content;
+	display: flex;
+	gap: 0.1rem;
+	background-color: var(--s);
+	margin: auto;
+	margin-bottom: 0.5rem;
+}
+
+[data-tabs-trigger] {
+	border-radius: 0.5rem;
+	padding: 0.25rem 0.75rem;
+	cursor: pointer;
+}
+
+[data-tabs-trigger][data-state='active'] {
+	background-color: var(--bg);
+	color: var(--fg);
 }

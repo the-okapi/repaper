@@ -50,7 +50,7 @@
 							? 'rounded-t-xl border-t'
 							: ''} {i === filteredOptions.length - 1
 							? 'rounded-b-xl border-b'
-							: ''} border-x"
+							: ''} border-x border-(--o)"
 					>
 						{#snippet children({ selected })}
 							<div class="z-60! flex w-fit">

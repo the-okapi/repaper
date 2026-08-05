@@ -25,7 +25,7 @@
 
 	let showSuccess = $state(false);
 
-	let dueDate = $state(createAssignment.result?.due ?? new Date().toISOString());
+	let dueDate = $state(createAssignment.result?.dueDate ?? new Date().toISOString());
 
 	function createAnother() {
 		showSuccess = false;
@@ -54,7 +54,7 @@
 						return;
 					}
 					const date = new Date();
-					const selectedDate = new Date(createAssignment.fields.due.value() ?? '');
+					const selectedDate = new Date(createAssignment.fields.dueDate.value() ?? '');
 					if (date > selectedDate) {
 						errorText = m.please_future_date();
 						return;
@@ -91,9 +91,9 @@
 						name="description"></textarea>
 				</div>
 				<div class="mb-5">
-					<Label.Root>{m.due()}:</Label.Root><br />
+					<Label.Root>{m.due_date()}:</Label.Root><br />
 					<input type="datetime-local" bind:value={dueDate} required class="w-60" />
-					<input type="hidden" name="due" value={new Date(dueDate).toISOString()} />
+					<input type="hidden" name="dueDate" value={new Date(dueDate).toISOString()} />
 				</div>
 				<div class="m-auto flex w-fit justify-center gap-4">
 					<Switch

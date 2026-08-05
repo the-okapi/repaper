@@ -2,6 +2,8 @@ import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { unwrap } from '$lib/error';
 import { m } from '$lib/paraglide/messages';
+import type { Actions } from './$types';
+import { changeName, changeDescription, changeDueDate } from './actions';
 
 export const load: PageServerLoad = async ({ locals, params }) => {
 	const {
@@ -30,16 +32,22 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		const assignments = unwrap(
 			await locals.supabase
 				.from('assignments')
-				.select('id, name, description')
+				.select('id, name, description, due_date')
 				.eq('class', params.class),
 			16
 		);
 
 		return {
 			assignments,
-			title: check[0].class.name + ' - ' + m.assignments()
+			title: m.assignments() + ' - ' + check[0].class.name
 		};
 	} catch {
 		return redirect(303, '/error');
 	}
 };
+
+export const actions = {
+	changeName,
+	changeDescription,
+	changeDueDate
+} satisfies Actions;

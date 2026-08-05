@@ -49,7 +49,21 @@
 			return goto('/error', { replaceState: true });
 		}
 	}
+
+	function onkeydown(event: KeyboardEvent) {
+		if (event.key !== 'Escape') {
+			return;
+		}
+
+		if (settings) {
+			settings = false;
+		} else if (login) {
+			login = false;
+		}
+	}
 </script>
+
+<svelte:window {onkeydown} />
 
 <AlertDialog bind:open={logOutOpen}>
 	<p class="mb-8 text-center text-2xl">{m.are_you_sure()} {m.confirm_log_out()}</p>
@@ -64,10 +78,10 @@
 </AlertDialog>
 
 <button
-	class="fixed top-5 left-5 z-50! inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg font-[TimesNewRoman] text-2xl font-black outline outline-(--o)"
+	class="fixed top-5 left-5 z-50! inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg font-[Times_New_Roman] text-2xl font-black outline outline-(--o)"
 	onclick={show}
 >
-	<div class="size-7">R</div>
+	R
 </button>
 {#if shown}
 	<div

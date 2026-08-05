@@ -78,11 +78,13 @@
 	"go_to": "Aller à",
 	"assignments": "Devoirs",
 	"no_assignments": "À ce moment, il n'y a aucun devoir. Retournez à la page de la classe pour en créer un.",
-	"due": "Date de Remise",
+	"due_date": "Date de Remise",
 	"please_future_date": "Choisissez une date dans le futur, s'il vous plaît.",
 	"date_within_five": "Choisissez une date dans cinq années.",
 	"class": "la Classe",
 	"go_to_m": "Aller au",
 	"assignment": "Devoir",
-	"late": "En Retard"
+	"late": "En Retard",
+	"change": "Changez",
+	"successfully_changed": "Changé avec Succès"
 }
