@@ -27,6 +27,10 @@ export const createAssignment = form(
 
 		const { locals, params } = getRequestEvent();
 
+		if (!params.class || !params.org) {
+			return redirect(303, '/error');
+		}
+
 		const {
 			data: { user }
 		} = await locals.supabase.auth.getUser();

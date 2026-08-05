@@ -7,7 +7,7 @@
 
 	let { data, form } = $props();
 
-	let dueDate = $derived(form?.dueDate ?? new Date().toISOString());
+	//let dueDate = $derived(form?.dueDate ?? new Date().toISOString());
 
 	let confirmDeleteOpen = $state(false);
 	let assignmentIndex = $state(0);
@@ -21,7 +21,7 @@
 {#if data.assignments.length === 0}
 	<div class="flex h-screen w-screen flex-col items-center justify-center">
 		<p class="mb-10 w-100 text-center text-xl">{m.no_assignments()}</p>
-		<Button.Root href={page.url.pathname.split('/assignments')[0]}>{m.back()}</Button.Root>
+		<Button.Root href="/manage/{page.params.org}/{page.params.class}">{m.back()}</Button.Root>
 	</div>
 {:else}
 	<div class="h-22"></div>
@@ -31,82 +31,32 @@
 	>
 	<div class="mt-2 grid grid-cols-3 gap-8 px-2">
 		{#each data.assignments as assignment, i (assignment.id)}
-			<div class="box">
-				<div>
-					<p class="text-center italic">{formatDate(assignment.due_date)}</p>
-					<h2 class="text-center text-2xl font-bold">{assignment.name}</h2>
-					<p class="px-4 text-center">{assignment.description}</p>
-					<div class="m-auto mt-8 h-40 w-fit">
-						{#snippet changeName()}
-							<form method="POST" action="?/changeName" class="m-auto w-fit">
-								<Label.Root>{m.change()} {m.name()}:</Label.Root><br />
-								<input value={form?.name} name="name" class="h-10 w-56" required />
-								<Button.Root type="submit">{m.go()}</Button.Root>
-								<input type="hidden" name="assignment" value={assignment.id} />
-							</form>
-							<p class="text-center">{form?.nameMessage}</p>
-						{/snippet}
-						{#snippet changeDescription()}
-							<form
-								method="POST"
-								action="?/changeDescription"
-								class="m-auto h-fit w-fit"
-							>
-								<Label.Root>{m.change()} Description:</Label.Root><br />
-								<div class="mt-0.75 flex gap-1">
-									<textarea
-										value={form?.description}
-										name="description"
-										class="m-0! inline h-10 w-56"
-										required></textarea>
-									<Button.Root type="submit">{m.go()}</Button.Root>
-								</div>
-								<input type="hidden" name="assignment" value={assignment.id} />
-							</form>
-							<p class="text-center">{form?.descriptionMessage}</p>
-						{/snippet}
-						{#snippet changeDueDate()}
-							<form method="POST" action="?/changeDueDate" class="m-auto w-fit">
-								<Label.Root>{m.change()} {m.due_date()}:</Label.Root><br />
-								<input
-									type="datetime-local"
-									class="h-10 w-56"
-									bind:value={dueDate}
-									required
-								/>
-								<Button.Root type="submit">{m.go()}</Button.Root>
-								<input type="hidden" name="assignment" value={assignment.id} />
-								<input
-									type="hidden"
-									name="dueDate"
-									value={new Date(dueDate).toISOString()}
-								/>
-							</form>
-							<p class="text-center">{form?.dueDateMessage}</p>
-						{/snippet}
-						{#snippet deleteAssignment()}
-							<div class="mt-5 w-full">
-								<Button.Root
-									class="red-button m-auto block"
-									onclick={() => {
-										assignmentIndex = i;
-										confirmDeleteOpen = true;
-									}}>{m.delete()} {m.assignment()}</Button.Root
-								>
+			<div class="box relative p-0!">
+				<a
+					class="flex h-full w-full cursor-pointer items-center justify-center rounded-xl transition-colors hover:bg-(--fg)/10"
+					href="/manage/{page.params.org}/{page.params.class}/assignments/{assignment.id}"
+				>
+					<div class="relative w-fit text-center">
+						{#if new Date() > new Date(assignment.due_date)}
+							<div class="absolute -top-8 w-full">
+								<p class="badge mx-auto mb-4 w-fit! bg-(--red) px-5!">
+									{m.late()}
+								</p>
 							</div>
-						{/snippet}
-						<Tabs
-							labels={[m.name(), 'Description', m.due_date(), m.delete()]}
-							snippets={[
-								changeName,
-								changeDescription,
-								changeDueDate,
-								deleteAssignment
-							]}
-							class="m-auto"
-						/>
+						{/if}
+						<p class="italic">{formatDate(assignment.due_date)}</p>
+						<h3 class="text-center text-2xl font-semibold">
+							{assignment.name}
+						</h3>
+						<p class="px-8">{assignment.description}</p>
 					</div>
-				</div>
+					<div class="absolute bottom-2 left-0 w-full text-center">
+						<p>
+							{m.go_to_m()}
+							{m.assignment()}
+						</p>
+					</div>
+				</a>
 			</div>
 		{/each}
 	</div>
