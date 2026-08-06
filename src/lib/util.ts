@@ -1,4 +1,34 @@
 import { getLocale } from '$lib/paraglide/runtime';
+import { object, string } from 'valibot';
+
+export const UserIdSchema = object({
+	userId: string()
+});
+
+export type SelectItemType = {
+	label: string;
+	value: string;
+};
+
+export type OrganizationMember = {
+	user: {
+		id: string;
+		name: string;
+		email: string;
+	};
+	admin: boolean;
+};
+
+export type Assignment = {
+	id: string;
+	assignment: {
+		id: string;
+		name: string;
+		description: string;
+		due_date: string;
+		class: string;
+	};
+};
 
 export function formatDate(date: string) {
 	const d = new Date(date);
@@ -11,4 +41,10 @@ export function formatDate(date: string) {
 		hour: 'numeric',
 		minute: 'numeric'
 	});
+}
+
+export function formatDateInput(date: string) {
+	const d = new Date(date);
+
+	return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}T${d.getHours() - 14}:${d.getMinutes()}`;
 }

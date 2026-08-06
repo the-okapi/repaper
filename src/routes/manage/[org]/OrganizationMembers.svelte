@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { AlertDialog } from '$lib/components';
 	import { Button, Label } from 'bits-ui';
-	import type { OrganizationMember } from '$lib/types';
+	import type { OrganizationMember } from '$lib/util';
 	import { enhance } from '$app/forms';
 	import { m } from '$lib/paraglide/messages';
 

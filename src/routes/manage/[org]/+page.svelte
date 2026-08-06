@@ -26,10 +26,6 @@
 	}
 </script>
 
-<svelte:head>
-	<title>{data.title} | Repaper</title>
-</svelte:head>
-
 <div class="h-22"></div>
 <a href="/home" class="relative ml-10 hover:underline">← {m.back()}</a>
 <div class="flex gap-4 px-10 pt-2">

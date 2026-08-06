@@ -38,7 +38,8 @@ export const changeName = async ({ request, locals, params }: ActionData) => {
 				.from('class_memberships')
 				.select('id')
 				.eq('user', user.id)
-				.eq('class', params.class),
+				.eq('class', params.class)
+				.eq('admin', true),
 			19
 		);
 
@@ -91,7 +92,8 @@ export const changeDescription = async ({ request, locals, params }: ActionData)
 				.from('class_memberships')
 				.select('id')
 				.eq('user', user.id)
-				.eq('class', params.class),
+				.eq('class', params.class)
+				.eq('admin', true),
 			21
 		);
 
@@ -144,7 +146,8 @@ export const changeDueDate = async ({ request, locals, params }: ActionData) => 
 				.from('class_memberships')
 				.select('id')
 				.eq('user', user.id)
-				.eq('class', params.class),
+				.eq('class', params.class)
+				.eq('admin', true),
 			23
 		);
 
@@ -196,7 +199,8 @@ export const deleteAssignment = async ({ request, locals, params }: ActionData) 
 				.from('class_memberships')
 				.select('id')
 				.eq('class', params.class)
-				.eq('user', user.id),
+				.eq('user', user.id)
+				.eq('admin', true),
 			25
 		);
 

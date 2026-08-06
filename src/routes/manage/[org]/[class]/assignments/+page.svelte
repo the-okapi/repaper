@@ -1,22 +1,11 @@
 <script lang="ts">
 	import { m } from '$lib/paraglide/messages';
-	import { Button, Label } from 'bits-ui';
+	import { Button } from 'bits-ui';
 	import { page } from '$app/state';
-	import { Tabs, AlertDialog } from '$lib/components';
 	import { formatDate } from '$lib/util';
 
-	let { data, form } = $props();
-
-	//let dueDate = $derived(form?.dueDate ?? new Date().toISOString());
-
-	let confirmDeleteOpen = $state(false);
-	let assignmentIndex = $state(0);
-	let assignment = $derived(data.assignments[assignmentIndex]);
+	let { data } = $props();
 </script>
-
-<svelte:head>
-	<title>{data.title} | Repaper</title>
-</svelte:head>
 
 {#if data.assignments.length === 0}
 	<div class="flex h-screen w-screen flex-col items-center justify-center">
@@ -25,12 +14,11 @@
 	</div>
 {:else}
 	<div class="h-22"></div>
-	<a
-		href="/manage/{page.params.org ?? ''}/{page.params.class ?? ''}"
-		class="relative ml-10 hover:underline">← {m.back()}</a
+	<a href="/manage/{page.params.org}/{page.params.class}" class="relative ml-10 hover:underline"
+		>← {m.back()}</a
 	>
 	<div class="mt-2 grid grid-cols-3 gap-8 px-2">
-		{#each data.assignments as assignment, i (assignment.id)}
+		{#each data.assignments as assignment (assignment.id)}
 			<div class="box relative p-0!">
 				<a
 					class="flex h-full w-full cursor-pointer items-center justify-center rounded-xl transition-colors hover:bg-(--fg)/10"
@@ -61,16 +49,3 @@
 		{/each}
 	</div>
 {/if}
-
-<AlertDialog bind:open={confirmDeleteOpen}>
-	<p class="mb-5 w-100">
-		{m.are_you_sure()}
-		{m.confirm_delete_assignment({ name: assignment.name })}
-	</p>
-	{#snippet go()}
-		<form action="?/delete" method="POST">
-			<input type="hidden" value={assignment.id} name="assignment" />
-			<Button.Root type="submit" class="red-button">{m.go()}</Button.Root>
-		</form>
-	{/snippet}
-</AlertDialog>

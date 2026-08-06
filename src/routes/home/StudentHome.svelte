@@ -3,7 +3,7 @@
 	import { loadStudent, loadAssignments } from './load.remote';
 	import { m } from '$lib/paraglide/messages';
 	import { onMount } from 'svelte';
-	import type { Assignment } from '$lib/types';
+	import type { Assignment } from '$lib/util';
 	import { formatDate } from '$lib/util';
 
 	let { organization } = $props();

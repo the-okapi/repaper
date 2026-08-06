@@ -1,7 +1,7 @@
 import { getRequestEvent, query } from '$app/server';
 import { redirect } from '@sveltejs/kit';
 import { unwrap } from '$lib/error';
-import type { Assignment } from '$lib/types';
+import type { Assignment } from '$lib/util';
 
 export const loadAdmin = query(async () => {
 	const { locals } = getRequestEvent();

@@ -214,6 +214,10 @@ input:disabled {
 	cursor: not-allowed;
 }
 
+input[type='datetime-local'] {
+	font-size: 0.9rem;
+}
+
 [data-button-root] {
 	background: var(--p);
 	color: var(--p-fg);

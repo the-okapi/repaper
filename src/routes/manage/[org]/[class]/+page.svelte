@@ -3,7 +3,7 @@
 	import { Combobox, Loader, AlertDialog } from '$lib/components';
 	import { Label, Button } from 'bits-ui';
 	import { load } from './load.remote';
-	import type { OrganizationMember } from '$lib/types';
+	import type { OrganizationMember } from '$lib/util';
 	import { m } from '$lib/paraglide/messages';
 	import CreateAssignment from './CreateAssignment.svelte';
 	import { page } from '$app/state';
@@ -26,10 +26,6 @@
 		admin: boolean;
 	};
 </script>
-
-<svelte:head>
-	<title>{data.title} | Repaper</title>
-</svelte:head>
 
 <div class="h-22"></div>
 <a href="/home" class="relative ml-10 hover:underline">← {m.back()}</a>

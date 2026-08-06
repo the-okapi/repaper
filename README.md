@@ -2,36 +2,20 @@
 
 ## Error Codes
 
-| Method              | File                                                          | Codes    |
-| ------------------- | ------------------------------------------------------------- | -------- |
-| `getStudents`       | `src/routes/manage/[org]/[class]/server.remote.ts`            | 1, 6     |
-| `createAssignment`  | same                                                          | 10 → 14  |
-| `load`              | `src/routes/manage/[org]/[class]/assignments/+page.server.ts` | 15       |
-| `changeName`        | `src/routes/manage/[org]/[class]/assignments/actions.ts`      | 19, 20   |
-| `changeDescription` | same                                                          | 21, 22   |
-| `changeDueDate`     | same                                                          | 23, 24   |
-| `deleteAssignment`  | same                                                          | 25, 26   |
-| `load`              | `src/routes/home/+page.server.ts`                             | 16       |
-| `add`               | `src/routes/manage/[org]/[class]/actions.ts`                  | 2 → 5, 9 |
-| `remove`            | same                                                          | 7, 8     |
-| `load`              | `src/routes/manage/[org]/[class]/+page.server.ts`             | 31, 32   |
-| `load`              | `src/routes/manage/[org]/[class]/load.remote.ts`              | 34, 35   |
-| `load`              | `src/routes/+layout.server.ts`                                | 37, 38   |
-| `rename`            | `src/routes/manage/[org]/actions.ts`                          | 40, 41   |
-| `create`            | same                                                          | 43 → 45  |
-| `revoke`            | same                                                          | 47, 48   |
-| `renameMember`      | same                                                          | 50 → 52  |
-| `deleteMember`      | same                                                          | 54 → 56  |
-| `restore`           | same                                                          | 58 → 60  |
-| `promote`           | same                                                          | 62, 63   |
-| `demote`            | same                                                          | 65, 66   |
-| `load`              | `src/routes/manage/[org]/+page.server.ts`                     | 68 → 71  |
-| `load`              | `src/routes/invitation/[org]/[id]/+page.server.ts`            | 72       |
-| `default`           | same                                                          | 73 → 75  |
-| `loadAdmin`         | `src/routes/home/load.remote.ts`                              | 76, 77   |
-| `loadStudent`       | same                                                          | 17       |
-| `loadAssignments`   | same                                                          | 18       |
-| `create`            | `src/routes/home/+page.server.ts`                             | 79, 80   |
-| `organization`      | same                                                          | 82, 83   |
-| `signOut`           | `src/lib/actions.remote.ts`                                   | 84       |
-| `logIn`             | same                                                          | 85, 86   |
+| File                                                                       | Codes          |
+| -------------------------------------------------------------------------- | -------------- |
+| `src/routes/manage/[org]/[class]/server.remote.ts`                         | 1, 6, 10 → 14  |
+| `src/routes/manage/[org]/[class]/assignments/+page.server.ts`              | 15             |
+| `src/routes/manage/[org]/[class]/assignments/[assignment]/actions.ts`      | 19 → 26        |
+| `src/routes/manage/[org]/[class]/assignments/[assignment]/+page.server.ts` | 27, 28         |
+| `src/routes/home/+page.server.ts`                                          | 16             |
+| `src/routes/manage/[org]/[class]/actions.ts`                               | 2 → 5, 7 → 9   |
+| `src/routes/manage/[org]/[class]/+page.server.ts`                          | 31, 32         |
+| `src/routes/manage/[org]/[class]/load.remote.ts`                           | 34, 35         |
+| `src/routes/+layout.server.ts`                                             | 37, 38         |
+| `src/routes/manage/[org]/actions.ts`                                       | 39 → 58        |
+| `src/routes/manage/[org]/+page.server.ts`                                  | 68 → 71        |
+| `src/routes/invitation/[org]/[id]/+page.server.ts`                         | 72 → 75        |
+| `src/routes/home/load.remote.ts`                                           | 17, 18, 76, 77 |
+| `src/routes/home/+page.server.ts`                                          | 79 → 82        |
+| `src/lib/actions.remote.ts`                                                | 84 → 86        |

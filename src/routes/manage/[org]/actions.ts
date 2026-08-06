@@ -2,7 +2,7 @@ import { redirect, fail } from '@sveltejs/kit';
 import resend from '$lib/resend';
 import { object, string, safeParse } from 'valibot';
 import type { RouteParams } from './$types';
-import { UserIdSchema } from '$lib/types';
+import { UserIdSchema } from '$lib/util';
 import { unwrap, unwrapNoData } from '$lib/error';
 import { m } from '$lib/paraglide/messages';
 
@@ -365,7 +365,7 @@ export const restore = async ({ request, locals, params }: ActionData) => {
 				organization: params.org,
 				admin: false
 			}),
-			59
+			57
 		);
 
 		unwrapNoData(
@@ -376,7 +376,7 @@ export const restore = async ({ request, locals, params }: ActionData) => {
 				})
 				.eq('id', userId)
 				.eq('organization', params.org),
-			60
+			53
 		);
 	} catch {
 		return redirect(303, '/error');
@@ -410,7 +410,7 @@ export const promote = async ({ request, locals, params }: ActionData) => {
 				.eq('organization', params.org)
 				.eq('admin', true)
 				.eq('user', user.id),
-			62
+			49
 		);
 
 		if (!check?.[0]) {
@@ -426,7 +426,7 @@ export const promote = async ({ request, locals, params }: ActionData) => {
 				.eq('user', userId)
 				.eq('organization', params.org)
 				.eq('admin', false),
-			63
+			39
 		);
 	} catch {
 		return redirect(303, '/error');
@@ -464,7 +464,7 @@ export const demote = async ({ request, params, locals }: ActionData) => {
 				.eq('organization', params.org)
 				.eq('admin', true)
 				.eq('user', user.id),
-			65
+			46
 		);
 
 		if (!check?.[0]) {
@@ -480,7 +480,7 @@ export const demote = async ({ request, params, locals }: ActionData) => {
 				.eq('user', userId)
 				.eq('organization', params.org)
 				.eq('admin', true),
-			66
+			42
 		);
 	} catch {
 		return redirect(303, '/error');
