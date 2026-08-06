@@ -61,7 +61,7 @@ export const changeName = async ({ request, locals, params }: ActionData) => {
 		return fail(500, { nameMessage: m.something_happened(), name });
 	}
 
-	return { nameMessage: m.successfully_changed(), name: '' };
+	return { nameMessage: m.successfully_changed(), name: '', success: m.name() };
 };
 
 const DescriptionSchema = object({
@@ -115,7 +115,11 @@ export const changeDescription = async ({ request, locals, params }: ActionData)
 		return fail(500, { descriptionMessage: m.something_happened(), description });
 	}
 
-	return { descriptionMessage: m.successfully_changed(), description: '' };
+	return {
+		descriptionMessage: m.successfully_changed(),
+		description: '',
+		success: 'Description'
+	};
 };
 
 const DueDateSchema = object({
@@ -169,7 +173,7 @@ export const changeDueDate = async ({ request, locals, params }: ActionData) => 
 		return fail(500, { dueDateMessage: m.something_happened(), dueDate });
 	}
 
-	return { dueDateMessage: m.successfully_changed(), dueDate: '' };
+	return { dueDateMessage: m.successfully_changed(), dueDate: '', success: m.due_date() };
 };
 
 const DeleteSchema = object({
@@ -220,5 +224,5 @@ export const deleteAssignment = async ({ request, locals, params }: ActionData) 
 		return fail(500, { deleteMessage: m.something_happened() });
 	}
 
-	return { success: true };
+	return { success: m.delete() };
 };

@@ -7,7 +7,7 @@
 
 	let { data, form } = $props();
 
-	let dueDate = $derived(form?.dueDate ?? data.assignment.due_date);
+	let dueDate = $derived(formatDateInput(form?.dueDate || data.assignment.due_date));
 
 	let confirmDeleteOpen = $state(false);
 </script>
@@ -61,7 +61,7 @@
 					<input type="datetime-local" class="h-10 w-56" bind:value={dueDate} required />
 					<Button.Root type="submit">{m.go()}</Button.Root>
 					<input type="hidden" name="assignment" value={data.assignment.id} />
-					<input type="hidden" name="dueDate" value={formatDateInput(dueDate)} />
+					<input type="hidden" name="dueDate" value={new Date(dueDate).toISOString()} />
 				</form>
 				<p class="text-center">{form?.dueDateMessage}</p>
 			{/snippet}
@@ -79,6 +79,7 @@
 				labels={[m.name(), 'Description', m.due_date(), m.delete()]}
 				snippets={[changeName, changeDescription, changeDueDate, deleteAssignment]}
 				class="m-auto"
+				value={form?.success ?? m.name()}
 			/>
 		</div>
 	</div>

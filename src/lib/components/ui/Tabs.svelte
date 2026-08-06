@@ -4,7 +4,7 @@
 	let { labels = [], snippets = [], ...props } = $props();
 </script>
 
-<Tabs.Root value={labels[0]} {...props}>
+<Tabs.Root {...props}>
 	<Tabs.List>
 		{#each labels as label (label)}
 			<Tabs.Trigger value={label}>
