@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+:focus {
+	outline: none;
+}
+
 .light {
 	color-scheme: light;
 	--bg: #ffffff;
@@ -359,4 +363,9 @@ textarea {
 		background-color: var(--bg);
 		color: var(--fg);
 	}
+}
+
+.assignment-tabs [data-tabs-trigger] {
+	font-size: 1.15rem;
+	width: 8rem;
 }

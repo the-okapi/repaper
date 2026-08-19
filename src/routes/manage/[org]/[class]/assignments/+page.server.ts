@@ -27,7 +27,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 			return redirect(303, '/home');
 		}
 
-		const assignments = unwrap(
+		const assignments: any[] = unwrap(
 			await locals.supabase
 				.from('assignments')
 				.select('id, name, description, due_date')
@@ -35,8 +35,12 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 			16
 		);
 
+		const assignmentsOrdered = assignments.sort((a, b) =>
+			new Date(a.due_date) > new Date(b.due_date) ? 1 : -1
+		);
+
 		return {
-			assignments,
+			assignments: assignmentsOrdered,
 			title: m.assignments() + ' - ' + check[0].class.name
 		};
 	} catch {

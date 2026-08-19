@@ -66,7 +66,6 @@ export const createAssignment = form(
 					.select('id'),
 				11
 			);
-			console.log(assignment);
 
 			if (everyone) {
 				const allStudents = unwrap(
@@ -79,7 +78,6 @@ export const createAssignment = form(
 				);
 
 				for (let i = 0; i < allStudents.length; i++) {
-					console.log(assignment);
 					unwrapNoData(
 						await locals.supabase.from('assignment_submissions').insert({
 							user: allStudents[i].user.id,

@@ -33,10 +33,6 @@
 
 	let logOutOpen = $state(false);
 
-	function link() {
-		shown = false;
-	}
-
 	async function signOutForm(event: Event) {
 		event.preventDefault();
 		logOutOpen = false;
@@ -87,7 +83,7 @@
 		class="fixed top-5 left-17 z-40! flex h-10 rounded-xl px-3 py-1.5 outline outline-(--o)"
 	>
 		{#if loggedIn}
-			<a class="m-auto mx-2 h-fit hover:underline" href="/home" onclick={link}>{m.home()}</a>
+			<a class="m-auto mx-2 h-fit hover:underline" href="/home">{m.home()}</a>
 			<button
 				class="mx-2 cursor-pointer whitespace-nowrap hover:underline"
 				onclick={() => (logOutOpen = true)}
@@ -95,11 +91,9 @@
 				{m.log_out()}
 			</button>
 		{:else}
-			<a class="m-auto mx-2 h-fit hover:underline" href="/" onclick={link}>{m.home()}</a>
-			<a
-				class="m-auto mx-2 h-fit whitespace-nowrap hover:underline"
-				href="/signup"
-				onclick={link}>{m.sign_up()}</a
+			<a class="m-auto mx-2 h-fit hover:underline" href="/">{m.home()}</a>
+			<a class="m-auto mx-2 h-fit whitespace-nowrap hover:underline" href="/signup"
+				>{m.sign_up()}</a
 			>
 			<div class="cardButton m-auto h-fit {login ? 'z-50!' : 'z-40!'}">
 				<button
