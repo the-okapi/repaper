@@ -41,11 +41,6 @@ main * {
 	color: var(--p-fg);
 }
 
-:root::selection {
-	background-color: var(--p);
-	color: var(--p-fg);
-}
-
 [data-theme='georgia'],
 .georgia {
 	--font: 'Georgia';
@@ -112,13 +107,13 @@ main * {
 	background-color: var(--bg);
 	transition: box-shadow 100ms;
 	margin: 0.2rem auto;
-}
 
-[data-select-trigger]:hover,
-[data-select-trigger]:focus {
-	box-shadow:
-		0 0 0 1.5px var(--bg),
-		0 0 0 3.5px var(--p);
+	&:hover,
+	&:focus {
+		box-shadow:
+			0 0 0 1.5px var(--bg),
+			0 0 0 3.5px var(--p);
+	}
 }
 
 [data-select-content] {
@@ -161,10 +156,6 @@ main * {
 	cursor: pointer;
 }
 
-[data-button-root]:focus {
-	outline: none!;
-}
-
 .card {
 	position: absolute;
 	width: fit;
@@ -182,40 +173,37 @@ textarea {
 	margin-top: 0.2rem;
 	margin-bottom: 0.2rem;
 	resize: none;
+
+	&:focus,
+	&:hover {
+		box-shadow:
+			0 0 0 1.5px var(--bg),
+			0 0 0 3.5px var(--p);
+	}
+
+	&:focus {
+		outline: none;
+	}
 }
 
 input {
 	padding: 0.5rem;
+
+	&:disabled {
+		background-color: color-mix(in oklab, var(--fg) 7%, transparent);
+		border-color: color-mix(in oklab, var(--fg) 10%, transparent);
+		color: color-mix(in oklab, var(--fg) 60%, transparent);
+		cursor: not-allowed;
+	}
+
+	&[type='datetime-local'] {
+		font-size: 0.9rem;
+	}
 }
 
 textarea {
 	padding: 0.35rem;
 	line-height: 1.1rem;
-}
-
-input:hover,
-input:focus,
-textarea:hover,
-textarea:focus {
-	box-shadow:
-		0 0 0 1.5px var(--bg),
-		0 0 0 3.5px var(--p);
-}
-
-input:focus,
-textarea:focus {
-	outline: none;
-}
-
-input:disabled {
-	background-color: color-mix(in oklab, var(--fg) 7%, transparent);
-	border-color: color-mix(in oklab, var(--fg) 10%, transparent);
-	color: color-mix(in oklab, var(--fg) 60%, transparent);
-	cursor: not-allowed;
-}
-
-input[type='datetime-local'] {
-	font-size: 0.9rem;
 }
 
 [data-button-root] {
@@ -227,27 +215,27 @@ input[type='datetime-local'] {
 	outline: 2px solid var(--p);
 	outline-offset: -5px;
 	transition: outline-offset 100ms;
+
+	&[href] {
+		padding: 0.75rem 1rem;
+	}
+
+	&:hover {
+		outline-offset: 1px;
+	}
+
+	&:disabled,
+	&[data-disabled] {
+		color: color-mix(in oklab, var(--fg) 50%, transparent);
+		background-color: color-mix(in oklab, var(--fg) 10%, transparent);
+		opacity: 1;
+		cursor: not-allowed;
+	}
 }
 
 .red-button {
 	background-color: var(--red);
 	outline-color: var(--red);
-}
-
-[data-button-root][href] {
-	padding: 0.75rem 1rem;
-}
-
-[data-button-root]:hover {
-	outline-offset: 1px;
-}
-
-[data-button-root]:disabled,
-[data-button-root][data-disabled] {
-	color: color-mix(in oklab, var(--fg) 50%, transparent);
-	background-color: color-mix(in oklab, var(--fg) 10%, transparent);
-	opacity: 1;
-	cursor: not-allowed;
 }
 
 [data-alert-dialog-overlay] {
@@ -316,20 +304,20 @@ input[type='datetime-local'] {
 		background-color 150ms,
 		outline-color 150ms,
 		outline-offset 100ms;
-}
 
-[data-switch-root]:hover {
-	outline-offset: 1px;
-}
+	&:hover {
+		outline-offset: 1px;
+	}
 
-[data-switch-root][data-state='unchecked'] {
-	background-color: var(--s);
-	outline-color: var(--s);
-}
+	&[data-state='unchecked'] {
+		background-color: var(--s);
+		outline-color: var(--s);
+	}
 
-[data-switch-root][data-state='checked'] {
-	background-color: var(--p);
-	outline-color: var(--p);
+	&[data-state='checked'] {
+		background-color: var(--p);
+		outline-color: var(--p);
+	}
 }
 
 [data-switch-thumb] {
@@ -341,14 +329,14 @@ input[type='datetime-local'] {
 	flex-shrink: 0;
 	border-radius: calc(infinity * 1px);
 	transition: transform 150ms;
-}
 
-[data-switch-thumb][data-state='unchecked'] {
-	transform: translateX(0);
-}
+	&[data-state='unchecked'] {
+		transform: translteX(0);
+	}
 
-[data-switch-thumb][data-state='checked'] {
-	transform: translateX(22px);
+	&[data-state='checked'] {
+		transform: translateX(22px);
+	}
 }
 
 [data-tabs-list] {
@@ -366,9 +354,9 @@ input[type='datetime-local'] {
 	border-radius: 0.5rem;
 	padding: 0.25rem 0.75rem;
 	cursor: pointer;
-}
 
-[data-tabs-trigger][data-state='active'] {
-	background-color: var(--bg);
-	color: var(--fg);
+	&[data-state='active'] {
+		background-color: var(--bg);
+		color: var(--fg);
+	}
 }
