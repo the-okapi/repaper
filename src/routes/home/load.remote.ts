@@ -94,7 +94,7 @@ export const loadAssignments = query(async () => {
 		const assignments: Assignment[] = unwrap(
 			await locals.supabase
 				.from('assignment_submissions')
-				.select('id, assignment ( id, name, description, due_date, class ) '),
+				.select('id, assignment ( id, name, description, due_date, class ), submitted '),
 			18
 		);
 

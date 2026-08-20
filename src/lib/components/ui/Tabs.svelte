@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { Tabs } from 'bits-ui';
 
-	let { labels = [], snippets = [], ...props } = $props();
+	let { labels = [], snippets = [], triggerClass = '', ...props } = $props();
 </script>
 
 <Tabs.Root {...props}>
 	<Tabs.List>
 		{#each labels as label (label)}
-			<Tabs.Trigger value={label}>
+			<Tabs.Trigger class={triggerClass} value={label}>
 				{label}
 			</Tabs.Trigger>
 		{/each}

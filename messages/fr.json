@@ -91,5 +91,8 @@
 	"confirm_delete_assignment": "supprimer {name}? Cette action est permanente et ne peut pas être refaite.",
 	"no_users": "Il n'y a aucun utilisateur qui n'est pas déjà dans cette classe.",
 	"upcoming": "Imminent",
-	"past": "Passé"
+	"past": "Passé",
+	"submitted": "Soumis",
+	"to_do": "À Faire",
+	"no_assignments_here": "Aucun Devoir Ici"
 }

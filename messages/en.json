@@ -92,5 +92,8 @@
 	"confirm_delete_assignment": "delete {name}? This action is permanent and cannot be undone.",
 	"no_users": "There are no users to add that are not already in this class.",
 	"upcoming": "Upcoming",
-	"past": "Past"
+	"past": "Past",
+	"submitted": "Submitted",
+	"to_do": "To Do",
+	"no_assignments_here": "No Assignments Here"
 }

@@ -28,6 +28,7 @@ export type Assignment = {
 		due_date: string;
 		class: string;
 	};
+	submitted: string;
 };
 
 export function formatDate(date: string) {
