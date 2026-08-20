@@ -4,6 +4,10 @@
 	import { m } from '$lib/paraglide/messages';
 </script>
 
+<svelte:head>
+	<title>{m.something_happened()} | Repaper</title>
+</svelte:head>
+
 <div class="flex h-screen w-screen items-center justify-center">
 	<div>
 		<h1 class="text-9xl font-bold">{page.status}: {page.error?.message}</h1>

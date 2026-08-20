@@ -56,9 +56,10 @@
 				<div>
 					<h2 class="mb-4 text-center text-3xl font-bold">{m.assignments()}</h2>
 					{#snippet list(assignmentsFiltered: Assignment[])}
-						<div class="grid grid-cols-2 gap-7">
+						<div class="grid grid-cols-2 gap-6">
 							{#each assignmentsFiltered as a (a.id)}
 								{let assignment = {
+									subId: a.id,
 									id: a.assignment.id,
 									name: a.assignment.name,
 									description: a.assignment.description,
@@ -69,7 +70,7 @@
 								<div class="box relative p-0!">
 									<a
 										class="flex h-full w-full cursor-pointer items-center justify-center rounded-xl transition-colors hover:bg-(--fg)/10"
-										href="/assignment/{assignment.id}"
+										href="/assignment/{assignment.subId}"
 									>
 										<div class="relative w-fit text-center">
 											{#if a.submitted}
