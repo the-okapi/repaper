@@ -4,7 +4,7 @@
 	let { value = $bindable(50), ...props } = $props();
 </script>
 
-<Slider.Root type="single" class="relative flex w-80 items-center" {...props} bind:value>
+<Slider.Root type="single" class="relative flex w-60 items-center" {...props} bind:value>
 	<span class="h-2 w-full cursor-pointer rounded-full bg-(--s)">
 		<Slider.Range class="absolute h-2 rounded-full bg-(--p)" />
 	</span>
