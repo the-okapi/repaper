@@ -14,7 +14,7 @@
 	<title>{data.title} | Repaper</title>
 </svelte:head>
 
-<div class="h-25"></div>
+<div class="h-4"></div>
 {#if !data.assignment.submitted}
 	<Tiptap content={data.assignment.content}>
 		{#snippet buttons()}

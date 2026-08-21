@@ -384,12 +384,13 @@ textarea {
 	border-radius: 0.85rem;
 	display: inline-block;
 	font-size: 20pt;
-	caret-color: var(--c);
+	caret-color: var(--p);
 	position: absolute;
 	text-align: left;
 	tab-size: 0.5in;
 	background-color: var(--bg);
 	font-family: 'Georgia', 'Times New Roman', serif;
+	min-height: 50rem;
 }
 
 .tiptap h1 {
@@ -429,4 +430,13 @@ textarea {
 		color: var(--fg) !important;
 		outline-color: var(--s) !important;
 	}
+}
+
+.toggle-icon {
+	height: 2.5rem;
+	width: 2.5rem;
+	padding: 0 !important;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

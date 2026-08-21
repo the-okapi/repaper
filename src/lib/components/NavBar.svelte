@@ -6,6 +6,8 @@
 	import { signOut } from '$lib/actions.remote';
 	import { m } from '$lib/paraglide/messages';
 	import { goto } from '$app/navigation';
+	import showIcon from '$lib/assets/icons/show.svg';
+	import hideIcon from '$lib/assets/icons/hide.svg';
 
 	let { loggedIn } = $props();
 
@@ -57,6 +59,8 @@
 			login = false;
 		}
 	}
+
+	let hidden = $state(false);
 </script>
 
 <svelte:window {onkeydown} />
@@ -69,58 +73,76 @@
 		</form>
 	{/snippet}
 </AlertDialog>
-
-<button
-	class="fixed top-5 left-5 z-50! inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg border border-(--o) font-[Times_New_Roman] text-2xl font-black"
-	onclick={show}
->
-	R
-</button>
-{#if shown}
-	<div
-		in:slide={{ axis: 'x' }}
-		out:slide={{ axis: 'x' }}
-		class="fixed top-5 left-17 z-40! flex h-10 rounded-xl px-3 py-1.5 outline outline-(--o)"
+{#if !hidden}
+	<button
+		class="fixed top-5 left-5 z-50! inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg border border-(--o) font-[Times_New_Roman] text-2xl font-black"
+		onclick={show}
 	>
-		{#if loggedIn}
-			<a class="m-auto mx-2 h-fit hover:underline" href="/home">{m.home()}</a>
-			<button
-				class="mx-2 cursor-pointer whitespace-nowrap hover:underline"
-				onclick={() => (logOutOpen = true)}
-			>
-				{m.log_out()}
-			</button>
-		{:else}
-			<a class="m-auto mx-2 h-fit hover:underline" href="/">{m.home()}</a>
-			<a class="m-auto mx-2 h-fit whitespace-nowrap hover:underline" href="/signup"
-				>{m.sign_up()}</a
-			>
-			<div class="cardButton m-auto h-fit {login ? 'z-50!' : 'z-40!'}">
+		R
+	</button>
+	{#if shown}
+		<div
+			in:slide={{ axis: 'x' }}
+			out:slide={{ axis: 'x' }}
+			class="fixed top-5 left-17 z-40! flex h-10 rounded-xl px-3 py-1.5 outline outline-(--o)"
+		>
+			{#if loggedIn}
+				<a class="m-auto mx-2 h-fit hover:underline" href="/home">{m.home()}</a>
 				<button
 					class="mx-2 cursor-pointer whitespace-nowrap hover:underline"
-					onclick={showLogin}>{m.log_in()}</button
+					onclick={() => (logOutOpen = true)}
 				>
-				{#if login}
-					<Login class="card" />
+					{m.log_out()}
+				</button>
+			{:else}
+				<a class="m-auto mx-2 h-fit hover:underline" href="/">{m.home()}</a>
+				<a class="m-auto mx-2 h-fit whitespace-nowrap hover:underline" href="/signup"
+					>{m.sign_up()}</a
+				>
+				<div class="cardButton m-auto h-fit {login ? 'z-50!' : 'z-40!'}">
+					<button
+						class="mx-2 cursor-pointer whitespace-nowrap hover:underline"
+						onclick={showLogin}>{m.log_in()}</button
+					>
+					{#if login}
+						<Login class="card" />
+					{/if}
+				</div>
+			{/if}
+			<div class="cardButton m-auto h-fit {settings ? 'z-50!' : 'z-40!'}">
+				<button
+					class="mx-2 cursor-pointer whitespace-nowrap hover:underline"
+					onclick={showSettings}>{m.settings()}</button
+				>
+				{#if settings}
+					<Settings class="card" />
 				{/if}
 			</div>
-		{/if}
-		<div class="cardButton m-auto h-fit {settings ? 'z-50!' : 'z-40!'}">
-			<button
-				class="mx-2 cursor-pointer whitespace-nowrap hover:underline"
-				onclick={showSettings}>{m.settings()}</button
-			>
-			{#if settings}
-				<Settings class="card" />
-			{/if}
 		</div>
-	</div>
+	{/if}
+	<h1
+		class="fixed top-0 w-screen border-b border-(--o) bg-(--bg) py-5 text-center text-4xl font-bold"
+	>
+		{page.data.title ?? 'Repaper'}
+	</h1>
+	<button
+		class="fixed top-5 right-5 z-50! inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg border border-(--o) bg-(--bg)
+		"
+		onclick={() => (hidden = true)}
+	>
+		<img src={showIcon} alt="Hide" class="size-4.5" />
+	</button>
+	{#if page.url.pathname.includes('/assignment/')}
+		<div class="h-20"></div>
+	{/if}
+{:else}
+	<button
+		class="fixed top-5 right-5 z-50! inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg border border-(--o) bg-(--bg)"
+		onclick={() => (hidden = false)}
+	>
+		<img src={hideIcon} alt="Show" class="size-4.5" />
+	</button>
 {/if}
-<h1
-	class="fixed top-0 w-screen border-b border-(--o) bg-(--bg) py-5 text-center text-4xl font-bold"
->
-	{page.data.title ?? 'Repaper'}
-</h1>
 
 <style>
 	.cardButton {

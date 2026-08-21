@@ -13,6 +13,9 @@
 	import { Slider, Toggle, Loader } from '$lib/components';
 	import { m } from '$lib/paraglide/messages';
 	import { Button } from 'bits-ui';
+	import BoldIcon from '$lib/assets/icons/Bold.svelte';
+	import ItalicIcon from '$lib/assets/icons/Italic.svelte';
+	import UnderlineIcon from '$lib/assets/icons/Underline.svelte';
 
 	let element: any = $state();
 	let editorState: { editor: Editor | null } = $state({ editor: null });
@@ -60,7 +63,7 @@
 		editorState.editor?.destroy();
 	});
 
-	let zoom = $state(100);
+	let zoom = $state(95);
 </script>
 
 <div class="relative">
@@ -73,6 +76,7 @@
 			></div>
 		</div>
 	</div>
+	<div class="h-24"></div>
 </div>
 
 <div
@@ -90,28 +94,31 @@
 		<div class="mx-4 h-10 border-l border-(--o)"></div>
 		<Toggle
 			onclick={() => editorState.editor?.chain().focus().toggleBold().run()}
-			active={editorState.editor.isActive('bold')}>{m.bold()}</Toggle
+			active={editorState.editor.isActive('bold')}
+			class="toggle-icon"><BoldIcon class="size-4.5" /></Toggle
 		>
 		<Toggle
 			onclick={() => editorState.editor?.chain().focus().toggleItalic().run()}
-			active={editorState.editor.isActive('italic')}>{m.italic()}</Toggle
+			active={editorState.editor.isActive('italic')}
+			class="toggle-icon"><ItalicIcon class="size-4.5" /></Toggle
 		>
 		<Toggle
 			onclick={() => editorState.editor?.chain().focus().toggleUnderline().run()}
-			active={editorState.editor.isActive('underline')}>{m.underline()}</Toggle
+			active={editorState.editor.isActive('underline')}
+			class="toggle-icon"><UnderlineIcon class="size-4.5" /></Toggle
 		>
 		<div class="w-4"></div>
 		<Toggle
-			onclick={() => editorState.editor?.chain().focus().setHeading({ level: 1 }).run()}
-			active={editorState.editor.isActive('heading', { level: 1 })}>{m.heading()}</Toggle
+			onclick={() => editorState.editor?.chain().focus().setParagraph().run()}
+			active={editorState.editor.isActive('paragraph')}>{m.body()}</Toggle
 		>
 		<Toggle
 			onclick={() => editorState.editor?.chain().focus().setHeading({ level: 2 }).run()}
 			active={editorState.editor.isActive('heading', { level: 2 })}>{m.subheading()}</Toggle
 		>
 		<Toggle
-			onclick={() => editorState.editor?.chain().focus().setParagraph().run()}
-			active={editorState.editor.isActive('paragraph')}>{m.body()}</Toggle
+			onclick={() => editorState.editor?.chain().focus().setHeading({ level: 1 }).run()}
+			active={editorState.editor.isActive('heading', { level: 1 })}>{m.heading()}</Toggle
 		>
 		<div class="mx-4 h-10 border-l border-(--o)"></div>
 		{@render buttons()}
