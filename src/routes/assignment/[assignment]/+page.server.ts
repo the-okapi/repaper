@@ -32,8 +32,6 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 			submitted: a.submitted
 		};
 
-		console.log(assignment);
-
 		if (a.document) {
 			return {
 				title: assignment.name,

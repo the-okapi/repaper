@@ -94,5 +94,12 @@
 	"past": "Passé",
 	"submitted": "Soumis",
 	"to_do": "À Faire",
-	"no_assignments_here": "Aucun Devoir Ici"
+	"no_assignments_here": "Aucun Devoir Ici",
+	"bold": "Gras",
+	"italic": "Italique",
+	"underline": "Soulignement",
+	"heading": "Titre",
+	"subheading": "Sous-Titre",
+	"body": "Corps",
+	"assignment_details": "Détails du Devoir"
 }

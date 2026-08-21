@@ -71,7 +71,7 @@
 </AlertDialog>
 
 <button
-	class="fixed top-5 left-5 z-50! inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg font-[Times_New_Roman] text-2xl font-black outline outline-(--o)"
+	class="fixed top-5 left-5 z-50! inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg border border-(--o) font-[Times_New_Roman] text-2xl font-black"
 	onclick={show}
 >
 	R

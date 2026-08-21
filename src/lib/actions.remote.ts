@@ -9,7 +9,6 @@ export const signOut = command(async () => {
 	try {
 		unwrapNoData(await locals.supabase.auth.signOut(), 84);
 	} catch {
-		console.log('Log Out Error');
 		return { status: 500 };
 	}
 
@@ -49,8 +48,7 @@ export const logIn = command(LogInSchema, async ({ email, password }) => {
 		unwrapNoData(await locals.supabase.auth.signOut(), 86);
 
 		return { status: 404, message: m.user_not_found() };
-	} catch (error: any) {
-		console.log(error);
+	} catch {
 		return { status: 500, message: m.something_happened() };
 	}
 });

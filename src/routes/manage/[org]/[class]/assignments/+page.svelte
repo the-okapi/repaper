@@ -30,7 +30,7 @@
 			{#each assignments as assignment (assignment.id)}
 				<div class="box relative p-0!">
 					<a
-						class="flex h-full w-full cursor-pointer items-center justify-center rounded-xl transition-colors hover:bg-(--fg)/10"
+						class="flex h-full w-full cursor-pointer items-center justify-center rounded-xl transition-colors hover:bg-(--a)"
 						href="/manage/{page.params.org}/{page.params
 							.class}/assignments/{assignment.id}"
 					>

@@ -90,7 +90,6 @@ main * {
 :root {
 	font-family: var(--font);
 	vector-effect: non-scaling-stroke;
-	text-decoration-thickness: 1px;
 }
 
 * {
@@ -368,4 +367,66 @@ textarea {
 .assignment-tabs [data-tabs-trigger] {
 	font-size: 1.15rem;
 	width: 8rem;
+}
+
+.tiptap-container {
+	display: inline-block;
+	border-radius: 0.85rem;
+	padding: 0.5rem;
+	background-color: var(--bg);
+	border: 1px solid var(--o);
+}
+
+.tiptap {
+	outline: none;
+	padding: 1.5rem;
+	width: 14in;
+	border-radius: 0.85rem;
+	display: inline-block;
+	font-size: 20pt;
+	caret-color: var(--c);
+	position: absolute;
+	text-align: left;
+	tab-size: 0.5in;
+	background-color: var(--bg);
+	font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.tiptap h1 {
+	font-size: 40pt;
+	text-align: center;
+}
+
+.tiptap h2 {
+	font-size: 22pt;
+	text-align: center;
+}
+
+.tiptap p {
+	line-height: 2.3rem;
+	margin-bottom: 0.8rem;
+	font-size: 14pt;
+}
+
+.tiptap hr {
+	border: 1px solid var(--fg);
+}
+
+.tiptap u::selection {
+	text-decoration: underline var(--p-fg);
+	text-decoration-thickness: 1.5px;
+}
+
+[data-toggle-root] {
+	transition:
+		background-color 150ms,
+		color 150ms,
+		outline-color 150ms,
+		outline-offset 100ms;
+
+	&[data-state='inactive'] {
+		background-color: var(--s) !important;
+		color: var(--fg) !important;
+		outline-color: var(--s) !important;
+	}
 }

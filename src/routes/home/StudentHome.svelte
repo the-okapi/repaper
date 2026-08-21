@@ -26,7 +26,7 @@
 			{#each userData.classes as classMembership (classMembership.id)}
 				<div class="box relative p-0!">
 					<a
-						class="flex h-full w-full cursor-pointer items-center justify-center rounded-xl transition-colors hover:bg-(--fg)/10"
+						class="flex h-full w-full cursor-pointer items-center justify-center rounded-xl transition-colors hover:bg-(--a)"
 						href="/class/{organization}/{classMembership.class.id}"
 					>
 						<div class="w-fit text-center">
@@ -69,7 +69,7 @@
 								}}
 								<div class="box relative p-0!">
 									<a
-										class="flex h-full w-full cursor-pointer items-center justify-center rounded-xl transition-colors hover:bg-(--fg)/10"
+										class="flex h-full w-full cursor-pointer items-center justify-center rounded-xl transition-colors hover:bg-(--a)"
 										href="/assignment/{assignment.subId}"
 									>
 										<div class="relative w-fit text-center">

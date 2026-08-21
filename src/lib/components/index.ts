@@ -10,3 +10,6 @@ export { default as Background } from '$lib/components/ui/Background.svelte';
 export { default as Combobox } from '$lib/components/ui/Combobox.svelte';
 export { default as Switch } from '$lib/components/ui/Switch.svelte';
 export { default as Tabs } from '$lib/components/ui/Tabs.svelte';
+export { default as Tiptap } from '$lib/components/Tiptap.svelte';
+export { default as Slider } from '$lib/components/ui/Slider.svelte';
+export { default as Toggle } from '$lib/components/ui/Toggle.svelte';

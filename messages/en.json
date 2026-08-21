@@ -95,5 +95,12 @@
 	"past": "Past",
 	"submitted": "Submitted",
 	"to_do": "To Do",
-	"no_assignments_here": "No Assignments Here"
+	"no_assignments_here": "No Assignments Here",
+	"bold": "Bold",
+	"italic": "Italic",
+	"underline": "Underline",
+	"heading": "Heading",
+	"subheading": "Subheading",
+	"body": "Body",
+	"assignment_details": "Assignment Details"
 }

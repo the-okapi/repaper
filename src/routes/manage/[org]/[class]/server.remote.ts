@@ -103,8 +103,7 @@ export const createAssignment = form(
 			return {
 				success: true
 			};
-		} catch (error: any) {
-			console.log(error);
+		} catch {
 			return {
 				everyone,
 				students,
