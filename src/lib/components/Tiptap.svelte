@@ -74,11 +74,7 @@
 >
 	<div class="text-center">
 		<div class="tiptap-container">
-			<div
-				spellcheck="false"
-				bind:this={element}
-				style="zoom: {zoom / 100}; transform-origin: top center;"
-			></div>
+			<div spellcheck="false" bind:this={element} style="zoom: {zoom / 100};"></div>
 		</div>
 	</div>
 </div>
