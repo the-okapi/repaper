@@ -9,7 +9,7 @@
 	<title>{m.something_happened()} | Repaper</title>
 </svelte:head>
 
-<div class="flex h-screen w-screen items-center justify-center">
+<div class="flex h-[calc(100vh-5rem)] w-screen items-center justify-center">
 	<div class="h-fit text-center">
 		<h1 class="mb-5">{m.something_happened()}</h1>
 		<Button.Root class="m-auto" href="/home">{m.home()}</Button.Root>

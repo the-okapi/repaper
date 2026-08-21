@@ -241,6 +241,12 @@ textarea {
 	outline-color: var(--red);
 }
 
+.gray-button {
+	background-color: var(--s);
+	outline-color: var(--s);
+	color: var(--fg);
+}
+
 [data-alert-dialog-overlay] {
 	background-color: color-mix(in oklab, #000000 50%, transparent);
 	width: 100vw;
@@ -375,6 +381,7 @@ textarea {
 	padding: 0.5rem;
 	background-color: var(--bg);
 	border: 1px solid var(--o);
+	overflow-x: scroll;
 }
 
 .tiptap {

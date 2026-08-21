@@ -19,7 +19,7 @@
 	<title>{m.sign_up()} | Repaper</title>
 </svelte:head>
 
-<div class="m-auto flex h-screen w-screen items-center justify-center p-20">
+<div class="m-auto flex h-[calc(100vh-5rem)] w-screen items-center justify-center">
 	{#if loading}
 		<Loader />
 	{:else}

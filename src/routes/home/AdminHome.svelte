@@ -13,7 +13,7 @@
 		<Loader />
 	</div>
 {:then userData}
-	<div class="grid grid-cols-3 gap-7 px-20 pt-24 pb-10">
+	<div class="grid grid-cols-3 gap-7 px-20 pt-4 pb-10">
 		{#if userData.organization}
 			{#if userData.organization.admin}
 				<div class="box">

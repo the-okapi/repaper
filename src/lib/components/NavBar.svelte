@@ -8,6 +8,7 @@
 	import { goto } from '$app/navigation';
 	import showIcon from '$lib/assets/icons/show.svg';
 	import hideIcon from '$lib/assets/icons/hide.svg';
+	import { barHidden } from '$lib/state.svelte';
 
 	let { loggedIn } = $props();
 
@@ -59,8 +60,6 @@
 			login = false;
 		}
 	}
-
-	let hidden = $state(false);
 </script>
 
 <svelte:window {onkeydown} />
@@ -73,9 +72,9 @@
 		</form>
 	{/snippet}
 </AlertDialog>
-{#if !hidden}
+{#if !barHidden.value}
 	<button
-		class="fixed top-5 left-5 z-50! inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg border border-(--o) font-[Times_New_Roman] text-2xl font-black"
+		class="fixed top-5 left-5 z-40! inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg border border-(--o) bg-(--bg) font-[Times_New_Roman] text-2xl font-black"
 		onclick={show}
 	>
 		R
@@ -84,7 +83,7 @@
 		<div
 			in:slide={{ axis: 'x' }}
 			out:slide={{ axis: 'x' }}
-			class="fixed top-5 left-17 z-40! flex h-10 rounded-xl px-3 py-1.5 outline outline-(--o)"
+			class="fixed top-5 left-17 z-40! flex h-10 rounded-xl border border-(--o) bg-(--bg) px-3 py-1.5"
 		>
 			{#if loggedIn}
 				<a class="m-auto mx-2 h-fit hover:underline" href="/home">{m.home()}</a>
@@ -125,20 +124,20 @@
 	>
 		{page.data.title ?? 'Repaper'}
 	</h1>
-	<button
-		class="fixed top-5 right-5 z-50! inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg border border-(--o) bg-(--bg)
+	{#if page.route.id === '/assignment/[assignment]'}
+		<button
+			class="fixed top-5 right-5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-(--o) bg-(--bg) p-2!
 		"
-		onclick={() => (hidden = true)}
-	>
-		<img src={showIcon} alt="Hide" class="size-4.5" />
-	</button>
-	{#if page.url.pathname.includes('/assignment/')}
-		<div class="h-20"></div>
+			onclick={() => (barHidden.value = true)}
+		>
+			<img src={showIcon} alt="Hide" class="size-4.5" />
+		</button>
 	{/if}
+	<div class="h-20"></div>
 {:else}
 	<button
-		class="fixed top-5 right-5 z-50! inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg border border-(--o) bg-(--bg)"
-		onclick={() => (hidden = false)}
+		class="fixed top-5 right-5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-(--o) bg-(--bg) p-2!"
+		onclick={() => (barHidden.value = false)}
 	>
 		<img src={hideIcon} alt="Show" class="size-4.5" />
 	</button>

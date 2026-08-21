@@ -20,7 +20,7 @@
 		<Loader />
 	</div>
 {:then userData}
-	<div class="grid grid-cols-[1fr_2fr] gap-28 px-20 pt-24 pb-10">
+	<div class="grid grid-cols-[1fr_2fr] gap-28 px-20 pt-4 pb-10">
 		<div>
 			<h2 class="mb-4 text-center text-3xl font-bold">Classes</h2>
 			{#each userData.classes as classMembership (classMembership.id)}

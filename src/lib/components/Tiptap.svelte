@@ -16,11 +16,14 @@
 	import BoldIcon from '$lib/assets/icons/Bold.svelte';
 	import ItalicIcon from '$lib/assets/icons/Italic.svelte';
 	import UnderlineIcon from '$lib/assets/icons/Underline.svelte';
+	import { barHidden } from '$lib/state.svelte';
 
 	let element: any = $state();
 	let editorState: { editor: Editor | null } = $state({ editor: null });
 
 	let { content, buttons } = $props();
+
+	let zoom = $state(95);
 
 	export const Keybindings = Extension.create({
 		addKeyboardShortcuts() {
@@ -62,11 +65,13 @@
 	onDestroy(() => {
 		editorState.editor?.destroy();
 	});
-
-	let zoom = $state(95);
 </script>
 
-<div class="relative">
+<div
+	class="absolute top-{barHidden.value
+		? '0'
+		: '20'} right-0 bottom-24 w-screen overflow-scroll pt-4"
+>
 	<div class="text-center">
 		<div class="tiptap-container">
 			<div
@@ -76,8 +81,13 @@
 			></div>
 		</div>
 	</div>
-	<div class="h-24"></div>
 </div>
+
+<!-- <div
+	class="fixed top-{barHidden.value
+		? '0'
+		: '20'} left-0 h-screen w-24 border-r border-(--o) bg-(--bg)"
+		></div>-->
 
 <div
 	class="fixed bottom-0 left-0 flex h-24 w-screen items-center justify-center gap-2 border-t border-(--o) bg-(--bg) py-5"
