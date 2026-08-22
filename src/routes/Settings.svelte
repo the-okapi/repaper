@@ -62,10 +62,6 @@
 			value: 'trebuchet'
 		},
 		{
-			label: 'Monospace',
-			value: 'monospace'
-		},
-		{
 			label: 'System UI',
 			value: 'system'
 		},

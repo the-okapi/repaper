@@ -6,7 +6,8 @@
 	import './layout.css';
 	import { ModeWatcher } from 'mode-watcher';
 	import favicon from '$lib/assets/favicon.png';
-	import { NavBar, Background } from '$lib/components';
+	import NavBar from './NavBar.svelte';
+	import Background from './Background.svelte';
 	import type { LayoutProps } from './$types';
 
 	let { data, children }: LayoutProps = $props();

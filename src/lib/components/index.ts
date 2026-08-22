@@ -1,12 +1,8 @@
-export { default as NavBar } from '$lib/components/NavBar.svelte';
 export { default as Select } from '$lib/components/ui/Select.svelte';
 export { default as SelectC } from '$lib/components/ui/SelectC.svelte';
 export { default as SelectItem } from '$lib/components/ui/SelectItem.svelte';
-export { default as Settings } from '$lib/components/cards/Settings.svelte';
-export { default as Login } from '$lib/components/cards/LogIn.svelte';
 export { default as Loader } from '$lib/assets/icons/Loader.svelte';
 export { default as AlertDialog } from '$lib/components/ui/AlertDialog.svelte';
-export { default as Background } from '$lib/components/ui/Background.svelte';
 export { default as Combobox } from '$lib/components/ui/Combobox.svelte';
 export { default as Switch } from '$lib/components/ui/Switch.svelte';
 export { default as Tabs } from '$lib/components/ui/Tabs.svelte';

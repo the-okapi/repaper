@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { Settings, Login, AlertDialog } from '$lib/components';
+	import { AlertDialog } from '$lib/components';
 	import { slide } from 'svelte/transition';
 	import { Button } from 'bits-ui';
 	import { signOut } from '$lib/actions.remote';
@@ -9,6 +9,8 @@
 	import showIcon from '$lib/assets/icons/show.svg';
 	import hideIcon from '$lib/assets/icons/hide.svg';
 	import { barHidden } from '$lib/state.svelte';
+	import Settings from './Settings.svelte';
+	import LogIn from './LogIn.svelte';
 
 	let { loggedIn } = $props();
 
@@ -103,7 +105,7 @@
 						onclick={showLogin}>{m.log_in()}</button
 					>
 					{#if login}
-						<Login class="card" />
+						<LogIn class="card" />
 					{/if}
 				</div>
 			{/if}
