@@ -10,12 +10,14 @@
 	import { Text } from '@tiptap/extension-text';
 	import { Underline } from '@tiptap/extension-underline';
 	import { UndoRedo } from '@tiptap/extensions';
-	import { Slider, Toggle, Loader } from '$lib/components';
+	import { Slider, Toggle, Loader, Popover, Select } from '$lib/components';
 	import { m } from '$lib/paraglide/messages';
 	import { Button } from 'bits-ui';
 	import BoldIcon from '$lib/assets/icons/Bold.svelte';
 	import ItalicIcon from '$lib/assets/icons/Italic.svelte';
 	import UnderlineIcon from '$lib/assets/icons/Underline.svelte';
+	import zoomIcon from '$lib/assets/icons/zoom.svg';
+	import fontSizeIcon from '$lib/assets/icons/font.svg';
 	import { barHidden } from '$lib/state.svelte';
 
 	let element: any = $state();
@@ -35,6 +37,30 @@
 			};
 		}
 	});
+
+	let textStyle = $state('p');
+	let changeTextStyleOpen = $state(false);
+
+	function updateTextStyle() {
+		if (editorState.editor?.isActive('heading', { level: 1 })) {
+			textStyle = 'h1';
+		} else if (editorState.editor?.isActive('heading', { level: 2 })) {
+			textStyle = 'h2';
+		} else if (editorState.editor?.isActive('paragraph')) {
+			textStyle = 'p';
+		}
+	}
+
+	function changeTextStyle() {
+		if (textStyle === 'h1') {
+			editorState.editor?.chain().focus().setHeading({ level: 1 }).run();
+		} else if (textStyle === 'h2') {
+			editorState.editor?.chain().focus().setHeading({ level: 2 }).run();
+		} else {
+			editorState.editor?.chain().focus().setParagraph().run();
+		}
+		changeTextStyleOpen = false;
+	}
 
 	onMount(() => {
 		editorState.editor = new Editor({
@@ -58,8 +84,10 @@
 			content,
 			onTransaction: ({ editor }) => {
 				editorState = { editor };
-			}
+			},
+			onSelectionUpdate: updateTextStyle
 		});
+		updateTextStyle();
 	});
 
 	onDestroy(() => {
@@ -68,65 +96,79 @@
 </script>
 
 <div
-	class="absolute top-{barHidden.value
-		? '0'
-		: '20'} right-0 bottom-24 w-screen overflow-scroll pt-4"
+	class="absolute top-{barHidden.value ? '0' : '20'} h-[calc(100vh-{barHidden.value
+		? '6 rem'
+		: '11rem'})] left-24 w-[calc(100vw-6rem)] pt-4 text-center"
 >
-	<div class="text-center">
-		<div class="tiptap-container">
-			<div spellcheck="false" bind:this={element} style="zoom: {zoom / 100};"></div>
-		</div>
+	<div class="tiptap-container">
+		<div spellcheck="false" bind:this={element} style="zoom: {zoom / 100};"></div>
 	</div>
 </div>
 
-<!-- <div
-	class="fixed top-{barHidden.value
-		? '0'
-		: '20'} left-0 h-screen w-24 border-r border-(--o) bg-(--bg)"
-		></div>-->
-
 <div
-	class="fixed bottom-0 left-0 flex h-24 w-screen items-center justify-center gap-2 border-t border-(--o) bg-(--bg) py-5"
+	class="fixed top-0 left-0 flex h-screen w-24 flex-col items-center justify-center gap-2 border-r border-(--o) bg-(--bg)"
 >
 	{#if editorState.editor}
-		<div>
-			<a href="/home"><Button.Root>← {m.back()}</Button.Root></a>
-		</div>
-		<div class="mx-4 h-10 border-l border-(--o)"></div>
-		<div class="relative">
-			<p class="absolute -top-7">Zoom:</p>
-			<Slider bind:value={zoom} min={10} max={200} />
-		</div>
-		<div class="mx-4 h-10 border-l border-(--o)"></div>
+		<a href="/home"
+			><Button.Root class="flex size-10 items-center justify-center" title={m.back()}
+				>←</Button.Root
+			></a
+		>
+		<div class="my-3 w-10 border-b border-(--o)"></div>
+		<Popover>
+			{#snippet trigger()}
+				<Button.Root class="flex size-10 items-center justify-center p-0!"
+					><img src={zoomIcon} alt="Zoom" class="size-4.5" /></Button.Root
+				>
+			{/snippet}
+			<div class="flex gap-4">
+				<p>Zoom:</p>
+				<Slider bind:value={zoom} min={10} max={200} />
+			</div>
+		</Popover>
+		<div class="my-3 w-10 border-b border-(--o)"></div>
 		<Toggle
+			active={editorState.editor?.isActive('bold')}
+			class="toggle-icon"
 			onclick={() => editorState.editor?.chain().focus().toggleBold().run()}
-			active={editorState.editor.isActive('bold')}
-			class="toggle-icon"><BoldIcon class="size-4.5" /></Toggle
+			title={m.bold()}
 		>
+			<BoldIcon class="size-4.5" />
+		</Toggle>
 		<Toggle
+			active={editorState.editor?.isActive('italic')}
+			class="toggle-icon"
 			onclick={() => editorState.editor?.chain().focus().toggleItalic().run()}
-			active={editorState.editor.isActive('italic')}
-			class="toggle-icon"><ItalicIcon class="size-4.5" /></Toggle
+			title={m.italic()}
 		>
+			<ItalicIcon class="size-4.5" />
+		</Toggle>
 		<Toggle
+			active={editorState.editor?.isActive('underline')}
+			class="toggle-icon"
 			onclick={() => editorState.editor?.chain().focus().toggleUnderline().run()}
-			active={editorState.editor.isActive('underline')}
-			class="toggle-icon"><UnderlineIcon class="size-4.5" /></Toggle
+			title={m.underline()}
 		>
-		<div class="w-4"></div>
-		<Toggle
-			onclick={() => editorState.editor?.chain().focus().setParagraph().run()}
-			active={editorState.editor.isActive('paragraph')}>{m.body()}</Toggle
-		>
-		<Toggle
-			onclick={() => editorState.editor?.chain().focus().setHeading({ level: 2 }).run()}
-			active={editorState.editor.isActive('heading', { level: 2 })}>{m.subheading()}</Toggle
-		>
-		<Toggle
-			onclick={() => editorState.editor?.chain().focus().setHeading({ level: 1 }).run()}
-			active={editorState.editor.isActive('heading', { level: 1 })}>{m.heading()}</Toggle
-		>
-		<div class="mx-4 h-10 border-l border-(--o)"></div>
+			<UnderlineIcon class="size-4.5" />
+		</Toggle>
+		<div class="h-3"></div>
+		<Popover border={false} bind:open={changeTextStyleOpen}>
+			{#snippet trigger()}
+				<Button.Root class="flex size-10 items-center justify-center p-0!"
+					><img src={fontSizeIcon} alt="Font Size" class="size-4.5" /></Button.Root
+				>
+			{/snippet}
+			<Select
+				options={[
+					{ value: 'p', label: m.body() },
+					{ value: 'h2', label: m.subheading() },
+					{ value: 'h1', label: m.heading() }
+				]}
+				bind:value={textStyle}
+				onChange={changeTextStyle}
+			/>
+		</Popover>
+		<div class="my-3 w-10 border-b border-(--o)"></div>
 		{@render buttons()}
 	{:else}
 		<Loader />

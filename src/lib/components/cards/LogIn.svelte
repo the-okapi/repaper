@@ -35,8 +35,7 @@
 </script>
 
 <div
-	in:slide
-	out:slide
+	transition:slide
 	class="{c} flex items-center justify-center rounded-xl bg-(--bg) p-6 outline outline-(--o)"
 	{...props}
 >

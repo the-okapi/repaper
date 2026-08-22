@@ -1,6 +1,6 @@
 import { paraglideVitePlugin } from '@inlang/paraglide-js';
 import tailwindcss from '@tailwindcss/vite';
-import adapter from '@sveltejs/adapter-cloudflare';
+import adapter from '@sveltejs/adapter-vercel';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
@@ -13,19 +13,7 @@ export default defineConfig({
 				runes: ({ filename }) =>
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
-			adapter: adapter({
-				config: undefined,
-				platformProxy: {
-					configPath: undefined,
-					environment: undefined,
-					persist: undefined
-				},
-				fallback: 'plaintext',
-				routes: {
-					include: ['/*'],
-					exclude: ['<all>']
-				}
-			}),
+			adapter: adapter(),
 			experimental: { remoteFunctions: true }
 		}),
 

@@ -84,7 +84,7 @@
 	let { class: c, ...props } = $props();
 </script>
 
-<div in:slide out:slide class="rounded-xl bg-(--bg) p-6 outline outline-(--o) {c}" {...props}>
+<div transition:slide class="rounded-xl bg-(--bg) p-6 outline outline-(--o) {c}" {...props}>
 	<div class="m-auto mb-8 w-fit">
 		<Label.Root>Mode:</Label.Root>
 		<Select options={modes} styling={false} bind:value={currentMode} onChange={onModeChange} />

@@ -4,6 +4,7 @@
 	import { Tiptap } from '$lib/components';
 	import { Button } from 'bits-ui';
 	import { AlertDialog } from '$lib/components';
+	import infoIcon from '$lib/assets/icons/info.svg';
 
 	let { data } = $props();
 
@@ -14,13 +15,16 @@
 	<title>{data.title} | Repaper</title>
 </svelte:head>
 
-<div class="h-4"></div>
 {#if !data.assignment.submitted}
 	<Tiptap content={data.assignment.content}>
 		{#snippet buttons()}
-			<Button.Root onclick={() => (assignmentDetailsOpen = true)}
-				>{m.assignment_details()}</Button.Root
+			<Button.Root
+				class="flex size-10 items-center justify-center p-0!"
+				onclick={() => (assignmentDetailsOpen = true)}
+				title={m.assignment_details()}
 			>
+				<img src={infoIcon} alt={m.assignment_details()} class="size-4.5" />
+			</Button.Root>
 		{/snippet}
 	</Tiptap>
 {/if}

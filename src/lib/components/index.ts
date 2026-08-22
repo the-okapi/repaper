@@ -13,3 +13,4 @@ export { default as Tabs } from '$lib/components/ui/Tabs.svelte';
 export { default as Tiptap } from '$lib/components/Tiptap.svelte';
 export { default as Slider } from '$lib/components/ui/Slider.svelte';
 export { default as Toggle } from '$lib/components/ui/Toggle.svelte';
+export { default as Popover } from '$lib/components/ui/Popover.svelte';

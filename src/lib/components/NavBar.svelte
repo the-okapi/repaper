@@ -81,8 +81,7 @@
 	</button>
 	{#if shown}
 		<div
-			in:slide={{ axis: 'x' }}
-			out:slide={{ axis: 'x' }}
+			transition:slide={{ axis: 'x' }}
 			class="fixed top-5 left-17 z-40! flex h-10 rounded-xl border border-(--o) bg-(--bg) px-3 py-1.5"
 		>
 			{#if loggedIn}

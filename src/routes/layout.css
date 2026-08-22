@@ -133,6 +133,14 @@ main * {
 	padding: 0.35rem 0.5rem;
 }
 
+[data-popover-content] * {
+	box-shadow: none !important;
+}
+
+[data-popover-content] [data-select-trigger]:hover {
+	background-color: var(--a);
+}
+
 [data-combobox-input] {
 	padding: 0.35rem 0.5rem;
 	padding-right: 2.3rem;
@@ -446,4 +454,13 @@ textarea {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+[data-popover-content] {
+	z-index: 50 !important;
+	border-radius: 0.75rem;
+	border: 1px solid var(--o);
+	background-color: var(--bg);
+	padding: 0.5rem 1rem;
+	transition: opacity 1000ms;
 }
