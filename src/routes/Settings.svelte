@@ -46,27 +46,23 @@
 	// Font
 	let fonts = [
 		{
-			label: 'Georgia',
+			label: '<span class="font-[Georgia]">Georgia</span>',
 			value: 'georgia'
 		},
 		{
-			label: 'Tahoma',
+			label: '<span class="font-[Tahoma]">Tahoma</span>',
 			value: 'tahoma'
 		},
 		{
-			label: 'Arial',
-			value: 'arial'
-		},
-		{
-			label: 'Trebuchet MS',
+			label: '<span class="font-[Trebuchet_MS]">Trebuchet MS</span>',
 			value: 'trebuchet'
 		},
 		{
-			label: 'System UI',
+			label: '<span class="font-system">System UI</span>',
 			value: 'system'
 		},
 		{
-			label: 'Fira Sans',
+			label: '<span class="font-[Fira_Sans]">Fira Sans</span>',
 			value: 'fira'
 		}
 	];
@@ -83,7 +79,7 @@
 <div transition:slide class="rounded-xl bg-(--bg) p-6 outline outline-(--o) {c}" {...props}>
 	<div class="m-auto mb-8 w-fit">
 		<Label.Root>Mode:</Label.Root>
-		<Select options={modes} styling={false} bind:value={currentMode} onChange={onModeChange} />
+		<Select options={modes} bind:value={currentMode} onChange={onModeChange} />
 	</div>
 
 	<div class="m-auto mb-8 w-fit">

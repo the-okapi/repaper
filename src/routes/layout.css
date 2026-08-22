@@ -51,12 +51,6 @@ main * {
 	font-family: var(--font);
 }
 
-[data-theme='arial'],
-.arial {
-	--font: 'Arial';
-	font-family: var(--font);
-}
-
 [data-theme='tahoma'],
 .tahoma {
 	--font: 'Tahoma';
