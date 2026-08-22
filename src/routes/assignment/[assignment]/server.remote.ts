@@ -48,5 +48,5 @@ export const saveDocument = command(SaveSchema, async (data) => {
 		return { status: 500 };
 	}
 
-	return { status: 201 };
+	return { status: 200 };
 });

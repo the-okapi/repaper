@@ -71,6 +71,8 @@
 		const { status } = await save(editorState.editor?.getHTML());
 		if (status !== 200) {
 			failedSave = true;
+		} else {
+			changesMadeSinceSave = false;
 		}
 		saving = false;
 	}
@@ -100,6 +102,9 @@
 			onTransaction: ({ editor }) => {
 				editorState = { editor };
 			},
+			onUpdate: () => {
+				changesMadeSinceSave = true;
+			},
 			onSelectionUpdate: updateTextStyle
 		});
 		updateTextStyle();
@@ -108,7 +113,17 @@
 	onDestroy(() => {
 		editorState.editor?.destroy();
 	});
+
+	let changesMadeSinceSave = $state(false);
+
+	function onbeforeunload(event: Event) {
+		if (changesMadeSinceSave) {
+			event.preventDefault();
+		}
+	}
 </script>
+
+<svelte:window {onbeforeunload} />
 
 <div
 	class="absolute top-{barHidden.value ? '0' : '20'} h-[calc(100vh-{barHidden.value
@@ -124,12 +139,6 @@
 	class="fixed top-0 left-0 flex h-screen w-24 flex-col items-center justify-center gap-2 border-r border-(--o) bg-(--bg)"
 >
 	{#if editorState.editor}
-		<a href="/home"
-			><Button.Root class="flex size-10 items-center justify-center" title={m.back()}
-				>←</Button.Root
-			></a
-		>
-		<div class="my-3 w-10 border-b border-(--o)"></div>
 		<Popover>
 			{#snippet trigger()}
 				<Button.Root class="flex size-10 items-center justify-center p-0!"
