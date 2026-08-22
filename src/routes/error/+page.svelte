@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Button } from 'bits-ui';
 	import { m } from '$lib/paraglide/messages';
+	import { AlertDialog } from '$lib/components';
 </script>
 
 <svelte:window {onbeforeunload} />
@@ -11,7 +12,11 @@
 
 <div class="flex h-[calc(100vh-5rem)] w-screen items-center justify-center">
 	<div class="h-fit text-center">
-		<h1 class="mb-5">{m.something_happened()}</h1>
-		<Button.Root class="m-auto" href="/home">{m.home()}</Button.Root>
+		<AlertDialog open={true} cancel={false}>
+			<p class="mb-5 w-80">{m.something_happened()}</p>
+			{#snippet go()}
+				<Button.Root href="/home" class="h-fit py-2!">{m.home()}</Button.Root>
+			{/snippet}
+		</AlertDialog>
 	</div>
 </div>

@@ -15,6 +15,7 @@
 | `src/routes/manage/[org]/[class]/load.remote.ts`                           | 34, 35         |
 | `src/routes/+layout.server.ts`                                             | 37, 38         |
 | `src/routes/manage/[org]/actions.ts`                                       | 39 → 58        |
+| `src/routes/assignment/[assignment]/server.remote.ts`                      | 59, 60         |
 | `src/routes/manage/[org]/+page.server.ts`                                  | 68 → 71        |
 | `src/routes/invitation/[org]/[id]/+page.server.ts`                         | 72 → 75        |
 | `src/routes/home/load.remote.ts`                                           | 17, 18, 76, 77 |

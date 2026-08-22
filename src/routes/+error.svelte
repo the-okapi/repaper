@@ -1,19 +1,23 @@
 <script lang="ts">
 	import { Button } from 'bits-ui';
-	import { page } from '$app/state';
 	import { m } from '$lib/paraglide/messages';
+	import { AlertDialog } from '$lib/components';
+	import { page } from '$app/state';
 </script>
+
+<svelte:window {onbeforeunload} />
 
 <svelte:head>
 	<title>{m.something_happened()} | Repaper</title>
 </svelte:head>
 
-<div class="flex h-screen w-screen items-center justify-center">
-	<div>
-		<h1 class="text-9xl font-bold">{page.status}: {page.error?.message}</h1>
-		<br />
-		<Button.Root href="/" class="m-auto mt-10 block w-fit rounded-2xl! px-8! py-5! text-4xl"
-			>{m.home()}</Button.Root
-		>
+<div class="flex h-[calc(100vh-5rem)] w-screen items-center justify-center">
+	<div class="h-fit text-center">
+		<AlertDialog open={true} cancel={false}>
+			<p class="mb-5 w-80">{m.something_happened()} <strong>Error {page.status}</strong></p>
+			{#snippet go()}
+				<Button.Root href="/home" class="h-fit py-2!">{m.home()}</Button.Root>
+			{/snippet}
+		</AlertDialog>
 	</div>
 </div>

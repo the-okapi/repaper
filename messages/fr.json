@@ -101,5 +101,8 @@
 	"heading": "Titre",
 	"subheading": "Sous-Titre",
 	"body": "Corps",
-	"assignment_details": "Détails du Devoir"
+	"assignment_details": "Détails du Devoir",
+	"save": "Enregistrer",
+	"failed_to_save": "Échoué à enregister. Essayez encore plus tard s'il vout plaît.",
+	"ok": "D'Accord"
 }

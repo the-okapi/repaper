@@ -102,5 +102,8 @@
 	"heading": "Heading",
 	"subheading": "Subheading",
 	"body": "Body",
-	"assignment_details": "Assignment Details"
+	"assignment_details": "Assignment Details",
+	"save": "Save",
+	"failed_to_save": "Failed to Save. Please try again later.",
+	"ok": "OK"
 }

@@ -10,7 +10,7 @@
 	import { Text } from '@tiptap/extension-text';
 	import { Underline } from '@tiptap/extension-underline';
 	import { UndoRedo } from '@tiptap/extensions';
-	import { Slider, Toggle, Loader, Popover, Select } from '$lib/components';
+	import { Slider, Toggle, Loader, Popover, Select, AlertDialog } from '$lib/components';
 	import { m } from '$lib/paraglide/messages';
 	import { Button } from 'bits-ui';
 	import BoldIcon from '$lib/assets/icons/Bold.svelte';
@@ -18,12 +18,13 @@
 	import UnderlineIcon from '$lib/assets/icons/Underline.svelte';
 	import zoomIcon from '$lib/assets/icons/zoom.svg';
 	import fontSizeIcon from '$lib/assets/icons/font.svg';
+	import saveIcon from '$lib/assets/icons/save.svg';
 	import { barHidden } from '$lib/state.svelte';
 
 	let element: any = $state();
 	let editorState: { editor: Editor | null } = $state({ editor: null });
 
-	let { content, buttons } = $props();
+	let { content, save, children } = $props();
 
 	let zoom = $state(95);
 
@@ -62,13 +63,27 @@
 		changeTextStyleOpen = false;
 	}
 
+	let saving = $state(false);
+	let failedSave = $state(false);
+
+	async function saveButton() {
+		saving = true;
+		const { status } = await save(editorState.editor?.getHTML());
+		if (status !== 200) {
+			failedSave = true;
+		}
+		saving = false;
+	}
+
 	onMount(() => {
 		editorState.editor = new Editor({
 			element,
 			extensions: [
 				Bold,
 				Document,
-				Heading,
+				Heading.configure({
+					levels: [1, 2]
+				}),
 				HorizontalRule,
 				Italic,
 				Paragraph,
@@ -169,8 +184,29 @@
 			/>
 		</Popover>
 		<div class="my-3 w-10 border-b border-(--o)"></div>
-		{@render buttons()}
+		{@render children()}
+		<div class="h-2"></div>
+		{#if !saving}
+			<Button.Root
+				class="flex size-10 items-center justify-center p-0!"
+				title={m.save()}
+				onclick={saveButton}
+			>
+				<img src={saveIcon} alt={m.save()} class="size-4.5" />
+			</Button.Root>
+		{:else}
+			<Button.Root
+				disabled
+				class="flex size-10 items-center justify-center p-0! outline-none!"
+			>
+				<Loader size={6} />
+			</Button.Root>
+		{/if}
 	{:else}
 		<Loader />
 	{/if}
 </div>
+
+<AlertDialog bind:open={failedSave} message={m.ok()}>
+	<p class="mb-4 w-100">{m.failed_to_save()}</p>
+</AlertDialog>
