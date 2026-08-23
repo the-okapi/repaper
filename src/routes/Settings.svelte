@@ -46,31 +46,31 @@
 	// Colors
 	let colors = [
 		{
-			label: '<div data-theme="red" class="swatch"></div>',
+			label: '<div data-theme="red" class="swatch"></div> ' + m.red(),
 			value: 'red'
 		},
 		{
-			label: '<div data-theme="orange" class="swatch"></div>',
+			label: '<div data-theme="orange" class="swatch"></div> Orange',
 			value: 'orange'
 		},
 		{
-			label: '<div data-theme="yellow" class="swatch"></div>',
+			label: '<div data-theme="yellow" class="swatch"></div> ' + m.yellow(),
 			value: 'yellow'
 		},
 		{
-			label: '<div data-theme="green" class="swatch"></div>',
+			label: '<div data-theme="green" class="swatch"></div> ' + m.green(),
 			value: 'green'
 		},
 		{
-			label: '<div class="swatch turquoise"></div>',
+			label: '<div class="swatch turquoise"></div> Turquoise',
 			value: 'turquoise'
 		},
 		{
-			label: '<div data-theme="blue" class="swatch"></div>',
+			label: '<div data-theme="blue" class="swatch"></div> ' + m.blue(),
 			value: 'blue'
 		},
 		{
-			label: '<div data-theme="purple" class="swatch"></div>',
+			label: '<div data-theme="purple" class="swatch"></div> ' + m.purple(),
 			value: 'purple'
 		}
 	];

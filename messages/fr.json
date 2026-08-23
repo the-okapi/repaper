@@ -109,5 +109,10 @@
 	"unsubmit": "Annuler Soumission",
 	"submission": "soumettre ce document?",
 	"undo_submission": "annuler la soumission de ce document?",
-	"color": "Couleur"
+	"color": "Couleur",
+	"red": "Rouge",
+	"yellow": "Jaune",
+	"green": "Vert",
+	"blue": "Bleu",
+	"purple": "Violet"
 }

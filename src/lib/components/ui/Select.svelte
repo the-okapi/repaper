@@ -19,7 +19,9 @@
 <Select.Root bind:value onValueChange={onC} type="single">
 	<Select.Trigger
 		><div class="flex items-center text-left">
-			<p>{@html selectedOptionLabel?.label}</p>
+			<div class="flex gap-2">
+				{@html selectedOptionLabel?.label}
+			</div>
 		</div>
 		<div class="text-right">
 			<div class="inline-flex h-full items-center">
@@ -46,9 +48,13 @@
 										class="my-auto mr-2 size-5"
 										alt="A checkmark"
 									/>
-									{@html option.label}
+									<div class="flex gap-2">
+										{@html option.label}
+									</div>
 								{:else}
-									<span class="relative left-7">{@html option.label}</span>
+									<div class="relative left-7 flex gap-2">
+										{@html option.label}
+									</div>
 								{/if}
 							</div>
 						{/snippet}
