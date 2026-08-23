@@ -19,7 +19,7 @@
 <ModeWatcher
 	darkClassNames={['dark']}
 	lightClassNames={['light']}
-	defaultTheme="fira"
+	defaultTheme="turquoise"
 	defaultMode="dark"
 />
 

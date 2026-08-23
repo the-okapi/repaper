@@ -43,34 +43,42 @@
 		setLocale(currentLang);
 	}
 
-	// Font
-	let fonts = [
+	// Colors
+	let colors = [
 		{
-			label: '<span class="font-[Fira_Sans]">Fira Sans</span>',
-			value: 'fira'
+			label: '<div data-theme="red" class="swatch"></div>',
+			value: 'red'
 		},
 		{
-			label: '<span class="font-[Georgia]">Georgia</span>',
-			value: 'georgia'
+			label: '<div data-theme="orange" class="swatch"></div>',
+			value: 'orange'
 		},
 		{
-			label: '<span class="font-[Tahoma]">Tahoma</span>',
-			value: 'tahoma'
+			label: '<div data-theme="yellow" class="swatch"></div>',
+			value: 'yellow'
 		},
 		{
-			label: '<span class="font-[Trebuchet_MS]">Trebuchet MS</span>',
-			value: 'trebuchet'
+			label: '<div data-theme="green" class="swatch"></div>',
+			value: 'green'
 		},
 		{
-			label: '<span class="font-system">System UI</span>',
-			value: 'system'
+			label: '<div class="swatch turquoise"></div>',
+			value: 'turquoise'
+		},
+		{
+			label: '<div data-theme="blue" class="swatch"></div>',
+			value: 'blue'
+		},
+		{
+			label: '<div data-theme="purple" class="swatch"></div>',
+			value: 'purple'
 		}
 	];
 
-	let currentFont: any = $state(theme.current);
+	let currentColor: any = $state(theme.current);
 
-	function onFontChange() {
-		setTheme(currentFont);
+	function onColorChange() {
+		setTheme(currentColor);
 	}
 
 	let { class: c, ...props } = $props();
@@ -83,8 +91,8 @@
 	</div>
 
 	<div class="m-auto mb-8 w-fit">
-		<Label.Root>{m.font()}:</Label.Root>
-		<Select options={fonts} bind:value={currentFont} onChange={onFontChange} />
+		<Label.Root>{m.color()}:</Label.Root>
+		<Select options={colors} bind:value={currentColor} onChange={onColorChange} />
 	</div>
 
 	<div class="m-auto w-fit">

@@ -1,5 +1,21 @@
 @import 'tailwindcss';
 
+:root {
+	font-family:
+		'Fira Sans',
+		'Source Sans',
+		-apple-system,
+		'Inter',
+		system-ui,
+		sans-serif;
+	vector-effect: non-scaling-stroke;
+	caret-color: var(--p);
+}
+
+* {
+	text-decoration-thickness: 1.5px;
+}
+
 :focus {
 	outline: none;
 }
@@ -9,13 +25,17 @@
 	--bg: #ffffff;
 	--a: #eeeeee;
 	--fg: #000000;
-	--p: #00978b;
 	--p-fg: #ffffff;
 	--o: #000000;
 	--red: #991b1b;
 	--s: #d9d9d9;
 	background-color: var(--bg);
 	color: var(--fg);
+
+	&[data-theme='turquoise'],
+	.turquoise {
+		--p: #00af9f;
+	}
 }
 
 .dark {
@@ -23,13 +43,41 @@
 	--bg: #222222;
 	--a: #272727;
 	--fg: #fafafa;
-	--p: #00dfdf;
-	--p-fg: #0a0a0a;
 	--red: #de4e45;
 	--o: #444444;
 	--s: #313131;
+	--p-fg: #222222;
 	background-color: var(--bg);
 	color: var(--fg);
+
+	&[data-theme='turquoise'],
+	.turquoise {
+		--p: #00dfdf;
+	}
+}
+
+[data-theme='red'] {
+	--p: #cc0050;
+}
+
+[data-theme='orange'] {
+	--p: #dd5500;
+}
+
+[data-theme='yellow'] {
+	--p: #ffdd00;
+}
+
+[data-theme='green'] {
+	--p: #00aa55;
+}
+
+[data-theme='blue'] {
+	--p: #00aaff;
+}
+
+[data-theme='purple'] {
+	--p: #6f33af;
 }
 
 .nav-bar * {
@@ -43,45 +91,6 @@ main * {
 ::selection {
 	background-color: var(--p);
 	color: var(--p-fg);
-}
-
-[data-theme='georgia'],
-.georgia {
-	--font: 'Georgia';
-	font-family: var(--font);
-}
-
-[data-theme='tahoma'],
-.tahoma {
-	--font: 'Tahoma';
-	font-family: var(--font);
-}
-
-[data-theme='trebuchet'],
-.trebuchet {
-	--font: 'Trebuchet MS';
-	font-family: var(--font);
-}
-
-[data-theme='system'],
-.system {
-	--font: system-ui;
-	font-family: var(--font);
-}
-
-[data-theme='fira'],
-.fira {
-	--font: Fira Sans, sans-serif;
-	font-family: var(--font);
-}
-
-:root {
-	font-family: var(--font);
-	vector-effect: non-scaling-stroke;
-}
-
-* {
-	text-decoration-thickness: 1.5px;
 }
 
 [data-select-trigger] {
@@ -449,4 +458,11 @@ textarea {
 	background-color: var(--bg);
 	padding: 0.5rem 1rem;
 	transition: opacity 1000ms;
+}
+
+.swatch {
+	width: 1.5rem;
+	height: 1.5rem;
+	border-radius: 1rem;
+	background-color: var(--p);
 }

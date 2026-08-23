@@ -61,7 +61,6 @@
 	"manage_class": "Manage Class",
 	"create_organization": "Create an Organization",
 	"organization_name": "Organization Name",
-	"font": "Font",
 	"light": "Light",
 	"dark": "Dark",
 	"confirm_log_out": "log out?",
@@ -109,5 +108,6 @@
 	"submit": "Submit",
 	"unsubmit": "Undo Submission",
 	"submission": "submit this document?",
-	"undo_submission": "undo the submission of this document?"
+	"undo_submission": "undo the submission of this document?",
+	"color": "Color"
 }
