@@ -104,5 +104,9 @@
 	"assignment_details": "Détails du Devoir",
 	"save": "Enregistrer",
 	"failed_to_save": "Échoué à enregister. Essayez encore plus tard s'il vout plaît.",
-	"ok": "D'Accord"
+	"ok": "D'Accord",
+	"submit": "Soumettre",
+	"unsubmit": "Annuler Soumission",
+	"submission": "soumettre ce document?",
+	"undo_submission": "annuler la soumission de ce document?"
 }

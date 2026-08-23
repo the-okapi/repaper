@@ -217,5 +217,5 @@
 </div>
 
 <AlertDialog bind:open={failedSave} message={m.ok()}>
-	<p class="mb-4 w-100">{m.failed_to_save()}</p>
+	<p class="mb-4 w-100 text-center">{m.failed_to_save()}</p>
 </AlertDialog>

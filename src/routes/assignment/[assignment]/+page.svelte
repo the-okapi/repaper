@@ -4,8 +4,10 @@
 	import { Button } from 'bits-ui';
 	import { AlertDialog } from '$lib/components';
 	import infoIcon from '$lib/assets/icons/info.svg';
+	import submitIcon from '$lib/assets/icons/submit.svg';
 	import { saveDocument } from './server.remote';
 	import Tiptap from './Tiptap.svelte';
+	import Document from './Document.svelte';
 
 	let { data, params } = $props();
 
@@ -17,22 +19,48 @@
 			content
 		});
 	}
+
+	let confirmUnsubmitOpen = $state(false);
+	let confirmSubmitOpen = $state(false);
 </script>
 
 <svelte:head>
 	<title>{data.title} | Repaper</title>
 </svelte:head>
 
+{#snippet assignmentDetails()}
+	<Button.Root
+		class="flex size-10 items-center justify-center p-0!"
+		onclick={() => (assignmentDetailsOpen = true)}
+		title={m.assignment_details()}
+	>
+		<img src={infoIcon} alt={m.assignment_details()} class="size-4.5" />
+	</Button.Root>
+{/snippet}
+
 {#if !data.assignment.submitted}
 	<Tiptap content={data.document.content} {save}>
+		{@render assignmentDetails()}
+		<div class="h-2"></div>
 		<Button.Root
 			class="flex size-10 items-center justify-center p-0!"
-			onclick={() => (assignmentDetailsOpen = true)}
-			title={m.assignment_details()}
+			title={m.submit()}
+			onclick={() => (confirmSubmitOpen = true)}
 		>
-			<img src={infoIcon} alt={m.assignment_details()} class="size-4.5" />
+			<img src={submitIcon} alt={m.submit()} class="size-7" />
 		</Button.Root>
 	</Tiptap>
+{:else}
+	<Document content={data.document.content} submitted={data.assignment.submitted}>
+		{@render assignmentDetails()}
+		<Button.Root
+			class="flex size-10 items-center justify-center p-0!"
+			title={m.unsubmit()}
+			onclick={() => (confirmUnsubmitOpen = true)}
+		>
+			<img src={submitIcon} alt={m.unsubmit()} class="size-7 rotate-180" />
+		</Button.Root>
+	</Document>
 {/if}
 
 <AlertDialog bind:open={assignmentDetailsOpen} message={m.ok()}>
@@ -48,4 +76,22 @@
 		<h2 class="text-center text-2xl font-bold">{data.assignment.name}</h2>
 		<p>{data.assignment.description}</p>
 	</div>
+</AlertDialog>
+
+<AlertDialog bind:open={confirmSubmitOpen}>
+	<p class="mb-4 w-100 text-center">{m.are_you_sure()} {m.submission()}</p>
+	{#snippet go()}
+		<form method="POST" action="?/submit">
+			<Button.Root type="submit">{m.go()}</Button.Root>
+		</form>
+	{/snippet}
+</AlertDialog>
+
+<AlertDialog bind:open={confirmUnsubmitOpen}>
+	<p class="mb-4 w-100 text-center">{m.are_you_sure()} {m.undo_submission()}</p>
+	{#snippet go()}
+		<form method="POST" action="?/undo">
+			<Button.Root type="submit">{m.go()}</Button.Root>
+		</form>
+	{/snippet}
 </AlertDialog>

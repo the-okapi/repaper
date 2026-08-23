@@ -105,5 +105,9 @@
 	"assignment_details": "Assignment Details",
 	"save": "Save",
 	"failed_to_save": "Failed to Save. Please try again later.",
-	"ok": "OK"
+	"ok": "OK",
+	"submit": "Submit",
+	"unsubmit": "Undo Submission",
+	"submission": "submit this document?",
+	"undo_submission": "undo the submission of this document?"
 }

@@ -19,7 +19,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 				.select('class ( name )')
 				.eq('class', params.class)
 				.eq('user', user.id),
-			33
+			63
 		);
 
 		const assignments: Assignment[] = unwrap(
@@ -28,7 +28,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 				.select('id, assignment ( id, name, description, due_date, class ), submitted ')
 				.eq('user', user.id)
 				.eq('class', params.class),
-			61
+			64
 		);
 
 		const assignmentsSorted = assignments.sort((a, b) =>

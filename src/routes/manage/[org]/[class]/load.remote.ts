@@ -21,7 +21,7 @@ export const load = query(string(), async (organization: string) => {
 				.eq('organization', organization)
 				.eq('admin', true)
 				.eq('user', user.id),
-			34
+			35
 		);
 
 		if (!check?.[0]) {
@@ -33,7 +33,7 @@ export const load = query(string(), async (organization: string) => {
 				.from('organization_memberships')
 				.select('user ( id, name, email ), admin')
 				.eq('organization', organization),
-			35
+			36
 		);
 
 		return { data };

@@ -23,7 +23,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 				.eq('class', params.class)
 				.eq('user', user.id)
 				.eq('admin', true),
-			31
+			61
 		);
 
 		if (!data?.[0]) {
@@ -35,7 +35,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 				.from('class_memberships')
 				.select('user ( id, name, email ), admin')
 				.eq('class', params.class),
-			32
+			62
 		);
 
 		return {

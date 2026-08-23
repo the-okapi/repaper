@@ -1,6 +1,7 @@
-import { redirect } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { HttpError, unwrap, unwrapNoData } from '$lib/error';
+import type { Actions } from './$types';
 
 export const load: PageServerLoad = async ({ locals, params }) => {
 	const {
@@ -79,3 +80,84 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		}
 	}
 };
+
+export const actions = {
+	submit: async ({ locals, params }) => {
+		const {
+			data: { user }
+		} = await locals.supabase.auth.getUser();
+
+		if (!user) {
+			return redirect(303, '/');
+		}
+
+		try {
+			const [assignmentSubmission] = unwrap(
+				await locals.supabase
+					.from('assignment_submissions')
+					.select('submitted')
+					.eq('id', params.assignment)
+					.eq('user', user.id),
+				31
+			);
+
+			if (!assignmentSubmission) {
+				return redirect(303, '/home');
+			} else if (assignmentSubmission.submitted !== null) {
+				return fail(409);
+			}
+
+			unwrapNoData(
+				await locals.supabase
+					.from('assignment_submissions')
+					.update({
+						submitted: new Date().toISOString()
+					})
+					.eq('id', params.assignment)
+					.eq('user', user.id),
+				32
+			);
+		} catch {
+			return fail(500);
+		}
+	},
+	undo: async ({ locals, params }) => {
+		const {
+			data: { user }
+		} = await locals.supabase.auth.getUser();
+
+		if (!user) {
+			return redirect(303, '/');
+		}
+
+		try {
+			const [assignmentSubmission] = unwrap(
+				await locals.supabase
+					.from('assignment_submissions')
+					.select('submitted')
+					.eq('id', params.assignment)
+					.eq('user', user.id),
+				33
+			);
+
+			if (!assignmentSubmission) {
+				return redirect(303, '/home');
+			} else if (assignmentSubmission.submitted === null) {
+				return fail(409);
+			}
+
+			unwrapNoData(
+				await locals.supabase
+					.from('assignment_submissions')
+					.update({
+						submitted: null
+					})
+					.eq('id', params.assignment)
+					.eq('user', user.id),
+				34
+			);
+		} catch {
+			return fail(500);
+		}
+	}
+} satisfies Actions;

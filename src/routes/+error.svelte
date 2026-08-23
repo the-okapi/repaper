@@ -14,7 +14,10 @@
 <div class="flex h-[calc(100vh-5rem)] w-screen items-center justify-center">
 	<div class="h-fit text-center">
 		<AlertDialog open={true} cancel={false}>
-			<p class="mb-5 w-80">{m.something_happened()} <strong>Error {page.status}</strong></p>
+			<p class="mb-5 w-80">
+				{m.something_happened()}
+				<strong>Error <span class="font-mono text-base">{page.status}</span></strong>
+			</p>
 			{#snippet go()}
 				<Button.Root href="/home" class="h-fit py-2!">{m.home()}</Button.Root>
 			{/snippet}

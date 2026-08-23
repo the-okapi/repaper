@@ -10,13 +10,13 @@
 | `src/routes/home/+page.server.ts`                                          | 16             |
 | `src/routes/manage/[org]/[class]/assignments/[assignment]/actions.ts`      | 19 → 26        |
 | `src/routes/manage/[org]/[class]/assignments/[assignment]/+page.server.ts` | 27, 28         |
-| `src/routes/assignment/[assigment]/+page.server.ts`                        | 29, 30, 33     |
-| `src/routes/manage/[org]/[class]/+page.server.ts`                          | 31, 32         |
-| `src/routes/class/[org]/[class]/+page.server.ts`                           | 33, 61         |
-| `src/routes/manage/[org]/[class]/load.remote.ts`                           | 34, 35         |
+| `src/routes/assignment/[assigment]/+page.server.ts`                        | 29 → 34        |
+| `src/routes/manage/[org]/[class]/load.remote.ts`                           | 35, 36         |
 | `src/routes/+layout.server.ts`                                             | 37, 38         |
 | `src/routes/manage/[org]/actions.ts`                                       | 39 → 58        |
 | `src/routes/assignment/[assignment]/server.remote.ts`                      | 59, 60         |
+| `src/routes/manage/[org]/[class]/+page.server.ts`                          | 61, 62         |
+| `src/routes/class/[org]/[class]/+page.server.ts`                           | 63, 64         |
 | `src/routes/manage/[org]/+page.server.ts`                                  | 68 → 71        |
 | `src/routes/invitation/[org]/[id]/+page.server.ts`                         | 72 → 75        |
 | `src/routes/home/load.remote.ts`                                           | 17, 18, 76, 77 |
