@@ -46,6 +46,10 @@
 	// Font
 	let fonts = [
 		{
+			label: '<span class="font-[Fira_Sans]">Fira Sans</span>',
+			value: 'fira'
+		},
+		{
 			label: '<span class="font-[Georgia]">Georgia</span>',
 			value: 'georgia'
 		},
@@ -60,10 +64,6 @@
 		{
 			label: '<span class="font-system">System UI</span>',
 			value: 'system'
-		},
-		{
-			label: '<span class="font-[Fira_Sans]">Fira Sans</span>',
-			value: 'fira'
 		}
 	];
 

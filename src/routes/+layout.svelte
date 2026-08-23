@@ -19,8 +19,8 @@
 <ModeWatcher
 	darkClassNames={['dark']}
 	lightClassNames={['light']}
-	defaultTheme="georgia"
-	defaultMode="light"
+	defaultTheme="fira"
+	defaultMode="dark"
 />
 
 <div class="nav-bar"><NavBar loggedIn={data.loggedIn} /></div>
