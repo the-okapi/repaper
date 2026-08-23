@@ -142,8 +142,9 @@ export const create = async ({ locals, request, params }: ActionData) => {
 				}
 			}
 		});
-	} catch {
-		return fail(500, { createError: true, message: m.something_happened() });
+	} catch (error: any) {
+		console.log(error);
+		return fail(500, { 	createError: true, message: m.something_happened() });
 	}
 
 	return { createSuccess: true, success: true, email };

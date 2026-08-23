@@ -48,91 +48,81 @@
 			{/each}
 		</div>
 		<div class="pb-14">
-			{#if assignments.length === 0}
-				<div class="flex h-full w-full items-center justify-center">
-					<Loader />
-				</div>
-			{:else}
-				<div>
-					<h2 class="mb-4 text-center text-3xl font-bold">{m.assignments()}</h2>
-					{#snippet list(assignmentsFiltered: Assignment[])}
-						<div class="grid grid-cols-2 gap-6">
-							{#each assignmentsFiltered as a (a.id)}
-								{let assignment = {
-									subId: a.id,
-									id: a.assignment.id,
-									name: a.assignment.name,
-									description: a.assignment.description,
-									due_date: a.assignment.due_date,
-									class: a.assignment.class,
-									submitted: a.submitted
-								}}
-								<div class="box relative p-0!">
-									<a
-										class="flex h-full w-full cursor-pointer items-center justify-center rounded-xl transition-colors hover:bg-(--a)"
-										href="/assignment/{assignment.subId}"
-									>
-										<div class="relative w-fit text-center">
-											{#if a.submitted}
-												<div class="absolute -top-8 w-full">
-													<p
-														class="badge mx-auto mb-4 w-fit! bg-(--p) px-5! text-(--p-fg)"
-													>
-														{m.submitted()}
-													</p>
-												</div>
-											{:else if new Date() > new Date(assignment.due_date)}
-												<div class="absolute -top-8 w-full">
-													<p
-														class="badge mx-auto mb-4 w-fit! bg-(--red) px-5!"
-													>
-														{m.late()}
-													</p>
-												</div>
-											{/if}
-											<p class="italic">{formatDate(assignment.due_date)}</p>
-											<h3 class="text-center text-2xl font-semibold">
-												{assignment.name}
-											</h3>
-											<p class="px-8">{assignment.description}</p>
-										</div>
-										<div class="absolute bottom-2 left-0 w-full text-center">
-											<p>
-												{m.go_to_m()}
-												{m.assignment()}
+			<h2 class="mb-4 text-center text-3xl font-bold">{m.assignments()}</h2>
+			{#snippet list(assignmentsFiltered: Assignment[])}
+				<div class="grid grid-cols-2 gap-6">
+					{#each assignmentsFiltered as a (a.id)}
+						{let assignment = {
+							subId: a.id,
+							id: a.assignment.id,
+							name: a.assignment.name,
+							description: a.assignment.description,
+							due_date: a.assignment.due_date,
+							class: a.assignment.class,
+							submitted: a.submitted
+						}}
+						<div class="box relative p-0!">
+							<a
+								class="flex h-full w-full cursor-pointer items-center justify-center rounded-xl transition-colors hover:bg-(--a)"
+								href="/assignment/{assignment.subId}"
+							>
+								<div class="relative w-fit text-center">
+									{#if a.submitted}
+										<div class="absolute -top-8 w-full">
+											<p
+												class="badge mx-auto mb-4 w-fit! bg-(--p) px-5! text-(--p-fg)"
+											>
+												{m.submitted()}
 											</p>
 										</div>
-									</a>
+									{:else if new Date() > new Date(assignment.due_date)}
+										<div class="absolute -top-8 w-full">
+											<p class="badge mx-auto mb-4 w-fit! bg-(--red) px-5!">
+												{m.late()}
+											</p>
+										</div>
+									{/if}
+									<p class="italic">{formatDate(assignment.due_date)}</p>
+									<h3 class="text-center text-2xl font-semibold">
+										{assignment.name}
+									</h3>
+									<p class="px-8">{assignment.description}</p>
 								</div>
-							{/each}
+								<div class="absolute bottom-2 left-0 w-full text-center">
+									<p>
+										{m.go_to_m()}
+										{m.assignment()}
+									</p>
+								</div>
+							</a>
 						</div>
-					{/snippet}
-					{#snippet toDo()}
-						{let assignmentsFiltered = assignments.filter(
-							(a: Assignment) => a.submitted === null
-						)}
-						{@render list(assignmentsFiltered)}
-						{#if assignmentsFiltered.length === 0}
-							<p class="mt-4 text-center text-lg">{m.no_assignments_here()}</p>
-						{/if}
-					{/snippet}
-					{#snippet submitted()}
-						{let assignmentsFiltered = assignments.filter(
-							(a: Assignment) => a.submitted !== null
-						)}
-						{@render list(assignmentsFiltered)}
-						{#if assignmentsFiltered.length === 0}
-							<p class="mt-4 text-center text-lg">{m.no_assignments_here()}</p>
-						{/if}
-					{/snippet}
-					<Tabs
-						labels={[m.to_do(), m.submitted()]}
-						value={m.to_do()}
-						snippets={[toDo, submitted]}
-						triggerClass="w-26"
-					/>
+					{/each}
 				</div>
-			{/if}
+			{/snippet}
+			{#snippet toDo()}
+				{let assignmentsFiltered = assignments.filter(
+					(a: Assignment) => a.submitted === null
+				)}
+				{@render list(assignmentsFiltered)}
+				{#if assignmentsFiltered.length === 0}
+					<p class="mt-4 text-center text-lg">{m.no_assignments_here()}</p>
+				{/if}
+			{/snippet}
+			{#snippet submitted()}
+				{let assignmentsFiltered = assignments.filter(
+					(a: Assignment) => a.submitted !== null
+				)}
+				{@render list(assignmentsFiltered)}
+				{#if assignmentsFiltered.length === 0}
+					<p class="mt-4 text-center text-lg">{m.no_assignments_here()}</p>
+				{/if}
+			{/snippet}
+			<Tabs
+				labels={[m.to_do(), m.submitted()]}
+				value={m.to_do()}
+				snippets={[toDo, submitted]}
+				triggerClass="w-26"
+			/>
 		</div>
 	</div>
 {/await}
