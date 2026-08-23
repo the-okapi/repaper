@@ -46,7 +46,6 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 				.from('documents')
 				.insert({
 					user: user.id,
-					assignment: assignment.id,
 					class: assignment.class
 				})
 				.select('id'),
@@ -61,7 +60,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 				})
 				.eq('id', params.assignment)
 				.eq('user', user.id),
-			33
+			31
 		);
 
 		return {
@@ -98,7 +97,7 @@ export const actions = {
 					.select('submitted')
 					.eq('id', params.assignment)
 					.eq('user', user.id),
-				31
+				32
 			);
 
 			if (!assignmentSubmission) {
@@ -115,7 +114,7 @@ export const actions = {
 					})
 					.eq('id', params.assignment)
 					.eq('user', user.id),
-				32
+				33
 			);
 		} catch {
 			return fail(500);
@@ -137,7 +136,7 @@ export const actions = {
 					.select('submitted')
 					.eq('id', params.assignment)
 					.eq('user', user.id),
-				33
+				34
 			);
 
 			if (!assignmentSubmission) {
@@ -154,7 +153,7 @@ export const actions = {
 					})
 					.eq('id', params.assignment)
 					.eq('user', user.id),
-				34
+				78
 			);
 		} catch {
 			return fail(500);

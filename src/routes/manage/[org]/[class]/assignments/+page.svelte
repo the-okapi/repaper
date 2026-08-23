@@ -66,14 +66,14 @@
 		</div>
 	{/snippet}
 	{#snippet upcoming()}
-		{const assignments = data.assignments.filter(
-			(a: Assignment) => new Date() < new Date(a.due_date)
+		{const assignments = $derived(
+			data.assignments.filter((a: Assignment) => new Date() < new Date(a.due_date))
 		)}
 		{@render list(assignments)}
 	{/snippet}
 	{#snippet past()}
-		{const assignments = data.assignments.filter(
-			(a: Assignment) => new Date() >= new Date(a.due_date)
+		{const assignments = $derived(
+			data.assignments.filter((a: Assignment) => new Date() >= new Date(a.due_date))
 		)}
 		{@render list(assignments)}
 	{/snippet}

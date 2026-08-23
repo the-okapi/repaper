@@ -10,7 +10,7 @@
 | `src/routes/home/+page.server.ts`                                          | 16             |
 | `src/routes/manage/[org]/[class]/assignments/[assignment]/actions.ts`      | 19 → 26        |
 | `src/routes/manage/[org]/[class]/assignments/[assignment]/+page.server.ts` | 27, 28         |
-| `src/routes/assignment/[assigment]/+page.server.ts`                        | 29 → 34        |
+| `src/routes/assignment/[assigment]/+page.server.ts`                        | 29 → 34, 78    |
 | `src/routes/manage/[org]/[class]/load.remote.ts`                           | 35, 36         |
 | `src/routes/+layout.server.ts`                                             | 37, 38         |
 | `src/routes/manage/[org]/actions.ts`                                       | 39 → 58        |

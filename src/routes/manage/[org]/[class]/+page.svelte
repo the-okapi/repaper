@@ -47,17 +47,19 @@
 						>
 							{m.add_member()}
 						</h2>
-						{let options = members
-							.filter(
-								(user: User) =>
-									data.members.find(
-										(u: User) => u.user.email === user.user.email
-									) === undefined
-							)
-							.map((user: User) => ({
-								value: user.user.name,
-								label: user.user.name
-							}))}
+						{let options = $derived(
+							members
+								.filter(
+									(user: User) =>
+										data.members.find(
+											(u: User) => u.user.email === user.user.email
+										) === undefined
+								)
+								.map((user: User) => ({
+									value: user.user.name,
+									label: user.user.name
+								}))
+						)}
 						{#if options.length === 0}
 							<p class="px-5 text-center">{m.no_users()}</p>
 						{:else}

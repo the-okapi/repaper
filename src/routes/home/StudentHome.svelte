@@ -32,9 +32,9 @@
 						<div class="w-fit text-center">
 							<h3 class="text-3xl font-bold">{classMembership.class.name}</h3>
 							{#if assignments.length !== 0}
-								{let numAssignments = assignments.filter(
-									(a: Assignment) => a.assignment.class
-								).length}
+								{let numAssignments = $derived(
+									assignments.filter((a: Assignment) => a.assignment.class).length
+								)}
 								<p>{numAssignments} {m.assignments()}</p>
 							{:else}
 								<p>_ {m.assignments()}</p>
@@ -100,8 +100,8 @@
 				</div>
 			{/snippet}
 			{#snippet toDo()}
-				{let assignmentsFiltered = assignments.filter(
-					(a: Assignment) => a.submitted === null
+				{let assignmentsFiltered = $derived(
+					assignments.filter((a: Assignment) => a.submitted === null)
 				)}
 				{@render list(assignmentsFiltered)}
 				{#if assignmentsFiltered.length === 0}
@@ -109,8 +109,8 @@
 				{/if}
 			{/snippet}
 			{#snippet submitted()}
-				{let assignmentsFiltered = assignments.filter(
-					(a: Assignment) => a.submitted !== null
+				{let assignmentsFiltered = $derived(
+					assignments.filter((a: Assignment) => a.submitted !== null)
 				)}
 				{@render list(assignmentsFiltered)}
 				{#if assignmentsFiltered.length === 0}
