@@ -208,7 +208,7 @@
 				disabled
 				class="flex size-10 items-center justify-center p-0! outline-none!"
 			>
-				<Loader size={6} />
+				<Loader />
 			</Button.Root>
 		{/if}
 	{:else}

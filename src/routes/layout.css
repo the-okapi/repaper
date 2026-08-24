@@ -59,10 +59,6 @@
 	--p: #cc0050;
 }
 
-[data-theme='orange'] {
-	--p: #dd5500;
-}
-
 [data-theme='yellow'] {
 	--p: #ffdd00;
 }

@@ -125,7 +125,9 @@
 			<div class="flex h-16 px-5 py-3">
 				<div class="flex w-fit items-center">
 					{#if member.admin}
-						<p class="badge bg-yellow-600">{m.admin()}</p>
+						<p class="badge bg-amber-600">
+							{m.admin()}
+						</p>
 					{:else}
 						<p class="badge bg-(--p)">{m.student()}</p>
 					{/if}

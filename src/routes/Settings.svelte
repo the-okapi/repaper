@@ -50,10 +50,6 @@
 			value: 'red'
 		},
 		{
-			label: '<div data-theme="orange" class="swatch"></div> Orange',
-			value: 'orange'
-		},
-		{
 			label: '<div data-theme="yellow" class="swatch"></div> ' + m.yellow(),
 			value: 'yellow'
 		},
