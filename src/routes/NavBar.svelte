@@ -3,9 +3,7 @@
 	import { AlertDialog } from '$lib/components';
 	import { slide } from 'svelte/transition';
 	import { Button } from 'bits-ui';
-	import { signOut } from '$lib/actions.remote';
 	import { m } from '$lib/paraglide/messages';
-	import { goto } from '$app/navigation';
 	import showIcon from '$lib/assets/icons/show.svg';
 	import hideIcon from '$lib/assets/icons/hide.svg';
 	import { barHidden } from '$lib/state.svelte';
@@ -38,19 +36,6 @@
 
 	let logOutOpen = $state(false);
 
-	async function signOutForm(event: Event) {
-		event.preventDefault();
-		logOutOpen = false;
-		login = false;
-		const response = await signOut();
-
-		if (response.status === 200) {
-			return goto('/', { replaceState: true });
-		} else {
-			return goto('/error', { replaceState: true });
-		}
-	}
-
 	function onkeydown(event: KeyboardEvent) {
 		if (event.key !== 'Escape') {
 			return;
@@ -69,7 +54,7 @@
 <AlertDialog bind:open={logOutOpen}>
 	<p class="mb-8 text-center text-lg">{m.are_you_sure()} {m.confirm_log_out()}</p>
 	{#snippet go()}
-		<form onsubmit={signOutForm}>
+		<form method="POST" action="/?/signOut">
 			<Button.Root type="submit">{m.go()}</Button.Root>
 		</form>
 	{/snippet}
