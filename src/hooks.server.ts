@@ -3,7 +3,7 @@ import { getTextDirection } from '$lib/paraglide/runtime';
 import { paraglideMiddleware } from '$lib/paraglide/server';
 import type { Handle } from '@sveltejs/kit';
 import { createServerClient } from '@supabase/ssr';
-import { PRIVATE_SUPABASE_PUBLISHABLE_KEY, PRIVATE_SUPABASE_URL } from '$env/static/private';
+import { PRIVATE_SUPABASE_PUBLISHABLE_KEY, PRIVATE_SUPABASE_URL } from '$app/env/private';
 
 const originalHandle: Handle = async ({ event, resolve }) => {
 	event.locals.supabase = createServerClient(

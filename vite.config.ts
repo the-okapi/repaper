@@ -14,7 +14,10 @@ export default defineConfig({
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
 			adapter: adapter(),
-			experimental: { remoteFunctions: true }
+			experimental: {
+				remoteFunctions: true,
+				explicitEnvironmentVariables: true
+			}
 		}),
 
 		paraglideVitePlugin({
