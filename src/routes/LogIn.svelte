@@ -2,7 +2,7 @@
 	import { Button, Label } from 'bits-ui';
 	import { slide } from 'svelte/transition';
 	import { Loader } from '$lib/components';
-	import { logIn } from './actions.remote';
+	import { logIn } from '$lib/actions.remote';
 	import { m } from '$lib/paraglide/messages';
 	import { goto } from '$app/navigation';
 
