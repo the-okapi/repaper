@@ -29,8 +29,7 @@
 	"after_delete": "Le compte de {name} a été marqué pour être supprimé et sera supprimé en 30 jours si aucun essaie de le récupérer a été fait.",
 	"next": "Continuer",
 	"email_incorrect": "Courriel est incorrect",
-	"email_sent": "Un courriel a été envoyé à",
-	"finish_setting_up": "pour finir d'organiser le compte.",
+	"email_sent": "Un courriel a été envoyé à {email} pour finir d'organiser le compte. Le courriel peut-être sera dans le dossier spam.",
 	"create_member": "Créer un Membre",
 	"user_exists": "Un utilisateur avec ce courriel existe déjà.",
 	"nonexistant_user": "Utilisateur n'existe pas",
@@ -76,7 +75,6 @@
 	"created_assignment": "Le devoir a été créé avec succès.",
 	"create_another": "Créer un Autre",
 	"go_to": "Aller à",
-	"assignments": "Devoirs",
 	"no_assignments": "À ce moment, il n'y a aucun devoir. Retournez à la page de la classe pour en créer un.",
 	"due_date": "Date de Remise",
 	"please_future_date": "Choisissez une date dans le futur, s'il vous plaît.",
@@ -114,5 +112,6 @@
 	"yellow": "Jaune",
 	"green": "Vert",
 	"blue": "Bleu",
-	"purple": "Violet"
+	"purple": "Violet",
+	"day": "Jour"
 }

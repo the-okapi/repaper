@@ -7,52 +7,60 @@
 	let { form } = $props();
 
 	let loading = $state(false);
+	let success = $state(false);
 </script>
 
 <div
-	class="relative flex items-center justify-center rounded-xl border border-(--o) bg-(--bg) px-12"
+	class="relative flex h-210 w-80 items-center justify-center rounded-xl border border-(--o) bg-(--bg) px-12"
 >
-	{#if loading && !form?.createSuccess}
-		<Loader />
-	{:else if loading}
-		<div class="absolute w-60 text-center">
-			<p>
-				{m.email_sent()}
-				{form.email}
-				{m.finish_setting_up()}
-			</p>
-			<Button.Root onclick={() => (loading = false)} class="mt-7"
-				>{m.create_another()}</Button.Root
-			>
-		</div>
-	{/if}
-	<form
-		class="h-full w-full {loading ? 'invisible' : ''}"
-		action="?/create"
-		method="POST"
-		use:enhance={() => {
-			loading = true;
-
-			return ({ update, result }) => {
-				update();
-				if (result.status !== 200) {
-					loading = false;
-				}
-			};
-		}}
-	>
-		<h2 class="mt-5 text-center text-3xl font-bold whitespace-nowrap">{m.create_member()}</h2>
-		<div class="m-auto mt-3 w-fit">
-			<Label.Root>{m.name()}:</Label.Root><br />
-			<input name="name" type="text" required />
-		</div>
-		<div class="m-auto mt-3 w-fit">
-			<Label.Root>{m.email()}:</Label.Root><br />
-			<input name="email" type="email" required />
-		</div>
-		<Button.Root type="submit" class="m-auto mt-3 mb-10 block w-fit">{m.go()}</Button.Root>
-		{#if form?.createError}
-			<p class="absolute bottom-2 left-3 text-sm text-(--red)">{form.message}</p>
+	{#if success || loading}
+		{#if loading || !form?.createSuccess}
+			<Loader />
+		{:else}
+			<div class="absolute w-60 text-center">
+				<p>
+					{m.email_sent({ email: form.createSuccess })}
+				</p>
+				<Button.Root onclick={() => (success = false)} class="mt-7"
+					>{m.create_another()}</Button.Root
+				>
+			</div>
 		{/if}
-	</form>
+	{:else if !loading && !success}
+		<form
+			class="h-full w-full {loading ? 'invisible' : ''}"
+			action="?/create"
+			method="POST"
+			use:enhance={() => {
+				loading = true;
+
+				return ({ update, result }) => {
+					update();
+					if (result.type === 'success') {
+						console.log('a');
+						success = true;
+					}
+					loading = false;
+				};
+			}}
+		>
+			<h2 class="mt-5 text-center text-3xl font-bold whitespace-nowrap">
+				{m.create_member()}
+			</h2>
+			<div class="m-auto mt-3 w-fit">
+				<Label.Root>{m.name()}:</Label.Root><br />
+				<input name="name" type="text" value={form?.name} required />
+			</div>
+			<div class="m-auto mt-3 w-fit">
+				<Label.Root>{m.email()}:</Label.Root><br />
+				<input name="email" type="email" value={form?.email} required />
+			</div>
+			<Button.Root type="submit" class="m-auto mt-3 mb-10 block w-fit">{m.go()}</Button.Root>
+			{#if form?.createError}
+				<p class="absolute bottom-2 left-3 text-sm leading-4 text-(--red)">
+					{form.message}
+				</p>
+			{/if}
+		</form>
+	{/if}
 </div>

@@ -1,12 +1,8 @@
-<script lang="ts">
-	let { size = 30 } = $props();
-</script>
-
 <div class="m-auto animate-spin">
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
-		width={size}
-		height={size}
+		width={30}
+		height={30}
 		viewBox="0 0 24 24"
 		fill="none"
 		stroke="var(--p)"

@@ -15,7 +15,7 @@
 
 <div class="relative">
 	<div>
-		<h2 class="mb-4 text-center text-4xl font-bold">{m.assignments()}</h2>
+		<h2 class="mb-4 text-center text-4xl font-bold">{m.assignment()}s</h2>
 		{#snippet list(assignments: Assignment[])}
 			<div class="mx-auto mt-4 grid w-fit grid-cols-3 gap-6">
 				{#each assignments as a (a.id)}

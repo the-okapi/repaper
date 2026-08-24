@@ -61,3 +61,13 @@ export function formatDateInput(date: string) {
 		pad(d.getMinutes())
 	);
 }
+
+export function getDaysUntil(date: string) {
+	const d = new Date(date);
+	const nD = new Date();
+
+	const dUTC = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate());
+	const nDUTC = Date.UTC(nD.getFullYear(), nD.getMonth(), nD.getDate());
+
+	return Math.floor((dUTC - nDUTC) / (1000 * 60 * 60 * 24));
+}

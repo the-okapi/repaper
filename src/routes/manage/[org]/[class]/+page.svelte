@@ -108,7 +108,7 @@
 						class="relative flex h-full w-full cursor-pointer items-center justify-center rounded-xl p-5 transition-colors hover:bg-(--a)"
 					>
 						<div class="w-fit text-center">
-							<h2 class="text-center text-2xl font-bold">{m.assignments()}</h2>
+							<h2 class="text-center text-2xl font-bold">{m.assignment()}s</h2>
 						</div>
 						<div class="absolute bottom-2 left-0 w-full text-center">
 							<p>{m.go_to()} {m.assignment()}</p>

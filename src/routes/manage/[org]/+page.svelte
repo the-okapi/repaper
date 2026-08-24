@@ -4,8 +4,8 @@
 	import CreateMember from './CreateMember.svelte';
 	import OrganizationMembers from './OrganizationMembers.svelte';
 	import { AlertDialog } from '$lib/components';
-	import { enhance } from '$app/forms';
 	import { m } from '$lib/paraglide/messages';
+	import { getDaysUntil } from '$lib/util';
 
 	let { data, form }: PageProps = $props();
 
@@ -62,8 +62,9 @@
 				{#each data.deletions as deletion, i (deletion.id)}
 					<div class="mb-2.5 flex w-80">
 						<p class="my-auto w-70 overflow-x-scroll whitespace-nowrap">
+							{let daysUntil = getDaysUntil(deletion.can_delete)}
 							<span class="font-mono text-sm"
-								>{new Date(deletion.can_delete).toLocaleDateString('en-CA')}</span
+								>{daysUntil} {m.day()}{daysUntil === 1 ? '' : 's'}</span
 							>
 							- {deletion.name}
 						</p>
@@ -104,13 +105,7 @@
 		{data.invitations[invitation].email}?
 	</p>
 	{#snippet go()}
-		<form
-			action="?/revoke"
-			method="POST"
-			use:enhance={() => {
-				confirmRevoke = false;
-			}}
-		>
+		<form action="?/revoke" method="POST">
 			<input type="hidden" value={data.invitations[invitation].id} name="invitation" />
 			<Button.Root type="submit" class="red-button">{m.go()}</Button.Root>
 		</form>

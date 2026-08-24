@@ -3,7 +3,7 @@ import resend from '$lib/resend';
 import { object, string, safeParse } from 'valibot';
 import type { RouteParams } from './$types';
 import { UserIdSchema } from '$lib/util';
-import { unwrap, unwrapNoData } from '$lib/error';
+import { unwrap, unwrapNoData, HttpError } from '$lib/error';
 import { m } from '$lib/paraglide/messages';
 
 type ActionData = {
@@ -88,15 +88,26 @@ export const create = async ({ locals, request, params }: ActionData) => {
 			return redirect(303, '/');
 		}
 
-		const foundData = unwrap(
+		const usersFound = unwrap(
 			await locals.supabase.from('users').select('id').eq('email', email),
 			43
 		);
 
+		const invitationsFound = unwrap(
+			await locals.supabase.from('invitations').select('id').eq('email', email),
+			65
+		);
+
+		const foundData = [...usersFound, ...invitationsFound];
+
+		console.log(foundData);
+
 		if (foundData.length > 0) {
 			return fail(409, {
 				createError: true,
-				message: m.user_exists()
+				message: m.user_exists(),
+				email,
+				name
 			});
 		}
 
@@ -126,28 +137,33 @@ export const create = async ({ locals, request, params }: ActionData) => {
 			45
 		);
 
-		await resend.emails.send({
-			from: 'Repaper <repaper@unlimitedstuffltd.com>',
-			to: email,
-			template: {
-				id: 'invitation-email',
-				variables: {
-					NAME: name,
-					ORGANIZATION: check[0].organization.name,
-					LINK:
-						'https://repaper.unlimitedstuffltd.com/invitation/' +
-						params.org +
-						'/' +
-						invitation[0].id
+		try {
+			// Error Code 66
+			await resend.emails.send({
+				from: 'Repaper <repaper@unlimitedstuffltd.com>',
+				to: email,
+				template: {
+					id: 'invitation-email',
+					variables: {
+						NAME: name,
+						ORGANIZATION: check[0].organization.name,
+						LINK:
+							'https://repaper.unlimitedstuffltd.com/invitation/' +
+							params.org +
+							'/' +
+							invitation[0].id
+					}
 				}
-			}
-		});
-	} catch (error: any) {
-		console.log(error);
-		return fail(500, { 	createError: true, message: m.something_happened() });
+			});
+		} catch (error: any) {
+			console.error(error, 'Error Code 66');
+			throw new HttpError(m.something_happened(), 500);
+		}
+	} catch {
+		return fail(500, { createError: true, message: m.something_happened(), email, name });
 	}
 
-	return { createSuccess: true, success: true, email };
+	return { createSuccess: email, success: true };
 };
 
 const RevokeSchema = object({

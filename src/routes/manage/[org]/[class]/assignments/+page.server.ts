@@ -41,7 +41,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 
 		return {
 			assignments: assignmentsOrdered,
-			title: m.assignments() + ' - ' + check[0].class.name
+			title: m.assignment() + 's - ' + check[0].class.name
 		};
 	} catch {
 		return redirect(303, '/error');

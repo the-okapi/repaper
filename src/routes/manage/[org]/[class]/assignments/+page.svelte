@@ -26,7 +26,7 @@
 		>← {m.back()}</a
 	>
 	{#snippet list(assignments: Assignment[])}
-		<div class="mt-5 grid grid-cols-3 px-20">
+		<div class="mt-5 grid grid-cols-3 gap-4 px-30">
 			{#each assignments as assignment (assignment.id)}
 				<div class="box relative p-0!">
 					<a

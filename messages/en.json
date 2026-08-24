@@ -30,8 +30,7 @@
 	"after_delete": "The account of {name} has been marked for deletion, and will be deleted in 30 days if no attempt to recover the account has been made.",
 	"next": "Next",
 	"email_incorrect": "Email is incorrect",
-	"email_sent": "An email has been sent to",
-	"finish_setting_up": "to finish setting up the account.",
+	"email_sent": "An email has been sent to {email} to finish setting up the account. The email may show up in the junk folder.",
 	"create_member": "Create a Member",
 	"user_exists": "A user with that email already exists.",
 	"nonexistant_user": "User doesn't exist",
@@ -76,7 +75,6 @@
 	"created_assignment": "The assignment was successfully created.",
 	"create_another": "Create Another",
 	"go_to": "Go to",
-	"assignments": "Assignments",
 	"no_assignments": "There are currently no assignments. Go back to the class page to create one.",
 	"due_date": "Due Date",
 	"please_future_date": "Please choose a date in the future.",
@@ -114,5 +112,6 @@
 	"yellow": "Yellow",
 	"green": "Green",
 	"blue": "Blue",
-	"purple": "Purple"
+	"purple": "Purple",
+	"day": "Day"
 }
