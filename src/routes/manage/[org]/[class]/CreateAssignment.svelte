@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { Loader, Switch, Combobox } from '$lib/components';
+	import { Loader, Switch, Combobox, DateTimePicker } from '$lib/components';
 	import { createAssignment, getStudents } from './server.remote';
 	import { Label, Button } from 'bits-ui';
 	import { m } from '$lib/paraglide/messages';
 	import { page } from '$app/state';
+	import { formatDate } from '$lib/util';
 
 	let loading = $state(false);
 	let everyone = $derived(createAssignment.result?.everyone ?? true);
@@ -25,11 +26,13 @@
 
 	let showSuccess = $state(false);
 
-	let dueDate = $state(createAssignment.result?.dueDate ?? new Date().toISOString());
-
 	function createAnother() {
+		day = null;
 		showSuccess = false;
 	}
+
+	let dateTime = $state('');
+	let day = $state(null);
 </script>
 
 <div
@@ -53,14 +56,8 @@
 						errorText = m.please_select_student();
 						return;
 					}
-					const date = new Date();
-					const selectedDate = new Date(createAssignment.fields.dueDate.value() ?? '');
-					if (date > selectedDate) {
-						errorText = m.please_future_date();
-						return;
-					}
-					if (new Date(date.setFullYear(date.getFullYear() + 5)) < selectedDate) {
-						errorText = m.date_within_five();
+					if (dateTime === '') {
+						errorText = m.date_not_selected();
 						return;
 					}
 					errorText = '';
@@ -91,9 +88,20 @@
 						name="description"></textarea>
 				</div>
 				<div class="mb-5">
-					<Label.Root>{m.due_date()}:</Label.Root><br />
-					<input type="datetime-local" bind:value={dueDate} required class="w-60" />
-					<input type="hidden" name="dueDate" value={new Date(dueDate).toISOString()} />
+					<Label.Root>{m.due_date()}:</Label.Root>
+					<div class="h-1"></div>
+					<div class="flex">
+						<div class="w-10">
+							<DateTimePicker name="dueDate" bind:day bind:value={dateTime} />
+						</div>
+						<p class="my-auto ml-3 text-sm">
+							{#if dateTime !== ''}
+								{formatDate(dateTime)}
+							{:else}
+								{m.date_not_selected()}
+							{/if}
+						</p>
+					</div>
 				</div>
 				<div class="m-auto flex w-fit justify-center gap-4">
 					<Switch

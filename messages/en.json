@@ -113,5 +113,14 @@
 	"green": "Green",
 	"blue": "Blue",
 	"purple": "Purple",
-	"day": "Day"
+	"day": "Day",
+	"sun": "Sun",
+	"mon": "Mon",
+	"tue": "Tue",
+	"wed": "Wed",
+	"thu": "Thu",
+	"fri": "Fri",
+	"sat": "Sat",
+	"time": "Time",
+	"date_not_selected": "Please select a date."
 }
