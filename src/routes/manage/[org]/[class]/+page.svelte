@@ -88,7 +88,7 @@
 								<input type="hidden" name="email" value={member.user.email} />
 								<div class="absolute left-0 w-full">
 									<p
-										class="block overflow-hidden text-center text-sm text-ellipsis whitespace-nowrap"
+										class="m-auto block w-70 overflow-hidden text-center text-sm text-ellipsis whitespace-nowrap"
 									>
 										{member.user.name} - {member.user.email}
 									</p>
@@ -96,7 +96,7 @@
 								<input type="hidden" name="userId" value={member.user.id} />
 							{/if}
 							<Button.Root type="submit" class="m-auto mt-8 block"
-								>{m.go()}</Button.Root
+								>{m.submit()}</Button.Root
 							>
 						{/if}
 					</form>
@@ -160,7 +160,7 @@
 	{#snippet go()}
 		<form action="?/remove" method="POST">
 			<input type="hidden" value={data.members[remove].user.id} name="userId" />
-			<Button.Root type="submit" class="red-button">{m.go()}</Button.Root>
+			<Button.Root type="submit" class="red-button">{m.submit()}</Button.Root>
 		</form>
 	{/snippet}
 </AlertDialog>

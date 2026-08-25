@@ -55,7 +55,9 @@
 				<Label.Root>{m.email()}:</Label.Root><br />
 				<input name="email" type="email" value={form?.email} required />
 			</div>
-			<Button.Root type="submit" class="m-auto mt-3 mb-10 block w-fit">{m.go()}</Button.Root>
+			<Button.Root type="submit" class="m-auto mt-3 mb-10 block w-fit"
+				>{m.submit()}</Button.Root
+			>
 			{#if form?.createError}
 				<p class="absolute bottom-2 left-3 text-sm leading-4 text-(--red)">
 					{form.message}

@@ -27,7 +27,7 @@
 	"please_type": "S'il vous plaît, tapez",
 	"below_confirm": "en bas pour confirmer.",
 	"after_delete": "Le compte de {name} a été marqué pour être supprimé et sera supprimé en 30 jours si aucun essaie de le récupérer a été fait.",
-	"next": "Continuer",
+	"next": "Suivant",
 	"email_incorrect": "Courriel est incorrect",
 	"email_sent": "Un courriel a été envoyé à {email} pour finir d'organiser le compte. Le courriel peut-être sera dans le dossier spam.",
 	"create_member": "Créer un Membre",

@@ -81,6 +81,7 @@ export const createAssignment = form(CreateAssignmentSchema, async (data) => {
 			}
 		} else {
 			for (let i = 0; i < students.length; i++) {
+				console.log(students);
 				unwrapNoData(
 					await locals.supabase.from('assignment_submissions').insert({
 						user: students[i],

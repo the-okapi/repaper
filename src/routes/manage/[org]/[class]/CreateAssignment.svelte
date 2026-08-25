@@ -133,11 +133,11 @@
 						{/if}
 					{/if}
 				</div>
-				<div class="absolute bottom-10 left-0 w-full">
-					<p class="mb-2 text-center leading-4 text-(--red)">
+				<Button.Root type="submit" class="m-auto mt-3 block">{m.submit()}</Button.Root>
+				<div class="absolute bottom-1 left-0 w-full">
+					<p class="mb-2 px-2 text-center leading-4 text-(--red)">
 						{createAssignment.result?.message}{errorText}
 					</p>
-					<Button.Root type="submit" class="m-auto block">{m.go()}</Button.Root>
 				</div>
 			</form>
 		</div>

@@ -82,7 +82,7 @@
 	<p class="mb-4 w-100 text-center">{m.are_you_sure()} {m.submission()}</p>
 	{#snippet go()}
 		<form method="POST" action="?/submit">
-			<Button.Root type="submit">{m.go()}</Button.Root>
+			<Button.Root type="submit">{m.submit()}</Button.Root>
 		</form>
 	{/snippet}
 </AlertDialog>
@@ -91,7 +91,7 @@
 	<p class="mb-4 w-100 text-center">{m.are_you_sure()} {m.undo_submission()}</p>
 	{#snippet go()}
 		<form method="POST" action="?/undo">
-			<Button.Root type="submit">{m.go()}</Button.Root>
+			<Button.Root type="submit">{m.submit()}</Button.Root>
 		</form>
 	{/snippet}
 </AlertDialog>

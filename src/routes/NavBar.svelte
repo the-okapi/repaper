@@ -55,7 +55,7 @@
 	<p class="mb-8 text-center text-lg">{m.are_you_sure()} {m.confirm_log_out()}</p>
 	{#snippet go()}
 		<form method="POST" action="/?/signOut">
-			<Button.Root type="submit">{m.go()}</Button.Root>
+			<Button.Root type="submit">{m.submit()}</Button.Root>
 		</form>
 	{/snippet}
 </AlertDialog>

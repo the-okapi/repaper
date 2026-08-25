@@ -45,7 +45,8 @@
 				{#each filteredOptions as option, i (option.value)}
 					<Combobox.Item
 						data-select-item
-						value={option.label}
+						value={option.value}
+						label={option.label}
 						class="w-48! hover:bg-(--fg)/5! {i === 0
 							? 'rounded-t-xl border-t'
 							: ''} {i === filteredOptions.length - 1

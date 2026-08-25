@@ -83,7 +83,7 @@
 				<Label.Root>{m.rename_to()}:</Label.Root>
 				<div class="m-auto flex gap-1">
 					<input name="name" required />
-					<Button.Root type="submit">{m.go()}</Button.Root>
+					<Button.Root type="submit">{m.submit()}</Button.Root>
 				</div>
 				<input type="hidden" name="user" value={member.user.id} />
 			</form>
@@ -118,7 +118,7 @@
 	{#snippet go()}
 		<form action="?/promote" method="POST">
 			<input type="hidden" value={member.user.id} name="userId" />
-			<Button.Root type="submit">{m.go()}</Button.Root>
+			<Button.Root type="submit">{m.submit()}</Button.Root>
 		</form>
 	{/snippet}
 </AlertDialog>
@@ -131,7 +131,7 @@
 	{#snippet go()}
 		<form action="?/demote" method="POST">
 			<input type="hidden" value={member.user.id} name="userId" />
-			<Button.Root type="submit">{m.go()}</Button.Root>
+			<Button.Root type="submit">{m.submit()}</Button.Root>
 		</form>
 	{/snippet}
 </AlertDialog>
@@ -182,7 +182,7 @@
 							confirmPage = 2;
 						}}
 					>
-						<Button.Root class="red-button" type="submit">{m.go()}</Button.Root>
+						<Button.Root class="red-button" type="submit">{m.submit()}</Button.Root>
 						<input type="hidden" name="userId" value={member.user.id} />
 					</form>
 				{:else}

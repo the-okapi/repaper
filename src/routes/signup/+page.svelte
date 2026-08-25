@@ -71,7 +71,7 @@
 						<p class="absolute text-(--red)">{form?.message || error}</p>
 					</div>
 				{/if}
-				<Button.Root type="submit" class="mt-10 w-fit">{m.go()}</Button.Root>
+				<Button.Root type="submit" class="mt-10 w-fit">{m.submit()}</Button.Root>
 			</form>
 		</div>
 	{/if}

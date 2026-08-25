@@ -34,7 +34,7 @@
 						class="h-10 w-56"
 						required
 					/>
-					<Button.Root type="submit">{m.go()}</Button.Root>
+					<Button.Root type="submit">{m.submit()}</Button.Root>
 					<input type="hidden" name="assignment" value={data.assignment.id} />
 				</form>
 				<p class="text-center">{form?.nameMessage}</p>
@@ -49,7 +49,7 @@
 							placeholder={data.assignment.description}
 							class="m-0! inline h-10 w-56"
 							required></textarea>
-						<Button.Root type="submit">{m.go()}</Button.Root>
+						<Button.Root type="submit">{m.submit()}</Button.Root>
 					</div>
 					<input type="hidden" name="assignment" value={data.assignment.id} />
 				</form>
@@ -59,7 +59,7 @@
 				<form method="POST" action="?/changeDueDate" class="m-auto w-fit">
 					<Label.Root>{m.change()} {m.due_date()}:</Label.Root><br />
 					<input type="datetime-local" class="h-10 w-56" bind:value={dueDate} required />
-					<Button.Root type="submit">{m.go()}</Button.Root>
+					<Button.Root type="submit">{m.submit()}</Button.Root>
 					<input type="hidden" name="assignment" value={data.assignment.id} />
 					<input type="hidden" name="dueDate" value={new Date(dueDate).toISOString()} />
 				</form>
@@ -91,7 +91,7 @@
 	</p>
 	{#snippet go()}
 		<form action="?/delete" method="POST">
-			<Button.Root type="submit" class="red-button">{m.go()}</Button.Root>
+			<Button.Root type="submit" class="red-button">{m.submit()}</Button.Root>
 		</form>
 	{/snippet}
 </AlertDialog>

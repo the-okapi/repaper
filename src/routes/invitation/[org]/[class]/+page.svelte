@@ -28,7 +28,7 @@
 			<Label.Root>{m.confirm()} {m.password()}:</Label.Root><br />
 			<input type="password" name="confirmPassword" class="w-60" required />
 		</div>
-		<Button.Root type="submit" class="m-auto block">{m.go()}</Button.Root>
+		<Button.Root type="submit" class="m-auto block">{m.submit()}</Button.Root>
 		{#if form?.fail}
 			<p class="absolute bottom-1 left-2 leading-none text-(--red)">{form.message}</p>
 		{/if}

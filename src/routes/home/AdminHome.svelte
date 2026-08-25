@@ -37,7 +37,7 @@
 						<h2 class="mb-10 text-center text-3xl font-bold">{m.create_class()}</h2>
 						<Label.Root>{m.class_name()}:</Label.Root><br />
 						<input type="text" name="className" class="mr-1 h-10" required />
-						<Button.Root type="submit">{m.go()}</Button.Root>
+						<Button.Root type="submit">{m.submit()}</Button.Root>
 						{#if form?.createFailure}
 							<p class="absolute text-(--red)">{form?.message}</p>
 						{/if}
@@ -70,7 +70,7 @@
 					<h2 class="mb-10 text-center text-2xl font-bold">{m.create_organization()}</h2>
 					<Label.Root>{m.organization_name()}:</Label.Root><br />
 					<input type="text" name="orgName" class="h-10" required />
-					<Button.Root type="submit">{m.go()}</Button.Root>
+					<Button.Root type="submit">{m.submit()}</Button.Root>
 					{#if form?.orgFailure}
 						<p class="absolute text-(--red)">{form.message}</p>
 					{/if}

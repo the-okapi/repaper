@@ -54,7 +54,7 @@
 			<div class="absolute w-50 text-center">
 				<p class="text-xs text-(--red)">{error}</p>
 			</div>
-			<Button.Root type="submit" class="m-auto mt-7 block w-fit">{m.go()}</Button.Root>
+			<Button.Root type="submit" class="m-auto mt-7 block w-fit">{m.submit()}</Button.Root>
 		</form>
 	{/if}
 </div>
