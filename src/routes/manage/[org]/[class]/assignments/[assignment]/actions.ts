@@ -11,8 +11,7 @@ type ActionData = {
 };
 
 const NameSchema = object({
-	name: string(),
-	assignment: string()
+	name: string()
 });
 
 export const changeName = async ({ request, locals, params }: ActionData) => {
@@ -22,7 +21,7 @@ export const changeName = async ({ request, locals, params }: ActionData) => {
 		return fail(400, { nameMessage: m.something_happened(), name: '' });
 	}
 
-	const { name, assignment } = formData.output;
+	const { name } = formData.output;
 
 	const {
 		data: { user }
@@ -53,7 +52,7 @@ export const changeName = async ({ request, locals, params }: ActionData) => {
 				.update({
 					name
 				})
-				.eq('id', assignment)
+				.eq('id', params.assignment)
 				.eq('class', params.class),
 			20
 		);
@@ -65,8 +64,7 @@ export const changeName = async ({ request, locals, params }: ActionData) => {
 };
 
 const DescriptionSchema = object({
-	description: string(),
-	assignment: string()
+	description: string()
 });
 
 export const changeDescription = async ({ request, locals, params }: ActionData) => {
@@ -76,7 +74,7 @@ export const changeDescription = async ({ request, locals, params }: ActionData)
 		return fail(400, { descriptionMessage: m.something_happened(), description: '' });
 	}
 
-	const { description, assignment } = formData.output;
+	const { description } = formData.output;
 
 	const {
 		data: { user }
@@ -107,7 +105,7 @@ export const changeDescription = async ({ request, locals, params }: ActionData)
 				.update({
 					description
 				})
-				.eq('id', assignment)
+				.eq('id', params.assignment)
 				.eq('class', params.class),
 			22
 		);
@@ -123,8 +121,7 @@ export const changeDescription = async ({ request, locals, params }: ActionData)
 };
 
 const DueDateSchema = object({
-	dueDate: string(),
-	assignment: string()
+	dueDate: string()
 });
 
 export const changeDueDate = async ({ request, locals, params }: ActionData) => {
@@ -134,7 +131,7 @@ export const changeDueDate = async ({ request, locals, params }: ActionData) => 
 		return fail(400, { dueDateMessage: m.something_happened(), dueDate: '' });
 	}
 
-	const { dueDate, assignment } = formData.output;
+	const { dueDate } = formData.output;
 
 	const {
 		data: { user }
@@ -165,7 +162,7 @@ export const changeDueDate = async ({ request, locals, params }: ActionData) => 
 				.update({
 					due_date: dueDate
 				})
-				.eq('id', assignment)
+				.eq('id', params.assignment)
 				.eq('class', params.class),
 			24
 		);
@@ -175,20 +172,7 @@ export const changeDueDate = async ({ request, locals, params }: ActionData) => 
 
 	return { dueDateMessage: m.successfully_changed(), dueDate: '', success: m.due_date() };
 };
-
-const DeleteSchema = object({
-	assignment: string()
-});
-
-export const deleteAssignment = async ({ request, locals, params }: ActionData) => {
-	const formData = safeParse(DeleteSchema, Object.fromEntries(await request.formData()));
-
-	if (!formData.success) {
-		return fail(400, { deleteMessage: m.something_happened });
-	}
-
-	const { assignment } = formData.output;
-
+export const deleteAssignment = async ({ locals, params }: ActionData) => {
 	const {
 		data: { user }
 	} = await locals.supabase.auth.getUser();
@@ -216,7 +200,7 @@ export const deleteAssignment = async ({ request, locals, params }: ActionData) 
 			await locals.supabase
 				.from('assignments')
 				.delete()
-				.eq('id', assignment)
+				.eq('id', params.assignment)
 				.eq('class', params.class),
 			26
 		);

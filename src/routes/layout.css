@@ -230,9 +230,10 @@ textarea {
 	&:disabled,
 	&[data-disabled] {
 		color: color-mix(in oklab, var(--fg) 50%, transparent);
-		background-color: color-mix(in oklab, var(--fg) 10%, transparent);
+		background-color: var(--s);
 		opacity: 1;
 		cursor: not-allowed;
+		outline: none !important;
 	}
 }
 
@@ -325,6 +326,8 @@ textarea {
 	padding: 2rem;
 	border: 1px solid var(--o);
 	border-radius: 1rem;
+
+	@apply shadow-2xl;
 }
 
 .box {
@@ -348,6 +351,7 @@ textarea {
 	text-align: center;
 	font-size: 1rem;
 	color: var(--bg);
+	user-select: none;
 }
 
 [data-switch-root] {

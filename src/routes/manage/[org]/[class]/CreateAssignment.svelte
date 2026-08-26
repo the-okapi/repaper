@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { Loader, Switch, Combobox, DateTimePicker } from '$lib/components';
+	import { Loader, Switch, Combobox, DatePicker } from '$lib/components';
 	import { createAssignment, getStudents } from './server.remote';
 	import { Label, Button } from 'bits-ui';
 	import { m } from '$lib/paraglide/messages';
 	import { page } from '$app/state';
-	import { formatDate } from '$lib/util';
 
 	let loading = $state(false);
 	let everyone = $derived(createAssignment.result?.everyone ?? true);
@@ -89,19 +88,7 @@
 				</div>
 				<div class="mb-5">
 					<Label.Root>{m.due_date()}:</Label.Root>
-					<div class="h-1"></div>
-					<div class="flex">
-						<div class="w-10">
-							<DateTimePicker name="dueDate" bind:day bind:value={dateTime} />
-						</div>
-						<p class="my-auto ml-3 text-sm">
-							{#if dateTime !== ''}
-								{formatDate(dateTime)}
-							{:else}
-								{m.date_not_selected()}
-							{/if}
-						</p>
-					</div>
+					<DatePicker name="dueDate" bind:day bind:value={dateTime} />
 				</div>
 				<div class="m-auto flex w-fit justify-center gap-4">
 					<Switch

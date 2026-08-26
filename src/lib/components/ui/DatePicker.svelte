@@ -4,8 +4,10 @@
 	import { fly } from 'svelte/transition';
 	import { getLocale } from '$lib/paraglide/runtime';
 	import { m } from '$lib/paraglide/messages';
+	import { formatDate } from '$lib/util';
+	import { onMount } from 'svelte';
 
-	let { value = $bindable(''), day = $bindable(null), ...props } = $props();
+	let { value = $bindable(''), day = $bindable(null), defaultValue = null, ...props } = $props();
 
 	const today = $state(new Date());
 
@@ -80,18 +82,40 @@
 				return 31;
 		}
 	}
+
+	onMount(() => {
+		if (defaultValue) {
+			const d = new Date(defaultValue);
+			day = {
+				year: d.getFullYear(),
+				month: d.getMonth(),
+				day: d.getDate()
+			};
+		}
+	});
 </script>
 
 <input {value} type="hidden" {...props} />
 
 <Popover.Root bind:open>
-	<Popover.Trigger
-		data-button-root
-		class="flex size-10 items-center justify-center p-0!"
-		type="button"
-	>
-		<img src={calendarIcon} class="size-4.5" alt="Calendar" />
-	</Popover.Trigger>
+	<div class="mt-1 flex">
+		<div class="w-10">
+			<Popover.Trigger
+				data-button-root
+				class="flex size-10 items-center justify-center p-0!"
+				type="button"
+			>
+				<img src={calendarIcon} class="size-4.5" alt="Calendar" />
+			</Popover.Trigger>
+		</div>
+		<p class="my-auto ml-3 text-sm">
+			{#if value !== ''}
+				{formatDate(value)}
+			{:else}
+				{m.date_not_selected()}
+			{/if}
+		</p>
+	</div>
 	<Popover.Portal>
 		<Popover.Content side="right" sideOffset={10} class="p-4!" forceMount>
 			{#snippet child({ wrapperProps, props, open })}

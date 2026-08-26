@@ -7,4 +7,4 @@ export { default as Tabs } from '$lib/components/ui/Tabs.svelte';
 export { default as Slider } from '$lib/components/ui/Slider.svelte';
 export { default as Toggle } from '$lib/components/ui/Toggle.svelte';
 export { default as Popover } from '$lib/components/ui/Popover.svelte';
-export { default as DateTimePicker } from '$lib/components/ui/DateTimePicker.svelte';
+export { default as DatePicker } from '$lib/components/ui/DatePicker.svelte';

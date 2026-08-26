@@ -46,5 +46,5 @@ export const actions = {
 	changeName,
 	changeDescription,
 	changeDueDate,
-	delete: deleteAssignment
+	deleteAssignment
 } satisfies Actions;

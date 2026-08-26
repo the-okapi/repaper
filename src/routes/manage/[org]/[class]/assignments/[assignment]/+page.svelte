@@ -2,96 +2,106 @@
 	import { page } from '$app/state';
 	import { m } from '$lib/paraglide/messages';
 	import { Label, Button } from 'bits-ui';
-	import { Tabs, AlertDialog } from '$lib/components';
-	import { formatDate, formatDateInput } from '$lib/util';
+	import { DatePicker, AlertDialog } from '$lib/components';
+	import { formatDate } from '$lib/util';
 
 	let { data, form } = $props();
 
-	let dueDate = $derived(formatDateInput(form?.dueDate || data.assignment.due_date));
+	let dueDate = $state('');
 
 	let confirmDeleteOpen = $state(false);
 </script>
 
-<div class="h-2"></div>
+<div class="h-5"></div>
 <a
 	href="/manage/{page.params.org}/{page.params.class}/assignments"
-	class="relative ml-10 hover:underline">← {m.back()}</a
+	class="absolute top-22 ml-10 hover:underline">← {m.back()}</a
 >
 
-<div class="box relative">
-	<div>
-		<p class="text-center italic">{formatDate(data.assignment.due_date)}</p>
-		<h2 class="text-center text-2xl font-bold">{data.assignment.name}</h2>
-		<p class="px-4 text-center">{data.assignment.description}</p>
-		<div class="m-auto mt-8 h-40 w-fit">
-			{#snippet changeName()}
-				<form method="POST" action="?/changeName" class="m-auto w-fit">
-					<Label.Root>{m.change()} {m.name()}:</Label.Root><br />
-					<input
-						value={form?.name}
-						placeholder={data.assignment.name}
-						name="name"
-						class="h-10 w-56"
-						required
-					/>
-					<Button.Root type="submit">{m.submit()}</Button.Root>
-					<input type="hidden" name="assignment" value={data.assignment.id} />
-				</form>
-				<p class="text-center">{form?.nameMessage}</p>
-			{/snippet}
-			{#snippet changeDescription()}
-				<form method="POST" action="?/changeDescription" class="m-auto h-fit w-fit">
-					<Label.Root>{m.change()} Description:</Label.Root><br />
-					<div class="mt-0.75 flex gap-1">
-						<textarea
-							value={form?.description}
-							name="description"
-							placeholder={data.assignment.description}
-							class="m-0! inline h-10 w-56"
-							required></textarea>
-						<Button.Root type="submit">{m.submit()}</Button.Root>
-					</div>
-					<input type="hidden" name="assignment" value={data.assignment.id} />
-				</form>
-				<p class="text-center">{form?.descriptionMessage}</p>
-			{/snippet}
-			{#snippet changeDueDate()}
-				<form method="POST" action="?/changeDueDate" class="m-auto w-fit">
-					<Label.Root>{m.change()} {m.due_date()}:</Label.Root><br />
-					<input type="datetime-local" class="h-10 w-56" bind:value={dueDate} required />
-					<Button.Root type="submit">{m.submit()}</Button.Root>
-					<input type="hidden" name="assignment" value={data.assignment.id} />
-					<input type="hidden" name="dueDate" value={new Date(dueDate).toISOString()} />
-				</form>
-				<p class="text-center">{form?.dueDateMessage}</p>
-			{/snippet}
-			{#snippet deleteAssignment()}
-				<div class="mt-5 w-full">
-					<Button.Root
-						class="red-button m-auto block"
-						onclick={() => {
-							confirmDeleteOpen = true;
-						}}>{m.delete()} {m.assignment()}</Button.Root
-					>
-				</div>
-			{/snippet}
-			<Tabs
-				labels={[m.name(), 'Description', m.due_date(), m.delete()]}
-				snippets={[changeName, changeDescription, changeDueDate, deleteAssignment]}
-				class="m-auto"
-				value={form?.success ?? m.name()}
-			/>
+<div class="grid grid-cols-3 gap-3 px-30">
+	<div class="box relative text-center">
+		<div>
+			{#if new Date() > new Date(data.assignment.due_date)}
+				<p class="badge m-auto w-fit! bg-(--red) px-5!">
+					{m.past()}
+				</p>
+			{:else}
+				<p class="badge m-auto w-fit! bg-(--p) px-5! text-(--p-fg)">
+					{m.upcoming()}
+				</p>
+			{/if}
+			<p class="mt-2 italic">{formatDate(data.assignment.due_date)}</p>
+			<h3 class="text-center text-2xl font-semibold">
+				{data.assignment.name}
+			</h3>
+			<p class="px-8">{data.assignment.description}</p>
+		</div>
+	</div>
+
+	<div class="box relative">
+		<form method="POST" action="?/changeName">
+			<h1 class="mb-4 text-center text-3xl font-bold">{m.change()} {m.name()}</h1>
+			<Label.Root>{m.name()}:</Label.Root><br />
+			<input
+				value={form?.name}
+				placeholder={data.assignment.name}
+				name="name"
+				class="w-60"
+				required
+			/><br />
+			<Button.Root type="submit" class="m-auto mt-2 block">{m.submit()}</Button.Root>
+		</form>
+		<p class="absolute bottom-4 px-8 leading-5">{form?.nameMessage}</p>
+	</div>
+
+	<div class="box relative">
+		<form method="POST" action="?/changeDescription">
+			<h1 class="mb-4 text-center text-3xl font-bold">{m.change()} Description</h1>
+			<div class="m-auto w-fit">
+				<Label.Root>Description:</Label.Root><br />
+				<textarea
+					value={form?.description}
+					name="description"
+					placeholder={data.assignment.description}
+					class="m-0! inline h-20 w-56"
+					required></textarea>
+			</div>
+			<Button.Root type="submit" class="m-auto mt-2 block">{m.submit()}</Button.Root>
+		</form>
+		<p class="absolute bottom-4 px-8 leading-5">{form?.descriptionMessage}</p>
+	</div>
+
+	<div class="box relative h-70!">
+		<form method="POST" action="?/changeDueDate">
+			<h1 class="mb-4 text-center text-3xl font-bold">{m.change()} {m.due_date()}</h1>
+			<Label.Root>{m.due_date()}:</Label.Root>
+			<DatePicker name="dueDate" defaultValue={form?.dueDate} bind:value={dueDate} />
+			<Button.Root type="submit" class="m-auto mt-2 block" disabled={dueDate === ''}
+				>{m.submit()}</Button.Root
+			>
+		</form>
+		<p class="absolute bottom-4 px-8 leading-5">{form?.dueDateMessage}</p>
+	</div>
+
+	<div class="box relative h-70!">
+		<div>
+			<h1 class="mb-4 text-center text-3xl font-bold">{m.delete()} {m.assignment()}</h1>
+
+			<Button.Root class="red-button m-auto block" onclick={() => (confirmDeleteOpen = true)}
+				>{m.delete()}</Button.Root
+			>
 		</div>
 	</div>
 </div>
+
 <AlertDialog bind:open={confirmDeleteOpen}>
-	<p class="mb-5 w-100">
+	<p class="mb-5 w-100 text-center">
 		{m.are_you_sure()}
 		{m.confirm_delete_assignment({ name: data.assignment.name })}
 	</p>
 	{#snippet go()}
-		<form action="?/delete" method="POST">
-			<Button.Root type="submit" class="red-button">{m.submit()}</Button.Root>
+		<form action="?/deleteAssignment" method="POST">
+			<Button.Root type="submit" class="red-button">{m.go()}</Button.Root>
 		</form>
 	{/snippet}
 </AlertDialog>
