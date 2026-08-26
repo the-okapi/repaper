@@ -2,7 +2,7 @@
 	import { page } from '$app/state';
 	import { m } from '$lib/paraglide/messages';
 	import { Label, Button } from 'bits-ui';
-	import { DatePicker, AlertDialog } from '$lib/components';
+	import { DatePicker, AlertDialog, Tabs } from '$lib/components';
 	import { formatDate } from '$lib/util';
 
 	let { data, form } = $props();
@@ -34,62 +34,67 @@
 			<h3 class="text-center text-2xl font-semibold">
 				{data.assignment.name}
 			</h3>
-			<p class="px-8">{data.assignment.description}</p>
+			<p class="mb-8 px-8">{data.assignment.description}</p>
+			<Button.Root class="red-button m-auto block" onclick={() => (confirmDeleteOpen = true)}
+				>{m.delete()} {m.assignment()}</Button.Root
+			>
 		</div>
 	</div>
 
 	<div class="box relative">
-		<form method="POST" action="?/changeName">
-			<h1 class="mb-4 text-center text-3xl font-bold">{m.change()} {m.name()}</h1>
-			<Label.Root>{m.name()}:</Label.Root><br />
-			<input
-				value={form?.name}
-				placeholder={data.assignment.name}
-				name="name"
-				class="w-60"
-				required
-			/><br />
-			<Button.Root type="submit" class="m-auto mt-2 block">{m.submit()}</Button.Root>
-		</form>
-		<p class="absolute bottom-4 px-8 leading-5">{form?.nameMessage}</p>
-	</div>
-
-	<div class="box relative">
-		<form method="POST" action="?/changeDescription">
-			<h1 class="mb-4 text-center text-3xl font-bold">{m.change()} Description</h1>
-			<div class="m-auto w-fit">
-				<Label.Root>Description:</Label.Root><br />
-				<textarea
-					value={form?.description}
-					name="description"
-					placeholder={data.assignment.description}
-					class="m-0! inline h-20 w-56"
-					required></textarea>
-			</div>
-			<Button.Root type="submit" class="m-auto mt-2 block">{m.submit()}</Button.Root>
-		</form>
-		<p class="absolute bottom-4 px-8 leading-5">{form?.descriptionMessage}</p>
-	</div>
-
-	<div class="box relative h-70!">
-		<form method="POST" action="?/changeDueDate">
-			<h1 class="mb-4 text-center text-3xl font-bold">{m.change()} {m.due_date()}</h1>
-			<Label.Root>{m.due_date()}:</Label.Root>
-			<DatePicker name="dueDate" defaultValue={form?.dueDate} bind:value={dueDate} />
-			<Button.Root type="submit" class="m-auto mt-2 block" disabled={dueDate === ''}
-				>{m.submit()}</Button.Root
-			>
-		</form>
-		<p class="absolute bottom-4 px-8 leading-5">{form?.dueDateMessage}</p>
-	</div>
-
-	<div class="box relative h-70!">
-		<div>
-			<h1 class="mb-4 text-center text-3xl font-bold">{m.delete()} {m.assignment()}</h1>
-
-			<Button.Root class="red-button m-auto block" onclick={() => (confirmDeleteOpen = true)}
-				>{m.delete()}</Button.Root
-			>
+		{#snippet changeName()}
+			<form method="POST" action="?/changeName" class="mt-6">
+				<h1 class="mb-4 text-center text-3xl font-bold">{m.change()} {m.name()}</h1>
+				<div class="m-auto w-fit">
+					<Label.Root>{m.name()}:</Label.Root><br />
+					<input
+						value={form?.name}
+						placeholder={data.assignment.name}
+						name="name"
+						class="w-60"
+						required
+					/>
+				</div>
+				<br />
+				<Button.Root type="submit" class="m-auto mt-4.5 block">{m.submit()}</Button.Root>
+				<p class="absolute bottom-4 px-8 leading-5">{form?.nameMessage}</p>
+			</form>
+		{/snippet}
+		{#snippet changeDescription()}
+			<form method="POST" action="?/changeDescription" class="mt-6">
+				<h1 class="mb-4 text-center text-3xl font-bold">{m.change()} Description</h1>
+				<div class="m-auto w-fit">
+					<Label.Root>Description:</Label.Root><br />
+					<textarea
+						value={form?.description}
+						name="description"
+						placeholder={data.assignment.description}
+						class="m-0! inline h-20 w-60"
+						required></textarea>
+				</div>
+				<Button.Root type="submit" class="m-auto mt-2 block">{m.submit()}</Button.Root>
+				<p class="absolute bottom-4 px-8 leading-5">{form?.descriptionMessage}</p>
+			</form>
+		{/snippet}
+		{#snippet changeDueDate()}
+			<form method="POST" action="?/changeDueDate" class="mt-6">
+				<h1 class="mb-4 text-center text-3xl font-bold">{m.change()} {m.due_date()}</h1>
+				<div class="px-12">
+					<Label.Root>{m.due_date()}:</Label.Root>
+					<DatePicker name="dueDate" defaultValue={form?.dueDate} bind:value={dueDate} />
+				</div>
+				<Button.Root type="submit" class="m-auto mt-2 block" disabled={dueDate === ''}
+					>{m.submit()}</Button.Root
+				>
+				<p class="absolute bottom-4 px-8 leading-5">{form?.dueDateMessage}</p>
+			</form>
+		{/snippet}
+		<div class="h-full w-full pt-2">
+			<Tabs
+				snippets={[changeName, changeDescription, changeDueDate]}
+				labels={[m.name(), 'Description', m.due_date()]}
+				value={m.name()}
+			/>
 		</div>
 	</div>
 </div>

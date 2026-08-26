@@ -9,9 +9,16 @@
 	import NavBar from './NavBar.svelte';
 	import Background from './Background.svelte';
 	import type { LayoutProps } from './$types';
+	import { reloadSession } from './reload.remote';
 
 	let { data, children }: LayoutProps = $props();
+
+	async function onfocus() {
+		await reloadSession();
+	}
 </script>
+
+<svelte:window {onfocus} />
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
 <Background class="fixed top-0 left-0" />
