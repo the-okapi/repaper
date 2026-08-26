@@ -150,7 +150,7 @@
 								{#each { length: 37 }, i}
 									{const num = $derived(i - firstDayOfMonth + 1)}
 									{#if num > 0 && num <= getNumDays()}
-										{#if month === today.getMonth() && year === today.getFullYear() && num < today.getDate()}
+										{#if month === today.getMonth() && year === today.getFullYear() && num <= today.getDate()}
 											<Button.Root class="calendar-day" disabled>
 												{num}
 											</Button.Root>

@@ -1,15 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import { Editor, Extension } from '@tiptap/core';
-	import { Bold } from '@tiptap/extension-bold';
-	import { Document } from '@tiptap/extension-document';
-	import { Heading } from '@tiptap/extension-heading';
-	import { HorizontalRule } from '@tiptap/extension-horizontal-rule';
-	import { Italic } from '@tiptap/extension-italic';
-	import { Paragraph } from '@tiptap/extension-paragraph';
-	import { Text } from '@tiptap/extension-text';
-	import { Underline } from '@tiptap/extension-underline';
-	import { UndoRedo } from '@tiptap/extensions';
+	import { Editor } from '@tiptap/core';
 	import { Slider, Toggle, Loader, Popover, Select, AlertDialog } from '$lib/components';
 	import { m } from '$lib/paraglide/messages';
 	import { Button } from 'bits-ui';
@@ -19,28 +10,22 @@
 	import zoomIcon from '$lib/assets/icons/zoom.svg';
 	import fontSizeIcon from '$lib/assets/icons/font.svg';
 	import saveIcon from '$lib/assets/icons/save.svg';
+	import submitIcon from '$lib/assets/icons/submit.svg';
 	import { barHidden } from '$lib/state.svelte';
+	import { extensions, editorExtensions } from '$lib/tiptap';
+	import { saveDocument, submitDocument } from './server.remote.ts';
 
 	let element: any = $state();
 	let editorState: { editor: Editor | null } = $state({ editor: null });
 
-	let { content, save, children } = $props();
+	let { content, children, assignment } = $props();
 
 	let zoom = $state(95);
 
-	export const Keybindings = Extension.create({
-		addKeyboardShortcuts() {
-			return {
-				F1: () => this.editor.commands.setHeading({ level: 1 }),
-				F2: () => this.editor.commands.setHeading({ level: 2 }),
-				F3: () => this.editor.commands.setParagraph(),
-				Tab: () => this.editor.commands.insertContent('\t')
-			};
-		}
-	});
-
 	let textStyle = $state('p');
 	let changeTextStyleOpen = $state(false);
+
+	let confirmSubmitOpen = $state(false);
 
 	function updateTextStyle() {
 		if (editorState.editor?.isActive('heading', { level: 1 })) {
@@ -68,7 +53,10 @@
 
 	async function saveButton() {
 		saving = true;
-		const { status } = await save(editorState.editor?.getHTML());
+		const { status } = await saveDocument({
+			assignment: assignment,
+			content: editorState.editor?.getHTML() ?? ''
+		});
 		if (status !== 200) {
 			failedSave = true;
 		} else {
@@ -77,23 +65,16 @@
 		saving = false;
 	}
 
+	async function submitAssignment() {
+		await saveButton();
+		await submitDocument(assignment);
+		window.location.reload();
+	}
+
 	onMount(() => {
 		editorState.editor = new Editor({
 			element,
-			extensions: [
-				Bold,
-				Document,
-				Heading.configure({
-					levels: [1, 2]
-				}),
-				HorizontalRule,
-				Italic,
-				Paragraph,
-				Text,
-				Underline,
-				UndoRedo,
-				Keybindings
-			],
+			extensions: [...extensions, ...editorExtensions],
 			editorProps: {
 				handlePaste: () => true,
 				handleDrop: () => true
@@ -135,8 +116,9 @@
 	</div>
 </div>
 
-<div
+<button
 	class="fixed top-0 left-0 flex h-screen w-24 flex-col items-center justify-center gap-2 border-r border-(--o) bg-(--bg)"
+	onclick={() => editorState.editor?.chain().focus().run()}
 >
 	{#if editorState.editor}
 		<Popover>
@@ -195,27 +177,50 @@
 		<div class="my-3 w-10 border-b border-(--o)"></div>
 		{@render children()}
 		<div class="h-2"></div>
+		<Button.Root
+			class="flex size-10 items-center justify-center p-0!"
+			title={m.submit()}
+			onclick={() => (confirmSubmitOpen = true)}
+		>
+			<img src={submitIcon} alt={m.submit()} class="size-7" />
+		</Button.Root>
+		<div class="h-2"></div>
 		{#if !saving}
 			<Button.Root
 				class="flex size-10 items-center justify-center p-0!"
 				title={m.save()}
 				onclick={saveButton}
 			>
-				<img src={saveIcon} alt={m.save()} class="size-4.5" />
+				<img src={saveIcon} alt={m.save()} class="size-4.5!" />
 			</Button.Root>
 		{:else}
 			<Button.Root
 				disabled
 				class="flex size-10 items-center justify-center p-0! outline-none!"
 			>
-				<Loader />
+				<Loader size={20} />
 			</Button.Root>
 		{/if}
 	{:else}
 		<Loader />
 	{/if}
-</div>
+</button>
 
 <AlertDialog bind:open={failedSave} message={m.ok()}>
 	<p class="mb-4 w-100 text-center">{m.failed_to_save()}</p>
 </AlertDialog>
+{#if confirmSubmitOpen}
+	{const text = $derived(editorState.editor?.getText())}
+	{#if text !== ''}
+		<AlertDialog bind:open={confirmSubmitOpen}>
+			<p class="mb-4 w-100 text-center">{m.are_you_sure()} {m.submission()}</p>
+			{#snippet go()}
+				<Button.Root type="submit" onclick={submitAssignment}>{m.submit()}</Button.Root>
+			{/snippet}
+		</AlertDialog>
+	{:else}
+		<AlertDialog bind:open={confirmSubmitOpen} message={m.ok()}>
+			<p class="mb-4 text-center">{m.document_empty()}</p>
+		</AlertDialog>
+	{/if}
+{/if}

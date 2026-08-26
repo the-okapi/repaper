@@ -2,17 +2,10 @@
 	import { onMount } from 'svelte';
 	import { Editor } from '@tiptap/core';
 	import { barHidden } from '$lib/state.svelte';
-	import { Bold } from '@tiptap/extension-bold';
-	import { Heading } from '@tiptap/extension-heading';
-	import { HorizontalRule } from '@tiptap/extension-horizontal-rule';
-	import { Italic } from '@tiptap/extension-italic';
-	import { Paragraph } from '@tiptap/extension-paragraph';
-	import { Underline } from '@tiptap/extension-underline';
-	import { Document } from '@tiptap/extension-document';
-	import { Text } from '@tiptap/extension-text';
 	import { Slider } from '$lib/components';
 	import { m } from '$lib/paraglide/messages';
 	import { formatDate } from '$lib/util';
+	import { extensions } from '$lib/tiptap';
 
 	let { content, children, submitted } = $props();
 
@@ -22,18 +15,7 @@
 	onMount(() => {
 		editorState.editor = new Editor({
 			element,
-			extensions: [
-				Bold,
-				Document,
-				Heading.configure({
-					levels: [1, 2]
-				}),
-				HorizontalRule,
-				Italic,
-				Paragraph,
-				Text,
-				Underline
-			],
+			extensions,
 			content,
 			editable: false
 		});

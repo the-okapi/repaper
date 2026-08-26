@@ -50,3 +50,47 @@ export const saveDocument = command(SaveSchema, async (data) => {
 
 	return { status: 200 };
 });
+
+export const submitDocument = command(string(), async (assignment) => {
+	const { locals } = getRequestEvent();
+
+	const {
+		data: { user }
+	} = await locals.supabase.auth.getUser();
+
+	if (!user) {
+		return { status: 404 };
+	}
+
+	try {
+		const [assignmentSubmission] = unwrap(
+			await locals.supabase
+				.from('assignment_submissions')
+				.select('submitted')
+				.eq('id', assignment)
+				.eq('user', user.id),
+			32
+		);
+
+		if (!assignmentSubmission) {
+			return { status: 401 };
+		} else if (assignmentSubmission.submitted !== null) {
+			return { status: 409 };
+		}
+
+		unwrapNoData(
+			await locals.supabase
+				.from('assignment_submissions')
+				.update({
+					submitted: new Date().toISOString()
+				})
+				.eq('id', assignment)
+				.eq('user', user.id),
+			33
+		);
+
+		return { status: 200 };
+	} catch {
+		return { status: 500 };
+	}
+});

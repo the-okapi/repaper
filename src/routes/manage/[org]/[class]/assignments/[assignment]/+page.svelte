@@ -12,10 +12,10 @@
 	let confirmDeleteOpen = $state(false);
 </script>
 
-<div class="h-5"></div>
+<div class="h-2"></div>
 <a
 	href="/manage/{page.params.org}/{page.params.class}/assignments"
-	class="absolute top-22 ml-10 hover:underline">← {m.back()}</a
+	class="relative ml-10 hover:underline">← {m.back()}</a
 >
 
 <div class="grid grid-cols-3 gap-3 px-30">

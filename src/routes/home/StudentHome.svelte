@@ -42,7 +42,7 @@
 										{m.assignment()}{numAssignments === 1 ? '' : 's'}
 									</p>
 								{:else}
-									<p>_ {m.assignment()}s</p>
+									<p>0 {m.assignment()}s</p>
 								{/if}
 							</div>
 							<div class="absolute bottom-2 w-full text-center">

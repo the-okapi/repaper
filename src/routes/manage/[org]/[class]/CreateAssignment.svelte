@@ -32,6 +32,8 @@
 
 	let dateTime = $state('');
 	let day = $state(null);
+
+	let name = $state(createAssignment.result?.name ?? '');
 </script>
 
 <div
@@ -41,7 +43,7 @@
 		<Loader />
 	{:else if createAssignment.result?.success && showSuccess}
 		<div>
-			<p>{m.created_assignment()}</p>
+			<p class="text-center">{m.created_assignment()}</p>
 			<Button.Root class="m-auto mt-10 block" onclick={createAnother}
 				>{m.create_another()}</Button.Root
 			>
@@ -71,12 +73,7 @@
 			>
 				<div class="mb-3 w-fit">
 					<Label.Root>{m.name()}:</Label.Root><br />
-					<input
-						value={createAssignment.result?.name ?? ''}
-						class="w-60"
-						name="name"
-						required
-					/>
+					<input bind:value={name} class="w-60" name="name" required />
 				</div>
 				<div class="mb-5">
 					<Label.Root>Description:</Label.Root>

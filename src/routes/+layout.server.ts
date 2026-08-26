@@ -19,6 +19,8 @@ export const load: LayoutServerLoad = async ({ cookies, locals, route }) => {
 			};
 		}
 
+		await locals.supabase.auth.refreshSession();
+
 		const check = unwrap(
 			await locals.supabase.from('users').select('can_delete').eq('id', user.id),
 			37
