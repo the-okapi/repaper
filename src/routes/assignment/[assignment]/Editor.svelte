@@ -85,6 +85,9 @@
 			},
 			onUpdate: () => {
 				changesMadeSinceSave = true;
+				if (editorState.editor?.isActive('link')) {
+					editorState.editor?.commands.unsetLink();
+				}
 			},
 			onSelectionUpdate: updateTextStyle
 		});
