@@ -30,7 +30,7 @@
 	defaultMode="dark"
 />
 
-<div class="nav-bar"><NavBar loggedIn={data.loggedIn} /></div>
+<div class="nav-bar"><NavBar loggedIn={data.loggedIn} name={data.name} /></div>
 <main class="bg-(--bg) transition-colors">{@render children()}</main>
 
 <div style="display:none">

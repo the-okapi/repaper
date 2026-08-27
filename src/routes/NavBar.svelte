@@ -10,7 +10,7 @@
 	import Settings from './Settings.svelte';
 	import LogIn from './LogIn.svelte';
 
-	let { loggedIn } = $props();
+	let { loggedIn, name } = $props();
 
 	let shown = $state(true);
 	let settings = $state(false);
@@ -115,13 +115,24 @@
 		{page.data.title ?? 'Repaper'}
 	</h1>
 	{#if page.route.id === '/assignment/[assignment]'}
-		<button
-			class="fixed top-5 right-5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-(--o) bg-(--bg) p-2!
+		<div class="fixed top-5 right-5 flex items-center gap-3">
+			{#if name}
+				<p>{name}</p>
+			{/if}
+			<button
+				class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-(--o) bg-(--bg) p-2!
 		"
-			onclick={() => (barHidden.value = true)}
-		>
-			<img src={showIcon} alt="Hide" class="size-4.5" />
-		</button>
+				onclick={() => (barHidden.value = true)}
+			>
+				<img src={showIcon} alt="Hide" class="size-4.5" />
+			</button>
+		</div>
+	{:else}
+		{#if name}
+			<div class="fixed top-0 right-5 flex h-20 items-center">
+				<p>{name}</p>
+			</div>
+		{/if}
 	{/if}
 	<div class="h-20"></div>
 {:else}
