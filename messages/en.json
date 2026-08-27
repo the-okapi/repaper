@@ -123,5 +123,6 @@
 	"sat": "Sat",
 	"time": "Time",
 	"date_not_selected": "Please select a date.",
-	"document_empty": "Document is empty."
+	"document_empty": "Document is empty.",
+	"mode": "Mode"
 }

@@ -121,9 +121,12 @@
 	onclick={() => editorState.editor?.chain().focus().run()}
 >
 	{#if editorState.editor}
+		{#if !barHidden.value}
+			<div class="relative top-0 left-0 h-20 bg-red-500"></div>
+		{/if}
 		<Popover>
 			{#snippet trigger()}
-				<Button.Root class="flex size-10 items-center justify-center p-0!"
+				<Button.Root class="icon-button"
 					><img src={zoomIcon} alt="Zoom" class="size-4.5" /></Button.Root
 				>
 			{/snippet}
@@ -157,10 +160,10 @@
 		>
 			<UnderlineIcon class="size-4.5" />
 		</Toggle>
-		<div class="h-3"></div>
+		<div class="h-2"></div>
 		<Popover border={false} bind:open={changeTextStyleOpen}>
 			{#snippet trigger()}
-				<Button.Root class="flex size-10 items-center justify-center p-0!"
+				<Button.Root class="icon-button"
 					><img src={fontSizeIcon} alt="Font Size" class="size-4.5" /></Button.Root
 				>
 			{/snippet}
@@ -176,28 +179,19 @@
 		</Popover>
 		<div class="my-3 w-10 border-b border-(--o)"></div>
 		{@render children()}
-		<div class="h-2"></div>
 		<Button.Root
-			class="flex size-10 items-center justify-center p-0!"
+			class="icon-button"
 			title={m.submit()}
 			onclick={() => (confirmSubmitOpen = true)}
 		>
 			<img src={submitIcon} alt={m.submit()} class="size-7" />
 		</Button.Root>
-		<div class="h-2"></div>
 		{#if !saving}
-			<Button.Root
-				class="flex size-10 items-center justify-center p-0!"
-				title={m.save()}
-				onclick={saveButton}
-			>
+			<Button.Root class="icon-button" title={m.save()} onclick={saveButton}>
 				<img src={saveIcon} alt={m.save()} class="size-4.5!" />
 			</Button.Root>
 		{:else}
-			<Button.Root
-				disabled
-				class="flex size-10 items-center justify-center p-0! outline-none!"
-			>
+			<Button.Root disabled class="icon-button outline-none!">
 				<Loader size={20} />
 			</Button.Root>
 		{/if}

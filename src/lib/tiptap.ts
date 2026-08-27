@@ -7,7 +7,8 @@ import { Paragraph } from '@tiptap/extension-paragraph';
 import { Underline } from '@tiptap/extension-underline';
 import { UndoRedo } from '@tiptap/extensions';
 import { Text } from '@tiptap/extension-text';
-import { Extension } from '@tiptap/core';
+import { Link } from '@tiptap/extension-link';
+import { Extension, type AnyExtension } from '@tiptap/core';
 
 export const Keybindings = Extension.create({
 	addKeyboardShortcuts() {
@@ -20,7 +21,7 @@ export const Keybindings = Extension.create({
 	}
 });
 
-export const extensions = [
+export const extensions: AnyExtension[] = [
 	Bold,
 	Document,
 	Heading.configure({
@@ -28,9 +29,10 @@ export const extensions = [
 	}),
 	HorizontalRule,
 	Italic,
+	Link,
 	Paragraph,
 	Text,
 	Underline
 ];
 
-export const editorExtensions = [UndoRedo, Keybindings];
+export const editorExtensions: AnyExtension[] = [UndoRedo, Keybindings];

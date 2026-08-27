@@ -82,7 +82,7 @@
 
 <div transition:slide class="rounded-xl bg-(--bg) p-6 outline outline-(--o) {c}" {...props}>
 	<div class="m-auto mb-8 w-fit">
-		<Label.Root>Mode:</Label.Root>
+		<Label.Root>{m.mode()}:</Label.Root>
 		<Select options={modes} bind:value={currentMode} onChange={onModeChange} />
 	</div>
 

@@ -9,6 +9,7 @@
 		sans-serif;
 	vector-effect: non-scaling-stroke;
 	caret-color: var(--p);
+	overscroll-behavior: none;
 }
 
 * {
@@ -272,6 +273,15 @@ textarea {
 	}
 }
 
+.icon-button {
+	display: flex;
+	height: 2.5rem;
+	width: 2.5rem;
+	align-items: center;
+	justify-content: center;
+	padding: 0 !important;
+}
+
 .calendar-day {
 	margin: auto;
 	display: flex;
@@ -473,8 +483,16 @@ textarea {
 	font-size: 14pt;
 }
 
-.tiptap hr {
-	border: 1px solid var(--fg);
+.tiptap a {
+	text-decoration: underline;
+	text-decoration-thickness: 1.5px;
+	cursor: pointer;
+	color: var(--p);
+
+	&::selection {
+		text-decoration: underline var(--p-fg);
+		text-decoration-thickness: 1.5px;
+	}
 }
 
 .tiptap u::selection {

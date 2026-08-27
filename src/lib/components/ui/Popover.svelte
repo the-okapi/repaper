@@ -10,10 +10,10 @@
 		<Popover.Trigger openDelay={400} openOnHover={true}>{@render trigger()}</Popover.Trigger>
 		<Popover.Portal>
 			<Popover.Content
-				class={border ? '' : 'border-none! bg-transparent! px-4 py-2 shadow-none!'}
+				class={border ? '' : 'border-none! bg-transparent! p-0! shadow-none!'}
 				forceMount
 				side="right"
-				sideOffset={border ? 10 : 1}
+				sideOffset={10}
 			>
 				{#snippet child({ wrapperProps, props, open })}
 					{#if open}
