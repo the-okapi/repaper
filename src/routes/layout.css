@@ -60,7 +60,7 @@
 		--p: #00dfdf;
 	}
 
-	&[data-theme='turquoise'],
+	&[data-theme='yellow'],
 	.yellow {
 		--p: #ffdd00;
 	}
