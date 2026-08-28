@@ -124,5 +124,6 @@
 	"time": "Time",
 	"date_not_selected": "Please select a date.",
 	"document_empty": "Document is empty.",
-	"mode": "Mode"
+	"mode": "Mode",
+	"system": "System"
 }

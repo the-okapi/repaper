@@ -36,6 +36,11 @@
 	.turquoise {
 		--p: #00af9f;
 	}
+
+	&[data-theme='yellow'],
+	.yellow {
+		--p: #eebf00;
+	}
 }
 
 .dark {
@@ -54,14 +59,15 @@
 	.turquoise {
 		--p: #00dfdf;
 	}
+
+	&[data-theme='turquoise'],
+	.yellow {
+		--p: #ffdd00;
+	}
 }
 
 [data-theme='red'] {
 	--p: #cc0050;
-}
-
-[data-theme='yellow'] {
-	--p: #ffdd00;
 }
 
 [data-theme='green'] {

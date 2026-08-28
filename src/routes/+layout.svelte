@@ -27,7 +27,7 @@
 	darkClassNames={['dark']}
 	lightClassNames={['light']}
 	defaultTheme="turquoise"
-	defaultMode="dark"
+	defaultMode="system"
 />
 
 <div class="nav-bar"><NavBar loggedIn={data.loggedIn} name={data.name} /></div>

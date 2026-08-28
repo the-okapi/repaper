@@ -53,6 +53,9 @@ importers:
       bits-ui:
         specifier: ^2.19.0
         version: 2.19.0(@internationalized/date@3.12.2)(@sveltejs/kit@2.70.3(@sveltejs/vite-plugin-svelte@7.3.0(svelte@5.56.10(@typescript-eslint/types@8.68.0))(vite@8.2.2(@types/node@26.3.0)(esbuild@0.28.2)(jiti@2.7.0)))(svelte@5.56.10(@typescript-eslint/types@8.68.0))(typescript@6.0.3)(vite@8.2.2(@types/node@26.3.0)(esbuild@0.28.2)(jiti@2.7.0)))(svelte@5.56.10(@typescript-eslint/types@8.68.0))
+      loadersz:
+        specifier: ^0.5.1
+        version: 0.5.1(svelte@5.56.10(@typescript-eslint/types@8.68.0))
       mode-watcher:
         specifier: ^1.1.0
         version: 1.1.0(svelte@5.56.10(@typescript-eslint/types@8.68.0))
@@ -1387,6 +1390,24 @@ packages:
 
   linkifyjs@4.3.3:
     resolution: {integrity: sha512-P8aEP5U/D1/IlTY2OeYsErdwh9bGuLE30NcXtKEjgdHcahveQoQwM2yZNsioQHsWFz0P7KKudisbrzCgR0sDHg==}
+
+  loadersz@0.5.1:
+    resolution: {integrity: sha512-ylUZ0YhnEttSk7lkE6oY7nwAvKQdTdOP3X49Wmmz8TIQK+1nvhUy+mp5Rfdbkb7sVn+ephgSEaPVV5pGxstC3Q==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@angular/core': '>=21 <23'
+      react: '>=18'
+      svelte: '>=4'
+      vue: '>=3'
+    peerDependenciesMeta:
+      '@angular/core':
+        optional: true
+      react:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
 
   locate-character@3.0.0:
     resolution: {integrity: sha512-SW13ws7BjaeJ6p7Q6CO2nchbYEc3X3J6WrmTTDto7yMPqVSZTUyY5Tjbid+Ab8gLnATtygYtiDIJGQRRn2ZOiA==}
@@ -3023,6 +3044,10 @@ snapshots:
   lilconfig@2.1.0: {}
 
   linkifyjs@4.3.3: {}
+
+  loadersz@0.5.1(svelte@5.56.10(@typescript-eslint/types@8.68.0)):
+    optionalDependencies:
+      svelte: 5.56.10(@typescript-eslint/types@8.68.0)
 
   locate-character@3.0.0: {}
 

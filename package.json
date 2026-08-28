@@ -51,6 +51,7 @@
 		"@tiptap/extensions": "^3.30.5",
 		"@tiptap/pm": "^3.30.5",
 		"bits-ui": "^2.19.0",
+		"loadersz": "^0.5.1",
 		"mode-watcher": "^1.1.0",
 		"resend": "^6.24.0",
 		"valibot": "^1.4.2"

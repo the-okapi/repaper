@@ -105,9 +105,13 @@
 			event.preventDefault();
 		}
 	}
+
+	function oncontextmenu(event: Event) {
+		event.preventDefault();
+	}
 </script>
 
-<svelte:window {onbeforeunload} />
+<svelte:window {onbeforeunload} {oncontextmenu} />
 
 <div
 	class="absolute top-{barHidden.value ? '0' : '20'} h-[calc(100vh-{barHidden.value

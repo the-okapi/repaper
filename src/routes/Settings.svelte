@@ -10,6 +10,10 @@
 	// Light/Dark
 	let modes = $derived([
 		{
+			label: m.system(),
+			value: 'system'
+		},
+		{
 			label: m.light(),
 			value: 'light'
 		},
@@ -50,7 +54,7 @@
 			value: 'red'
 		},
 		{
-			label: '<div data-theme="yellow" class="swatch"></div> ' + m.yellow(),
+			label: '<div class="swatch yellow"></div> ' + m.yellow(),
 			value: 'yellow'
 		},
 		{

@@ -123,5 +123,6 @@
 	"sat": "sam.",
 	"time": "Heure",
 	"date_not_selected": "Selectionnez une date s'il vous plaît.",
-	"document_empty": "Le document est vide."
+	"document_empty": "Le document est vide.",
+	"system": "Système"
 }
