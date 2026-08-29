@@ -6,7 +6,7 @@
 	import infoIcon from '$lib/assets/icons/info.svg';
 	import submitIcon from '$lib/assets/icons/submit.svg';
 	import Editor from './Editor.svelte';
-	import Document from './Document.svelte';
+	import Viewer from './Viewer.svelte';
 
 	let { data, params } = $props();
 
@@ -34,7 +34,7 @@
 		{@render assignmentDetails()}
 	</Editor>
 {:else}
-	<Document content={data.document.content} submitted={data.assignment.submitted}>
+	<Viewer content={data.document.content} submitted={data.assignment.submitted}>
 		{@render assignmentDetails()}
 		<Button.Root
 			class="flex size-10 items-center justify-center p-0!"
@@ -43,7 +43,7 @@
 		>
 			<img src={submitIcon} alt={m.unsubmit()} class="size-7 rotate-180" />
 		</Button.Root>
-	</Document>
+	</Viewer>
 {/if}
 
 <AlertDialog bind:open={assignmentDetailsOpen} message={m.ok()}>

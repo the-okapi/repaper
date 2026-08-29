@@ -14,7 +14,7 @@
 	import imageIcon from '$lib/assets/icons/image.svg';
 	import { barHidden } from '$lib/state.svelte';
 	import { extensions, editorExtensions } from '$lib/tiptap';
-	import { saveDocument, submitDocument, uploadFile } from './server.remote.ts';
+	import { saveDocument, submitDocument, uploadFile, deleteFile } from './server.remote.ts';
 
 	let element: any = $state();
 	let editorState: { editor: Editor | null } = $state({ editor: null });
@@ -116,6 +116,14 @@
 				changesMadeSinceSave = true;
 				if (editorState.editor?.isActive('link')) {
 					editorState.editor?.commands.unsetLink();
+				}
+			},
+			onDelete: async (data) => {
+				if (data.type === 'node' && data.node.type.name === 'image') {
+					await deleteFile({
+						assignment,
+						url: data.node.attrs.src
+					});
 				}
 			},
 			onSelectionUpdate: updateTextStyle
