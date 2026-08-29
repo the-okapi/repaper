@@ -28,10 +28,29 @@
 
 	let addImageOpen = $state(false);
 	let addImageLoading = $state(false);
+	let imageTooBig = $state(false);
 
 	let images: any = $state();
 
+	function openFile() {
+		if (images[0].size > 50000000) {
+			imageTooBig = true;
+			images = [];
+		} else {
+			imageTooBig = false;
+		}
+	}
+
+	function cancelAddImage() {
+		addImageOpen = false;
+		images = [];
+	}
+
 	async function addImage() {
+		if (!images) {
+			return;
+		}
+
 		addImageLoading = true;
 
 		const { status, url } = await uploadFile({
@@ -268,8 +287,8 @@
 	{/if}
 {/if}
 
-<AlertDialog bind:open={addImageOpen} cancel={!addImageLoading}>
-	<div class="flex h-14">
+<AlertDialog bind:open={addImageOpen} cancel={false}>
+	<div class="h-14">
 		{#if addImageLoading}
 			<div class="m-auto h-fit w-fit">
 				<Loader />
@@ -278,9 +297,18 @@
 			<div class="flex gap-4">
 				<div>
 					<label for="fileInput" data-button-root>{m.choose_image()}</label>
-					<input id="fileInput" type="file" bind:files={images} hidden />
+					<input
+						id="fileInput"
+						type="file"
+						accept="image/png, image/jpeg, image/webp, image/avif"
+						bind:files={images}
+						onchange={openFile}
+						hidden
+					/>
 				</div>
-				{#if images}
+				{#if imageTooBig}
+					<p>Max 50 MB</p>
+				{:else if images}
 					<p>{images[0].name}</p>
 				{/if}
 			</div>
@@ -291,7 +319,10 @@
 	{#snippet go()}
 		<div class="h-10 w-full">
 			{#if !addImageLoading}
-				<Button.Root onclick={addImage}>{m.submit()}</Button.Root>
+				<div class="flex gap-4">
+					<Button.Root onclick={cancelAddImage}>{m.cancel()}</Button.Root>
+					<Button.Root onclick={addImage}>{m.submit()}</Button.Root>
+				</div>
 			{/if}
 		</div>
 	{/snippet}
