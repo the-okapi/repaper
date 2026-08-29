@@ -129,5 +129,6 @@
 	"loading": "Attendez, s'il vous plaît...",
 	"not": "Non",
 	"select_student": "Selectionnez un étudiant pour commencer.",
-	"failed_load": "Échoué à trouver le document."
+	"failed_load": "Échoué à trouver le document.",
+	"is_required": " est requis."
 }

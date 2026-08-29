@@ -133,5 +133,6 @@
 	"not": "Not",
 	"select_student": "Select a student to get started.",
 	"failed_load": "Failed to load the document.",
-	"description": "Description"
+	"description": "Description",
+	"is_required": " is required."
 }

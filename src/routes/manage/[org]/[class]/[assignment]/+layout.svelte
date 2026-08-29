@@ -2,7 +2,7 @@
 	import { page } from '$app/state';
 	import { m } from '$lib/paraglide/messages';
 	import { Label, Button } from 'bits-ui';
-	import { DatePicker, AlertDialog, Tabs } from '$lib/components';
+	import { DatePicker, AlertDialog, Tabs, Loader } from '$lib/components';
 	import { getLocale } from '$lib/paraglide/runtime';
 	import {
 		changeName,
@@ -11,12 +11,28 @@
 		deleteAssignment
 	} from './actions.remote';
 	import { goto } from '$app/navigation';
+	import type { RemoteFormEnhanceCallback } from '@sveltejs/kit';
 
 	let { data, children } = $props();
 
+	let nameValue = $state('');
+	let descriptionValue = $state('');
 	let dueDateValue = $state('');
 
 	let confirmDeleteOpen = $state(false);
+
+	let loading = $state(false);
+
+	const handleLoading: RemoteFormEnhanceCallback<any> = async (form) => {
+		loading = true;
+		await form.submit();
+		if (form.result?.status === 200) {
+			nameValue = '';
+			descriptionValue = '';
+			dueDateValue = '';
+		}
+		loading = false;
+	};
 </script>
 
 <div class="fixed top-20 left-0 flex h-[calc(100vh-5rem)] flex-col gap-2 py-5 pl-5">
@@ -72,12 +88,24 @@
 	</div>
 
 	<div class="box relative h-140!">
+		{#if loading}
+			<Loader />
+		{/if}
 		{#snippet name()}
-			<form {...changeName}>
-				<h1 class="mb-4 text-center text-3xl font-bold">{m.change()} {m.name()}</h1>
+			<form {...changeName.enhance(handleLoading)}>
+				<h1 class="mt-4 mb-2 text-center text-3xl font-bold">
+					{m.change()}
+					{m.name()}
+				</h1>
 				<div class="m-auto w-fit">
 					<Label.Root>{m.name()}:</Label.Root><br />
-					<input placeholder={data.assignment.name} name="name" class="w-60" required />
+					<input
+						placeholder={data.assignment.name}
+						bind:value={nameValue}
+						name="name"
+						class="w-60"
+						required
+					/>
 				</div>
 				<div class="absolute right-0 bottom-5 w-full text-center">
 					<Button.Root type="submit">{m.submit()}</Button.Root>
@@ -92,13 +120,16 @@
 			</form>
 		{/snippet}
 		{#snippet description()}
-			<form {...changeDescription}>
-				<h1 class="mb-4 text-center text-3xl font-bold">{m.change()} Description</h1>
+			<form {...changeDescription.enhance(handleLoading)}>
+				<h1 class="mt-4 mb-2 text-center text-3xl font-bold">
+					{m.change()} Description
+				</h1>
 				<div class="m-auto w-fit">
 					<Label.Root>Description:</Label.Root><br />
 					<textarea
 						name="description"
 						placeholder={data.assignment.description}
+						bind:value={descriptionValue}
 						class="m-0! mt-1! inline h-20 w-60"
 						required></textarea>
 				</div>
@@ -114,8 +145,12 @@
 			</form>
 		{/snippet}
 		{#snippet dueDate()}
-			<form {...changeDueDate}>
-				<h1 class="mb-4 text-center text-3xl font-bold">{m.change()} {m.due_date()}</h1>
+			{let dueDateMessage = $state('')}
+			<form {...changeDueDate.enhance(handleLoading)}>
+				<h1 class="mt-4 mb-2 text-center text-3xl font-bold">
+					{m.change()}
+					{m.due_date()}
+				</h1>
 				<div class="px-12">
 					<Label.Root>{m.due_date()}:</Label.Root>
 					<DatePicker
@@ -125,19 +160,30 @@
 					/>
 				</div>
 				<div class="absolute right-0 bottom-5 w-full text-center">
-					<Button.Root type="submit" disabled={dueDateValue === ''}
-						>{m.submit()}</Button.Root
-					>
+					{#if dueDateValue === ''}
+						<Button.Root
+							onclick={() => (dueDateMessage = m.due_date() + m.is_required())}
+							>{m.submit()}</Button.Root
+						>
+					{:else}
+						<Button.Root type="submit" onclick={() => (dueDateMessage = '')}
+							>{m.submit()}</Button.Root
+						>
+					{/if}
 				</div>
 				<p class="absolute bottom-px px-8 text-sm">
-					{changeDueDate.result?.dueDateMessage}
+					{#if dueDateMessage}
+						{dueDateMessage}
+					{:else}
+						{changeDueDate.result?.dueDateMessage}
+					{/if}
 				</p>
 
 				<input type="hidden" name="assignment" value={page.params.assignment} />
 				<input type="hidden" name="class" value={page.params.class} />
 			</form>
 		{/snippet}
-		<div class="h-full w-full">
+		<div class="h-full w-full" hidden={loading}>
 			<Tabs
 				snippets={[name, description, dueDate]}
 				labels={[m.name(), m.description(), m.due_date()]}
