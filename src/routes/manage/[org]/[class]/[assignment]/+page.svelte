@@ -2,8 +2,9 @@
 	import { page } from '$app/state';
 	import { m } from '$lib/paraglide/messages';
 	import { Label, Button } from 'bits-ui';
-	import { DatePicker, AlertDialog, Tabs } from '$lib/components';
+	import { DatePicker, AlertDialog, Tabs, Document } from '$lib/components';
 	import { formatDate } from '$lib/util';
+	import { getLocale } from '$lib/paraglide/runtime';
 
 	let { data, form } = $props();
 
@@ -15,11 +16,11 @@
 <div class="h-2"></div>
 <a
 	href="/manage/{page.params.org}/{page.params.class}/assignments"
-	class="relative ml-10 hover:underline">← {m.back()}</a
+	class="absolute top-20 left-2 text-sm hover:underline">← {m.back()}</a
 >
 
-<div class="grid grid-cols-3 gap-3 px-30">
-	<div class="box relative text-center">
+<div class="fixed top-20 right-0 flex h-[calc(100vh-5rem)] flex-col gap-2 py-5 pr-5">
+	<!-- <div class="box relative text-center">
 		<div>
 			{#if new Date() > new Date(data.assignment.due_date)}
 				<p class="badge m-auto w-fit! bg-(--red) px-5!">
@@ -39,11 +40,33 @@
 				>{m.delete()} {m.assignment()}</Button.Root
 			>
 		</div>
+	</div> -->
+
+	<div class="box relative h-full! overflow-scroll">
+		<div class="h-full w-full p-3">
+			{#each data.submissions as submission, i (submission.id)}
+				{#if i !== 0}
+					<div class="m-auto my-3 w-[85%] border-b border-(--o)"></div>
+				{/if}
+				<div class="flex items-center justify-end gap-3">
+					<div class="flex w-full items-center gap-2">
+						<p class="text-lg font-bold whitespace-nowrap">{submission.user.name}</p>
+						{#if submission.submitted}
+							<p class="text-sm">
+								{m.submitted()}
+								{new Date(submission.submitted).toLocaleDateString(getLocale(), {})}
+							</p>
+						{/if}
+					</div>
+					<Button.Root class="small-button">View</Button.Root>
+				</div>
+			{/each}
+		</div>
 	</div>
 
-	<div class="box relative">
+	<div class="box relative h-140!">
 		{#snippet changeName()}
-			<form method="POST" action="?/changeName" class="mt-6">
+			<form method="POST" action="?/changeName">
 				<h1 class="mb-4 text-center text-3xl font-bold">{m.change()} {m.name()}</h1>
 				<div class="m-auto w-fit">
 					<Label.Root>{m.name()}:</Label.Root><br />
@@ -55,13 +78,16 @@
 						required
 					/>
 				</div>
-				<br />
-				<Button.Root type="submit" class="m-auto mt-4.5 block">{m.submit()}</Button.Root>
-				<p class="absolute bottom-4 px-8 leading-5">{form?.nameMessage}</p>
+				<div class="absolute right-0 bottom-5 w-full text-center">
+					<Button.Root type="submit">{m.submit()}</Button.Root>
+				</div>
+				<p class="absolute bottom-px px-8 text-sm">
+					{form?.nameMessage}
+				</p>
 			</form>
 		{/snippet}
 		{#snippet changeDescription()}
-			<form method="POST" action="?/changeDescription" class="mt-6">
+			<form method="POST" action="?/changeDescription">
 				<h1 class="mb-4 text-center text-3xl font-bold">{m.change()} Description</h1>
 				<div class="m-auto w-fit">
 					<Label.Root>Description:</Label.Root><br />
@@ -69,31 +95,34 @@
 						value={form?.description}
 						name="description"
 						placeholder={data.assignment.description}
-						class="m-0! inline h-20 w-60"
+						class="m-0! mt-1! inline h-20 w-60"
 						required></textarea>
 				</div>
-				<Button.Root type="submit" class="m-auto mt-2 block">{m.submit()}</Button.Root>
-				<p class="absolute bottom-4 px-8 leading-5">{form?.descriptionMessage}</p>
+				<div class="absolute right-0 bottom-5 w-full text-center">
+					<Button.Root type="submit">{m.submit()}</Button.Root>
+				</div>
+				<p class="absolute bottom-px px-8 text-sm">{form?.descriptionMessage}</p>
 			</form>
 		{/snippet}
 		{#snippet changeDueDate()}
-			<form method="POST" action="?/changeDueDate" class="mt-6">
+			<form method="POST" action="?/changeDueDate">
 				<h1 class="mb-4 text-center text-3xl font-bold">{m.change()} {m.due_date()}</h1>
 				<div class="px-12">
 					<Label.Root>{m.due_date()}:</Label.Root>
 					<DatePicker name="dueDate" defaultValue={form?.dueDate} bind:value={dueDate} />
 				</div>
-				<Button.Root type="submit" class="m-auto mt-2 block" disabled={dueDate === ''}
-					>{m.submit()}</Button.Root
-				>
-				<p class="absolute bottom-4 px-8 leading-5">{form?.dueDateMessage}</p>
+				<div class="absolute right-0 bottom-5 w-full text-center">
+					<Button.Root type="submit" disabled={dueDate === ''}>{m.submit()}</Button.Root>
+				</div>
+				<p class="absolute bottom-px px-8 text-sm">{form?.dueDateMessage}</p>
 			</form>
 		{/snippet}
-		<div class="h-full w-full pt-2">
+		<div class="h-full w-full">
 			<Tabs
 				snippets={[changeName, changeDescription, changeDueDate]}
 				labels={[m.name(), 'Description', m.due_date()]}
 				value={m.name()}
+				triggerClass="w-27"
 			/>
 		</div>
 	</div>

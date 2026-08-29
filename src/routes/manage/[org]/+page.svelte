@@ -46,8 +46,7 @@
 						</p>
 						<Button.Root
 							onclick={() => revokeInvitation(i)}
-							class="red-button ml-1 rounded-[0.625rem]! px-3! py-1.5!"
-							>{m.revoke()}</Button.Root
+							class="red-button small-button">{m.revoke()}</Button.Root
 						>
 					</div>
 				{/each}
@@ -60,7 +59,7 @@
 					<p class="w-80">{m.no_deletions()}</p>
 				{/if}
 				{#each data.deletions as deletion, i (deletion.id)}
-					<div class="mb-2.5 flex w-80">
+					<div class="mb-2.5 flex w-80 gap-1">
 						<p class="my-auto w-70 overflow-x-scroll whitespace-nowrap">
 							{let daysUntil = getDaysUntil(deletion.can_delete)}
 							<span class="font-mono text-sm"
@@ -68,9 +67,7 @@
 							>
 							- {deletion.name}
 						</p>
-						<Button.Root
-							onclick={() => restoreMember(i)}
-							class="ml-1 rounded-[0.625rem]! px-3! py-1.5! text-sm"
+						<Button.Root onclick={() => restoreMember(i)} class="small-button"
 							>{m.restore()}</Button.Root
 						>
 					</div>

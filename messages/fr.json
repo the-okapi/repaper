@@ -125,5 +125,6 @@
 	"date_not_selected": "Selectionnez une date s'il vous plaît.",
 	"document_empty": "Le document est vide.",
 	"system": "Système",
-	"choose_image": "Choisir une Image"
+	"choose_image": "Choisir une Image",
+	"loading": "Attendez, s'il vous plaît..."
 }

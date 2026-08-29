@@ -25,7 +25,7 @@ export const saveDocument = command(SaveSchema, async ({ assignment, content }) 
 				.select('document, class')
 				.eq('id', assignment)
 				.eq('user', user.id),
-			34
+			96
 		);
 
 		if (!assignmentSubmission) {

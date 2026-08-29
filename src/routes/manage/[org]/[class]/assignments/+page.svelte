@@ -31,8 +31,7 @@
 				<div class="box relative p-0!">
 					<a
 						class="flex h-full w-full cursor-pointer items-center justify-center rounded-xl transition-colors hover:bg-(--a)"
-						href="/manage/{page.params.org}/{page.params
-							.class}/assignments/{assignment.id}"
+						href="/manage/{page.params.org}/{page.params.class}/{assignment.id}"
 					>
 						<div class="relative w-fit text-center">
 							<div class="absolute -top-8 w-full">
@@ -64,6 +63,9 @@
 				</div>
 			{/each}
 		</div>
+		{#if assignments.length === 0}
+			<p class="w-full text-center text-xl">{m.no_assignments_here()}</p>
+		{/if}
 	{/snippet}
 	{#snippet upcoming()}
 		{const assignments = $derived(

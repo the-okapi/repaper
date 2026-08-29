@@ -36,7 +36,14 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 			28
 		);
 
-		return { assignment, title: assignment.name };
+		const submissions = unwrap(
+			await locals.supabase
+				.from('assignment_submissions')
+				.select('id, user ( name ), submitted, document'),
+			34
+		);
+
+		return { assignment, title: assignment.name, submissions };
 	} catch {
 		return redirect(303, '/error');
 	}

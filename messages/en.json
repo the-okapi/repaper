@@ -128,5 +128,6 @@
 	"system": "System",
 	"image": "Image",
 	"zoom": "Zoom",
-	"choose_image": "Choose an Image"
+	"choose_image": "Choose an Image",
+	"loading": "Please Wait..."
 }
