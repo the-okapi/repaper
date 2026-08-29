@@ -8,3 +8,4 @@ export { default as Slider } from '$lib/components/Slider.svelte';
 export { default as Toggle } from '$lib/components/Toggle.svelte';
 export { default as Popover } from '$lib/components/Popover.svelte';
 export { default as DatePicker } from '$lib/components/DatePicker.svelte';
+export { default as Document } from '$lib/components/Document.svelte';
