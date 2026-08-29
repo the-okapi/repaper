@@ -506,6 +506,32 @@ textarea {
 	text-decoration-thickness: 1.5px;
 }
 
+.tiptap img {
+	margin: auto;
+}
+
+[data-resize-container] {
+	margin: auto;
+	width: fit-content;
+}
+
+[data-resize-handle] {
+	background: #000000;
+	border: 1px solid #ffffff;
+	width: 0.5rem;
+	height: 0.5rem;
+
+	&[data-resize-handle='top-left'],
+	&[data-resize-handle='bottom-right'] {
+		cursor: nwse-resize;
+	}
+
+	&[data-resize-handle='top-right'],
+	&[data-resize-handle='bottom-left'] {
+		cursor: nesw-resize;
+	}
+}
+
 [data-toggle-root] {
 	transition:
 		background-color 150ms,

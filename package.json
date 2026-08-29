@@ -43,6 +43,7 @@
 		"@tiptap/extension-document": "^3.30.5",
 		"@tiptap/extension-heading": "^3.30.5",
 		"@tiptap/extension-horizontal-rule": "^3.30.5",
+		"@tiptap/extension-image": "^3.30.5",
 		"@tiptap/extension-italic": "^3.30.5",
 		"@tiptap/extension-link": "^3.30.5",
 		"@tiptap/extension-paragraph": "^3.30.5",

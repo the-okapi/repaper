@@ -90,12 +90,12 @@ export const create = async ({ locals, request, params }: ActionData) => {
 
 		const usersFound = unwrap(
 			await locals.supabase.from('users').select('id').eq('email', email),
-			43
+			42
 		);
 
 		const invitationsFound = unwrap(
 			await locals.supabase.from('invitations').select('id').eq('email', email),
-			65
+			43
 		);
 
 		const foundData = [...usersFound, ...invitationsFound];
@@ -138,7 +138,7 @@ export const create = async ({ locals, request, params }: ActionData) => {
 		);
 
 		try {
-			// Error Code 66
+			// Error Code 46
 			await resend.emails.send({
 				from: 'Repaper <repaper@unlimitedstuffltd.com>',
 				to: email,
@@ -156,7 +156,7 @@ export const create = async ({ locals, request, params }: ActionData) => {
 				}
 			});
 		} catch (error: any) {
-			console.error(error, 'Error Code 66');
+			console.error(error, 'Error Code 46');
 			throw new HttpError(m.something_happened(), 500);
 		}
 	} catch {
@@ -210,8 +210,6 @@ export const revoke = async ({ request, locals, params }: ActionData) => {
 				.eq('organization', params.org),
 			48
 		);
-
-		// TODO: send email when invitation revoked
 	} catch {
 		return redirect(303, '/error');
 	}
@@ -249,7 +247,7 @@ export const renameMember = async ({ request, locals, params }: ActionData) => {
 				.eq('user', user.id)
 				.eq('organization', params.org)
 				.eq('admin', true),
-			50
+			49
 		);
 
 		if (!check?.[0]) {
@@ -262,7 +260,7 @@ export const renameMember = async ({ request, locals, params }: ActionData) => {
 				.select('user')
 				.eq('user', userId)
 				.eq('organization', params.org),
-			51
+			50
 		);
 
 		if (!check2?.[0]) {
@@ -276,7 +274,7 @@ export const renameMember = async ({ request, locals, params }: ActionData) => {
 					name
 				})
 				.eq('id', userId),
-			52
+			51
 		);
 	} catch {
 		return fail(500, { renameMemberError: true, message: m.something_happened() });
@@ -310,7 +308,7 @@ export const deleteMember = async ({ request, params, locals }: ActionData) => {
 				.eq('organization', params.org)
 				.eq('admin', true)
 				.eq('user', user.id),
-			54
+			52
 		);
 
 		if (!check?.[0]) {
@@ -323,7 +321,7 @@ export const deleteMember = async ({ request, params, locals }: ActionData) => {
 				.delete()
 				.eq('organization', params.org)
 				.eq('user', userId),
-			55
+			53
 		);
 
 		const date = new Date();
@@ -335,7 +333,7 @@ export const deleteMember = async ({ request, params, locals }: ActionData) => {
 				.from('users')
 				.update({ can_delete: date.toISOString() })
 				.eq('id', userId),
-			56
+			54
 		);
 	} catch {
 		return redirect(303, '/error');
@@ -369,7 +367,7 @@ export const restore = async ({ request, locals, params }: ActionData) => {
 				.eq('organization', params.org)
 				.eq('user', user.id)
 				.eq('admin', true),
-			58
+			55
 		);
 
 		if (!check?.[0]) {
@@ -382,7 +380,7 @@ export const restore = async ({ request, locals, params }: ActionData) => {
 				organization: params.org,
 				admin: false
 			}),
-			57
+			56
 		);
 
 		unwrapNoData(
@@ -393,7 +391,7 @@ export const restore = async ({ request, locals, params }: ActionData) => {
 				})
 				.eq('id', userId)
 				.eq('organization', params.org),
-			53
+			57
 		);
 	} catch {
 		return redirect(303, '/error');
@@ -427,7 +425,7 @@ export const promote = async ({ request, locals, params }: ActionData) => {
 				.eq('organization', params.org)
 				.eq('admin', true)
 				.eq('user', user.id),
-			49
+			58
 		);
 
 		if (!check?.[0]) {
@@ -443,7 +441,7 @@ export const promote = async ({ request, locals, params }: ActionData) => {
 				.eq('user', userId)
 				.eq('organization', params.org)
 				.eq('admin', false),
-			39
+			59
 		);
 	} catch {
 		return redirect(303, '/error');
@@ -481,7 +479,7 @@ export const demote = async ({ request, params, locals }: ActionData) => {
 				.eq('organization', params.org)
 				.eq('admin', true)
 				.eq('user', user.id),
-			46
+			60
 		);
 
 		if (!check?.[0]) {
@@ -497,7 +495,7 @@ export const demote = async ({ request, params, locals }: ActionData) => {
 				.eq('user', userId)
 				.eq('organization', params.org)
 				.eq('admin', true),
-			42
+			61
 		);
 	} catch {
 		return redirect(303, '/error');

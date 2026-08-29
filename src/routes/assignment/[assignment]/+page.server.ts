@@ -97,7 +97,7 @@ export const actions = {
 					.select('submitted')
 					.eq('id', params.assignment)
 					.eq('user', user.id),
-				34
+				32
 			);
 
 			if (!assignmentSubmission) {
@@ -114,7 +114,7 @@ export const actions = {
 					})
 					.eq('id', params.assignment)
 					.eq('user', user.id),
-				78
+				33
 			);
 		} catch {
 			return fail(500);

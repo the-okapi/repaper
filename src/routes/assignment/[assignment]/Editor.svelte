@@ -11,9 +11,10 @@
 	import fontSizeIcon from '$lib/assets/icons/font.svg';
 	import saveIcon from '$lib/assets/icons/save.svg';
 	import submitIcon from '$lib/assets/icons/submit.svg';
+	import imageIcon from '$lib/assets/icons/image.svg';
 	import { barHidden } from '$lib/state.svelte';
 	import { extensions, editorExtensions } from '$lib/tiptap';
-	import { saveDocument, submitDocument } from './server.remote.ts';
+	import { saveDocument, submitDocument, uploadFile } from './server.remote.ts';
 
 	let element: any = $state();
 	let editorState: { editor: Editor | null } = $state({ editor: null });
@@ -24,6 +25,34 @@
 
 	let textStyle = $state('p');
 	let changeTextStyleOpen = $state(false);
+
+	let addImageOpen = $state(false);
+	let addImageLoading = $state(false);
+
+	let images: any = $state();
+
+	async function addImage() {
+		addImageLoading = true;
+
+		const { status, url } = await uploadFile({
+			assignment,
+			file: images[0]
+		});
+
+		if (status !== 200) {
+			return;
+		}
+
+		editorState.editor
+			?.chain()
+			.setImage({ src: url ?? '' })
+			.focus()
+			.run();
+
+		images = [];
+		addImageOpen = false;
+		addImageLoading = false;
+	}
 
 	let confirmSubmitOpen = $state(false);
 
@@ -134,11 +163,11 @@
 		<Popover>
 			{#snippet trigger()}
 				<Button.Root class="icon-button"
-					><img src={zoomIcon} alt="Zoom" class="size-4.5" /></Button.Root
+					><img src={zoomIcon} alt={m.zoom()} class="size-4.5" /></Button.Root
 				>
 			{/snippet}
 			<div class="flex gap-4">
-				<p>Zoom:</p>
+				<p>{m.zoom()}:</p>
 				<Slider bind:value={zoom} min={10} max={200} />
 			</div>
 		</Popover>
@@ -184,6 +213,10 @@
 				onChange={changeTextStyle}
 			/>
 		</Popover>
+		<div class="h-2"></div>
+		<Button.Root class="icon-button" title={m.image()} onclick={() => (addImageOpen = true)}>
+			<img src={imageIcon} class="size-4.5" alt={m.image()} />
+		</Button.Root>
 		<div class="my-3 w-10 border-b border-(--o)"></div>
 		{@render children()}
 		<Button.Root
@@ -195,7 +228,7 @@
 		</Button.Root>
 		{#if !saving}
 			<Button.Root class="icon-button" title={m.save()} onclick={saveButton}>
-				<img src={saveIcon} alt={m.save()} class="size-4.5!" />
+				<img src={saveIcon} alt={m.save()} class="size-4.5" />
 			</Button.Root>
 		{:else}
 			<Button.Root disabled class="icon-button outline-none!">
@@ -210,6 +243,7 @@
 <AlertDialog bind:open={failedSave} message={m.ok()}>
 	<p class="mb-4 w-100 text-center">{m.failed_to_save()}</p>
 </AlertDialog>
+
 {#if confirmSubmitOpen}
 	{const text = $derived(editorState.editor?.getText())}
 	{#if text !== ''}
@@ -225,3 +259,32 @@
 		</AlertDialog>
 	{/if}
 {/if}
+
+<AlertDialog bind:open={addImageOpen} cancel={!addImageLoading}>
+	<div class="flex h-14">
+		{#if addImageLoading}
+			<div class="m-auto h-fit w-fit">
+				<Loader />
+			</div>
+		{:else}
+			<div class="flex gap-4">
+				<div>
+					<label for="fileInput" data-button-root>{m.choose_image()}</label>
+					<input id="fileInput" type="file" bind:files={images} hidden />
+				</div>
+				{#if images}
+					<p>{images[0].name}</p>
+				{/if}
+			</div>
+
+			<div class="h-8"></div>
+		{/if}
+	</div>
+	{#snippet go()}
+		<div class="h-10 w-full">
+			{#if !addImageLoading}
+				<Button.Root onclick={addImage}>{m.submit()}</Button.Root>
+			{/if}
+		</div>
+	{/snippet}
+</AlertDialog>

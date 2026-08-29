@@ -5,7 +5,7 @@
 	import { Slider } from '$lib/components';
 	import { m } from '$lib/paraglide/messages';
 	import { formatDate } from '$lib/util';
-	import { extensions } from '$lib/tiptap';
+	import { extensions, viewerExtensions } from '$lib/tiptap';
 
 	let { content, children, submitted } = $props();
 
@@ -15,7 +15,7 @@
 	onMount(() => {
 		editorState.editor = new Editor({
 			element,
-			extensions,
+			extensions: [...extensions, ...viewerExtensions],
 			content,
 			editable: false
 		});

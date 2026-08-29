@@ -23,7 +23,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 				.eq('class', params.class)
 				.eq('user', user.id)
 				.eq('admin', true),
-			61
+			62
 		);
 
 		if (!data?.[0]) {
@@ -35,7 +35,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 				.from('class_memberships')
 				.select('user ( id, name, email ), admin')
 				.eq('class', params.class),
-			62
+			63
 		);
 
 		return {
@@ -93,7 +93,7 @@ export const actions = {
 					.select('organization')
 					.eq('id', params.class)
 					.eq('organization', params.org),
-				9
+				3
 			);
 
 			if (!check2 || check2[0].organization !== params.org) {
@@ -107,7 +107,7 @@ export const actions = {
 					.eq('id', userId)
 					.eq('email', email)
 					.eq('organization', params.org),
-				3
+				4
 			);
 
 			if (!check3?.[0]) {
@@ -120,7 +120,7 @@ export const actions = {
 					.select('class ( organization )')
 					.eq('class', params.class)
 					.eq('user', userId),
-				4
+				5
 			);
 
 			if (check4?.[0]) {
@@ -133,7 +133,7 @@ export const actions = {
 					class: params.class,
 					admin: false
 				}),
-				5
+				6
 			);
 		} catch (error: any) {
 			if (error.statusCode !== 500) {
@@ -183,7 +183,7 @@ export const actions = {
 					.delete()
 					.eq('user', userId)
 					.eq('class', params.class),
-				8
+				1
 			);
 		} catch (error: any) {
 			if (error.statusCode !== 500) {

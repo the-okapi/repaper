@@ -1,5 +1,5 @@
 import { command, getRequestEvent } from '$app/server';
-import { object, string } from 'valibot';
+import { object, string, file } from 'valibot';
 import { unwrap, unwrapNoData } from '$lib/error';
 
 const SaveSchema = object({
@@ -7,9 +7,7 @@ const SaveSchema = object({
 	content: string()
 });
 
-export const saveDocument = command(SaveSchema, async (data) => {
-	const { assignment, content } = data;
-
+export const saveDocument = command(SaveSchema, async ({ assignment, content }) => {
 	const { locals } = getRequestEvent();
 
 	const {
@@ -27,7 +25,7 @@ export const saveDocument = command(SaveSchema, async (data) => {
 				.select('document, class')
 				.eq('id', assignment)
 				.eq('user', user.id),
-			59
+			34
 		);
 
 		if (!assignmentSubmission) {
@@ -42,7 +40,7 @@ export const saveDocument = command(SaveSchema, async (data) => {
 				})
 				.eq('id', assignmentSubmission.document)
 				.eq('class', assignmentSubmission.class),
-			60
+			87
 		);
 	} catch {
 		return { status: 500 };
@@ -59,7 +57,7 @@ export const submitDocument = command(string(), async (assignment) => {
 	} = await locals.supabase.auth.getUser();
 
 	if (!user) {
-		return { status: 404 };
+		return { status: 401 };
 	}
 
 	try {
@@ -69,7 +67,7 @@ export const submitDocument = command(string(), async (assignment) => {
 				.select('submitted')
 				.eq('id', assignment)
 				.eq('user', user.id),
-			32
+			88
 		);
 
 		if (!assignmentSubmission) {
@@ -86,10 +84,64 @@ export const submitDocument = command(string(), async (assignment) => {
 				})
 				.eq('id', assignment)
 				.eq('user', user.id),
-			33
+			89
 		);
 
 		return { status: 200 };
+	} catch {
+		return { status: 500 };
+	}
+});
+
+const UploadFileSchema = object({
+	assignment: string(),
+	file: file()
+});
+
+export const uploadFile = command(UploadFileSchema, async ({ assignment, file }) => {
+	const { locals } = getRequestEvent();
+
+	const {
+		data: { user }
+	} = await locals.supabase.auth.getUser();
+
+	if (!user) {
+		return { status: 401 };
+	}
+
+	try {
+		const [check] = unwrap(
+			await locals.supabase
+				.from('assignment_submissions')
+				.select('document')
+				.eq('id', assignment)
+				.eq('user', user.id),
+			90
+		);
+
+		if (!check) {
+			return { status: 403 };
+		}
+
+		const id = crypto.randomUUID();
+		const path = `${user.id}/${assignment}/${id}.${file.type.split('/')[1]}`;
+
+		unwrapNoData(await locals.supabase.storage.from('images').upload(path, file), 91);
+
+		const {
+			data: { publicUrl: url }
+		} = locals.supabase.storage.from('images').getPublicUrl(path);
+
+		unwrapNoData(
+			await locals.supabase.from('images').insert({
+				id,
+				url,
+				document: check.document
+			}),
+			92
+		);
+
+		return { status: 200, url };
 	} catch {
 		return { status: 500 };
 	}

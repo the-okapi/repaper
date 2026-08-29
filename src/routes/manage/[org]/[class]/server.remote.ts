@@ -126,7 +126,7 @@ export const getStudents = query(string(), async (classId: string) => {
 			.eq('class', classId)
 			.eq('admin', true)
 			.eq('user', user.id),
-		1
+		8
 	);
 
 	if (!check) {
@@ -139,7 +139,7 @@ export const getStudents = query(string(), async (classId: string) => {
 			.select('user ( id, name )')
 			.eq('class', classId)
 			.eq('admin', false),
-		6
+		9
 	);
 
 	return {

@@ -125,5 +125,8 @@
 	"date_not_selected": "Please select a date.",
 	"document_empty": "Document is empty.",
 	"mode": "Mode",
-	"system": "System"
+	"system": "System",
+	"image": "Image",
+	"zoom": "Zoom",
+	"choose_image": "Choose an Image"
 }
