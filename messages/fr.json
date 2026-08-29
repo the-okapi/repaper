@@ -126,5 +126,8 @@
 	"document_empty": "Le document est vide.",
 	"system": "Système",
 	"choose_image": "Choisir une Image",
-	"loading": "Attendez, s'il vous plaît..."
+	"loading": "Attendez, s'il vous plaît...",
+	"not": "Non",
+	"select_student": "Selectionnez un étudiant pour commencer.",
+	"failed_load": "Échoué à trouver le document."
 }

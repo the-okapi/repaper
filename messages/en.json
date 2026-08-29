@@ -129,5 +129,9 @@
 	"image": "Image",
 	"zoom": "Zoom",
 	"choose_image": "Choose an Image",
-	"loading": "Please Wait..."
+	"loading": "Please Wait...",
+	"not": "Not",
+	"select_student": "Select a student to get started.",
+	"failed_load": "Failed to load the document.",
+	"description": "Description"
 }

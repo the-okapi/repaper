@@ -1,9 +1,8 @@
 import { unwrap } from '$lib/error';
-import type { Actions, PageServerLoad } from './$types';
-import { changeName, changeDescription, changeDueDate, deleteAssignment } from './actions';
+import type { LayoutServerLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async ({ params, locals }) => {
+export const load: LayoutServerLoad = async ({ params, locals }) => {
 	const {
 		data: { user }
 	} = await locals.supabase.auth.getUser();
@@ -39,7 +38,8 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		const submissions = unwrap(
 			await locals.supabase
 				.from('assignment_submissions')
-				.select('id, user ( name ), submitted, document'),
+				.select('id, user ( name ), submitted, document')
+				.eq('assignment', params.assignment),
 			34
 		);
 
@@ -48,10 +48,3 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		return redirect(303, '/error');
 	}
 };
-
-export const actions = {
-	changeName,
-	changeDescription,
-	changeDueDate,
-	deleteAssignment
-} satisfies Actions;

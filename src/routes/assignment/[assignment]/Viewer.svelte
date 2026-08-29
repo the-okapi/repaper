@@ -1,11 +1,27 @@
 <script lang="ts">
-	import { Slider, Document } from '$lib/components';
+	import { Slider } from '$lib/components';
 	import { m } from '$lib/paraglide/messages';
 	import { formatDate } from '$lib/util';
+	import { barHidden } from '$lib/state.svelte';
+	import { onMount } from 'svelte';
+	import { Editor } from '@tiptap/core';
+	import { extensions, viewerExtensions } from '$lib/tiptap';
 
 	let { content, children, submitted } = $props();
 
 	let zoom = $state(95);
+
+	let element: any = $state();
+	let editorState: { editor: Editor | null } = $state({ editor: null });
+
+	onMount(() => {
+		editorState.editor = new Editor({
+			element,
+			extensions: [...extensions, ...viewerExtensions],
+			content,
+			editable: false
+		});
+	});
 </script>
 
 <div class="relative mx-auto flex w-fit items-center gap-5 pt-10">
@@ -17,4 +33,12 @@
 	{@render children()}
 </div>
 
-<Document {zoom} {content} />
+<div
+	class="absolute top-{barHidden.value ? '0' : '20'} h-[calc(100vh-{barHidden.value
+		? '6 rem'
+		: '11rem'})] w-screen pt-4 text-center"
+>
+	<div class="tiptap-container">
+		<div spellcheck="false" bind:this={element} style="zoom: {zoom / 100};"></div>
+	</div>
+</div>
