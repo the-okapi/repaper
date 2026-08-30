@@ -35,10 +35,14 @@ export const load: LayoutServerLoad = async ({ params, locals }) => {
 			28
 		);
 
+		if (!assignment) {
+			return redirect(303, `/manage/${params.org}/${params.class}`);
+		}
+
 		const submissions = unwrap(
 			await locals.supabase
 				.from('assignment_submissions')
-				.select('id, user ( name ), submitted, document')
+				.select('id, user ( id, name ), submitted, document')
 				.eq('assignment', params.assignment),
 			34
 		);

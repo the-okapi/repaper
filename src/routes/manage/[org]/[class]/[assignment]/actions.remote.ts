@@ -35,7 +35,7 @@ export const changeName = form(NameSchema, async ({ name, assignment, class: cla
 		);
 
 		if (!check) {
-			return { nameMessage: m.something_happened(), status: 400 };
+			return { nameMessage: m.something_happened(), status: 403 };
 		}
 
 		unwrapNoData(
@@ -86,7 +86,7 @@ export const changeDescription = form(
 			);
 
 			if (!check) {
-				return { descriptionMessage: m.something_happened(), status: 400 };
+				return { descriptionMessage: m.something_happened(), status: 403 };
 			}
 
 			unwrapNoData(
@@ -119,6 +119,18 @@ const DueDateSchema = object({
 export const changeDueDate = form(
 	DueDateSchema,
 	async ({ dueDate, assignment, class: className }) => {
+		const dueDateDate = new Date(dueDate);
+		const todayDate = new Date();
+
+		if (dueDateDate < todayDate) {
+			return { dueDateMessage: m.please_future_date(), status: 400 };
+		} else if (
+			dueDateDate >
+			new Date(todayDate.getFullYear() + 5, todayDate.getMonth(), todayDate.getDate())
+		) {
+			return { dueDateMessage: m.date_within_five(), status: 400 };
+		}
+
 		const { locals } = getRequestEvent();
 
 		const {
@@ -141,7 +153,7 @@ export const changeDueDate = form(
 			);
 
 			if (!check?.[0]) {
-				return { dueDateMessage: m.something_happened(), status: 400 };
+				return { dueDateMessage: m.something_happened(), status: 403 };
 			}
 
 			unwrapNoData(
@@ -181,7 +193,7 @@ export const deleteAssignment = form(
 		}
 
 		try {
-			const check = unwrap(
+			const [check] = unwrap(
 				await locals.supabase
 					.from('class_memberships')
 					.select('id')
@@ -191,8 +203,8 @@ export const deleteAssignment = form(
 				25
 			);
 
-			if (!check?.[0]) {
-				return { deleteMessage: m.something_happened(), status: 400 };
+			if (!check) {
+				return { deleteMessage: m.something_happened(), status: 403 };
 			}
 
 			unwrapNoData(
@@ -208,5 +220,57 @@ export const deleteAssignment = form(
 		}
 
 		return { status: 200 };
+	}
+);
+
+const AssignSchema = object({
+	students: string(),
+	assignment: string(),
+	class: string()
+});
+
+export const assign = form(
+	AssignSchema,
+	async ({ students: studentsString, assignment, class: className }) => {
+		const students = JSON.parse(studentsString);
+
+		const { locals } = getRequestEvent();
+
+		const {
+			data: { user }
+		} = await locals.supabase.auth.getUser();
+
+		if (!user) {
+			return redirect(303, '/');
+		}
+
+		try {
+			const [check] = unwrap(
+				await locals.supabase
+					.from('class_memberships')
+					.select('id')
+					.eq('class', className)
+					.eq('user', user.id)
+					.eq('admin', true),
+				99
+			);
+
+			if (!check) {
+				return redirect(303, '/home');
+			}
+
+			for (let i = 0; i < students.length; i++) {
+				unwrapNoData(
+					await locals.supabase.from('assignment_submissions').insert({
+						user: students[i],
+						assignment,
+						class: className
+					}),
+					100
+				);
+			}
+		} catch {
+			return redirect(303, '/error');
+		}
 	}
 );

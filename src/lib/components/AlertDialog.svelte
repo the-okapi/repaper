@@ -2,13 +2,7 @@
 	import { Button } from 'bits-ui';
 	import { m } from '$lib/paraglide/messages';
 
-	let {
-		open = $bindable(),
-		children,
-		go = () => {},
-		cancel = true,
-		message = m.cancel()
-	} = $props();
+	let { open = $bindable(), children, go = null, cancel = true, message = m.cancel() } = $props();
 
 	function onkeydown(event: KeyboardEvent) {
 		if (event.key === 'Escape' && open) {
@@ -24,12 +18,12 @@
 		<div data-alert-dialog-overlay></div>
 		<div data-alert-dialog-content>
 			{@render children?.()}
-			{#if go !== null}
+			{#if go}
 				<div class="m-auto flex w-fit gap-4">
 					{#if cancel}
 						<Button.Root onclick={() => (open = false)}>{message}</Button.Root>
 					{/if}
-					{@render go?.()}
+					{@render go()}
 				</div>
 			{/if}
 		</div>

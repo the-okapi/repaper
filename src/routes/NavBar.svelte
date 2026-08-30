@@ -59,7 +59,7 @@
 		</form>
 	{/snippet}
 </AlertDialog>
-{#if !barHidden.value}
+{#if !barHidden.value && page.route.id !== '/error'}
 	<button
 		class="fixed top-5 left-5 z-40! inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg border border-(--o) bg-(--bg) font-[Times_New_Roman] text-2xl font-black"
 		onclick={show}
@@ -135,7 +135,7 @@
 		{/if}
 	{/if}
 	<div class="h-20"></div>
-{:else}
+{:else if barHidden.value}
 	<button
 		class="fixed top-5 right-5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-(--o) bg-(--bg) p-2!"
 		onclick={() => (barHidden.value = false)}

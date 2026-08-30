@@ -2,16 +2,18 @@
 	import { page } from '$app/state';
 	import { m } from '$lib/paraglide/messages';
 	import { Label, Button } from 'bits-ui';
-	import { DatePicker, AlertDialog, Tabs, Loader } from '$lib/components';
+	import { DatePicker, AlertDialog, Tabs, Loader, Combobox } from '$lib/components';
 	import { getLocale } from '$lib/paraglide/runtime';
 	import {
 		changeName,
 		changeDescription,
 		changeDueDate,
-		deleteAssignment
+		deleteAssignment,
+		assign
 	} from './actions.remote';
 	import { goto } from '$app/navigation';
 	import type { RemoteFormEnhanceCallback } from '@sveltejs/kit';
+	import { loadStudents } from './load.remote';
 
 	let { data, children } = $props();
 
@@ -23,6 +25,11 @@
 
 	let loading = $state(false);
 
+	let assignToMoreStudentsOpen = $state(false);
+	let assignToMoreStudentsLoading = $state(false);
+
+	let selectedStudents = $state([]);
+
 	const handleLoading: RemoteFormEnhanceCallback<any> = async (form) => {
 		loading = true;
 		await form.submit();
@@ -33,6 +40,19 @@
 		}
 		loading = false;
 	};
+
+	let students = $state(null);
+
+	async function assignToAnotherStudent() {
+		assignToMoreStudentsLoading = true;
+		assignToMoreStudentsOpen = true;
+		const { students: unfilteredStudents } = await loadStudents(page.params.class ?? '');
+		students = unfilteredStudents.filter(
+			(a: { value: string; label: string }) =>
+				data.submissions.find((b: any) => b.user.id === a.value) === undefined
+		);
+		assignToMoreStudentsLoading = false;
+	}
 </script>
 
 <div class="fixed top-20 left-0 flex h-[calc(100vh-5rem)] flex-col gap-2 py-5 pl-5">
@@ -61,6 +81,7 @@
 	<div class="box relative h-full! overflow-scroll">
 		<div class="h-full w-full p-3">
 			{#each data.submissions as submission (submission.id)}
+				{const url = `/manage/${page.params.org}/${page.params.class}/${page.params.assignment}/${submission.id}`}
 				<div class="flex items-center justify-end gap-3">
 					<div class="flex w-full items-center gap-2">
 						<p class="text-lg font-bold whitespace-nowrap">
@@ -71,19 +92,25 @@
 								{m.submitted()}
 								{new Date(submission.submitted).toLocaleDateString(getLocale(), {})}
 							</p>
+						{:else if submission.document === null}
+							<p class="text-sm">{m.assignment_not_started()}</p>
 						{/if}
 					</div>
 					<Button.Root
 						class="small-button"
-						onclick={() =>
-							goto(
-								`/manage/${page.params.org}/${page.params.class}/${page.params.assignment}/${submission.id}`,
-								{ replaceState: true }
-							)}>View</Button.Root
+						onclick={() => goto(url, { replaceState: true })}
+						disabled={url === page.url.pathname || submission.document === null}
+						>View</Button.Root
 					>
 				</div>
 				<div class="m-auto my-3 w-[85%] border-b border-(--o)"></div>
 			{/each}
+			<Button.Root class="m-auto mb-3 block" onclick={assignToAnotherStudent}
+				>{m.assign_to()} {m.more_students()}</Button.Root
+			>
+			<Button.Root class="red-button m-auto block" onclick={() => (confirmDeleteOpen = true)}
+				>{m.delete()} {m.assignment()}</Button.Root
+			>
 		</div>
 	</div>
 
@@ -210,3 +237,42 @@
 		</form>
 	{/snippet}
 </AlertDialog>
+
+{#if assignToMoreStudentsLoading === true}
+	<AlertDialog bind:open={assignToMoreStudentsOpen}>
+		<div class="m-auto flex h-31 w-fit items-center">
+			<Loader />
+		</div>
+	</AlertDialog>
+{:else}
+	<AlertDialog bind:open={assignToMoreStudentsOpen}>
+		<div class="m-auto mb-5 h-16 w-48">
+			<div class="grid grid-cols-2">
+				<p class="text-left">{m.assign_to()}:</p>
+				<p class="text-right">
+					{selectedStudents.length}
+					{m.student()}{selectedStudents.length !== 1 ? 's' : ''}
+				</p>
+			</div>
+			<div class="m-auto w-fit">
+				<Combobox options={students} multiple bind:value={selectedStudents} />
+			</div>
+			<input type="hidden" value={JSON.stringify(selectedStudents)} name="students" />
+		</div>
+		{#snippet go()}
+			<form
+				{...assign.enhance(async (form) => {
+					assignToMoreStudentsLoading = true;
+					await form.submit();
+					assignToMoreStudentsOpen = false;
+					assignToMoreStudentsLoading = false;
+				})}
+			>
+				<Button.Root type="submit">{m.submit()}</Button.Root>
+				<input type="hidden" name="students" value={JSON.stringify(selectedStudents)} />
+				<input type="hidden" name="class" value={page.params.class} />
+				<input type="hidden" name="assignment" value={page.params.assignment} />
+			</form>
+		{/snippet}
+	</AlertDialog>
+{/if}

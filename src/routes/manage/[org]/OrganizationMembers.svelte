@@ -136,7 +136,7 @@
 	{/snippet}
 </AlertDialog>
 
-<AlertDialog bind:open={confirmDeleteOpen} cancel={false}>
+<AlertDialog bind:open={confirmDeleteOpen}>
 	<div class="relative h-46 w-120">
 		{#if confirmPage === 0}
 			<p class="mb-8 text-center text-lg">

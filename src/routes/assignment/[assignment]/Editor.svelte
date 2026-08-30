@@ -287,13 +287,15 @@
 	{/if}
 {/if}
 
-<AlertDialog bind:open={addImageOpen} cancel={false}>
-	<div class="h-14">
-		{#if addImageLoading}
-			<div class="m-auto h-fit w-fit">
-				<Loader />
-			</div>
-		{:else}
+{#if addImageLoading}
+	<AlertDialog bind:open={addImageOpen}>
+		<div class="m-auto flex h-24 w-fit items-center">
+			<Loader />
+		</div>
+	</AlertDialog>
+{:else}
+	<AlertDialog bind:open={addImageOpen} cancel={false}>
+		<div class="h-14">
 			<div class="flex gap-4">
 				<div>
 					<label for="fileInput" data-button-root>{m.choose_image()}</label>
@@ -314,16 +316,14 @@
 			</div>
 
 			<div class="h-8"></div>
-		{/if}
-	</div>
-	{#snippet go()}
-		<div class="h-10 w-full">
-			{#if !addImageLoading}
+		</div>
+		{#snippet go()}
+			<div class="h-10 w-full">
 				<div class="flex gap-4">
 					<Button.Root onclick={cancelAddImage}>{m.cancel()}</Button.Root>
 					<Button.Root onclick={addImage}>{m.submit()}</Button.Root>
 				</div>
-			{/if}
-		</div>
-	{/snippet}
-</AlertDialog>
+			</div>
+		{/snippet}
+	</AlertDialog>
+{/if}

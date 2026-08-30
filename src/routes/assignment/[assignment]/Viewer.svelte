@@ -24,7 +24,7 @@
 	});
 </script>
 
-<div class="relative mx-auto flex w-fit items-center gap-5 pt-10">
+<div class="relative z-50 mx-auto flex w-fit items-center gap-5 pt-10">
 	<p>{m.submitted()} <strong>{formatDate(submitted)}</strong></p>
 	<div class="relative mx-auto">
 		<p class="absolute -top-7">Zoom:</p>
@@ -34,7 +34,7 @@
 </div>
 
 <div
-	class="absolute top-{barHidden.value ? '0' : '20'} h-[calc(100vh-{barHidden.value
+	class="absolute top-{barHidden.value ? '20' : '40'} h-[calc(100vh-{barHidden.value
 		? '6 rem'
 		: '11rem'})] w-screen pt-4 text-center"
 >

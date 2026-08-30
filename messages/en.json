@@ -134,5 +134,7 @@
 	"select_student": "Select a student to get started.",
 	"failed_load": "Failed to load the document.",
 	"description": "Description",
-	"is_required": " is required."
+	"is_required": " is required.",
+	"more_students": "More Students",
+	"assignment_not_started": "Assignment not started"
 }

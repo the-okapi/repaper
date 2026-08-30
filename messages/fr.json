@@ -130,5 +130,7 @@
 	"not": "Non",
 	"select_student": "Selectionnez un étudiant pour commencer.",
 	"failed_load": "Échoué à trouver le document.",
-	"is_required": " est requis."
+	"is_required": " est requis.",
+	"more_students": "plus d'Élèves",
+	"assignment_not_started": "Devoir non commencé"
 }

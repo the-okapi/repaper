@@ -25,7 +25,7 @@
 	--bg: #ffffff;
 	--a: #eeeeee;
 	--fg: #000000;
-	--p-fg: #ffffff;
+	--p-fg: var(--bg);
 	--o: #bfbfbf;
 	--red: #991b1b;
 	--s: #d9d9d9;
@@ -51,7 +51,7 @@
 	--red: #de4e45;
 	--o: #444444;
 	--s: #313131;
-	--p-fg: #222222;
+	--p-fg: var(--bg);
 	background-color: var(--bg);
 	color: var(--fg);
 
@@ -91,8 +91,7 @@ main * {
 }
 
 ::selection {
-	background-color: var(--p);
-	color: var(--p-fg);
+	@apply bg-(--p)/40;
 }
 
 [data-select-trigger] {
@@ -144,6 +143,7 @@ main * {
 	padding: 0.35rem 0.5rem;
 	padding-right: 2.3rem;
 	width: 12rem;
+	height: 2.3rem;
 }
 
 [data-combobox-portal] * {
@@ -155,7 +155,7 @@ main * {
 	top: 0.2rem;
 	right: 0;
 	display: flex;
-	height: 37.5px;
+	height: 2.3rem;
 	width: 2rem;
 	align-items: center;
 	justify-content: center;
@@ -497,19 +497,18 @@ textarea {
 }
 
 .tiptap a {
-	text-decoration: underline;
+	text-decoration: underline var(--p);
 	text-decoration-thickness: 1.5px;
 	cursor: pointer;
 	color: var(--p);
 
-	&::selection {
-		text-decoration: underline var(--p-fg);
-		text-decoration-thickness: 1.5px;
+	u::selection {
+		text-decoration: underline var(--p);
 	}
 }
 
 .tiptap u::selection {
-	text-decoration: underline var(--p-fg);
+	text-decoration: underline var(--fg);
 	text-decoration-thickness: 1.5px;
 }
 
