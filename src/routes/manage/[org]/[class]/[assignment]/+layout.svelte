@@ -221,6 +221,12 @@
 	</div>
 </div>
 
+<div class="h-2"></div>
+<a
+	href="/manage/{page.params.org}/{page.params.class}/assignments"
+	class="fixed top-20 left-6 z-50 cursor-pointer text-sm hover:underline">← {m.back()}</a
+>
+
 {@render children()}
 
 <AlertDialog bind:open={confirmDeleteOpen}>
