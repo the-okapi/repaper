@@ -160,7 +160,7 @@
 	{#snippet go()}
 		<form action="?/remove" method="POST">
 			<input type="hidden" value={data.members[remove].user.id} name="userId" />
-			<Button.Root type="submit" class="red-button">{m.submit()}</Button.Root>
+			<Button.Root type="submit" class="red-button">{m.go()}</Button.Root>
 		</form>
 	{/snippet}
 </AlertDialog>

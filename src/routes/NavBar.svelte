@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { AlertDialog } from '$lib/components';
-	import { slide } from 'svelte/transition';
 	import { Button } from 'bits-ui';
 	import { m } from '$lib/paraglide/messages';
 	import showIcon from '$lib/assets/icons/show.svg';
@@ -9,10 +8,10 @@
 	import { barHidden } from '$lib/state.svelte';
 	import Settings from './Settings.svelte';
 	import LogIn from './LogIn.svelte';
+	import { getLocale } from '$lib/paraglide/runtime';
 
 	let { loggedIn, name } = $props();
 
-	let shown = $state(true);
 	let settings = $state(false);
 	let login = $state(false);
 
@@ -24,14 +23,6 @@
 	function showLogin() {
 		settings = false;
 		login = !login;
-	}
-
-	function show() {
-		shown = !shown;
-		if (!shown) {
-			settings = false;
-			login = false;
-		}
 	}
 
 	let logOutOpen = $state(false);
@@ -47,6 +38,11 @@
 			login = false;
 		}
 	}
+
+	function closeAll() {
+		settings = false;
+		login = false;
+	}
 </script>
 
 <svelte:window {onkeydown} />
@@ -60,19 +56,10 @@
 	{/snippet}
 </AlertDialog>
 {#if !barHidden.value && page.route.id !== '/error'}
-	<button
-		class="fixed top-5 left-5 z-40! inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg border border-(--o) bg-(--bg) font-[Times_New_Roman] text-2xl font-black"
-		onclick={show}
-	>
-		R
-	</button>
-	{#if shown}
-		<div
-			transition:slide={{ axis: 'x' }}
-			class="fixed top-5 left-17 z-40! flex h-10 rounded-xl border border-(--o) bg-(--bg) px-3 py-1.5"
-		>
+	<div class="fixed top-0 flex w-screen items-center border-b border-(--o) bg-(--bg) p-5">
+		<div class="flex w-full">
 			{#snippet settingsSnippet()}
-				<div class="cardButton m-auto h-fit {settings ? 'z-50!' : 'z-40!'}">
+				<div class="cardButton h-fit {settings ? 'z-50!' : 'z-40!'}">
 					<button
 						class="mx-2 cursor-pointer whitespace-nowrap hover:underline"
 						onclick={showSettings}>{m.settings()}</button
@@ -83,21 +70,35 @@
 				</div>
 			{/snippet}
 			{#if loggedIn}
-				<a class="m-auto mx-2 h-fit hover:underline" href="/home">{m.home()}</a>
+				<a class="m-auto mx-2 h-fit hover:underline" href="/home" onclick={closeAll}
+					>{m.home()}</a
+				>
 				{@render settingsSnippet()}
 				<button
 					class="mx-2 cursor-pointer whitespace-nowrap hover:underline"
-					onclick={() => (logOutOpen = true)}
+					onclick={() => {
+						settings = false;
+						logOutOpen = true;
+					}}
 				>
 					{m.log_out()}
 				</button>
+				<a
+					class="m-auto mx-2 h-fit hover:underline"
+					href="https://help.repaper.unlimitedstuffltd.com/{getLocale()}"
+					target="_blank">{m.help()}</a
+				>
 			{:else}
-				<a class="m-auto mx-2 h-fit hover:underline" href="/">{m.home()}</a>
-				<a class="m-auto mx-2 h-fit whitespace-nowrap hover:underline" href="/signup"
-					>{m.sign_up()}</a
+				<a class="m-auto mx-2 h-fit hover:underline" href="/" onclick={closeAll}
+					>{m.home()}</a
+				>
+				<a
+					class="m-auto mx-2 h-fit whitespace-nowrap hover:underline"
+					href="/signup"
+					onclick={closeAll}>{m.sign_up()}</a
 				>
 				{@render settingsSnippet()}
-				<div class="cardButton m-auto h-fit {login ? 'z-50!' : 'z-40!'}">
+				<div class="cardButton h-fit {login ? 'z-50!' : 'z-40!'}">
 					<button
 						class="mx-2 cursor-pointer whitespace-nowrap hover:underline"
 						onclick={showLogin}>{m.log_in()}</button
@@ -106,34 +107,34 @@
 						<LogIn class="card" />
 					{/if}
 				</div>
+				<a
+					class="m-auto mx-2 h-fit hover:underline"
+					href="https://help.repaper.unlimitedstuffltd.com/{getLocale()}"
+					target="_blank">{m.help()}</a
+				>
 			{/if}
 		</div>
-	{/if}
-	<h1
-		class="fixed top-0 w-screen border-b border-(--o) bg-(--bg) py-5 text-center text-4xl font-bold"
-	>
-		{page.data.title ?? 'Repaper'}
-	</h1>
-	{#if page.route.id === '/assignment/[assignment]'}
-		<div class="fixed top-5 right-5 flex items-center gap-3">
-			{#if name}
+		<h1 class="text-4xl font-bold whitespace-nowrap">
+			{page.data.title ?? 'Repaper'}
+		</h1>
+		<div class="w-full text-right">
+			{#if page.route.id === '/assignment/[assignment]'}
+				{#if name}
+					<p>{name}</p>
+				{/if}
+				<button
+					class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-(--o) bg-(--bg) p-2!
+			"
+					onclick={() => (barHidden.value = true)}
+				>
+					<img src={showIcon} alt="Hide" class="size-4.5" />
+				</button>
+			{:else if name}
 				<p>{name}</p>
 			{/if}
-			<button
-				class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-(--o) bg-(--bg) p-2!
-		"
-				onclick={() => (barHidden.value = true)}
-			>
-				<img src={showIcon} alt="Hide" class="size-4.5" />
-			</button>
 		</div>
-	{:else}
-		{#if name}
-			<div class="fixed top-0 right-5 flex h-20 items-center">
-				<p>{name}</p>
-			</div>
-		{/if}
-	{/if}
+	</div>
+
 	<div class="h-20"></div>
 {:else if barHidden.value}
 	<button
@@ -143,11 +144,3 @@
 		<img src={hideIcon} alt="Show" class="size-4.5" />
 	</button>
 {/if}
-
-<style>
-	.cardButton {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-</style>

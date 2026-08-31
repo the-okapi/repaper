@@ -23,7 +23,7 @@
 	{#if loading}
 		<Loader />
 	{:else}
-		<div class="m-auto rounded-xl border border-(--o) bg-(--bg) px-20 py-15">
+		<div class="m-auto rounded-xl border border-(--o) bg-(--bg) px-15 py-10">
 			<form
 				method="POST"
 				class="flex w-fit flex-col items-center"
@@ -46,11 +46,11 @@
 			>
 				<div class="mb-5 text-left">
 					<Label.Root>{m.your()} {m.name()}:</Label.Root><br />
-					<input type="text" value={form?.name} name="name" class="w-50" required />
+					<input type="text" value={form?.name} name="name" class="w-60" required />
 				</div>
 				<div class="mb-5 text-left">
 					<Label.Root>{m.your()} {m.email()}:</Label.Root><br />
-					<input type="email" value={form?.email} name="email" class="w-50" required />
+					<input type="email" value={form?.email} name="email" class="w-60" required />
 				</div>
 				<div class="mb-5 text-left">
 					<Label.Root>{m.password()}:</Label.Root><br />
@@ -58,13 +58,13 @@
 						type="password"
 						name="password"
 						bind:value={password}
-						class="w-50"
+						class="w-60"
 						required
 					/>
 				</div>
 				<div class="text-left">
 					<Label.Root>{m.confirm()} {m.password()}:</Label.Root><br />
-					<input type="password" bind:value={confirmPassword} class="w-50" required />
+					<input type="password" bind:value={confirmPassword} class="w-60" required />
 				</div>
 				{#if form?.fail || error}
 					<div class="flex w-50 justify-center bg-red-500">

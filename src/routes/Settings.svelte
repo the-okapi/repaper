@@ -81,10 +81,10 @@
 		setTheme(currentColor);
 	}
 
-	let { class: c, ...props } = $props();
+	let { class: c } = $props();
 </script>
 
-<div transition:slide class="rounded-xl bg-(--bg) p-6 outline outline-(--o) {c}" {...props}>
+<div transition:slide class="rounded-xl bg-(--bg) p-6 outline outline-(--o) {c}">
 	<div class="m-auto mb-8 w-fit">
 		<Label.Root>{m.mode()}:</Label.Root>
 		<Select options={modes} bind:value={currentMode} onChange={onModeChange} />

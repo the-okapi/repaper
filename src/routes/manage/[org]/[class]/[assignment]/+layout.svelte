@@ -161,7 +161,7 @@
 				>{m.delete()} {m.assignment()}</Button.Root
 			>
 		</div>
-	</div>``
+	</div>
 </div>
 
 <div class="h-2"></div>
