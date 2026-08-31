@@ -15,9 +15,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		const data = unwrap(
 			await locals.supabase
 				.from('assignment_submissions')
-				.select(
-					'document ( content ), submitted, user ( name ), assignment ( name, description, due_date )'
-				)
+				.select('document ( content ), submitted, user ( name )')
 				.eq('id', params.submission),
 			97
 		);

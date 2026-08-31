@@ -140,5 +140,8 @@
 	"insert": "Insert",
 	"link": "Link",
 	"url": "URL",
-	"accents": "Accents"
+	"accents": "Accents",
+	"edit": "Change",
+	"le": "",
+	"la": ""
 }

@@ -134,5 +134,8 @@
 	"more_students": "plus d'Élèves",
 	"assignment_not_started": "Devoir non commencé",
 	"insert": "Insérer",
-	"link": "Lien"
+	"link": "Lien",
+	"edit": "Changer",
+	"le": "le ",
+	"la": "la "
 }

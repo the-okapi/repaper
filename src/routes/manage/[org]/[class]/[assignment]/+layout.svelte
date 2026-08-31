@@ -2,7 +2,7 @@
 	import { page } from '$app/state';
 	import { m } from '$lib/paraglide/messages';
 	import { Label, Button } from 'bits-ui';
-	import { DatePicker, AlertDialog, Tabs, Loader, Combobox } from '$lib/components';
+	import { DatePicker, AlertDialog, Loader, Combobox } from '$lib/components';
 	import { getLocale } from '$lib/paraglide/runtime';
 	import {
 		changeName,
@@ -14,6 +14,8 @@
 	import { goto } from '$app/navigation';
 	import type { RemoteFormEnhanceCallback } from '@sveltejs/kit';
 	import { loadStudents } from './load.remote';
+	import { formatDate } from '$lib/util';
+	import editIcon from '$lib/assets/icons/edit.svg';
 
 	let { data, children } = $props();
 
@@ -21,24 +23,52 @@
 	let descriptionValue = $state('');
 	let dueDateValue = $state('');
 
+	let changeNameOpen = $state(false);
+	let changeDescriptionOpen = $state(false);
+	let changeDueDateOpen = $state(false);
+
 	let confirmDeleteOpen = $state(false);
 
-	let loading = $state(false);
+	let nameLoading = $state(false);
+	let descriptionLoading = $state(false);
+	let dueDateLoading = $state(false);
 
 	let assignToMoreStudentsOpen = $state(false);
 	let assignToMoreStudentsLoading = $state(false);
 
 	let selectedStudents = $state([]);
 
-	const handleLoading: RemoteFormEnhanceCallback<any> = async (form) => {
-		loading = true;
+	const handleLoadingName: RemoteFormEnhanceCallback<any> = async (form) => {
+		nameLoading = true;
 		await form.submit();
 		if (form.result?.status === 200) {
+			changeNameOpen = false;
 			nameValue = '';
-			descriptionValue = '';
-			dueDateValue = '';
+			form.element.reset();
 		}
-		loading = false;
+		nameLoading = false;
+	};
+
+	const handleLoadingDescription: RemoteFormEnhanceCallback<any> = async (form) => {
+		descriptionLoading = true;
+		await form.submit();
+		if (form.result?.status === 200) {
+			changeDescriptionOpen = false;
+			descriptionValue = '';
+			form.element.reset();
+		}
+		descriptionLoading = false;
+	};
+
+	const handleLoadingDueDate: RemoteFormEnhanceCallback<any> = async (form) => {
+		dueDateLoading = true;
+		await form.submit();
+		if (form.result?.status === 200) {
+			changeDueDateOpen = false;
+			dueDateValue = '';
+			form.element.reset();
+		}
+		dueDateLoading = false;
 	};
 
 	let students = $state(null);
@@ -56,28 +86,6 @@
 </script>
 
 <div class="fixed top-20 left-0 flex h-[calc(100vh-5rem)] flex-col gap-2 py-5 pl-5">
-	<!-- <div class="box relative text-center">
-		<div>
-			{#if new Date() > new Date(data.assignment.due_date)}
-				<p class="badge m-auto w-fit! bg-(--red) px-5!">
-					{m.past()}
-				</p>
-			{:else}
-				<p class="badge m-auto w-fit! bg-(--p) px-5! text-(--p-fg)">
-					{m.upcoming()}
-				</p>
-			{/if}
-			<p class="mt-2 italic">{formatDate(data.assignment.due_date)}</p>
-			<h3 class="text-center text-2xl font-semibold">
-				{data.assignment.name}
-			</h3>
-			<p class="mb-8 px-8">{data.assignment.description}</p>
-			<Button.Root class="red-button m-auto block" onclick={() => (confirmDeleteOpen = true)}
-				>{m.delete()} {m.assignment()}</Button.Root
-			>
-		</div>
-	</div> -->
-
 	<div class="box relative h-full! overflow-scroll">
 		<div class="h-full w-full p-3">
 			{#each data.submissions as submission (submission.id)}
@@ -108,77 +116,154 @@
 			<Button.Root class="m-auto mb-3 block" onclick={assignToAnotherStudent}
 				>{m.assign_to()} {m.more_students()}</Button.Root
 			>
+		</div>
+	</div>
+
+	{#snippet editButton(onclick = () => {}, size = 6, img = 4)}
+		<Button.Root
+			class="ghost-button m-0! inline-flex h-{size}! w-{size}! items-center justify-center rounded-lg! p-0!"
+			style="max-height: {size / 4}rem !important; max-width: {size / 4}rem !important;"
+			{onclick}
+		>
+			<img
+				src={editIcon}
+				style="max-width: {img / 4}rem !important; max-height: {img / 4}rem !important"
+				alt={m.edit()}
+			/>
+		</Button.Root>
+	{/snippet}
+
+	<div class="box relative h-140!">
+		<div>
+			{#if new Date() > new Date(data.assignment.due_date)}
+				<p class="badge m-auto w-fit! bg-(--red) px-5!">
+					{m.past()}
+				</p>
+			{:else}
+				<p class="badge m-auto w-fit! bg-(--p) px-5! text-(--p-fg)">
+					{m.upcoming()}
+				</p>
+			{/if}
+			<p class="mt-2 flex items-center justify-center gap-1 italic">
+				{formatDate(data.assignment.due_date)}
+				{@render editButton(() => (changeDueDateOpen = true))}
+			</p>
+			<h3 class="flex items-center justify-center gap-2 text-2xl font-semibold">
+				{data.assignment.name}
+				{@render editButton(() => (changeNameOpen = true), 7, 5)}
+			</h3>
+			<p class="mb-8 flex items-center justify-center gap-1 px-8">
+				{data.assignment.description}
+
+				{@render editButton(() => (changeDescriptionOpen = true))}
+			</p>
 			<Button.Root class="red-button m-auto block" onclick={() => (confirmDeleteOpen = true)}
 				>{m.delete()} {m.assignment()}</Button.Root
 			>
 		</div>
-	</div>
+	</div>``
+</div>
 
-	<div class="box relative h-140!">
-		{#if loading}
+<div class="h-2"></div>
+<a
+	href="/manage/{page.params.org}/{page.params.class}/assignments"
+	class="fixed top-20 left-6 z-50 cursor-pointer text-sm hover:underline">← {m.back()}</a
+>
+
+{@render children()}
+
+<AlertDialog bind:open={changeNameOpen}>
+	<div class="flex h-45 items-center justify-center">
+		{#if nameLoading}
 			<Loader />
-		{/if}
-		{#snippet name()}
-			<form {...changeName.enhance(handleLoading)}>
-				<h1 class="mt-4 mb-2 text-center text-3xl font-bold">
+		{:else}
+			<form {...changeName.enhance(handleLoadingName)}>
+				<h1 class="mb-2 text-center text-3xl font-bold">
 					{m.change()}
-					{m.name()}
+					{m.le()}{m.name()}
 				</h1>
-				<div class="m-auto w-fit">
+
+				<div class="m-auto mb-5 w-fit">
 					<Label.Root>{m.name()}:</Label.Root><br />
 					<input
 						placeholder={data.assignment.name}
 						bind:value={nameValue}
 						name="name"
-						class="w-60"
+						class="w-70"
 						required
 					/>
 				</div>
-				<div class="absolute right-0 bottom-5 w-full text-center">
+
+				<div class="flex items-center justify-center gap-4">
+					<Button.Root class="gray-button" onclick={() => (changeNameOpen = false)}
+						>{m.cancel()}</Button.Root
+					>
 					<Button.Root type="submit">{m.submit()}</Button.Root>
 				</div>
 
-				<p class="absolute bottom-px px-8 text-sm">
+				<p class="absolute bottom-px px-8 text-sm leading-4">
 					{changeName.result?.nameMessage}
 				</p>
 
 				<input type="hidden" name="assignment" value={page.params.assignment} />
 				<input type="hidden" name="class" value={page.params.class} />
 			</form>
-		{/snippet}
-		{#snippet description()}
-			<form {...changeDescription.enhance(handleLoading)}>
-				<h1 class="mt-4 mb-2 text-center text-3xl font-bold">
-					{m.change()} Description
+		{/if}
+	</div>
+</AlertDialog>
+
+<AlertDialog bind:open={changeDescriptionOpen}>
+	<div class="flex h-45 items-center justify-center">
+		{#if descriptionLoading}
+			<Loader />
+		{:else}
+			<form {...changeDescription.enhance(handleLoadingDescription)}>
+				<h1 class="mb-2 text-center text-3xl font-bold">
+					{m.change()}
+					{m.la()}Description
 				</h1>
-				<div class="m-auto w-fit">
+
+				<div class="m-auto mb-5 w-fit">
 					<Label.Root>Description:</Label.Root><br />
 					<textarea
 						name="description"
 						placeholder={data.assignment.description}
 						bind:value={descriptionValue}
-						class="m-0! mt-1! inline h-20 w-60"
+						class="m-0! mt-1! inline h-20 w-70"
 						required></textarea>
 				</div>
-				<div class="absolute right-0 bottom-5 w-full text-center">
+
+				<div class="flex items-center justify-center gap-4">
+					<Button.Root class="gray-button" onclick={() => (changeDescriptionOpen = false)}
+						>{m.cancel()}</Button.Root
+					>
 					<Button.Root type="submit">{m.submit()}</Button.Root>
 				</div>
-				<p class="absolute bottom-px px-8 text-sm">
+
+				<p class="absolute bottom-px px-8 text-sm leading-4">
 					{changeDescription.result?.descriptionMessage}
 				</p>
 
 				<input type="hidden" name="assignment" value={page.params.assignment} />
 				<input type="hidden" name="class" value={page.params.class} />
 			</form>
-		{/snippet}
-		{#snippet dueDate()}
-			{let dueDateMessage = $state('')}
-			<form {...changeDueDate.enhance(handleLoading)}>
-				<h1 class="mt-4 mb-2 text-center text-3xl font-bold">
+		{/if}
+	</div>
+</AlertDialog>
+
+<AlertDialog bind:open={changeDueDateOpen}>
+	{let dueDateMessage = $state('')}
+	<div class="flex h-45 items-center justify-center">
+		{#if dueDateLoading}
+			<Loader />
+		{:else}
+			<form {...changeDueDate.enhance(handleLoadingDueDate)}>
+				<h1 class="mb-2 text-center text-3xl font-bold">
 					{m.change()}
-					{m.due_date()}
+					{m.la()}{m.due_date()}
 				</h1>
-				<div class="px-12">
+
+				<div class="mb-5 px-12">
 					<Label.Root>{m.due_date()}:</Label.Root>
 					<DatePicker
 						name="dueDate"
@@ -186,7 +271,11 @@
 						bind:value={dueDateValue}
 					/>
 				</div>
-				<div class="absolute right-0 bottom-5 w-full text-center">
+
+				<div class="flex items-center justify-center gap-4">
+					<Button.Root onclick={() => (changeDueDateOpen = false)} class="gray-button"
+						>{m.cancel()}</Button.Root
+					>
 					{#if dueDateValue === ''}
 						<Button.Root
 							onclick={() => (dueDateMessage = m.due_date() + m.is_required())}
@@ -198,7 +287,8 @@
 						>
 					{/if}
 				</div>
-				<p class="absolute bottom-px px-8 text-sm">
+
+				<p class="absolute bottom-px px-8 text-sm leading-4">
 					{#if dueDateMessage}
 						{dueDateMessage}
 					{:else}
@@ -209,25 +299,9 @@
 				<input type="hidden" name="assignment" value={page.params.assignment} />
 				<input type="hidden" name="class" value={page.params.class} />
 			</form>
-		{/snippet}
-		<div class="h-full w-full" hidden={loading}>
-			<Tabs
-				snippets={[name, description, dueDate]}
-				labels={[m.name(), m.description(), m.due_date()]}
-				value={m.name()}
-				triggerClass="w-27"
-			/>
-		</div>
+		{/if}
 	</div>
-</div>
-
-<div class="h-2"></div>
-<a
-	href="/manage/{page.params.org}/{page.params.class}/assignments"
-	class="fixed top-20 left-6 z-50 cursor-pointer text-sm hover:underline">← {m.back()}</a
->
-
-{@render children()}
+</AlertDialog>
 
 <AlertDialog bind:open={confirmDeleteOpen}>
 	<p class="mb-5 w-100 text-center">

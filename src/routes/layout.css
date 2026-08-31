@@ -27,7 +27,7 @@
 	--fg: #000000;
 	--p-fg: var(--bg);
 	--o: #bfbfbf;
-	--red: #991b1b;
+	--red: #ee4400;
 	--s: #d9d9d9;
 	background-color: var(--bg);
 	color: var(--fg);
@@ -264,6 +264,7 @@ textarea {
 	padding: 0;
 	border-radius: 0.5rem;
 	margin-inline: 0.5rem;
+	transition: background-color 50ms;
 
 	&:hover {
 		background-color: var(--s);

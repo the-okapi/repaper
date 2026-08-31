@@ -20,7 +20,10 @@
 	let firstDayOfMonth = $derived(new Date(year, month, 1).getDay());
 
 	let canGoBack = $derived(
-		year > today.getFullYear() || (year === today.getFullYear() && month > today.getMonth())
+		year > today.getFullYear() ||
+			(year === today.getFullYear() &&
+				((today.getDate() !== getNumDays(today.getMonth()) && month > today.getMonth()) ||
+					month > today.getMonth() + 1))
 	);
 
 	let canGoForward = $derived(
@@ -69,8 +72,8 @@
 		}
 	}
 
-	function getNumDays() {
-		switch (month) {
+	function getNumDays(m: number) {
+		switch (m) {
 			case 1:
 				return year % 4 === 0 ? 29 : 28;
 			case 3:
@@ -84,6 +87,13 @@
 	}
 
 	onMount(() => {
+		if (today.getDate() === getNumDays(today.getMonth())) {
+			if (month !== 11) {
+				month++;
+			} else {
+				month = 0;
+			}
+		}
 		if (defaultValue) {
 			const d = new Date(defaultValue);
 			day = {
@@ -149,7 +159,8 @@
 
 								{#each { length: 37 }, i}
 									{const num = $derived(i - firstDayOfMonth + 1)}
-									{#if num > 0 && num <= getNumDays()}
+									{const numDays = $derived(getNumDays(month))}
+									{#if num > 0 && num <= numDays}
 										{#if month === today.getMonth() && year === today.getFullYear() && num <= today.getDate()}
 											<Button.Root class="calendar-day" disabled>
 												{num}
@@ -167,7 +178,7 @@
 											</Button.Root>
 										{/if}
 									{:else}
-										<div class="size-8"></div>
+										<div class="w-8"></div>
 									{/if}
 								{/each}
 							</div>
