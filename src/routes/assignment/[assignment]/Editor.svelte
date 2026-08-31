@@ -33,7 +33,8 @@
 	let addAccentOpen = $state(false);
 
 	function addAccent(str: string) {
-		console.log(str);
+		addAccentOpen = false;
+		editorState.editor?.chain().insertContent(str).focus().run();
 	}
 
 	let addImageOpen = $state(false);
