@@ -160,9 +160,11 @@
 		<div class="absolute bottom-0 m-auto flex w-full items-center justify-center">
 			<div class="flex gap-4">
 				{#if confirmPage === 0}
-					<Button.Root onclick={cancel}>{m.cancel()}</Button.Root>
+					<Button.Root onclick={cancel} class="gray-button">{m.cancel()}</Button.Root>
 				{:else if confirmPage === 1}
-					<Button.Root onclick={() => (confirmPage = 0)}>{m.back()}</Button.Root>
+					<Button.Root onclick={() => (confirmPage = 0)} class="gray-button"
+						>{m.back()}</Button.Root
+					>
 				{/if}
 				{#if confirmPage === 0}
 					<Button.Root class="red-button" onclick={() => (confirmPage = 1)}

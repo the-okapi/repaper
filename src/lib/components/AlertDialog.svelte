@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Button } from 'bits-ui';
 	import { m } from '$lib/paraglide/messages';
+	import { fade } from 'svelte/transition';
 
 	let {
 		open = $bindable(),
@@ -28,21 +29,18 @@
 
 <div class="absolute z-50!">
 	{#if open}
-		<div data-alert-dialog-overlay></div>
-		<div data-alert-dialog-content>
+		<div data-alert-dialog-overlay transition:fade={{ duration: 100 }}></div>
+		<div data-alert-dialog-content transition:fade={{ duration: 100 }}>
 			{@render children?.()}
 			{#if go}
 				<div class="m-auto flex w-fit gap-4">
 					{#if cancel}
-						<Button.Root onclick={close}>{message}</Button.Root>
+						<Button.Root onclick={close} class="gray-button">{message}</Button.Root>
 					{/if}
 					{@render go()}
 				</div>
 			{:else if cancelOverride}
-				<Button.Root
-					onclick={close}
-					class="m-auto block {message === 'OK' ? 'gray-button' : ''}"
-					>{message}</Button.Root
+				<Button.Root onclick={close} class="gray-button m-auto block">{message}</Button.Root
 				>
 			{/if}
 		</div>

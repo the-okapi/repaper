@@ -348,7 +348,7 @@ textarea {
 	height: fit-content;
 	padding: 2rem;
 	border: 1px solid var(--o);
-	border-radius: 1rem;
+	border-radius: 1.5rem;
 
 	@apply shadow-2xl;
 }

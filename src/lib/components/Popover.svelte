@@ -18,7 +18,7 @@
 				{#snippet child({ wrapperProps, props, open })}
 					{#if open}
 						<div {...wrapperProps}>
-							<div {...props} transition:fade={{ duration: 50 }}>
+							<div {...props} transition:fade={{ duration: 100 }}>
 								{@render children()}
 							</div>
 						</div>

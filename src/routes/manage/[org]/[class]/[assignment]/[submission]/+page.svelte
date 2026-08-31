@@ -45,7 +45,7 @@
 	</div>
 </div>
 
-<AlertDialog bind:open={assignmentDetailsOpen}>
+<AlertDialog bind:open={assignmentDetailsOpen} message={m.ok()} cancelOverride>
 	<div class="mb-5">
 		<div class="flex">
 			{#if new Date() > new Date(data.submission.assignment.due_date)}
@@ -58,7 +58,4 @@
 		<h2 class="text-center text-2xl font-bold">{data.submission.assignment.name}</h2>
 		<p class="m-auto block w-fit">{data.submission.assignment.description}</p>
 	</div>
-	<Button.Root class="m-auto block" onclick={() => (assignmentDetailsOpen = false)}
-		>{m.ok()}</Button.Root
-	>
 </AlertDialog>

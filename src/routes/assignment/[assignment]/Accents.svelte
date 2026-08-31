@@ -6,14 +6,14 @@
 </script>
 
 {#snippet button(accent: string)}
-	<Button.Root class="icon-button ghost-button" onclick={() => addAccent(accent)}
+	<Button.Root class="icon-button ghost-button rounded-xl!" onclick={() => addAccent(accent)}
 		>{accent}</Button.Root
 	>
 {/snippet}
 
 <h1 class="mb-4 text-center text-3xl font-bold">{m.accents()}</h1>
 
-<div class="grid w-100 grid-cols-8">
+<div class="grid w-120 grid-cols-10 gap-2">
 	{@render button('À')}
 	{@render button('à')}
 	{@render button('Â')}

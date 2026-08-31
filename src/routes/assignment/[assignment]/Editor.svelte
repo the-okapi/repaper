@@ -307,7 +307,7 @@
 	<p class="mb-4 w-100 text-center">{m.failed_to_save()}</p>
 </AlertDialog>
 
-<AlertDialog bind:open={addAccentOpen} message={m.ok()} cancelOverride>
+<AlertDialog bind:open={addAccentOpen} cancelOverride>
 	<Accents {addAccent} />
 </AlertDialog>
 
@@ -360,7 +360,9 @@
 		{#snippet go()}
 			<div class="h-10 w-full">
 				<div class="flex gap-4">
-					<Button.Root onclick={cancelAddImage}>{m.cancel()}</Button.Root>
+					<Button.Root onclick={cancelAddImage} class="gray-button"
+						>{m.cancel()}</Button.Root
+					>
 					<Button.Root onclick={addImage}>{m.submit()}</Button.Root>
 				</div>
 			</div>
