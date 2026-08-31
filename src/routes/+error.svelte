@@ -13,7 +13,7 @@
 
 <div class="flex h-[calc(100vh-5rem)] w-screen items-center justify-center">
 	<div class="h-fit text-center">
-		<AlertDialog open={true} cancel={false}>
+		<AlertDialog open cancel={false}>
 			<p class="mb-5 w-80">
 				{m.something_happened()}
 				<strong>Error <span class="font-mono text-base">{page.status}</span></strong>

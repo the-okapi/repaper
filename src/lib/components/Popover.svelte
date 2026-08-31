@@ -7,7 +7,7 @@
 
 <div class="relative">
 	<Popover.Root bind:open>
-		<Popover.Trigger openDelay={400} openOnHover={true}>{@render trigger()}</Popover.Trigger>
+		<Popover.Trigger openDelay={400} openOnHover>{@render trigger()}</Popover.Trigger>
 		<Popover.Portal>
 			<Popover.Content
 				class={border ? '' : 'border-none! bg-transparent! p-0! shadow-none!'}

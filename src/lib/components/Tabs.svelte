@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Tabs } from 'bits-ui';
 
-	let { labels = [], snippets = [], triggerClass = '', ...props } = $props();
+	let { labels = [], snippets = [], triggerClass = '', contentClass = '', ...props } = $props();
 </script>
 
 <Tabs.Root {...props}>
@@ -13,7 +13,7 @@
 		{/each}
 	</Tabs.List>
 	{#each { length: snippets.length }, i}
-		<Tabs.Content value={labels[i]}>
+		<Tabs.Content value={labels[i]} class={contentClass}>
 			{@render snippets[i]()}
 		</Tabs.Content>
 	{/each}

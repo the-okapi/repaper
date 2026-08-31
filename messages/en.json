@@ -136,5 +136,9 @@
 	"description": "Description",
 	"is_required": " is required.",
 	"more_students": "More Students",
-	"assignment_not_started": "Assignment not started"
+	"assignment_not_started": "Assignment not started",
+	"insert": "Insert",
+	"link": "Link",
+	"url": "URL",
+	"accents": "Accents"
 }

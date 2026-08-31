@@ -46,8 +46,8 @@
 	</Viewer>
 {/if}
 
-<AlertDialog bind:open={assignmentDetailsOpen} message={m.ok()}>
-	<div class="mb-10">
+<AlertDialog bind:open={assignmentDetailsOpen} message={m.ok()} cancelOverride>
+	<div class="mb-5">
 		<div class="flex">
 			{#if new Date() > new Date(data.assignment.due_date)}
 				<div class="badge w-fit! bg-(--red) px-5!">{m.late()}</div>

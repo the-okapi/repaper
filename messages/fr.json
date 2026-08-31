@@ -132,5 +132,7 @@
 	"failed_load": "Échoué à trouver le document.",
 	"is_required": " est requis.",
 	"more_students": "plus d'Élèves",
-	"assignment_not_started": "Devoir non commencé"
+	"assignment_not_started": "Devoir non commencé",
+	"insert": "Insérer",
+	"link": "Lien"
 }

@@ -12,9 +12,11 @@
 	import saveIcon from '$lib/assets/icons/save.svg';
 	import submitIcon from '$lib/assets/icons/submit.svg';
 	import imageIcon from '$lib/assets/icons/image.svg';
+	import addIcon from '$lib/assets/icons/add.svg';
 	import { barHidden } from '$lib/state.svelte';
 	import { extensions, editorExtensions } from '$lib/tiptap';
 	import { saveDocument, submitDocument, uploadFile, deleteFile } from './server.remote.ts';
+	import Accents from './Accents.svelte';
 
 	let element: any = $state();
 	let editorState: { editor: Editor | null } = $state({ editor: null });
@@ -25,6 +27,14 @@
 
 	let textStyle = $state('p');
 	let changeTextStyleOpen = $state(false);
+
+	let insertOpen = $state(false);
+
+	let addAccentOpen = $state(false);
+
+	function addAccent(str: string) {
+		console.log(str);
+	}
 
 	let addImageOpen = $state(false);
 	let addImageLoading = $state(false);
@@ -241,9 +251,34 @@
 			/>
 		</Popover>
 		<div class="h-2"></div>
-		<Button.Root class="icon-button" title={m.image()} onclick={() => (addImageOpen = true)}>
-			<img src={imageIcon} class="size-4.5" alt={m.image()} />
-		</Button.Root>
+		<Popover bind:open={insertOpen}>
+			<div class="my-2 flex gap-3">
+				<Button.Root
+					onclick={() => {
+						addImageOpen = true;
+						insertOpen = false;
+					}}
+					class="icon-button"
+					title={m.image()}
+					><img src={imageIcon} class="size-4.5" alt={m.image()} /></Button.Root
+				>
+				<Button.Root
+					onclick={() => {
+						addAccentOpen = true;
+						insertOpen = false;
+					}}
+					class="icon-button"
+					title={m.accents()}
+				>
+					É
+				</Button.Root>
+			</div>
+			{#snippet trigger()}
+				<Button.Root class="icon-button">
+					<img src={addIcon} class="size-4.5" alt={m.insert()} />
+				</Button.Root>
+			{/snippet}
+		</Popover>
 		<div class="my-3 w-10 border-b border-(--o)"></div>
 		{@render children()}
 		<Button.Root
@@ -269,6 +304,10 @@
 
 <AlertDialog bind:open={failedSave} message={m.ok()}>
 	<p class="mb-4 w-100 text-center">{m.failed_to_save()}</p>
+</AlertDialog>
+
+<AlertDialog bind:open={addAccentOpen} message={m.ok()} cancelOverride>
+	<Accents {addAccent} />
 </AlertDialog>
 
 {#if confirmSubmitOpen}
