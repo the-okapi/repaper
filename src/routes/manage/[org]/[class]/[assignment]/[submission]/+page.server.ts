@@ -15,7 +15,9 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		const data = unwrap(
 			await locals.supabase
 				.from('assignment_submissions')
-				.select('document ( content )')
+				.select(
+					'document ( content ), submitted, user ( name ), assignment ( name, description, due_date )'
+				)
 				.eq('id', params.submission),
 			97
 		);
@@ -27,7 +29,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		}
 
 		return {
-			content: submission.document.content
+			submission
 		};
 	} catch {
 		return redirect(303, '/error');
