@@ -146,5 +146,17 @@
 	"la": "",
 	"help": "Help",
 	"slogan": "Real People, Real Writing",
-	"have_trust": "Have trust in your students' work again."
+	"have_trust": "Have trust in your students' work again.",
+	"contact": "Contact us at",
+	"if_questions": "if you have any questions",
+	"word_processing": "Word Processing",
+	"no_copy_paste_ai": "No copy/paste from AI",
+	"consistent_fonts_spacing": "Consistent fonts and spacing",
+	"images_and_links": "Images and links",
+	"no_autocorrect_spellchecking": "No autocorrect or spellchecking",
+	"support_accents": "Support for accents",
+	"no_more": "No more...",
+	"losing_homework": "Losing homework",
+	"illegible_handwriting": "Illegible handwriting",
+	"wrong_fonts": "Wrong fonts"
 }

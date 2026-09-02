@@ -90,9 +90,7 @@
 					target="_blank">{m.help()}</a
 				>
 			{:else}
-				<a class="m-auto mx-2 h-fit hover:underline" href="/" onclick={closeAll}
-					>{m.home()}</a
-				>
+				<a class="m-auto mx-2 h-fit hover:underline" href="/" onclick={closeAll}>Repaper</a>
 				<a
 					class="m-auto mx-2 h-fit whitespace-nowrap hover:underline"
 					href="/signup"

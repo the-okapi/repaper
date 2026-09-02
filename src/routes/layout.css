@@ -520,6 +520,7 @@ textarea {
 
 .tiptap img {
 	margin: auto;
+	border: 1px solid var(--o);
 }
 
 [data-resize-container] {
