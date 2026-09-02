@@ -60,9 +60,9 @@
 			<li>{m.classes_organize_students()}</li>
 			<li>{m.due_dates_assignments()}</li>
 			<li class="my-1.5 leading-6">{m.one_document_student_assignment()}</li>
-			<li class="opacity-30">{m.grade_book()}*</li>
+			<li>{m.grade_book()}*</li>
 		</ul>
-		<p class="absolute bottom-0.5 left-0 w-110 text-center text-sm opacity-30">
+		<p class="absolute bottom-0.5 left-0 w-110 text-center text-sm">
 			*{m.feature_wip()}
 		</p>
 	</div>
