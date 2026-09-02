@@ -59,7 +59,7 @@
 				>{m.submit()}</Button.Root
 			>
 			{#if form?.createError}
-				<p class="absolute bottom-2 left-3 text-sm leading-4 text-(--red)">
+				<p class="absolute bottom-2 left-3 text-sm leading-4 text-(--r)">
 					{form.message}
 				</p>
 			{/if}

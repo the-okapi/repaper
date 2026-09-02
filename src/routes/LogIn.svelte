@@ -52,7 +52,7 @@
 				<input type="password" class="w-50" bind:value={password} required />
 			</div>
 			<div class="absolute w-50 text-center">
-				<p class="text-xs text-(--red)">{error}</p>
+				<p class="text-xs text-(--r)">{error}</p>
 			</div>
 			<Button.Root type="submit" class="m-auto mt-7 block w-fit">{m.submit()}</Button.Root>
 		</form>

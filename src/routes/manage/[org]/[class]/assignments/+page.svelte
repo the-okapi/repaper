@@ -36,7 +36,7 @@
 						<div class="relative w-fit text-center">
 							<div class="absolute -top-8 w-full">
 								{#if new Date() > new Date(assignment.due_date)}
-									<p class="badge mx-auto mb-4 w-fit! bg-(--red) px-5!">
+									<p class="badge mx-auto mb-4 w-fit! bg-(--r) px-5!">
 										{m.past()}
 									</p>
 								{:else}

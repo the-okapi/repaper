@@ -86,7 +86,7 @@
 					</div>
 					<Button.Root type="submit" class="m-auto block">{m.submit()}</Button.Root>
 					{#if form?.renameError}
-						<p class="absolute text-(--red)">{form.message}</p>
+						<p class="absolute text-(--r)">{form.message}</p>
 					{/if}
 				</form>
 			</div>

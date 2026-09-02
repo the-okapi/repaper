@@ -153,7 +153,7 @@
 				<Label.Root>{m.email()}:</Label.Root><br />
 				<input type="text" class="w-80" bind:value={confirmText} />
 			</div>
-			<p class="absolute bottom-12 left-20 text-(--red)">{confirmError}</p>
+			<p class="absolute bottom-12 left-20 text-(--r)">{confirmError}</p>
 		{:else}
 			<p class="mb-8 text-center text-lg">{m.after_delete({ name: member.user.name })}</p>
 		{/if}

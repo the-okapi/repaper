@@ -30,7 +30,7 @@
 		</div>
 		<Button.Root type="submit" class="m-auto block">{m.submit()}</Button.Root>
 		{#if form?.fail}
-			<p class="absolute bottom-1 left-2 leading-none text-(--red)">{form.message}</p>
+			<p class="absolute bottom-1 left-2 leading-none text-(--r)">{form.message}</p>
 		{/if}
 	</form>
 </div>

@@ -127,7 +127,7 @@
 				</div>
 				<Button.Root type="submit" class="m-auto mt-3 block">{m.submit()}</Button.Root>
 				<div class="absolute bottom-1 left-0 w-full">
-					<p class="mb-2 px-2 text-center leading-4 text-(--red)">
+					<p class="mb-2 px-2 text-center leading-4 text-(--r)">
 						{createAssignment.result?.message}{errorText}
 					</p>
 				</div>

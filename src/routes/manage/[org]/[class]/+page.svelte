@@ -65,7 +65,7 @@
 						{:else}
 							{#if form?.add}
 								<div class="absolute left-0 w-full">
-									<p class="text-center text-sm text-(--red)">{form.add}</p>
+									<p class="text-center text-sm text-(--r)">{form.add}</p>
 								</div>
 							{/if}
 							{let memberToAdd = $state(

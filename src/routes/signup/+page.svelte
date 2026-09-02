@@ -68,7 +68,7 @@
 				</div>
 				{#if form?.fail || error}
 					<div class="flex w-50 justify-center bg-red-500">
-						<p class="absolute text-(--red)">{form?.message || error}</p>
+						<p class="absolute text-(--r)">{form?.message || error}</p>
 					</div>
 				{/if}
 				<Button.Root type="submit" class="mt-10 w-fit">{m.submit()}</Button.Root>

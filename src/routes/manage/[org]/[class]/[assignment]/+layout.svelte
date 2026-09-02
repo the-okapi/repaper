@@ -136,7 +136,7 @@
 	<div class="box relative h-140!">
 		<div>
 			{#if new Date() > new Date(data.assignment.due_date)}
-				<p class="badge m-auto w-fit! bg-(--red) px-5!">
+				<p class="badge m-auto w-fit! bg-(--r) px-5!">
 					{m.past()}
 				</p>
 			{:else}

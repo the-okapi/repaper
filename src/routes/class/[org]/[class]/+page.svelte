@@ -44,7 +44,7 @@
 									</div>
 								{:else if new Date() > new Date(assignment.due_date)}
 									<div class="absolute -top-8 w-full">
-										<p class="badge mx-auto mb-4 w-fit! bg-(--red) px-5!">
+										<p class="badge mx-auto mb-4 w-fit! bg-(--r) px-5!">
 											{m.late()}
 										</p>
 									</div>

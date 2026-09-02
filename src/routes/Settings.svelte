@@ -54,7 +54,7 @@
 			value: 'red'
 		},
 		{
-			label: '<div class="swatch yellow"></div> ' + m.yellow(),
+			label: '<div data-theme="yellow" class="swatch"></div> ' + m.yellow(),
 			value: 'yellow'
 		},
 		{
@@ -62,7 +62,7 @@
 			value: 'green'
 		},
 		{
-			label: '<div class="swatch turquoise"></div> Turquoise',
+			label: '<div data-theme="turquoise" class="swatch"></div> Turquoise',
 			value: 'turquoise'
 		},
 		{
