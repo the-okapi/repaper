@@ -151,12 +151,20 @@
 	"if_questions": "if you have any questions",
 	"word_processing": "Word Processing",
 	"no_copy_paste_ai": "No copy/paste from AI",
-	"consistent_fonts_spacing": "Consistent fonts and spacing",
+	"consistent_font_spacing": "Consistent fonts and spacing",
 	"images_and_links": "Images and links",
 	"no_autocorrect_spellchecking": "No autocorrect or spellchecking",
 	"support_accents": "Support for accents",
 	"no_more": "No more...",
 	"losing_homework": "Losing homework",
 	"illegible_handwriting": "Illegible handwriting",
-	"wrong_fonts": "Wrong fonts"
+	"wrong_fonts": "Wrong fonts",
+	"attaching_wrong_document": "Attaching the wrong document",
+	"forgetting_due_date": "Forgetting the due date",
+	"assignments": "Assignments",
+	"classes_organize_students": "Classes, to organize students",
+	"due_dates_assignments": "Due dates for assignments",
+	"one_document_student_assignment": "One document per student for each assignment",
+	"grade_book": "Grade book",
+	"feature_wip": "This feature is still a work in progress."
 }
