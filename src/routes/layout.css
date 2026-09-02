@@ -10,7 +10,8 @@
 	vector-effect: non-scaling-stroke;
 	caret-color: var(--p);
 	overscroll-behavior: none;
-	--red: #cc0050;
+
+	--red: #ee3360;
 	--green: #00aa55;
 	--blue: #0077dd;
 	--purple: #6f33af;

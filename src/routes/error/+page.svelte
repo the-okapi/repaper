@@ -4,8 +4,6 @@
 	import { AlertDialog } from '$lib/components';
 </script>
 
-<svelte:window {onbeforeunload} />
-
 <svelte:head>
 	<title>{m.something_happened()} | Repaper</title>
 </svelte:head>

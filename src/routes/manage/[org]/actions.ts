@@ -5,6 +5,7 @@ import type { RouteParams } from './$types';
 import { UserIdSchema } from '$lib/util';
 import { unwrap, unwrapNoData, HttpError } from '$lib/error';
 import { m } from '$lib/paraglide/messages';
+import { PUBLIC_REPAPER_URL } from '$app/env/public';
 
 type ActionData = {
 	request: Request;
@@ -148,7 +149,8 @@ export const create = async ({ locals, request, params }: ActionData) => {
 						NAME: name,
 						ORGANIZATION: check[0].organization.name,
 						LINK:
-							'https://repaper.unlimitedstuffltd.com/invitation/' +
+							PUBLIC_REPAPER_URL +
+							'/invitation/' +
 							params.org +
 							'/' +
 							invitation[0].id

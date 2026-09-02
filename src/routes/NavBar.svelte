@@ -9,6 +9,7 @@
 	import Settings from './Settings.svelte';
 	import LogIn from './LogIn.svelte';
 	import { getLocale } from '$lib/paraglide/runtime';
+	import { PUBLIC_HELP_URL } from '$app/env/public';
 
 	let { loggedIn, name } = $props();
 
@@ -85,7 +86,7 @@
 				</button>
 				<a
 					class="m-auto mx-2 h-fit hover:underline"
-					href="https://help.repaper.unlimitedstuffltd.com/{getLocale()}"
+					href="{PUBLIC_HELP_URL}/{getLocale()}"
 					target="_blank">{m.help()}</a
 				>
 			{:else}
@@ -109,7 +110,7 @@
 				</div>
 				<a
 					class="m-auto mx-2 h-fit hover:underline"
-					href="https://help.repaper.unlimitedstuffltd.com/{getLocale()}"
+					href="{PUBLIC_HELP_URL}/{getLocale()}"
 					target="_blank">{m.help()}</a
 				>
 			{/if}
