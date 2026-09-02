@@ -5,8 +5,6 @@
 	import { page } from '$app/state';
 </script>
 
-<svelte:window {onbeforeunload} />
-
 <svelte:head>
 	<title>{m.something_happened()} | Repaper</title>
 </svelte:head>

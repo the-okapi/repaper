@@ -117,7 +117,7 @@
 		<h1 class="text-4xl font-bold whitespace-nowrap">
 			{page.data.title ?? 'Repaper'}
 		</h1>
-		<div class="w-full text-right">
+		<div class="flex w-full items-center justify-end gap-4 text-right">
 			{#if page.route.id === '/assignment/[assignment]'}
 				{#if name}
 					<p>{name}</p>
