@@ -79,10 +79,5 @@
 		)}
 		{@render list(assignments)}
 	{/snippet}
-	<Tabs
-		labels={[m.upcoming(), m.past()]}
-		snippets={[upcoming, past]}
-		size={32}
-		class="assignment-tabs relative"
-	/>
+	<Tabs labels={[m.upcoming(), m.past()]} snippets={[upcoming, past]} />
 {/if}

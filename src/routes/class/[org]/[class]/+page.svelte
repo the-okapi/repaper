@@ -78,11 +78,6 @@
 				<p class="mt-4 text-center text-lg">{m.no_assignments_here()}</p>
 			{/if}
 		{/snippet}
-		<Tabs
-			labels={[m.to_do(), m.submitted()]}
-			value={m.to_do()}
-			snippets={[toDo, submitted]}
-			class="assignment-tabs"
-		/>
+		<Tabs labels={[m.to_do(), m.submitted()]} value={m.to_do()} snippets={[toDo, submitted]} />
 	</div>
 </div>

@@ -36,22 +36,22 @@
 
 <div
 	transition:slide
-	class="{c} flex h-70 w-65 items-center justify-center rounded-xl bg-(--bg) p-6 outline outline-(--o)"
+	class="{c} flex h-70 w-75 items-center justify-center rounded-xl bg-(--bg) p-6 outline outline-(--o)"
 	{...props}
 >
 	{#if loading}
 		<Loader />
 	{:else}
 		<form {onsubmit}>
-			<div class="mb-5 w-50">
+			<div class="mb-5 w-60">
 				<Label.Root class={loading ? 'opacity-50' : ''}>{m.email()}:</Label.Root>
-				<input type="email" class="w-50" bind:value={email} required />
+				<input type="email" class="w-60" bind:value={email} required />
 			</div>
-			<div class="mb-0.5 w-50">
+			<div class="mb-0.5 w-60">
 				<Label.Root class={loading ? 'opacity-50' : ''}>{m.password()}:</Label.Root>
-				<input type="password" class="w-50" bind:value={password} required />
+				<input type="password" class="w-60" bind:value={password} required />
 			</div>
-			<div class="absolute w-50 text-center">
+			<div class="absolute w-60 text-center">
 				<p class="text-xs text-(--r)">{error}</p>
 			</div>
 			<Button.Root type="submit" class="m-auto mt-7 block w-fit">{m.submit()}</Button.Root>

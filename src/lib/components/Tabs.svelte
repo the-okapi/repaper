@@ -1,5 +1,5 @@
 <script lang="ts">
-	let { labels = [], snippets = [], width = 32, height = 9, ...props } = $props();
+	let { labels = [], snippets = [], ...props } = $props();
 
 	let value = $state(0);
 </script>
@@ -8,12 +8,12 @@
 	<div data-tabs-list>
 		<div
 			data-tabs-active
-			class="h-{height} w-{width}"
-			style={value === 0 ? 'left: 0.25rem' : 'left: ' + (width + 1) / 4 + 'rem'}
+			class="h-9 w-32"
+			style={value === 0 ? 'left: 0.25rem' : 'left: 8.25rem'}
 		></div>
 
 		{#each labels as label, i (label)}
-			<button data-tabs-trigger class="w-{width}" onclick={() => (value = i)}>
+			<button data-tabs-trigger onclick={() => (value = i)}>
 				{label}
 			</button>
 		{/each}

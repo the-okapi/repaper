@@ -123,12 +123,7 @@
 					<p class="mt-4 text-center text-lg">{m.no_assignments_here()}</p>
 				{/if}
 			{/snippet}
-			<Tabs
-				labels={[m.to_do(), m.submitted()]}
-				width={30}
-				height={8}
-				snippets={[toDo, submitted]}
-			/>
+			<Tabs labels={[m.to_do(), m.submitted()]} snippets={[toDo, submitted]} />
 		</div>
 	</div>
 {/await}

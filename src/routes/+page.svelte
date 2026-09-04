@@ -11,19 +11,14 @@
 
 <div class="h-25"></div>
 
-<h1 class="gradient relative text-center text-[5.5rem] leading-32 font-black">{m.slogan()}</h1>
+<h1 class="gradient relative text-center text-[4.5rem] leading-32 font-black">{m.slogan()}</h1>
 <h2 class="relative text-center text-3xl">{m.have_trust()}</h2>
 
-<div class="m-auto mt-10 flex w-fit gap-6">
-	<Button.Root
-		class="gray-button rounded-2xl! px-6.5! py-3.5! text-2xl outline-3! hover:outline-offset-[1.5px]!"
-		href={PUBLIC_HELP_URL}>{m.help()}</Button.Root
+<div class="m-auto mt-10 flex h-10 w-fit items-center justify-center gap-6">
+	<Button.Root class="rounded-[0.85rem]! px-5! text-xl" href={PUBLIC_HELP_URL}
+		>{m.help()}</Button.Root
 	>
-	<Button.Root
-		href="/signup"
-		class="rounded-2xl! px-6.5! py-3.5! text-2xl outline-3! hover:outline-offset-[1.5px]!"
-		>{m.sign_up()}</Button.Root
-	>
+	<Button.Root href="/signup" class="rounded-[0.85rem]! px-5! text-xl">{m.sign_up()}</Button.Root>
 </div>
 
 <div class="h-20"></div>
