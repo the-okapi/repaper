@@ -1,18 +1,23 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import { Editor } from '@tiptap/core';
-	import { Slider, Toggle, Loader, Popover, Select, AlertDialog } from '$lib/components';
+	import Slider from '$lib/components/Slider.svelte';
+	import Toggle from '$lib/components/Toggle.svelte';
+	import Loader from '$lib/components/Loader.svelte';
+	import Popover from '$lib/components/Popover.svelte';
+	import Select from '$lib/components/Select.svelte';
+	import AlertDialog from '$lib/components/AlertDialog.svelte';
 	import { m } from '$lib/paraglide/messages';
 	import { Button } from 'bits-ui';
-	import BoldIcon from '$lib/assets/icons/Bold.svelte';
-	import ItalicIcon from '$lib/assets/icons/Italic.svelte';
-	import UnderlineIcon from '$lib/assets/icons/Underline.svelte';
-	import zoomIcon from '$lib/assets/icons/zoom.svg';
-	import fontSizeIcon from '$lib/assets/icons/font.svg';
-	import saveIcon from '$lib/assets/icons/save.svg';
-	import submitIcon from '$lib/assets/icons/submit.svg';
-	import imageIcon from '$lib/assets/icons/image.svg';
-	import addIcon from '$lib/assets/icons/add.svg';
+	import Bold from '@lucide/svelte/icons/bold';
+	import Italic from '@lucide/svelte/icons/italic';
+	import Underline from '@lucide/svelte/icons/underline';
+	import Zoom from '@lucide/svelte/icons/zoom-in';
+	import FontSize from '@lucide/svelte/icons/a-large-small';
+	import Insert from '@lucide/svelte/icons/plus';
+	import Save from '@lucide/svelte/icons/save';
+	import Submit from '@lucide/svelte/icons/send';
+	import Image from '@lucide/svelte/icons/image';
 	import { barHidden } from '$lib/state.svelte';
 	import { extensions, editorExtensions } from '$lib/tiptap';
 	import { saveDocument, submitDocument, uploadFile, deleteFile } from './server.remote.ts';
@@ -200,9 +205,7 @@
 		{/if}
 		<Popover>
 			{#snippet trigger()}
-				<Button.Root class="icon-button"
-					><img src={zoomIcon} alt={m.zoom()} class="size-4.5" /></Button.Root
-				>
+				<Button.Root class="icon-button"><Zoom size={20} /></Button.Root>
 			{/snippet}
 			<div class="flex gap-4">
 				<p>{m.zoom()}:</p>
@@ -216,7 +219,7 @@
 			onclick={() => editorState.editor?.chain().focus().toggleBold().run()}
 			title={m.bold()}
 		>
-			<BoldIcon class="size-4.5" />
+			<Bold size={20} />
 		</Toggle>
 		<Toggle
 			active={editorState.editor?.isActive('italic')}
@@ -224,7 +227,7 @@
 			onclick={() => editorState.editor?.chain().focus().toggleItalic().run()}
 			title={m.italic()}
 		>
-			<ItalicIcon class="size-4.5" />
+			<Italic size={20} />
 		</Toggle>
 		<Toggle
 			active={editorState.editor?.isActive('underline')}
@@ -232,14 +235,12 @@
 			onclick={() => editorState.editor?.chain().focus().toggleUnderline().run()}
 			title={m.underline()}
 		>
-			<UnderlineIcon class="size-4.5" />
+			<Underline size={20} />
 		</Toggle>
 		<div class="h-2"></div>
 		<Popover border={false} bind:open={changeTextStyleOpen}>
 			{#snippet trigger()}
-				<Button.Root class="icon-button"
-					><img src={fontSizeIcon} alt="Font Size" class="size-4.5" /></Button.Root
-				>
+				<Button.Root class="icon-button"><FontSize size={20} /></Button.Root>
 			{/snippet}
 			<Select
 				options={[
@@ -260,8 +261,7 @@
 						insertOpen = false;
 					}}
 					class="icon-button"
-					title={m.image()}
-					><img src={imageIcon} class="size-4.5" alt={m.image()} /></Button.Root
+					title={m.image()}><Image size={20} /></Button.Root
 				>
 				<Button.Root
 					onclick={() => {
@@ -276,7 +276,7 @@
 			</div>
 			{#snippet trigger()}
 				<Button.Root class="icon-button">
-					<img src={addIcon} class="size-4.5" alt={m.insert()} />
+					<Insert size={20} />
 				</Button.Root>
 			{/snippet}
 		</Popover>
@@ -287,11 +287,11 @@
 			title={m.submit()}
 			onclick={() => (confirmSubmitOpen = true)}
 		>
-			<img src={submitIcon} alt={m.submit()} class="size-7" />
+			<Submit size={20} />
 		</Button.Root>
 		{#if !saving}
 			<Button.Root class="icon-button" title={m.save()} onclick={saveButton}>
-				<img src={saveIcon} alt={m.save()} class="size-4.5" />
+				<Save size={20} />
 			</Button.Root>
 		{:else}
 			<Button.Root disabled class="icon-button outline-none!">

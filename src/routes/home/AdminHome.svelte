@@ -2,7 +2,7 @@
 	import { m } from '$lib/paraglide/messages';
 	import { Label, Button } from 'bits-ui';
 	import { fade } from 'svelte/transition';
-	import { Loader } from '$lib/components';
+	import Loader from '$lib/components/Loader.svelte';
 	import { loadAdmin } from './load.remote';
 
 	let { form } = $props();

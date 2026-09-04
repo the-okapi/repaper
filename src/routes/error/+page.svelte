@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Button } from 'bits-ui';
 	import { m } from '$lib/paraglide/messages';
-	import { AlertDialog } from '$lib/components';
+	import AlertDialog from '$lib/components/AlertDialog.svelte';
 </script>
 
 <svelte:head>

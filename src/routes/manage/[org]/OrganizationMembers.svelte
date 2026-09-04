@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { AlertDialog } from '$lib/components';
+	import AlertDialog from '$lib/components/AlertDialog.svelte';
 	import { Button, Label } from 'bits-ui';
 	import type { OrganizationMember } from '$lib/util';
 	import { enhance } from '$app/forms';

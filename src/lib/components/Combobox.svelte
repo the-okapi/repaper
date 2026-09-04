@@ -1,6 +1,6 @@
 <script lang="ts">
-	import expand from '$lib/assets/icons/expand.svg';
-	import check from '$lib/assets/icons/check.svg';
+	import Expand from '@lucide/svelte/icons/chevrons-up-down';
+	import Check from '@lucide/svelte/icons/check';
 	import { Combobox } from 'bits-ui';
 
 	let { options, value = $bindable(), multiple = false, ...props } = $props();
@@ -35,7 +35,7 @@
 				oninput={(e) => (searchValue = e.currentTarget.value)}
 			/>
 			<Combobox.Trigger>
-				<img src={expand} alt="Open the select menu" class="size-5 cursor-pointer" />
+				<Expand size={20} />
 			</Combobox.Trigger>
 		</label>
 	</div>
@@ -55,15 +55,9 @@
 					>
 						{#snippet children({ selected })}
 							<div class="z-60! flex w-fit">
-								{#if selected}<img
-										src={check}
-										class="my-auto mr-2 size-5"
-										alt="A checkmark"
-									/>{:else}<img
-										src={check}
-										class="my-auto mr-2 size-5 opacity-0"
-										alt="Nothing"
-									/>{/if}
+								{#if selected}<Check size={20} class="m-auto mr-2" />{:else}<div
+										class="mr-2 size-5"
+									></div>{/if}
 								{option.label}
 							</div>
 						{/snippet}

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { PageProps } from './$types';
-	import { Combobox, Loader, AlertDialog } from '$lib/components';
+	import Combobox from '$lib/components/Combobox.svelte';
+	import Loader from '$lib/components/Loader.svelte';
+	import AlertDialog from '$lib/components/AlertDialog.svelte';
 	import { Label, Button } from 'bits-ui';
 	import { load } from './load.remote';
 	import type { OrganizationMember } from '$lib/util';

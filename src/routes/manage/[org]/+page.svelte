@@ -3,7 +3,7 @@
 	import type { PageProps } from './$types';
 	import CreateMember from './CreateMember.svelte';
 	import OrganizationMembers from './OrganizationMembers.svelte';
-	import { AlertDialog } from '$lib/components';
+	import AlertDialog from '$lib/components/AlertDialog.svelte';
 	import { m } from '$lib/paraglide/messages';
 	import { getDaysUntil } from '$lib/util';
 

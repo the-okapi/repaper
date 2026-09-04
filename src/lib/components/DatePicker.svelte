@@ -1,5 +1,5 @@
 <script lang="ts">
-	import calendarIcon from '$lib/assets/icons/calendar.svg';
+	import Calendar from '@lucide/svelte/icons/calendar-days';
 	import { Button, Popover } from 'bits-ui';
 	import { fly } from 'svelte/transition';
 	import { getLocale } from '$lib/paraglide/runtime';
@@ -115,7 +115,7 @@
 				class="flex size-10 items-center justify-center p-0!"
 				type="button"
 			>
-				<img src={calendarIcon} class="size-4.5" alt="Calendar" />
+				<Calendar size={20} />
 			</Popover.Trigger>
 		</div>
 		<p class="my-auto ml-3 text-sm">

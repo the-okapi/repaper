@@ -1,5 +1,8 @@
 <script lang="ts">
-	import { Loader, Switch, Combobox, DatePicker } from '$lib/components';
+	import Loader from '$lib/components/Loader.svelte';
+	import Switch from '$lib/components/Switch.svelte';
+	import Combobox from '$lib/components/Combobox.svelte';
+	import DatePicker from '$lib/components/DatePicker.svelte';
 	import { createAssignment, getStudents } from './server.remote';
 	import { Label, Button } from 'bits-ui';
 	import { m } from '$lib/paraglide/messages';

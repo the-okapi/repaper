@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Select } from '$lib/components';
+	import Select from '$lib/components/Select.svelte';
 	import { mode, setMode, setTheme, theme } from 'mode-watcher';
 	import { Label } from 'bits-ui';
 	import { slide } from 'svelte/transition';

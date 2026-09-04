@@ -2,9 +2,9 @@
 	import { m } from '$lib/paraglide/messages';
 	import { formatDate } from '$lib/util';
 	import { Button } from 'bits-ui';
-	import { AlertDialog } from '$lib/components';
-	import infoIcon from '$lib/assets/icons/info.svg';
-	import submitIcon from '$lib/assets/icons/submit.svg';
+	import AlertDialog from '$lib/components/AlertDialog.svelte';
+	import Info from '@lucide/svelte/icons/info';
+	import Undo from '@lucide/svelte/icons/undo-2';
 	import Editor from './Editor.svelte';
 	import Viewer from './Viewer.svelte';
 
@@ -25,7 +25,7 @@
 		onclick={() => (assignmentDetailsOpen = true)}
 		title={m.assignment_details()}
 	>
-		<img src={infoIcon} alt={m.assignment_details()} class="size-4.5" />
+		<Info size={20} />
 	</Button.Root>
 {/snippet}
 
@@ -41,21 +41,19 @@
 			title={m.unsubmit()}
 			onclick={() => (confirmUnsubmitOpen = true)}
 		>
-			<img src={submitIcon} alt={m.unsubmit()} class="size-7 rotate-180" />
+			<Undo size={20} />
 		</Button.Root>
 	</Viewer>
 {/if}
 
 <AlertDialog bind:open={assignmentDetailsOpen} message={m.ok()} cancelOverride>
 	<div class="mb-5">
-		<div class="flex">
-			{#if new Date() > new Date(data.assignment.due_date)}
-				<div class="badge w-fit! bg-(--r) px-5!">{m.late()}</div>
-			{/if}
-			<p class="w-full text-center">
-				{m.due_date()}: <i>{formatDate(data.assignment.due_date)}</i>
-			</p>
-		</div>
+		{#if new Date() > new Date(data.assignment.due_date)}
+			<div class="badge m-auto w-fit! bg-(--r) px-5!">{m.late()}</div>
+		{/if}
+		<p class="w-full text-center">
+			{m.due_date()}: <i>{formatDate(data.assignment.due_date)}</i>
+		</p>
 		<h2 class="text-center text-2xl font-bold">{data.assignment.name}</h2>
 		<p class="m-auto block w-fit">{data.assignment.description}</p>
 	</div>
@@ -65,7 +63,7 @@
 	<p class="mb-4 w-100 text-center">{m.are_you_sure()} {m.undo_submission()}</p>
 	{#snippet go()}
 		<form method="POST" action="?/undo">
-			<Button.Root type="submit">{m.submit()}</Button.Root>
+			<Button.Root type="submit">{m.go()}</Button.Root>
 		</form>
 	{/snippet}
 </AlertDialog>

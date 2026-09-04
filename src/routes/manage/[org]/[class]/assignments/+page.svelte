@@ -3,7 +3,7 @@
 	import { Button } from 'bits-ui';
 	import { page } from '$app/state';
 	import { formatDate } from '$lib/util';
-	import { Tabs } from '$lib/components';
+	import Tabs from '$lib/components/Tabs.svelte';
 
 	let { data } = $props();
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Button, Label } from 'bits-ui';
 	import { slide } from 'svelte/transition';
-	import { Loader } from '$lib/components';
+	import Loader from '$lib/components/Loader.svelte';
 	import { logIn } from './actions.remote';
 	import { m } from '$lib/paraglide/messages';
 	import { goto } from '$app/navigation';

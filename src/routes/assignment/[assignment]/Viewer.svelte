@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Slider } from '$lib/components';
+	import Slider from '$lib/components/Slider.svelte';
 	import { m } from '$lib/paraglide/messages';
 	import { formatDate } from '$lib/util';
 	import { barHidden } from '$lib/state.svelte';

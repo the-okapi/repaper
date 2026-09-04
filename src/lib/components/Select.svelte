@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { SelectItemType } from '$lib/util';
 	import { Select } from 'bits-ui';
-	import expand from '$lib/assets/icons/expand.svg';
-	import check from '$lib/assets/icons/check.svg';
+	import Expand from '@lucide/svelte/icons/chevrons-up-down';
+	import Check from '@lucide/svelte/icons/check';
 
 	let { options, value = $bindable(), onChange = () => {} } = $props();
 
@@ -25,7 +25,7 @@
 		</div>
 		<div class="text-right">
 			<div class="inline-flex h-full items-center">
-				<img src={expand} alt="Open the select menu" class="inline size-5" />
+				<Expand size={20} />
 			</div>
 		</div></Select.Trigger
 	>
@@ -43,11 +43,8 @@
 					>
 						{#snippet children({ selected })}
 							<div class="relative flex">
-								{#if selected}<img
-										src={check}
-										class="my-auto mr-2 size-5"
-										alt="A checkmark"
-									/>
+								{#if selected}
+									<Check size={20} class="my-auto mr-2" />
 									<div class="flex gap-2">
 										{@html option.label}
 									</div>

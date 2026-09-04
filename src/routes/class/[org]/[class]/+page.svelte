@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { m } from '$lib/paraglide/messages';
-	import { Tabs } from '$lib/components';
+	import Tabs from '$lib/components/Tabs.svelte';
 	import { formatDate, type Assignment } from '$lib/util';
 
 	let { data } = $props();

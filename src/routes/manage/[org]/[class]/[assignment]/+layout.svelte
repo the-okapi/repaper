@@ -2,7 +2,10 @@
 	import { page } from '$app/state';
 	import { m } from '$lib/paraglide/messages';
 	import { Label, Button } from 'bits-ui';
-	import { DatePicker, AlertDialog, Loader, Combobox } from '$lib/components';
+	import DatePicker from '$lib/components/DatePicker.svelte';
+	import AlertDialog from '$lib/components/AlertDialog.svelte';
+	import Loader from '$lib/components/Loader.svelte';
+	import Combobox from '$lib/components/Combobox.svelte';
 	import { getLocale } from '$lib/paraglide/runtime';
 	import {
 		changeName,
@@ -15,7 +18,7 @@
 	import type { RemoteFormEnhanceCallback } from '@sveltejs/kit';
 	import { loadStudents } from './load.remote';
 	import { formatDate } from '$lib/util';
-	import editIcon from '$lib/assets/icons/edit.svg';
+	import Edit from '@lucide/svelte/icons/pencil';
 
 	let { data, children } = $props();
 
@@ -121,15 +124,11 @@
 
 	{#snippet editButton(onclick = () => {}, size = 6, img = 4)}
 		<Button.Root
-			class="ghost-button m-0! inline-flex h-{size}! w-{size}! items-center justify-center rounded-lg! p-0!"
+			class="ghost-button m-0! inline-flex h-{size}! w-{size}! items-center justify-center rounded-lg! p-1.5!"
 			style="max-height: {size / 4}rem !important; max-width: {size / 4}rem !important;"
 			{onclick}
 		>
-			<img
-				src={editIcon}
-				style="max-width: {img / 4}rem !important; max-height: {img / 4}rem !important"
-				alt={m.edit()}
-			/>
+			<Edit style="max-width: {img / 4}rem !important; max-height: {img / 4}rem !important" />
 		</Button.Root>
 	{/snippet}
 

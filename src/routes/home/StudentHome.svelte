@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Loader, Tabs } from '$lib/components';
+	import Loader from '$lib/components/Loader.svelte';
+	import Tabs from '$lib/components/Tabs.svelte';
 	import { loadStudent, loadAssignments } from './load.remote';
 	import { m } from '$lib/paraglide/messages';
 	import { onMount } from 'svelte';

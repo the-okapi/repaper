@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { AlertDialog } from '$lib/components';
+	import AlertDialog from '$lib/components/AlertDialog.svelte';
 	import { Button } from 'bits-ui';
 	import { m } from '$lib/paraglide/messages';
-	import showIcon from '$lib/assets/icons/show.svg';
-	import hideIcon from '$lib/assets/icons/hide.svg';
+	import Show from '@lucide/svelte/icons/eye';
+	import Hide from '@lucide/svelte/icons/eye-closed';
 	import { barHidden } from '$lib/state.svelte';
 	import Settings from './Settings.svelte';
 	import LogIn from './LogIn.svelte';
@@ -122,11 +122,11 @@
 					<p>{name}</p>
 				{/if}
 				<button
-					class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-(--o) bg-(--bg) p-2!
+					class="flex size-10 cursor-pointer items-center justify-center rounded-xl border border-(--o) bg-(--bg) p-2!
 			"
 					onclick={() => (barHidden.value = true)}
 				>
-					<img src={showIcon} alt="Hide" class="size-4.5" />
+					<Show size={20} />
 				</button>
 			{:else if name}
 				<p>{name}</p>
@@ -137,9 +137,9 @@
 	<div class="h-20"></div>
 {:else if barHidden.value}
 	<button
-		class="fixed top-5 right-5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-(--o) bg-(--bg) p-2!"
+		class="fixed top-5 right-5 flex size-10 cursor-pointer items-center justify-center rounded-xl border border-(--o) bg-(--bg) p-2! hover:bg-(--s)"
 		onclick={() => (barHidden.value = false)}
 	>
-		<img src={hideIcon} alt="Show" class="size-4.5" />
+		<Hide size={20} />
 	</button>
 {/if}
