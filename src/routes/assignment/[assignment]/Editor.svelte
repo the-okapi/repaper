@@ -181,6 +181,23 @@
 	function oncontextmenu(event: Event) {
 		event.preventDefault();
 	}
+
+	const wordCount = $derived(
+		editorState.editor
+			?.getText()
+			.split(' ')
+			.filter((word) => word !== '').length
+	);
+
+	const selectionWordCount = $derived(
+		editorState.editor?.state.doc
+			.textBetween(
+				editorState.editor?.state.selection.from,
+				editorState.editor?.state.selection.to
+			)
+			.split(' ')
+			.filter((word) => word !== '').length
+	);
 </script>
 
 <svelte:window {onbeforeunload} {oncontextmenu} />
@@ -298,6 +315,13 @@
 				<Loader size={20} />
 			</Button.Root>
 		{/if}
+		<div class="h-2"></div>
+		<div>
+			<p class="text-xl leading-3 font-bold">
+				{selectionWordCount !== 0 ? selectionWordCount : wordCount}
+			</p>
+			<p>{m.words()}</p>
+		</div>
 	{:else}
 		<Loader />
 	{/if}
