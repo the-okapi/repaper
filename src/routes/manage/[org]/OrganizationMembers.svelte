@@ -81,9 +81,9 @@
 			<h3 class="text-center">{member.user.email}</h3>
 			<form action="?/renameMember" method="POST" class="m-auto my-8 w-fit">
 				<Label.Root>{m.rename_to()}:</Label.Root>
-				<div class="m-auto flex gap-1">
+				<div class="m-auto flex gap-2">
 					<input name="name" required />
-					<Button.Root type="submit">{m.submit()}</Button.Root>
+					<Button.Root type="submit" class="my-auto h-fit">{m.submit()}</Button.Root>
 				</div>
 				<input type="hidden" name="user" value={member.user.id} />
 			</form>

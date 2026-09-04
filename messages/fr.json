@@ -160,5 +160,6 @@
 	"due_dates_assignments": "Les dates de remise pour des devoirs",
 	"one_document_student_assignment": "Un document par élève pour chaque devoir",
 	"grade_book": "Cahier de notes",
-	"feature_wip": "Cette fonction est un travail en cours."
+	"feature_wip": "Cette fonction est un travail en cours.",
+	"view": "Regarder"
 }

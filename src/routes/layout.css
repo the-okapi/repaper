@@ -439,21 +439,25 @@ textarea {
 	padding: 0.25rem;
 	width: fit-content;
 	display: flex;
-	gap: 0.1rem;
 	background-color: var(--s);
 	margin: auto;
 	margin-bottom: 0.5rem;
+	position: relative;
+	height: fit-content;
 }
 
-[data-tabs-trigger] {
+[data-tabs-trigger],
+[data-tabs-active] {
 	border-radius: 0.5rem;
 	padding: 0.25rem 0.75rem;
 	cursor: pointer;
+}
 
-	&[data-state='active'] {
-		background-color: var(--bg);
-		color: var(--fg);
-	}
+[data-tabs-active] {
+	background-color: var(--bg);
+	color: var(--fg);
+	position: absolute;
+	transition: left 250ms;
 }
 
 .assignment-tabs [data-tabs-trigger] {
@@ -499,7 +503,7 @@ textarea {
 .tiptap p {
 	line-height: 2.3rem;
 	margin-bottom: 0.8rem;
-	font-size: 14pt;
+	font-size: 15pt;
 }
 
 .tiptap a {

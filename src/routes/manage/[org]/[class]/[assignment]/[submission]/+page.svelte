@@ -21,7 +21,7 @@
 </script>
 
 <div
-	class="absolute top-25 right-0 flex w-[calc(100vw-26.25rem)] flex-col items-center justify-center gap-4 pb-5"
+	class="absolute top-25 right-0 flex w-[calc(100vw-27.5rem)] flex-col items-center justify-center gap-4 pb-5"
 >
 	<div class="flex items-center justify-center gap-6">
 		<p>
@@ -34,6 +34,6 @@
 		</p>
 	</div>
 	<div class="tiptap-container">
-		<div spellcheck="false" bind:this={element} style="zoom: 0.75;"></div>
+		<div spellcheck="false" bind:this={element} style="zoom: 0.73;"></div>
 	</div>
 </div>

@@ -125,9 +125,9 @@
 			{/snippet}
 			<Tabs
 				labels={[m.to_do(), m.submitted()]}
-				value={m.to_do()}
+				width={30}
+				height={8}
 				snippets={[toDo, submitted]}
-				triggerClass="w-26"
 			/>
 		</div>
 	</div>

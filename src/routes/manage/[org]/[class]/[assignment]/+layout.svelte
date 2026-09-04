@@ -85,7 +85,7 @@
 	}
 </script>
 
-<div class="fixed top-20 left-0 flex h-[calc(100vh-5rem)] flex-col gap-2 py-5 pl-5">
+<div class="fixed top-20 left-0 flex h-[calc(100vh-5rem)] flex-col gap-2 pt-10 pb-5 pl-10">
 	<div class="box relative h-full! overflow-scroll">
 		<div class="h-full w-full p-3">
 			{#each data.submissions as submission (submission.id)}
@@ -108,7 +108,7 @@
 						class="small-button"
 						onclick={() => goto(url, { replaceState: true })}
 						disabled={url === page.url.pathname || submission.document === null}
-						>View</Button.Root
+						>{m.view()}</Button.Root
 					>
 				</div>
 				<div class="m-auto my-3 w-[85%] border-b border-(--o)"></div>
@@ -164,10 +164,9 @@
 	</div>
 </div>
 
-<div class="h-2"></div>
 <a
 	href="/manage/{page.params.org}/{page.params.class}/assignments"
-	class="fixed top-20 left-6 z-50 cursor-pointer text-sm hover:underline">← {m.back()}</a
+	class="fixed top-22 left-10 hover:underline">← {m.back()}</a
 >
 
 {@render children()}
@@ -217,19 +216,19 @@
 		{#if descriptionLoading}
 			<Loader />
 		{:else}
-			<form {...changeDescription.enhance(handleLoadingDescription)}>
+			<form {...changeDescription.enhance(handleLoadingDescription)} class="w-full">
 				<h1 class="mb-2 text-center text-3xl font-bold">
 					{m.change()}
 					{m.la()}Description
 				</h1>
 
-				<div class="m-auto mb-5 w-fit">
+				<div class="m-auto mb-5 w-full">
 					<Label.Root>Description:</Label.Root><br />
 					<textarea
 						name="description"
 						placeholder={data.assignment.description}
 						bind:value={descriptionValue}
-						class="m-0! mt-1! inline h-20 w-70"
+						class="m-0! mt-1! inline h-20 w-full"
 						required></textarea>
 				</div>
 

@@ -81,8 +81,8 @@
 	{/snippet}
 	<Tabs
 		labels={[m.upcoming(), m.past()]}
-		value={m.upcoming()}
 		snippets={[upcoming, past]}
+		size={32}
 		class="assignment-tabs relative"
 	/>
 {/if}
