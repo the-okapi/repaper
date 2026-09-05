@@ -26,7 +26,7 @@
 		});
 
 		if (response.status === 200) {
-			return goto('/home', { replaceState: true });
+			return goto('/student', { replaceState: true });
 		} else {
 			error = response.message ?? '';
 			loading = false;

@@ -17,7 +17,9 @@
 				<strong>Error <span class="font-mono text-base">{page.status}</span></strong>
 			</p>
 			{#snippet go()}
-				<Button.Root href="/home" class="h-fit py-2!">{m.home()}</Button.Root>
+				<Button.Root href={page.data.admin ? '/admin' : '/student'} class="h-fit py-2!"
+					>{m.home()}</Button.Root
+				>
 			{/snippet}
 		</AlertDialog>
 	</div>

@@ -5,7 +5,7 @@ import { unwrapNoData } from '$lib/error';
 export const load: PageServerLoad = async ({ parent }) => {
 	const data = await parent();
 	if (data.loggedIn) {
-		return redirect(307, '/home');
+		return redirect(307, '/student');
 	}
 
 	return {

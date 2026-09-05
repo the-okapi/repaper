@@ -1,0 +1,151 @@
+import { form, getRequestEvent, query } from '$app/server';
+import { redirect } from '@sveltejs/kit';
+import { optional, object, string } from 'valibot';
+import { unwrap, unwrapNoData } from '$lib/error';
+import { m } from '$lib/paraglide/messages';
+
+const CreateAssignmentSchema = object({
+	name: string(),
+	description: string(),
+	dueDate: string(),
+	everyone: string(),
+	students: optional(string())
+});
+
+export const createAssignment = form(CreateAssignmentSchema, async (data) => {
+	const everyone = data.everyone === 'true' ? true : false;
+	const students = JSON.parse(data.students ?? 'null');
+	const { name, description, dueDate } = data;
+
+	const { locals, params } = getRequestEvent();
+
+	if (!params.org || !params.class) {
+		return redirect(303, '/error');
+	}
+
+	const {
+		data: { user }
+	} = await locals.supabase.auth.getUser();
+
+	if (!user) {
+		return redirect(303, '/');
+	}
+
+	try {
+		const check = unwrap(
+			await locals.supabase
+				.from('class_memberships')
+				.select('id')
+				.eq('user', user.id)
+				.eq('admin', true)
+				.eq('class', params.class),
+			10
+		);
+
+		if (!check?.[0]) {
+			return redirect(303, '/admin');
+		}
+
+		const assignment = unwrap(
+			await locals.supabase
+				.from('assignments')
+				.insert({
+					name,
+					description,
+					class: params.class,
+					due_date: dueDate
+				})
+				.select('id'),
+			11
+		);
+
+		if (everyone) {
+			const allStudents = unwrap(
+				await locals.supabase
+					.from('class_memberships')
+					.select('user ( id )')
+					.eq('class', params.class)
+					.eq('admin', false),
+				12
+			);
+
+			for (let i = 0; i < allStudents.length; i++) {
+				unwrapNoData(
+					await locals.supabase.from('assignment_submissions').insert({
+						user: allStudents[i].user.id,
+						assignment: assignment[0].id,
+						class: params.class
+					}),
+					13
+				);
+			}
+		} else {
+			for (let i = 0; i < students.length; i++) {
+				console.log(students);
+				unwrapNoData(
+					await locals.supabase.from('assignment_submissions').insert({
+						user: students[i],
+						assignment: assignment[0].id,
+						class: params.class
+					}),
+					14
+				);
+			}
+		}
+
+		return {
+			success: true
+		};
+	} catch {
+		return {
+			everyone,
+			students,
+			name,
+			description,
+			dueDate,
+			message: m.something_happened()
+		};
+	}
+});
+
+export const getStudents = query(string(), async (classId: string) => {
+	const { locals } = getRequestEvent();
+
+	const {
+		data: { user }
+	} = await locals.supabase.auth.getUser();
+
+	if (!user) {
+		return redirect(303, '/');
+	}
+
+	const check = unwrap(
+		await locals.supabase
+			.from('class_memberships')
+			.select('id')
+			.eq('class', classId)
+			.eq('admin', true)
+			.eq('user', user.id),
+		8
+	);
+
+	if (!check) {
+		return redirect(303, '/admin');
+	}
+
+	const students = unwrap(
+		await locals.supabase
+			.from('class_memberships')
+			.select('user ( id, name )')
+			.eq('class', classId)
+			.eq('admin', false),
+		9
+	);
+
+	return {
+		students: students.map((student: { user: { name: string; id: string } }) => ({
+			label: student.user.name,
+			value: student.user.id
+		}))
+	};
+});

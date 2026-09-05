@@ -11,7 +11,9 @@
 
 <div class="h-25"></div>
 
-<h1 class="gradient relative text-center text-[4.5rem] leading-32 font-black">{m.slogan()}</h1>
+<h1 class="gradient relative text-center text-[4.5rem] leading-32 font-black">
+	{m.slogan()}
+</h1>
 <h2 class="relative text-center text-3xl">{m.have_trust()}</h2>
 
 <div class="m-auto mt-10 flex h-10 w-fit items-center justify-center gap-6">

@@ -11,7 +11,7 @@
 | `src/routes/manage/[org]/[class]/[assignment]/+layout.server.ts`            | 27, 28, 34       |
 | `src/routes/assignment/[assigment]/+page.server.ts`                         | 29 → 33          |
 | `src/routes/manage/[org]/[class]/load.remote.ts`                            | 35, 36           |
-| `src/routes/+layout.server.ts`                                              | 37, 38           |
+| `src/routes/+layout.server.ts`                                              | 37, 38, 99       |
 | `src/routes/manage/[org]/actions.ts`                                        | 39 → 61          |
 | `src/routes/manage/[org]/[class]/+page.server.ts`                           | 1 → 7, 62, 63    |
 | `src/routes/class/[org]/[class]/+page.server.ts`                            | 64, 65           |

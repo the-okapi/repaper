@@ -71,7 +71,11 @@
 				</div>
 			{/snippet}
 			{#if loggedIn}
-				<a class="m-auto mx-2 h-fit hover:underline" href="/home" onclick={closeAll}
+				{#if name}
+					<a href="/account" class="m-auto mx-2 h-fit hover:underline">{name}</a>
+					<p class="mx-1">—</p>
+				{/if}
+				<a class="m-auto mx-2 h-fit hover:underline" href="/student" onclick={closeAll}
 					>{m.home()}</a
 				>
 				{@render settingsSnippet()}
@@ -117,10 +121,7 @@
 			{page.data.title ?? 'Repaper'}
 		</h1>
 		<div class="flex w-full items-center justify-end gap-4 text-right">
-			{#if page.route.id === '/assignment/[assignment]'}
-				{#if name}
-					<p>{name}</p>
-				{/if}
+			{#if page.route.id === '/student/assignment/[assignment]'}
 				<button
 					class="flex size-10 cursor-pointer items-center justify-center rounded-xl border border-(--o) bg-(--bg) p-2!
 			"
@@ -128,8 +129,6 @@
 				>
 					<Show size={20} />
 				</button>
-			{:else if name}
-				<p>{name}</p>
 			{/if}
 		</div>
 	</div>

@@ -26,18 +26,35 @@ export const load: LayoutServerLoad = async ({ cookies, locals, route }) => {
 			37
 		);
 
-		if (check.can_delete === null) {
+		if (check.can_delete !== null) {
+			unwrapNoData(await locals.supabase.auth.signOut(), 38);
 			return {
 				cookies: cookies.getAll(),
-				loggedIn: true,
-				name: check.name
+				loggedIn: false
 			};
 		}
 
-		unwrapNoData(await locals.supabase.auth.signOut(), 38);
+		const orgMemberships = unwrap(
+			await locals.supabase
+				.from('organization_memberships')
+				.select('admin')
+				.eq('user', user.id),
+			99
+		);
+
+		let admin = false;
+
+		if (orgMemberships.length === 0 || orgMemberships[0].admin) {
+			admin = true;
+		}
+
+		return {
+			cookies: cookies.getAll(),
+			loggedIn: true,
+			admin,
+			name: check.name
+		};
 	} catch {
 		return redirect(303, '/error');
 	}
-
-	return redirect(303, '/');
 };

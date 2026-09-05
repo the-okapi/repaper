@@ -55,7 +55,7 @@ export const logInForm = form(LogInSchema, async ({ email, password }) => {
 		);
 
 		if (!check[0].can_delete) {
-			return redirect(303, '/home');
+			return redirect(303, '/student');
 		}
 
 		unwrapNoData(await locals.supabase.auth.signOut(), 86);
