@@ -10,11 +10,6 @@
 	vector-effect: non-scaling-stroke;
 	caret-color: var(--p);
 	overscroll-behavior: none;
-
-	--red: #ee3360;
-	--green: #00aa55;
-	--blue: #0077dd;
-	--purple: #6f33af;
 }
 
 * {
@@ -37,8 +32,12 @@
 	background-color: var(--bg);
 	color: var(--fg);
 
+	--red: #ee3340;
 	--yellow: #efbf3f;
+	--green: #00aa55;
 	--turquoise: #00af9f;
+	--blue: #0077dd;
+	--purple: #6f33af;
 }
 
 .dark {
@@ -53,8 +52,12 @@
 	background-color: var(--bg);
 	color: var(--fg);
 
+	--red: #f04f5f;
 	--yellow: #ffdd00;
+	--green: #00aa55;
 	--turquoise: #00dfdf;
+	--blue: #00aaff;
+	--purple: #9f50cf;
 }
 
 [data-theme='red'] {
@@ -136,12 +139,12 @@ main * {
 	padding: 0.35rem 0.5rem;
 }
 
-[data-popover-content] * {
+.popover-select {
 	box-shadow: none !important;
-}
 
-[data-popover-content] [data-select-trigger]:hover {
-	background-color: var(--a);
+	&:hover {
+		background-color: var(--a);
+	}
 }
 
 [data-combobox-input] {

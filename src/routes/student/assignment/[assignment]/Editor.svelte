@@ -269,6 +269,7 @@
 				]}
 				bind:value={textStyle}
 				onChange={changeTextStyle}
+				class="popover-select"
 			/>
 		</Popover>
 		<div class="h-2"></div>

@@ -13,40 +13,8 @@
 
 	let { loggedIn, name } = $props();
 
-	let settings = $state(false);
-	let login = $state(false);
-
-	function showSettings() {
-		login = false;
-		settings = !settings;
-	}
-
-	function showLogin() {
-		settings = false;
-		login = !login;
-	}
-
 	let logOutOpen = $state(false);
-
-	function onkeydown(event: KeyboardEvent) {
-		if (event.key !== 'Escape') {
-			return;
-		}
-
-		if (settings) {
-			settings = false;
-		} else if (login) {
-			login = false;
-		}
-	}
-
-	function closeAll() {
-		settings = false;
-		login = false;
-	}
 </script>
-
-<svelte:window {onkeydown} />
 
 <AlertDialog bind:open={logOutOpen}>
 	<p class="mb-8 text-center text-lg">{m.are_you_sure()} {m.confirm_log_out()}</p>
@@ -59,32 +27,16 @@
 {#if !barHidden.value && page.route.id !== '/error'}
 	<div class="fixed top-0 flex w-screen items-center border-b border-(--o) bg-(--bg) p-5">
 		<div class="flex w-full">
-			{#snippet settingsSnippet()}
-				<div class="cardButton h-fit {settings ? 'z-50!' : 'z-40!'}">
-					<button
-						class="mx-2 cursor-pointer whitespace-nowrap hover:underline"
-						onclick={showSettings}>{m.settings()}</button
-					>
-					{#if settings}
-						<Settings class="card" />
-					{/if}
-				</div>
-			{/snippet}
 			{#if loggedIn}
 				{#if name}
 					<a href="/account" class="m-auto mx-2 h-fit hover:underline">{name}</a>
 					<p class="mx-1">—</p>
 				{/if}
-				<a class="m-auto mx-2 h-fit hover:underline" href="/student" onclick={closeAll}
-					>{m.home()}</a
-				>
-				{@render settingsSnippet()}
+				<a class="m-auto mx-2 h-fit hover:underline" href="/student">{m.home()}</a>
+				<Settings />
 				<button
 					class="mx-2 cursor-pointer whitespace-nowrap hover:underline"
-					onclick={() => {
-						settings = false;
-						logOutOpen = true;
-					}}
+					onclick={() => (logOutOpen = true)}
 				>
 					{m.log_out()}
 				</button>
@@ -94,22 +46,12 @@
 					target="_blank">{m.help()}</a
 				>
 			{:else}
-				<a class="m-auto mx-2 h-fit hover:underline" href="/" onclick={closeAll}>Repaper</a>
-				<a
-					class="m-auto mx-2 h-fit whitespace-nowrap hover:underline"
-					href="/signup"
-					onclick={closeAll}>{m.sign_up()}</a
+				<a class="m-auto mx-2 h-fit hover:underline" href="/">Repaper</a>
+				<a class="m-auto mx-2 h-fit whitespace-nowrap hover:underline" href="/signup"
+					>{m.sign_up()}</a
 				>
-				{@render settingsSnippet()}
-				<div class="cardButton h-fit {login ? 'z-50!' : 'z-40!'}">
-					<button
-						class="mx-2 cursor-pointer whitespace-nowrap hover:underline"
-						onclick={showLogin}>{m.log_in()}</button
-					>
-					{#if login}
-						<LogIn class="card" />
-					{/if}
-				</div>
+				<Settings />
+				<LogIn />
 				<a
 					class="m-auto mx-2 h-fit hover:underline"
 					href="{PUBLIC_HELP_URL}/{getLocale()}"

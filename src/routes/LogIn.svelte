@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { Button, Label } from 'bits-ui';
-	import { slide } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 	import Loader from '$lib/components/Loader.svelte';
 	import { logIn } from './actions.remote';
 	import { m } from '$lib/paraglide/messages';
 	import { goto } from '$app/navigation';
-
-	let { class: c, ...props } = $props();
+	import { Popover } from 'bits-ui';
 
 	let email = $state('');
 	let password = $state('');
@@ -34,27 +33,56 @@
 	}
 </script>
 
-<div
-	transition:slide
-	class="{c} flex h-70 w-75 items-center justify-center rounded-xl bg-(--bg) p-6 outline outline-(--o)"
-	{...props}
->
-	{#if loading}
-		<Loader />
-	{:else}
-		<form {onsubmit}>
-			<div class="mb-5 w-60">
-				<Label.Root class={loading ? 'opacity-50' : ''}>{m.email()}:</Label.Root>
-				<input type="email" class="w-60" bind:value={email} required />
-			</div>
-			<div class="mb-0.5 w-60">
-				<Label.Root class={loading ? 'opacity-50' : ''}>{m.password()}:</Label.Root>
-				<input type="password" class="w-60" bind:value={password} required />
-			</div>
-			<div class="absolute w-60 text-center">
-				<p class="text-xs text-(--r)">{error}</p>
-			</div>
-			<Button.Root type="submit" class="m-auto mt-7 block w-fit">{m.submit()}</Button.Root>
-		</form>
-	{/if}
-</div>
+<Popover.Root>
+	<Popover.Trigger class="mx-2 cursor-pointer whitespace-nowrap hover:underline"
+		>{m.log_in()}
+	</Popover.Trigger>
+	<Popover.Portal>
+		<Popover.Content sideOffset={10} forceMount>
+			{#snippet child({ wrapperProps, props, open })}
+				{#if open}
+					<div {...wrapperProps}>
+						<div {...props} transition:fade={{ duration: 100 }}>
+							<div class="flex h-65 w-67 items-center justify-center">
+								{#if loading}
+									<Loader />
+								{:else}
+									<form {onsubmit}>
+										<div class="mb-5 w-60">
+											<Label.Root class={loading ? 'opacity-50' : ''}
+												>{m.email()}:</Label.Root
+											>
+											<input
+												type="email"
+												class="w-60"
+												bind:value={email}
+												required
+											/>
+										</div>
+										<div class="mb-0.5 w-60">
+											<Label.Root class={loading ? 'opacity-50' : ''}
+												>{m.password()}:</Label.Root
+											>
+											<input
+												type="password"
+												class="w-60"
+												bind:value={password}
+												required
+											/>
+										</div>
+										<div class="absolute w-60 text-center">
+											<p class="text-xs text-(--r)">{error}</p>
+										</div>
+										<Button.Root type="submit" class="m-auto mt-7 block w-fit"
+											>{m.submit()}</Button.Root
+										>
+									</form>
+								{/if}
+							</div>
+						</div>
+					</div>
+				{/if}
+			{/snippet}
+		</Popover.Content>
+	</Popover.Portal>
+</Popover.Root>

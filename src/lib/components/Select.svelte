@@ -4,7 +4,7 @@
 	import Expand from '@lucide/svelte/icons/chevrons-up-down';
 	import Check from '@lucide/svelte/icons/check';
 
-	let { options, value = $bindable(), onChange = () => {} } = $props();
+	let { options, value = $bindable(), onChange = () => {}, class: c = '' } = $props();
 
 	const selectedOptionLabel = $derived(
 		options.find((option: SelectItemType) => option.value === value)
@@ -17,7 +17,7 @@
 </script>
 
 <Select.Root bind:value onValueChange={onC} type="single">
-	<Select.Trigger
+	<Select.Trigger class={c}
 		><div class="flex items-center text-left">
 			<div class="flex gap-2">
 				{@html selectedOptionLabel?.label}

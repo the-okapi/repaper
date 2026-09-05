@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Select from '$lib/components/Select.svelte';
 	import { mode, setMode, setTheme, theme } from 'mode-watcher';
-	import { Label } from 'bits-ui';
-	import { slide } from 'svelte/transition';
+	import { Label, Popover } from 'bits-ui';
+	import { fade } from 'svelte/transition';
 	import { m } from '$lib/paraglide/messages';
 	import { getLocale } from '$lib/paraglide/runtime';
 	import { setLocale } from '$lib/paraglide/runtime';
@@ -80,23 +80,50 @@
 	function onColorChange() {
 		setTheme(currentColor);
 	}
-
-	let { class: c } = $props();
 </script>
 
-<div transition:slide class="rounded-xl bg-(--bg) p-6 outline outline-(--o) {c}">
-	<div class="m-auto mb-8 w-fit">
-		<Label.Root>{m.mode()}:</Label.Root>
-		<Select options={modes} bind:value={currentMode} onChange={onModeChange} />
-	</div>
+<Popover.Root>
+	<Popover.Trigger class="mx-2 cursor-pointer whitespace-nowrap hover:underline"
+		>{m.settings()}</Popover.Trigger
+	>
+	<Popover.Portal>
+		<Popover.Content sideOffset={10} forceMount>
+			{#snippet child({ wrapperProps, props, open })}
+				{#if open}
+					<div {...wrapperProps}>
+						<div {...props} transition:fade={{ duration: 100 }}>
+							<div class="p-3">
+								<div class="m-auto mb-8 w-fit">
+									<Label.Root>{m.mode()}:</Label.Root>
+									<Select
+										options={modes}
+										bind:value={currentMode}
+										onChange={onModeChange}
+									/>
+								</div>
 
-	<div class="m-auto mb-8 w-fit">
-		<Label.Root>{m.color()}:</Label.Root>
-		<Select options={colors} bind:value={currentColor} onChange={onColorChange} />
-	</div>
+								<div class="m-auto mb-8 w-fit">
+									<Label.Root>{m.color()}:</Label.Root>
+									<Select
+										options={colors}
+										bind:value={currentColor}
+										onChange={onColorChange}
+									/>
+								</div>
 
-	<div class="m-auto w-fit">
-		<Label.Root>{m.language()}:</Label.Root>
-		<Select options={languages} bind:value={currentLang} onChange={onLangChange} />
-	</div>
-</div>
+								<div class="m-auto w-fit">
+									<Label.Root>{m.language()}:</Label.Root>
+									<Select
+										options={languages}
+										bind:value={currentLang}
+										onChange={onLangChange}
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+				{/if}
+			{/snippet}
+		</Popover.Content>
+	</Popover.Portal>
+</Popover.Root>
