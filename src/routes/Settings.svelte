@@ -50,27 +50,27 @@
 	// Colors
 	let colors = [
 		{
-			label: '<div data-theme="red" class="swatch"></div> ' + m.red(),
+			label: '<div class="swatch bg-(--red)"></div> ' + m.red(),
 			value: 'red'
 		},
 		{
-			label: '<div data-theme="yellow" class="swatch"></div> ' + m.yellow(),
+			label: '<div class="swatch bg-(--yellow)"></div> ' + m.yellow(),
 			value: 'yellow'
 		},
 		{
-			label: '<div data-theme="green" class="swatch"></div> ' + m.green(),
+			label: '<div class="swatch bg-(--green)"></div> ' + m.green(),
 			value: 'green'
 		},
 		{
-			label: '<div data-theme="turquoise" class="swatch"></div> Turquoise',
+			label: '<div class="swatch bg-(--turquoise)"></div> Turquoise',
 			value: 'turquoise'
 		},
 		{
-			label: '<div data-theme="blue" class="swatch"></div> ' + m.blue(),
+			label: '<div class="swatch bg-(--blue)"></div> ' + m.blue(),
 			value: 'blue'
 		},
 		{
-			label: '<div data-theme="purple" class="swatch"></div> ' + m.purple(),
+			label: '<div class="swatch bg-(--purple)"></div> ' + m.purple(),
 			value: 'purple'
 		}
 	];

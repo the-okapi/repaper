@@ -75,7 +75,7 @@
 <div class="h-10"></div>
 
 <style>
-	@keyframes gradient {
+	/*@keyframes gradient {
 		0% {
 			background-position: left;
 		}
@@ -85,10 +85,10 @@
 		100% {
 			background-position: left;
 		}
-	}
+	}*/
 
 	.gradient {
-		background: linear-gradient(
+		/*background: linear-gradient(
 			90deg,
 			var(--red),
 			20%,
@@ -102,7 +102,8 @@
 			85%,
 			var(--purple)
 		);
-		background-size: 400% 100%;
+		background-size: 400% 100%;*/
+		background: var(--gradient);
 		background-clip: text;
 		color: transparent;
 		animation: gradient 50s linear infinite;

@@ -59,26 +59,32 @@
 
 [data-theme='red'] {
 	--p: var(--red);
+	--gradient: linear-gradient(to right, var(--purple), 20%, var(--red), 80%, var(--yellow));
 }
 
 [data-theme='yellow'] {
 	--p: var(--yellow);
+	--gradient: linear-gradient(to right, var(--red), 20%, var(--yellow), 80%, var(--green));
 }
 
 [data-theme='green'] {
 	--p: var(--green);
+	--gradient: linear-gradient(to right, var(--yellow), 25%, var(--green), 75%, var(--turquoise));
 }
 
 [data-theme='turquoise'] {
 	--p: var(--turquoise);
+	--gradient: linear-gradient(to right, var(--green), 20%, var(--turquoise), 80%, var(--blue));
 }
 
 [data-theme='blue'] {
 	--p: var(--blue);
+	--gradient: linear-gradient(to right, var(--turquoise), 20%, var(--blue), 75%, var(--purple));
 }
 
 [data-theme='purple'] {
 	--p: var(--purple);
+	--gradient: linear-gradient(to right, var(--blue), 25%, var(--purple), 85%, var(--red));
 }
 
 .nav-bar * {
@@ -584,5 +590,4 @@ textarea {
 	width: 1.5rem;
 	height: 1.5rem;
 	border-radius: 1rem;
-	background-color: var(--p);
 }
