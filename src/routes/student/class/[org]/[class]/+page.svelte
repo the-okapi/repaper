@@ -27,7 +27,7 @@
 					<div class="box relative p-0!">
 						<a
 							class="flex h-full w-full cursor-pointer items-center justify-center rounded-xl transition-colors hover:bg-(--a)"
-							href="/assignment/{assignment.subId}"
+							href="/student/assignment/{assignment.subId}"
 						>
 							<div class="relative w-fit text-center">
 								{#if a.submitted}

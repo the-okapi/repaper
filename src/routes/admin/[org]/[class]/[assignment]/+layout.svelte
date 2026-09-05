@@ -92,7 +92,7 @@
 	<div class="box relative h-full! overflow-scroll">
 		<div class="h-full w-full p-3">
 			{#each data.submissions as submission (submission.id)}
-				{const url = `/manage/${page.params.org}/${page.params.class}/${page.params.assignment}/${submission.id}`}
+				{const url = `/admin/${page.params.org}/${page.params.class}/${page.params.assignment}/${submission.id}`}
 				<div class="flex items-center justify-end gap-3">
 					<div class="flex w-full items-center gap-2">
 						<p class="text-lg font-bold whitespace-nowrap">
@@ -164,7 +164,7 @@
 </div>
 
 <a
-	href="/manage/{page.params.org}/{page.params.class}/assignments"
+	href="/admin/{page.params.org}/{page.params.class}/assignments"
 	class="fixed top-22 left-10 hover:underline">← {m.back()}</a
 >
 

@@ -18,11 +18,11 @@
 {#if data.assignments.length === 0}
 	<div class="flex h-screen w-screen flex-col items-center justify-center">
 		<p class="mb-10 w-100 text-center text-xl">{m.no_assignments()}</p>
-		<Button.Root href="/manage/{page.params.org}/{page.params.class}">{m.back()}</Button.Root>
+		<Button.Root href="/admin/{page.params.org}/{page.params.class}">{m.back()}</Button.Root>
 	</div>
 {:else}
 	<div class="h-2"></div>
-	<a href="/manage/{page.params.org}/{page.params.class}" class="relative ml-10 hover:underline"
+	<a href="/admin/{page.params.org}/{page.params.class}" class="relative ml-10 hover:underline"
 		>← {m.back()}</a
 	>
 	{#snippet list(assignments: Assignment[])}
@@ -31,7 +31,7 @@
 				<div class="box relative p-0!">
 					<a
 						class="flex h-full w-full cursor-pointer items-center justify-center rounded-xl transition-colors hover:bg-(--a)"
-						href="/manage/{page.params.org}/{page.params.class}/{assignment.id}"
+						href="/admin/{page.params.org}/{page.params.class}/{assignment.id}"
 					>
 						<div class="relative w-fit text-center">
 							<div class="absolute -top-8 w-full">

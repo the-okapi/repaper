@@ -75,34 +75,7 @@
 <div class="h-10"></div>
 
 <style>
-	/*@keyframes gradient {
-		0% {
-			background-position: left;
-		}
-		50% {
-			background-position: right;
-		}
-		100% {
-			background-position: left;
-		}
-	}*/
-
 	.gradient {
-		/*background: linear-gradient(
-			90deg,
-			var(--red),
-			20%,
-			var(--yellow),
-			35%,
-			var(--green),
-			50%,
-			var(--turquoise),
-			65%,
-			var(--blue),
-			85%,
-			var(--purple)
-		);
-		background-size: 400% 100%;*/
 		background: var(--gradient);
 		background-clip: text;
 		color: transparent;

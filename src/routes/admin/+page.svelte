@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import { m } from '$lib/paraglide/messages';
 	import { Label, Button } from 'bits-ui';
 	import { fade } from 'svelte/transition';
@@ -69,4 +69,6 @@
 			</form>
 		</div>
 	{/if}
-</div>
+</div> -->
+
+<h1>Recents</h1>

@@ -84,6 +84,8 @@
 			.focus()
 			.run();
 
+		await saveButton();
+
 		images = [];
 		addImageOpen = false;
 		addImageLoading = false;
