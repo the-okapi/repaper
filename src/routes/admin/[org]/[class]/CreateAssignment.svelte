@@ -75,28 +75,32 @@
 				class="w-60"
 			>
 				<div class="mb-3 w-fit">
-					<Label.Root>{m.name()}:</Label.Root><br />
-					<input bind:value={name} class="w-60" name="name" required />
+					<Label.Root for="name">{m.name()}:</Label.Root><br />
+					<input bind:value={name} class="w-60" id="name" name="name" required />
 				</div>
 				<div class="mb-5">
-					<Label.Root>Description:</Label.Root>
+					<Label.Root for="description">Description:</Label.Root>
 					<textarea
 						value={createAssignment.result?.description ?? ''}
 						class="h-20 w-60"
 						maxlength={500}
+						id="description"
 						name="description"></textarea>
 				</div>
 				<div class="mb-5">
-					<Label.Root>{m.due_date()}:</Label.Root>
-					<DatePicker name="dueDate" bind:day bind:value={dateTime} />
+					<Label.Root
+						>{m.due_date()}:
+						<DatePicker name="dueDate" bind:day bind:value={dateTime} /></Label.Root
+					>
 				</div>
 				<div class="m-auto flex w-fit justify-center gap-4">
 					<Switch
 						class="my-auto"
+						id="everyone"
 						bind:checked={everyone}
 						onCheckedChange={loadStudents}
 					/>
-					<Label.Root class="my-auto whitespace-nowrap"
+					<Label.Root for="everyone" class="my-auto whitespace-nowrap"
 						>{m.assign_to_everyone()}</Label.Root
 					>
 					<input type="hidden" value={everyone} name="everyone" />

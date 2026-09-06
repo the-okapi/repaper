@@ -94,30 +94,36 @@
 						<div {...props} transition:fade={{ duration: 100 }}>
 							<div class="p-3">
 								<div class="m-auto mb-8 w-fit">
-									<Label.Root>{m.mode()}:</Label.Root>
-									<Select
-										options={modes}
-										bind:value={currentMode}
-										onChange={onModeChange}
-									/>
+									<Label.Root
+										>{m.mode()}:
+										<Select
+											options={modes}
+											bind:value={currentMode}
+											onChange={onModeChange}
+										/></Label.Root
+									>
 								</div>
 
 								<div class="m-auto mb-8 w-fit">
-									<Label.Root>{m.color()}:</Label.Root>
-									<Select
-										options={colors}
-										bind:value={currentColor}
-										onChange={onColorChange}
-									/>
+									<Label.Root
+										>{m.color()}:
+										<Select
+											options={colors}
+											bind:value={currentColor}
+											onChange={onColorChange}
+										/></Label.Root
+									>
 								</div>
 
 								<div class="m-auto w-fit">
-									<Label.Root>{m.language()}:</Label.Root>
-									<Select
-										options={languages}
-										bind:value={currentLang}
-										onChange={onLangChange}
-									/>
+									<Label.Root
+										>{m.language()}:
+										<Select
+											options={languages}
+											bind:value={currentLang}
+											onChange={onLangChange}
+										/></Label.Root
+									>
 								</div>
 							</div>
 						</div>

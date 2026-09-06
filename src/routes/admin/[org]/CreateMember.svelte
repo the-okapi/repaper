@@ -48,12 +48,12 @@
 				{m.create_member()}
 			</h2>
 			<div class="m-auto mt-3 w-fit">
-				<Label.Root>{m.name()}:</Label.Root><br />
-				<input name="name" type="text" value={form?.name} required />
+				<Label.Root for="name">{m.name()}:</Label.Root><br />
+				<input name="name" id="name" type="text" value={form?.name} required />
 			</div>
 			<div class="m-auto mt-3 w-fit">
-				<Label.Root>{m.email()}:</Label.Root><br />
-				<input name="email" type="email" value={form?.email} required />
+				<Label.Root for="email">{m.email()}:</Label.Root><br />
+				<input name="email" id="email" type="email" value={form?.email} required />
 			</div>
 			<Button.Root type="submit" class="m-auto mt-3 mb-10 block w-fit"
 				>{m.submit()}</Button.Root

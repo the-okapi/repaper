@@ -78,8 +78,10 @@
 									: ''
 							)}
 							<div class="m-auto mt-5 mb-1 w-fit">
-								<Label.Root class="text-sm">{m.choose_add()}:</Label.Root>
-								<Combobox {options} bind:value={memberToAdd} />
+								<Label.Root class="text-sm"
+									>{m.choose_add()}:
+									<Combobox {options} bind:value={memberToAdd} /></Label.Root
+								>
 							</div>
 							{#if memberToAdd !== ''}
 								{const member = $derived(

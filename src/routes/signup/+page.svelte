@@ -45,26 +45,48 @@
 				}}
 			>
 				<div class="mb-5 text-left">
-					<Label.Root>{m.your()} {m.name()}:</Label.Root><br />
-					<input type="text" value={form?.name} name="name" class="w-70" required />
+					<Label.Root for="name">{m.your()} {m.name()}:</Label.Root><br />
+					<input
+						type="text"
+						id="name"
+						value={form?.name}
+						name="name"
+						class="w-70"
+						required
+					/>
 				</div>
 				<div class="mb-5 text-left">
-					<Label.Root>{m.your()} {m.email()}:</Label.Root><br />
-					<input type="email" value={form?.email} name="email" class="w-70" required />
+					<Label.Root for="email">{m.your()} {m.email()}:</Label.Root><br />
+					<input
+						type="email"
+						id="email"
+						value={form?.email}
+						name="email"
+						class="w-70"
+						required
+					/>
 				</div>
 				<div class="mb-5 text-left">
-					<Label.Root>{m.password()}:</Label.Root><br />
+					<Label.Root for="password">{m.password()}:</Label.Root><br />
 					<input
 						type="password"
 						name="password"
+						id="password"
 						bind:value={password}
 						class="w-70"
 						required
 					/>
 				</div>
 				<div class="text-left">
-					<Label.Root>{m.confirm()} {m.password()}:</Label.Root><br />
-					<input type="password" bind:value={confirmPassword} class="w-70" required />
+					<Label.Root for="confirmPassword">{m.confirm()} {m.password()}:</Label.Root><br
+					/>
+					<input
+						type="password"
+						id="confirmPassword"
+						bind:value={confirmPassword}
+						class="w-70"
+						required
+					/>
 				</div>
 				{#if form?.fail || error}
 					<div class="flex w-50 justify-center bg-red-500">

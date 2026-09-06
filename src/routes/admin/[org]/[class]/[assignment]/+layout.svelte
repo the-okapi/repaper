@@ -182,11 +182,12 @@
 				</h1>
 
 				<div class="m-auto mb-5 w-fit">
-					<Label.Root>{m.name()}:</Label.Root><br />
+					<Label.Root for="name">{m.name()}:</Label.Root><br />
 					<input
 						placeholder={data.assignment.name}
 						bind:value={nameValue}
 						name="name"
+						id="name"
 						class="w-70"
 						required
 					/>
@@ -222,9 +223,10 @@
 				</h1>
 
 				<div class="m-auto mb-5 w-full">
-					<Label.Root>Description:</Label.Root><br />
+					<Label.Root for="description">Description:</Label.Root><br />
 					<textarea
 						name="description"
+						id="description"
 						placeholder={data.assignment.description}
 						bind:value={descriptionValue}
 						class="m-0! mt-1! inline h-20 w-full"
@@ -262,12 +264,14 @@
 				</h1>
 
 				<div class="mb-5 px-12">
-					<Label.Root>{m.due_date()}:</Label.Root>
-					<DatePicker
-						name="dueDate"
-						defaultValue={changeDueDate.fields.dueDate.value()}
-						bind:value={dueDateValue}
-					/>
+					<Label.Root
+						>{m.due_date()}:
+						<DatePicker
+							name="dueDate"
+							defaultValue={changeDueDate.fields.dueDate.value()}
+							bind:value={dueDateValue}
+						/></Label.Root
+					>
 				</div>
 
 				<div class="flex items-center justify-center gap-4">

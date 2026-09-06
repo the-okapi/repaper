@@ -80,9 +80,9 @@
 			</h2>
 			<h3 class="text-center">{member.user.email}</h3>
 			<form action="?/renameMember" method="POST" class="m-auto my-8 w-fit">
-				<Label.Root>{m.rename_to()}:</Label.Root>
+				<Label.Root for="name">{m.rename_to()}:</Label.Root>
 				<div class="m-auto flex gap-2">
-					<input name="name" required />
+					<input name="name" id="name" required />
 					<Button.Root type="submit" class="my-auto h-fit">{m.submit()}</Button.Root>
 				</div>
 				<input type="hidden" name="user" value={member.user.id} />
@@ -150,8 +150,8 @@
 				{m.below_confirm()}
 			</p>
 			<div class="m-auto mt-4 w-fit">
-				<Label.Root>{m.email()}:</Label.Root><br />
-				<input type="text" class="w-80" bind:value={confirmText} />
+				<Label.Root for="email">{m.email()}:</Label.Root><br />
+				<input type="text" id="email" class="w-80" bind:value={confirmText} />
 			</div>
 			<p class="absolute bottom-12 left-20 text-(--r)">{confirmError}</p>
 		{:else}

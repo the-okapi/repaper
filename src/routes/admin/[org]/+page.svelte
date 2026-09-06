@@ -81,8 +81,8 @@
 				<form action="?/rename" method="POST" class="m-auto">
 					<h2 class="text-center text-2xl font-bold">{m.rename_organization()}</h2>
 					<div class="mx-auto my-5 w-fit">
-						<Label.Root>{m.rename_to()}:</Label.Root><br />
-						<input type="text" name="name" required />
+						<Label.Root for="name">{m.rename_to()}:</Label.Root><br />
+						<input type="text" id="name" name="name" required />
 					</div>
 					<Button.Root type="submit" class="m-auto block">{m.submit()}</Button.Root>
 					{#if form?.renameError}

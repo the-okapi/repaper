@@ -49,21 +49,27 @@
 								{:else}
 									<form {onsubmit}>
 										<div class="mb-5 w-60">
-											<Label.Root class={loading ? 'opacity-50' : ''}
+											<Label.Root
+												for="email"
+												class={loading ? 'opacity-50' : ''}
 												>{m.email()}:</Label.Root
 											>
 											<input
 												type="email"
+												id="email"
 												class="w-60"
 												bind:value={email}
 												required
 											/>
 										</div>
 										<div class="mb-0.5 w-60">
-											<Label.Root class={loading ? 'opacity-50' : ''}
+											<Label.Root
+												for="password"
+												class={loading ? 'opacity-50' : ''}
 												>{m.password()}:</Label.Root
 											>
 											<input
+												id="password"
 												type="password"
 												class="w-60"
 												bind:value={password}
