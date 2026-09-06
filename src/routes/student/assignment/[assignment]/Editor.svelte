@@ -17,10 +17,9 @@
 	import Insert from '@lucide/svelte/icons/plus';
 	import Save from '@lucide/svelte/icons/save';
 	import Submit from '@lucide/svelte/icons/send';
-	import Image from '@lucide/svelte/icons/image';
 	import { barHidden } from '$lib/state.svelte';
 	import { extensions, editorExtensions } from '$lib/tiptap';
-	import { saveDocument, submitDocument, uploadFile, deleteFile } from './server.remote.ts';
+	import { saveDocument, submitDocument, deleteFile } from './server.remote.ts';
 	import Accents from './Accents.svelte';
 
 	let element: any = $state();
@@ -40,55 +39,6 @@
 	function addAccent(str: string) {
 		addAccentOpen = false;
 		editorState.editor?.chain().insertContent(str).focus().run();
-	}
-
-	let addImageOpen = $state(false);
-	let addImageLoading = $state(false);
-	let imageTooBig = $state(false);
-
-	let images: any = $state();
-
-	function openFile() {
-		if (images[0].size > 50000000) {
-			imageTooBig = true;
-			images = [];
-		} else {
-			imageTooBig = false;
-		}
-	}
-
-	function cancelAddImage() {
-		addImageOpen = false;
-		images = [];
-	}
-
-	async function addImage() {
-		if (!images) {
-			return;
-		}
-
-		addImageLoading = true;
-
-		const { status, url } = await uploadFile({
-			assignment,
-			file: images[0]
-		});
-
-		if (status !== 200) {
-			return;
-		}
-
-		editorState.editor
-			?.chain()
-			.setImage({ src: url ?? '' })
-			.focus()
-			.run();
-
-		await saveButton();
-
-		images = [];
-		addImageOpen = false;
-		addImageLoading = false;
 	}
 
 	let confirmSubmitOpen = $state(false);
@@ -277,14 +227,6 @@
 			<div class="my-2 flex gap-3">
 				<Button.Root
 					onclick={() => {
-						addImageOpen = true;
-						insertOpen = false;
-					}}
-					class="icon-button"
-					title={m.image()}><Image size={20} /></Button.Root
-				>
-				<Button.Root
-					onclick={() => {
 						addAccentOpen = true;
 						insertOpen = false;
 					}}
@@ -352,47 +294,4 @@
 			<p class="mb-4 text-center">{m.document_empty()}</p>
 		</AlertDialog>
 	{/if}
-{/if}
-
-{#if addImageLoading}
-	<AlertDialog bind:open={addImageOpen}>
-		<div class="m-auto flex h-24 w-fit items-center">
-			<Loader />
-		</div>
-	</AlertDialog>
-{:else}
-	<AlertDialog bind:open={addImageOpen} cancel={false}>
-		<div class="h-14">
-			<div class="flex gap-4">
-				<div>
-					<label for="fileInput" data-button-root>{m.choose_image()}</label>
-					<input
-						id="fileInput"
-						type="file"
-						accept="image/png, image/jpeg, image/webp, image/avif"
-						bind:files={images}
-						onchange={openFile}
-						hidden
-					/>
-				</div>
-				{#if imageTooBig}
-					<p>Max 50 MB</p>
-				{:else if images}
-					<p>{images[0].name}</p>
-				{/if}
-			</div>
-
-			<div class="h-8"></div>
-		</div>
-		{#snippet go()}
-			<div class="h-10 w-full">
-				<div class="flex gap-4">
-					<Button.Root onclick={cancelAddImage} class="gray-button"
-						>{m.cancel()}</Button.Root
-					>
-					<Button.Root onclick={addImage}>{m.submit()}</Button.Root>
-				</div>
-			</div>
-		{/snippet}
-	</AlertDialog>
 {/if}

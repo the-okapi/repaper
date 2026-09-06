@@ -23,7 +23,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		const [submission] = data;
 
 		if (!submission) {
-			return redirect(303, `/manage/${params.org}/${params.class}/${params.assignment}/`);
+			return redirect(303, `/admin/${params.org}/${params.class}/${params.assignment}/`);
 		}
 
 		return {

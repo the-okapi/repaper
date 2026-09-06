@@ -29,7 +29,8 @@
 
 <div class="absolute z-50!">
 	{#if open}
-		<div data-alert-dialog-overlay transition:fade={{ duration: 100 }}></div>
+		<button data-alert-dialog-overlay onclick={() => (open = false)} aria-label="Close Dialog"
+		></button>
 		<div data-alert-dialog-content transition:fade={{ duration: 100 }}>
 			{@render children?.()}
 			{#if go}

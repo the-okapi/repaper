@@ -266,7 +266,7 @@ export const assign = form(
 						assignment,
 						class: className
 					}),
-					100
+					101
 				);
 			}
 		} catch {

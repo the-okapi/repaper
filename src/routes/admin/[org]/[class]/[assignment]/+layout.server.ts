@@ -36,7 +36,7 @@ export const load: LayoutServerLoad = async ({ params, locals }) => {
 		);
 
 		if (!assignment) {
-			return redirect(303, `/manage/${params.org}/${params.class}`);
+			return redirect(303, `/admin/${params.org}/${params.class}`);
 		}
 
 		const submissions = unwrap(

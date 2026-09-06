@@ -1,4 +1,4 @@
-<!-- <script lang="ts">
+<script lang="ts">
 	import { m } from '$lib/paraglide/messages';
 	import { Label, Button } from 'bits-ui';
 	import { fade } from 'svelte/transition';
@@ -12,7 +12,7 @@
 			<div class="box">
 				<button
 					class="box absolute cursor-pointer transition-colors hover:bg-(--fg)/5!"
-					onclick={() => window.location.assign('/manage/' + data.organization.id)}
+					onclick={() => window.location.assign('/admin/' + data.organization.id)}
 				>
 					<div>
 						<h2 class="text-center text-4xl font-bold">
@@ -44,7 +44,7 @@
 					class="box absolute cursor-pointer transition-colors hover:bg-(--fg)/5!"
 					onclick={() =>
 						window.location.assign(
-							'/manage/' + data.organization.id + '/' + classData.id
+							'/admin/' + data.organization.id + '/' + classData.id
 						)}
 				>
 					<div>
@@ -69,6 +69,4 @@
 			</form>
 		</div>
 	{/if}
-</div> -->
-
-<h1>Recents</h1>
+</div>

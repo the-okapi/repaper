@@ -39,7 +39,7 @@ export const load: LayoutServerLoad = async ({ cookies, locals, route }) => {
 				.from('organization_memberships')
 				.select('admin')
 				.eq('user', user.id),
-			99
+			100
 		);
 
 		let admin = false;

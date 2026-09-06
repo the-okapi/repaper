@@ -1,5 +1,5 @@
 import { command, getRequestEvent } from '$app/server';
-import { object, string, file } from 'valibot';
+import { object, string } from 'valibot';
 import { unwrap, unwrapNoData } from '$lib/error';
 
 const SaveSchema = object({
@@ -88,61 +88,6 @@ export const submitDocument = command(string(), async (assignment) => {
 		);
 
 		return { status: 200 };
-	} catch {
-		return { status: 500 };
-	}
-});
-
-const UploadFileSchema = object({
-	assignment: string(),
-	file: file()
-});
-
-export const uploadFile = command(UploadFileSchema, async ({ assignment, file }) => {
-	const { locals } = getRequestEvent();
-
-	const {
-		data: { user }
-	} = await locals.supabase.auth.getUser();
-
-	if (!user) {
-		return { status: 401 };
-	}
-
-	try {
-		const [check] = unwrap(
-			await locals.supabase
-				.from('assignment_submissions')
-				.select('document')
-				.eq('id', assignment)
-				.eq('user', user.id),
-			90
-		);
-
-		if (!check) {
-			return { status: 403 };
-		}
-
-		const id = crypto.randomUUID();
-		const path = `${user.id}/${assignment}/${id}.${file.type.split('/')[1]}`;
-
-		unwrapNoData(await locals.supabase.storage.from('images').upload(path, file), 91);
-
-		const {
-			data: { publicUrl: url }
-		} = locals.supabase.storage.from('images').getPublicUrl(path);
-
-		unwrapNoData(
-			await locals.supabase.from('images').insert({
-				id,
-				url,
-				path,
-				document: check.document
-			}),
-			92
-		);
-
-		return { status: 200, url };
 	} catch {
 		return { status: 500 };
 	}

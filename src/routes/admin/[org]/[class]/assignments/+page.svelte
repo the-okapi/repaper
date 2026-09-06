@@ -18,7 +18,9 @@
 {#if data.assignments.length === 0}
 	<div class="flex h-screen w-screen flex-col items-center justify-center">
 		<p class="mb-10 w-100 text-center text-xl">{m.no_assignments()}</p>
-		<Button.Root href="/admin/{page.params.org}/{page.params.class}">{m.back()}</Button.Root>
+		<Button.Root href="/admin/{page.params.org}/{page.params.class}" class="gray-button"
+			>{m.back()}</Button.Root
+		>
 	</div>
 {:else}
 	<div class="h-2"></div>

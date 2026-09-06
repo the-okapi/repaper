@@ -102,7 +102,7 @@
 				{/if}
 			{/if}
 			<div class="absolute bottom-5 w-full">
-				<Button.Root onclick={() => (focus = -1)} class="m-auto block"
+				<Button.Root onclick={() => (focus = -1)} class="gray-button m-auto block"
 					>{m.back()}</Button.Root
 				>
 			</div>

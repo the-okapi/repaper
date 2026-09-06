@@ -252,6 +252,17 @@ textarea {
 	}
 }
 
+.big-button {
+	padding: 0.75rem 1.75rem;
+	border-radius: 0.9375rem;
+	outline-width: 2.5px;
+	font-size: 1.25rem;
+
+	&:hover {
+		outline-offset: 1.45px;
+	}
+}
+
 .red-button {
 	background-color: var(--r);
 	outline-color: var(--r);
@@ -342,7 +353,7 @@ textarea {
 }
 
 [data-alert-dialog-overlay] {
-	background-color: color-mix(in oklab, #000000 50%, transparent);
+	background-color: color-mix(in oklab, #000000 0%, transparent);
 	width: 100vw;
 	height: 100vw;
 	position: fixed;
