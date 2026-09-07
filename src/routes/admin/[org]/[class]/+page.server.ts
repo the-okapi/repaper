@@ -1,21 +1,21 @@
 import type { Actions, PageServerLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
-import { unwrap, unwrapNoData, HttpError } from '$lib/error';
+import { unwrap, unwrapNoData, HttpError, handleHttpError } from '$lib/error';
 import { m } from '$lib/paraglide/messages';
 import { object, string, safeParse } from 'valibot';
 import { fail } from '@sveltejs/kit';
 import { UserIdSchema } from '$lib/util';
 
 export const load: PageServerLoad = async ({ locals, params }) => {
+	const {
+		data: { user }
+	} = await locals.supabase.auth.getUser();
+
+	if (!user) {
+		return redirect(303, '/');
+	}
+
 	try {
-		const {
-			data: { user }
-		} = await locals.supabase.auth.getUser();
-
-		if (!user) {
-			return redirect(303, '/');
-		}
-
 		const data = unwrap(
 			await locals.supabase
 				.from('class_memberships')
@@ -27,7 +27,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		);
 
 		if (!data?.[0]) {
-			return redirect(303, '/admin');
+			throw new HttpError(303, '/admin');
 		}
 
 		const classData = unwrap(
@@ -44,8 +44,8 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 			organization: data[0].class.organization,
 			user: user.id
 		};
-	} catch {
-		return redirect(303, '/error');
+	} catch (e: any) {
+		return handleHttpError(e);
 	}
 };
 
@@ -84,7 +84,7 @@ export const actions = {
 			);
 
 			if (!check?.[0]) {
-				throw new HttpError(m.invalid_permissions(), 403);
+				throw new HttpError(403, m.invalid_permissions());
 			}
 
 			const check2 = unwrap(
@@ -97,7 +97,7 @@ export const actions = {
 			);
 
 			if (!check2 || check2[0].organization !== params.org) {
-				throw new HttpError(m.class_not_found(), 404);
+				throw new HttpError(404, m.class_not_found());
 			}
 
 			const check3 = unwrap(
@@ -111,7 +111,7 @@ export const actions = {
 			);
 
 			if (!check3?.[0]) {
-				throw new HttpError(m.user_not_found(), 400);
+				throw new HttpError(400, m.user_not_found());
 			}
 
 			const check4 = unwrap(
@@ -124,7 +124,7 @@ export const actions = {
 			);
 
 			if (check4?.[0]) {
-				throw new HttpError(m.user_already_class(), 409);
+				throw new HttpError(409, m.user_already_class());
 			}
 
 			unwrapNoData(
@@ -136,8 +136,8 @@ export const actions = {
 				6
 			);
 		} catch (error: any) {
-			if (error.statusCode !== 500) {
-				return fail(error.statusCode, { add: error.message, user: userId });
+			if (error.status !== 500) {
+				return fail(error.status, { add: error.message, user: userId });
 			} else {
 				return fail(500, { add: m.something_happened(), user: userId });
 			}
@@ -174,7 +174,7 @@ export const actions = {
 			);
 
 			if (!check?.[0]) {
-				return new HttpError(m.invalid_permissions(), 403);
+				return new HttpError(403, m.invalid_permissions());
 			}
 
 			unwrapNoData(
@@ -186,8 +186,8 @@ export const actions = {
 				1
 			);
 		} catch (error: any) {
-			if (error.statusCode !== 500) {
-				return fail(error.statusCode, { remove: error.message, userId });
+			if (error.status !== 500) {
+				return fail(error.status, { remove: error.message, userId });
 			} else {
 				return fail(500, { remove: m.something_happened(), userId });
 			}

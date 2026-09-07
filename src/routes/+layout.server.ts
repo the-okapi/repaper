@@ -1,12 +1,7 @@
 import type { LayoutServerLoad } from './$types';
-import { redirect } from '@sveltejs/kit';
-import { unwrap, unwrapNoData } from '$lib/error';
+import { error500, unwrap, unwrapNoData } from '$lib/error';
 
-export const load: LayoutServerLoad = async ({ cookies, locals, route }) => {
-	if (route.id === '/error') {
-		return;
-	}
-
+export const load: LayoutServerLoad = async ({ cookies, locals }) => {
 	try {
 		const {
 			data: { user }
@@ -58,6 +53,6 @@ export const load: LayoutServerLoad = async ({ cookies, locals, route }) => {
 			name: check.name
 		};
 	} catch {
-		return redirect(303, '/error');
+		return error500();
 	}
 };

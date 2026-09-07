@@ -1,6 +1,6 @@
 import type { PageServerLoad, Actions } from './$types';
 import { redirect, fail } from '@sveltejs/kit';
-import { unwrap, unwrapNoData } from '$lib/error';
+import { error500, unwrap, unwrapNoData } from '$lib/error';
 import { m } from '$lib/paraglide/messages';
 
 export const load: PageServerLoad = async ({ locals }) => {
@@ -45,7 +45,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 		return { classes, organization, title: m.home() };
 	} catch {
-		return redirect(303, '/error');
+		return error500();
 	}
 };
 

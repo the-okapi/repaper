@@ -1,4 +1,4 @@
-import { unwrap } from '$lib/error';
+import { unwrap, HttpError, handleHttpError } from '$lib/error';
 import type { LayoutServerLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
 
@@ -23,7 +23,7 @@ export const load: LayoutServerLoad = async ({ params, locals }) => {
 		);
 
 		if (!check?.[0]) {
-			return redirect(303, '/admin');
+			throw new HttpError(303, '/admin');
 		}
 
 		const [assignment] = unwrap(
@@ -36,7 +36,7 @@ export const load: LayoutServerLoad = async ({ params, locals }) => {
 		);
 
 		if (!assignment) {
-			return redirect(303, `/admin/${params.org}/${params.class}`);
+			throw new HttpError(303, `/admin/${params.org}/${params.class}`);
 		}
 
 		const submissions = unwrap(
@@ -48,7 +48,7 @@ export const load: LayoutServerLoad = async ({ params, locals }) => {
 		);
 
 		return { assignment, title: assignment.name, submissions };
-	} catch {
-		return redirect(303, '/error');
+	} catch (e: any) {
+		return handleHttpError(e);
 	}
 };

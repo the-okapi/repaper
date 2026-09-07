@@ -1,7 +1,6 @@
 import { query, getRequestEvent } from '$app/server';
-import { redirect } from '@sveltejs/kit';
 import type { Assignment } from '$lib/util';
-import { unwrap } from '$lib/error';
+import { error500, unwrap } from '$lib/error';
 
 export const loadAssignments = query(async () => {
 	const { locals } = getRequestEvent();
@@ -11,7 +10,7 @@ export const loadAssignments = query(async () => {
 	} = await locals.supabase.auth.getUser();
 
 	if (!user) {
-		return redirect(303, '/error');
+		return error500();
 	}
 
 	try {
@@ -28,6 +27,6 @@ export const loadAssignments = query(async () => {
 
 		return assignmentsSorted;
 	} catch {
-		return redirect(303, '/error');
+		return error500();
 	}
 });

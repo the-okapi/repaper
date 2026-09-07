@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { unwrap } from '$lib/error';
+import { handleHttpError, HttpError, unwrap } from '$lib/error';
 import { m } from '$lib/paraglide/messages';
 
 export const load: PageServerLoad = async ({ locals, params }) => {
@@ -24,7 +24,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		);
 
 		if (!check?.[0]) {
-			return redirect(303, '/admin');
+			throw new HttpError(303, '/admin');
 		}
 
 		const assignments: any[] = unwrap(
@@ -43,7 +43,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 			assignments: assignmentsOrdered,
 			title: m.assignment() + 's - ' + check[0].class.name
 		};
-	} catch {
-		return redirect(303, '/error');
+	} catch (e: any) {
+		return handleHttpError(e);
 	}
 };

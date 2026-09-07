@@ -17,9 +17,7 @@
 <h2 class="relative text-center text-4xl">{m.have_trust()}</h2>
 
 <div class="m-auto mt-10 flex h-10 w-fit items-center justify-center gap-6">
-	<Button.Root class="big-button" href={PUBLIC_HELP_URL}
-		>{m.help()}</Button.Root
-	>
+	<Button.Root class="big-button" href={PUBLIC_HELP_URL}>{m.help()}</Button.Root>
 	<Button.Root href="/signup" class="big-button">{m.sign_up()}</Button.Root>
 </div>
 

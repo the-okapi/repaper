@@ -1,7 +1,7 @@
 import { form, getRequestEvent, query } from '$app/server';
 import { redirect } from '@sveltejs/kit';
 import { optional, object, string } from 'valibot';
-import { unwrap, unwrapNoData } from '$lib/error';
+import { error500, unwrap, unwrapNoData } from '$lib/error';
 import { m } from '$lib/paraglide/messages';
 
 const CreateAssignmentSchema = object({
@@ -20,7 +20,7 @@ export const createAssignment = form(CreateAssignmentSchema, async (data) => {
 	const { locals, params } = getRequestEvent();
 
 	if (!params.org || !params.class) {
-		return redirect(303, '/error');
+		return error500();
 	}
 
 	const {

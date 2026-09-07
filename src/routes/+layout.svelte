@@ -76,7 +76,7 @@
 />
 
 <div class="nav-bar">
-	{#if !barHidden.value && page.route.id !== '/error'}
+	{#if !barHidden.value}
 		<div class="fixed top-0 flex w-screen items-center border-b border-(--o) bg-(--bg) p-5">
 			<div class="flex w-full">
 				{#if data.loggedIn}

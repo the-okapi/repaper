@@ -10,18 +10,18 @@ import {
 	promote,
 	demote
 } from './actions';
-import { unwrap } from '$lib/error';
+import { error500, unwrap } from '$lib/error';
 
 export const load: PageServerLoad = async ({ locals, params }) => {
+	const {
+		data: { user }
+	} = await locals.supabase.auth.getUser();
+
+	if (!user) {
+		return redirect(303, '/');
+	}
+
 	try {
-		const {
-			data: { user }
-		} = await locals.supabase.auth.getUser();
-
-		if (!user) {
-			return redirect(303, '/');
-		}
-
 		const data = unwrap(
 			await locals.supabase
 				.from('organization_memberships')
@@ -74,7 +74,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 			deletions
 		};
 	} catch {
-		return redirect(303, '/error');
+		return error500();
 	}
 };
 

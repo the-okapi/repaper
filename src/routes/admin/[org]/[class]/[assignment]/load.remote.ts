@@ -1,6 +1,6 @@
 import { getRequestEvent, query } from '$app/server';
 import { redirect } from '@sveltejs/kit';
-import { unwrap } from '$lib/error';
+import { error500, unwrap } from '$lib/error';
 import { string } from 'valibot';
 
 export const loadStudents = query(string(), async (className) => {
@@ -31,6 +31,6 @@ export const loadStudents = query(string(), async (className) => {
 			}))
 		};
 	} catch {
-		return redirect(303, '/error');
+		return error500();
 	}
 });

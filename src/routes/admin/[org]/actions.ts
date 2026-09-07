@@ -3,7 +3,7 @@ import resend from '$lib/resend';
 import { object, string, safeParse } from 'valibot';
 import type { RouteParams } from './$types';
 import { UserIdSchema } from '$lib/util';
-import { unwrap, unwrapNoData, HttpError } from '$lib/error';
+import { unwrap, unwrapNoData, HttpError, error500, handleHttpError } from '$lib/error';
 import { m } from '$lib/paraglide/messages';
 import { PUBLIC_REPAPER_URL } from '$app/env/public';
 
@@ -21,7 +21,7 @@ export const rename = async ({ request, params, locals }: ActionData) => {
 	const formData = safeParse(RenameSchema, Object.fromEntries(await request.formData()));
 
 	if (!formData.success) {
-		return redirect(303, '/error');
+		return error500();
 	}
 
 	const { name } = formData.output;
@@ -159,7 +159,7 @@ export const create = async ({ locals, request, params }: ActionData) => {
 			});
 		} catch (error: any) {
 			console.error(error, 'Error Code 46');
-			throw new HttpError(m.something_happened(), 500);
+			throw new HttpError(500, m.something_happened());
 		}
 	} catch {
 		return fail(500, { createError: true, message: m.something_happened(), email, name });
@@ -176,7 +176,7 @@ export const revoke = async ({ request, locals, params }: ActionData) => {
 	const formData = safeParse(RevokeSchema, Object.fromEntries(await request.formData()));
 
 	if (!formData.success) {
-		return redirect(303, '/error');
+		return error500();
 	}
 
 	const { invitation } = formData.output;
@@ -187,7 +187,7 @@ export const revoke = async ({ request, locals, params }: ActionData) => {
 		} = await locals.supabase.auth.getUser();
 
 		if (!user) {
-			return redirect(303, '/');
+			throw new HttpError(303, '/');
 		}
 
 		const check = unwrap(
@@ -201,7 +201,7 @@ export const revoke = async ({ request, locals, params }: ActionData) => {
 		);
 
 		if (!check?.[0]) {
-			return redirect(303, '/admin');
+			throw new HttpError(303, '/admin');
 		}
 
 		unwrapNoData(
@@ -212,8 +212,8 @@ export const revoke = async ({ request, locals, params }: ActionData) => {
 				.eq('organization', params.org),
 			48
 		);
-	} catch {
-		return redirect(303, '/error');
+	} catch (e: any) {
+		return handleHttpError(e);
 	}
 
 	return { success: true };
@@ -289,7 +289,7 @@ export const deleteMember = async ({ request, params, locals }: ActionData) => {
 	const formData = safeParse(UserIdSchema, Object.fromEntries(await request.formData()));
 
 	if (!formData.success) {
-		return redirect(303, '/error');
+		return error500();
 	}
 
 	const { userId } = formData.output;
@@ -300,7 +300,7 @@ export const deleteMember = async ({ request, params, locals }: ActionData) => {
 		} = await locals.supabase.auth.getUser();
 
 		if (!user) {
-			return redirect(303, '/');
+			throw new HttpError(303, '/');
 		}
 
 		const check = unwrap(
@@ -314,7 +314,7 @@ export const deleteMember = async ({ request, params, locals }: ActionData) => {
 		);
 
 		if (!check?.[0]) {
-			return redirect(303, '/admin');
+			throw new HttpError(303, '/admin');
 		}
 
 		unwrapNoData(
@@ -337,8 +337,8 @@ export const deleteMember = async ({ request, params, locals }: ActionData) => {
 				.eq('id', userId),
 			54
 		);
-	} catch {
-		return redirect(303, '/error');
+	} catch (e: any) {
+		return handleHttpError(e);
 	}
 
 	return { success: true };
@@ -348,7 +348,7 @@ export const restore = async ({ request, locals, params }: ActionData) => {
 	const formData = safeParse(UserIdSchema, Object.fromEntries(await request.formData()));
 
 	if (!formData.success) {
-		return redirect(303, '/error');
+		return error500();
 	}
 
 	const { userId } = formData.output;
@@ -359,7 +359,7 @@ export const restore = async ({ request, locals, params }: ActionData) => {
 		} = await locals.supabase.auth.getUser();
 
 		if (!user) {
-			return redirect(303, '/');
+			throw new HttpError(303, '/');
 		}
 
 		const check = unwrap(
@@ -373,7 +373,7 @@ export const restore = async ({ request, locals, params }: ActionData) => {
 		);
 
 		if (!check?.[0]) {
-			return redirect(303, '/admin');
+			throw new HttpError(303, '/admin');
 		}
 
 		unwrapNoData(
@@ -395,8 +395,8 @@ export const restore = async ({ request, locals, params }: ActionData) => {
 				.eq('organization', params.org),
 			57
 		);
-	} catch {
-		return redirect(303, '/error');
+	} catch (e: any) {
+		return handleHttpError(e);
 	}
 
 	return { success: true };
@@ -406,7 +406,7 @@ export const promote = async ({ request, locals, params }: ActionData) => {
 	const formData = safeParse(UserIdSchema, Object.fromEntries(await request.formData()));
 
 	if (!formData.success) {
-		return redirect(303, '/error');
+		return error500();
 	}
 
 	const { userId } = formData.output;
@@ -417,7 +417,7 @@ export const promote = async ({ request, locals, params }: ActionData) => {
 		} = await locals.supabase.auth.getUser();
 
 		if (!user) {
-			return redirect(303, '/');
+			throw new HttpError(303, '/');
 		}
 
 		const check = unwrap(
@@ -431,7 +431,7 @@ export const promote = async ({ request, locals, params }: ActionData) => {
 		);
 
 		if (!check?.[0]) {
-			return redirect(303, '/admin');
+			throw new HttpError(303, '/admin');
 		}
 
 		unwrapNoData(
@@ -445,8 +445,8 @@ export const promote = async ({ request, locals, params }: ActionData) => {
 				.eq('admin', false),
 			59
 		);
-	} catch {
-		return redirect(303, '/error');
+	} catch (e: any) {
+		return handleHttpError(e);
 	}
 
 	return { success: true };
@@ -456,7 +456,7 @@ export const demote = async ({ request, params, locals }: ActionData) => {
 	const formData = safeParse(UserIdSchema, Object.fromEntries(await request.formData()));
 
 	if (!formData.success) {
-		return redirect(303, '/error');
+		return error500();
 	}
 
 	const { userId } = formData.output;
@@ -467,7 +467,7 @@ export const demote = async ({ request, params, locals }: ActionData) => {
 		} = await locals.supabase.auth.getUser();
 
 		if (!user) {
-			return redirect(303, '/');
+			throw new HttpError(303, '/');
 		}
 
 		if (userId === user.id) {
@@ -485,7 +485,7 @@ export const demote = async ({ request, params, locals }: ActionData) => {
 		);
 
 		if (!check?.[0]) {
-			return redirect(303, '/admin');
+			throw new HttpError(303, '/admin');
 		}
 
 		unwrapNoData(
@@ -499,8 +499,8 @@ export const demote = async ({ request, params, locals }: ActionData) => {
 				.eq('admin', true),
 			61
 		);
-	} catch {
-		return redirect(303, '/error');
+	} catch (e: any) {
+		return handleHttpError(e);
 	}
 
 	return { success: true };

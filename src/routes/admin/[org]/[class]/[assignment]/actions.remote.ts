@@ -1,7 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 import { object, string } from 'valibot';
 import { m } from '$lib/paraglide/messages';
-import { unwrap, unwrapNoData } from '$lib/error';
+import { handleHttpError, HttpError, unwrap, unwrapNoData } from '$lib/error';
 import { form, getRequestEvent } from '$app/server';
 
 const NameSchema = object({
@@ -256,7 +256,7 @@ export const assign = form(
 			);
 
 			if (!check) {
-				return redirect(303, '/admin');
+				throw new HttpError(303, '/admin');
 			}
 
 			for (let i = 0; i < students.length; i++) {
@@ -269,8 +269,8 @@ export const assign = form(
 					101
 				);
 			}
-		} catch {
-			return redirect(303, '/error');
+		} catch (e: any) {
+			return handleHttpError(e);
 		}
 	}
 );

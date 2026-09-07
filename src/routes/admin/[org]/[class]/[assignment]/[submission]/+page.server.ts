@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
-import { unwrap } from '$lib/error';
+import { handleHttpError, HttpError, unwrap } from '$lib/error';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ locals, params }) => {
@@ -23,13 +23,13 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		const [submission] = data;
 
 		if (!submission) {
-			return redirect(303, `/admin/${params.org}/${params.class}/${params.assignment}/`);
+			throw new HttpError(303, `/admin/${params.org}/${params.class}/${params.assignment}/`);
 		}
 
 		return {
 			submission
 		};
-	} catch {
-		return redirect(303, '/error');
+	} catch (e: any) {
+		return handleHttpError(e);
 	}
 };

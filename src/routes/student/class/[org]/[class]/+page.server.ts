@@ -1,6 +1,5 @@
-import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { unwrap } from '$lib/error';
+import { error500, unwrap } from '$lib/error';
 import { type Assignment } from '$lib/util';
 
 export const load: PageServerLoad = async ({ locals, params }) => {
@@ -9,7 +8,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 	} = await locals.supabase.auth.getUser();
 
 	if (!user) {
-		return redirect(303, '/error');
+		return error500();
 	}
 
 	try {
@@ -44,6 +43,6 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 
 		return { upcomingAssignments, submittedAssignments, title: classMembership.class.name };
 	} catch {
-		return redirect(303, '/error');
+		return error500();
 	}
 };

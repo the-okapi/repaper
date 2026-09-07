@@ -1,6 +1,6 @@
-import { redirect, error } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
-import { HttpError } from '$lib/error';
+import { error500, HttpError } from '$lib/error';
 import { m } from '$lib/paraglide/messages';
 import { unwrapNoData } from '$lib/error';
 
@@ -10,7 +10,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 	} = await locals.supabase.auth.getUser();
 
 	if (!user) {
-		throw new HttpError('/', 303);
+		throw new HttpError(303, '/');
 	}
 
 	const { data: memberships, error: e } = await locals.supabase
@@ -20,7 +20,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 	if (e) {
 		console.error(e.message, 'Error Code 102');
-		return error(500, m.something_happened());
+		return error500();
 	}
 
 	if (memberships.length > 0) {
@@ -66,7 +66,7 @@ export const actions = {
 				82
 			);
 		} catch {
-			return error(500, m.something_happened());
+			return error500();
 		}
 
 		return redirect(303, '/admin');

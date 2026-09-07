@@ -1,19 +1,20 @@
 import { getRequestEvent, query } from '$app/server';
 import { string } from 'valibot';
 import { redirect } from '@sveltejs/kit';
-import { unwrap } from '$lib/error';
+import { handleHttpError, HttpError, unwrap } from '$lib/error';
 
 export const load = query(string(), async (organization: string) => {
 	const { locals } = getRequestEvent();
+
+	const {
+		data: { user }
+	} = await locals.supabase.auth.getUser();
+
+	if (!user) {
+		return redirect(303, '/');
+	}
+
 	try {
-		const {
-			data: { user }
-		} = await locals.supabase.auth.getUser();
-
-		if (!user) {
-			return redirect(303, '/');
-		}
-
 		const check = unwrap(
 			await locals.supabase
 				.from('organization_memberships')
@@ -25,7 +26,7 @@ export const load = query(string(), async (organization: string) => {
 		);
 
 		if (!check?.[0]) {
-			return redirect(303, '/admin');
+			throw new HttpError(303, '/admin');
 		}
 
 		const data = unwrap(
@@ -37,7 +38,7 @@ export const load = query(string(), async (organization: string) => {
 		);
 
 		return { data };
-	} catch {
-		return redirect(303, '/error');
+	} catch (e: any) {
+		return handleHttpError(e);
 	}
 });

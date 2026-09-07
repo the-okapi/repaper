@@ -1,6 +1,6 @@
 import type { LayoutServerLoad } from './$types';
-import { error, redirect } from '@sveltejs/kit';
-import { m } from '$lib/paraglide/messages';
+import { redirect } from '@sveltejs/kit';
+import { error500 } from '$lib/error';
 
 export const load: LayoutServerLoad = async ({ parent, route, locals }) => {
 	const parentData = await parent();
@@ -31,7 +31,7 @@ export const load: LayoutServerLoad = async ({ parent, route, locals }) => {
 
 	if (e) {
 		console.error(e.message, 'Error Code 103');
-		return error(500, m.something_happened());
+		return error500();
 	}
 
 	if (memberships.length < 1) {

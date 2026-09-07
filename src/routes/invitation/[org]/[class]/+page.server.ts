@@ -1,7 +1,7 @@
 import type { Actions, PageServerLoad } from './$types';
 import { fail, redirect } from '@sveltejs/kit';
 import { object, string, safeParse } from 'valibot';
-import { unwrap, unwrapNoData } from '$lib/error';
+import { unwrap, unwrapNoData, HttpError, handleHttpError } from '$lib/error';
 import { m } from '$lib/paraglide/messages';
 
 export const load: PageServerLoad = async ({ locals, params }) => {
@@ -15,14 +15,14 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		);
 
 		if (data.length === 0) {
-			return redirect(303, '/');
+			throw new HttpError(303, '/');
 		}
 
 		return {
 			title: m.create_account()
 		};
-	} catch {
-		return redirect(303, '/error');
+	} catch (e: any) {
+		return handleHttpError(e);
 	}
 };
 

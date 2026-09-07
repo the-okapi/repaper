@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
-import { unwrapNoData } from '$lib/error';
+import { error500 } from '$lib/error';
 
 export const load: PageServerLoad = async ({ parent }) => {
 	const data = await parent();
@@ -15,10 +15,11 @@ export const load: PageServerLoad = async ({ parent }) => {
 
 export const actions = {
 	signOut: async ({ locals }) => {
-		try {
-			unwrapNoData(await locals.supabase.auth.signOut(), 84);
-		} catch {
-			return redirect(303, '/error');
+		const { error: e } = await locals.supabase.auth.signOut();
+
+		if (e) {
+			console.error(e, 'Error Code 84');
+			return error500();
 		}
 
 		return redirect(303, '/');

@@ -233,6 +233,7 @@ textarea {
 	outline: 2px solid var(--p);
 	outline-offset: -5px;
 	transition: outline-offset 100ms;
+	user-select: none;
 
 	&[href] {
 		padding: 0.75rem 1rem;
