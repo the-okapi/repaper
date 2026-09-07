@@ -4,7 +4,15 @@
 	import Expand from '@lucide/svelte/icons/chevrons-up-down';
 	import Check from '@lucide/svelte/icons/check';
 
-	let { options, value = $bindable(), onChange = () => {}, class: c = '', ...props } = $props();
+	let {
+		options,
+		value = $bindable(),
+		onChange = () => {},
+		class: c = '',
+		placeholder = '',
+		trigger = () => {},
+		...props
+	} = $props();
 
 	const selectedOptionLabel = $derived(
 		options.find((option: SelectItemType) => option.value === value)
@@ -17,18 +25,22 @@
 </script>
 
 <Select.Root bind:value onValueChange={onC} type="single" {...props}>
-	<Select.Trigger class={c}
-		><div class="flex items-center text-left">
-			<div class="flex gap-2">
-				{@html selectedOptionLabel?.label}
+	{#if trigger}
+		{@render trigger(selectedOptionLabel?.label ?? placeholder)}
+	{:else}
+		<Select.Trigger class={c}
+			><div class="flex items-center text-left">
+				<div class="flex gap-2">
+					{@html selectedOptionLabel?.label ?? placeholder}
+				</div>
 			</div>
-		</div>
-		<div class="text-right">
-			<div class="inline-flex h-full items-center">
-				<Expand size={20} />
-			</div>
-		</div></Select.Trigger
-	>
+			<div class="text-right">
+				<div class="inline-flex h-full items-center">
+					<Expand size={20} />
+				</div>
+			</div></Select.Trigger
+		>
+	{/if}
 	<Select.Portal>
 		<Select.Content sideOffset={5} class="z-50">
 			<Select.Viewport>

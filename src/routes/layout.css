@@ -381,7 +381,6 @@ textarea {
 }
 
 .nav-bar-link {
-	margin: auto 0.5rem;
 	white-space: nowrap;
 	height: fit-content;
 	cursor: pointer;
@@ -407,7 +406,7 @@ textarea {
 }
 
 .badge {
-	width: 6rem;
+	min-width: 6rem;
 	border-radius: calc(infinity * 1px);
 	padding-inline: 0.75rem;
 	padding-block: 0.125rem;

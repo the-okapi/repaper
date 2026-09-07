@@ -169,5 +169,6 @@
 	"feature_wip": "This feature is still a work in progress.",
 	"view": "View",
 	"words": "Words",
-	"account": "Account"
+	"account": "Account",
+	"select_a_class": "Select a Class"
 }

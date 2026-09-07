@@ -163,5 +163,6 @@
 	"feature_wip": "Cette fonction est un travail en cours.",
 	"view": "Regarder",
 	"words": "Mots",
-	"account": "Compte"
+	"account": "Compte",
+	"select_a_class": "Selectionner une classe"
 }

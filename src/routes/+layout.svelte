@@ -77,8 +77,10 @@
 
 <div class="nav-bar">
 	{#if !barHidden.value}
-		<div class="fixed top-0 flex w-screen items-center border-b border-(--o) bg-(--bg) p-5">
-			<div class="flex w-full">
+		<div
+			class="fixed top-0 flex w-screen items-center border-b border-(--o) bg-(--bg) px-7 py-5"
+		>
+			<div class="flex w-full gap-4">
 				{#if data.loggedIn}
 					<a class="nav-bar-link" href="/student">{m.home()}</a>
 					<Settings />
