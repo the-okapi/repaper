@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { m } from '$lib/paraglide/messages';
 	import { Button } from 'bits-ui';
-	import { page } from '$app/state';
 	import { formatDate } from '$lib/util';
 	import Tabs from '$lib/components/Tabs.svelte';
 
-	let { data } = $props();
+	let { data, params } = $props();
 
 	type Assignment = {
 		id: string;
@@ -18,13 +17,13 @@
 {#if data.assignments.length === 0}
 	<div class="flex h-screen w-screen flex-col items-center justify-center">
 		<p class="mb-10 w-100 text-center text-xl">{m.no_assignments()}</p>
-		<Button.Root href="/admin/{page.params.org}/{page.params.class}" class="gray-button"
+		<Button.Root href="/admin/{params.org}/{params.class}" class="gray-button"
 			>{m.back()}</Button.Root
 		>
 	</div>
 {:else}
 	<div class="h-2"></div>
-	<a href="/admin/{page.params.org}/{page.params.class}" class="relative ml-10 hover:underline"
+	<a href="/admin/{params.org}/{params.class}" class="relative ml-10 hover:underline"
 		>← {m.back()}</a
 	>
 	{#snippet list(assignments: Assignment[])}
@@ -33,7 +32,7 @@
 				<div class="box relative p-0!">
 					<a
 						class="flex h-full w-full cursor-pointer items-center justify-center rounded-xl transition-colors hover:bg-(--a)"
-						href="/admin/{page.params.org}/{page.params.class}/{assignment.id}"
+						href="/admin/{params.org}/{params.class}/{assignment.id}"
 					>
 						<div class="relative w-fit text-center">
 							<div class="absolute -top-8 w-full">

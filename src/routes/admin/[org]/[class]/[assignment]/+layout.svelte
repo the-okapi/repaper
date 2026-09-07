@@ -20,7 +20,7 @@
 	import { formatDate } from '$lib/util';
 	import Edit from '@lucide/svelte/icons/pencil';
 
-	let { data, children } = $props();
+	let { data, children, params } = $props();
 
 	let nameValue = $state('');
 	let descriptionValue = $state('');
@@ -79,7 +79,7 @@
 	async function assignToAnotherStudent() {
 		assignToMoreStudentsLoading = true;
 		assignToMoreStudentsOpen = true;
-		const { students: unfilteredStudents } = await loadStudents(page.params.class ?? '');
+		const { students: unfilteredStudents } = await loadStudents(params.class);
 		students = unfilteredStudents.filter(
 			(a: { value: string; label: string }) =>
 				data.submissions.find((b: any) => b.user.id === a.value) === undefined
@@ -92,7 +92,7 @@
 	<div class="box relative h-full! overflow-scroll">
 		<div class="h-full w-full p-3">
 			{#each data.submissions as submission (submission.id)}
-				{const url = `/admin/${page.params.org}/${page.params.class}/${page.params.assignment}/${submission.id}`}
+				{const url = `/admin/${params.org}/${params.class}/${params.assignment}/${submission.id}`}
 				<div class="flex items-center justify-end gap-3">
 					<div class="flex w-full items-center gap-2">
 						<p class="text-lg font-bold whitespace-nowrap">
@@ -164,7 +164,7 @@
 </div>
 
 <a
-	href="/admin/{page.params.org}/{page.params.class}/assignments"
+	href="/admin/{params.org}/{params.class}/assignments"
 	class="fixed top-22 left-10 hover:underline">← {m.back()}</a
 >
 
@@ -204,8 +204,8 @@
 					{changeName.result?.nameMessage}
 				</p>
 
-				<input type="hidden" name="assignment" value={page.params.assignment} />
-				<input type="hidden" name="class" value={page.params.class} />
+				<input type="hidden" name="assignment" value={params.assignment} />
+				<input type="hidden" name="class" value={params.class} />
 			</form>
 		{/if}
 	</div>
@@ -244,8 +244,8 @@
 					{changeDescription.result?.descriptionMessage}
 				</p>
 
-				<input type="hidden" name="assignment" value={page.params.assignment} />
-				<input type="hidden" name="class" value={page.params.class} />
+				<input type="hidden" name="assignment" value={params.assignment} />
+				<input type="hidden" name="class" value={params.class} />
 			</form>
 		{/if}
 	</div>
@@ -298,8 +298,8 @@
 					{/if}
 				</p>
 
-				<input type="hidden" name="assignment" value={page.params.assignment} />
-				<input type="hidden" name="class" value={page.params.class} />
+				<input type="hidden" name="assignment" value={params.assignment} />
+				<input type="hidden" name="class" value={params.class} />
 			</form>
 		{/if}
 	</div>
@@ -314,8 +314,8 @@
 		<form {...deleteAssignment}>
 			<Button.Root type="submit" class="red-button">{m.go()}</Button.Root>
 
-			<input type="hidden" name="assignment" value={page.params.assignment} />
-			<input type="hidden" name="class" value={page.params.class} />
+			<input type="hidden" name="assignment" value={params.assignment} />
+			<input type="hidden" name="class" value={params.class} />
 		</form>
 	{/snippet}
 </AlertDialog>
@@ -352,8 +352,8 @@
 			>
 				<Button.Root type="submit">{m.submit()}</Button.Root>
 				<input type="hidden" name="students" value={JSON.stringify(selectedStudents)} />
-				<input type="hidden" name="class" value={page.params.class} />
-				<input type="hidden" name="assignment" value={page.params.assignment} />
+				<input type="hidden" name="class" value={params.class} />
+				<input type="hidden" name="assignment" value={params.assignment} />
 			</form>
 		{/snippet}
 	</AlertDialog>

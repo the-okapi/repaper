@@ -379,6 +379,19 @@ textarea {
 	@apply shadow-2xl;
 }
 
+.nav-bar-link {
+	margin: auto 0.5rem;
+	white-space: nowrap;
+	height: fit-content;
+	cursor: pointer;
+	text-decoration: underline 1.5px transparent;
+	transition: text-decoration-color 100ms;
+
+	&:hover {
+		text-decoration-color: var(--fg);
+	}
+}
+
 .box {
 	margin: auto;
 	width: 25rem;

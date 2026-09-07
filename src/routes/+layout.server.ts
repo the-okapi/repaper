@@ -37,21 +37,24 @@ export const load: LayoutServerLoad = async ({ cookies, locals, route }) => {
 		const orgMemberships = unwrap(
 			await locals.supabase
 				.from('organization_memberships')
-				.select('admin')
+				.select('admin, organization ( id, name )')
 				.eq('user', user.id),
 			100
 		);
 
 		let admin = false;
+		let organization = null;
 
 		if (orgMemberships.length === 0 || orgMemberships[0].admin) {
 			admin = true;
+			organization = orgMemberships[0].organization;
 		}
 
 		return {
 			cookies: cookies.getAll(),
 			loggedIn: true,
 			admin,
+			organization,
 			name: check.name
 		};
 	} catch {

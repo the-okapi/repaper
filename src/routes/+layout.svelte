@@ -6,10 +6,34 @@
 	import './layout.css';
 	import { ModeWatcher } from 'mode-watcher';
 	import favicon from '$lib/assets/favicon.ico';
-	import NavBar from './NavBar.svelte';
+	import { barHidden } from '$lib/state.svelte';
 	import type { LayoutProps } from './$types';
+	import AlertDialog from '$lib/components/AlertDialog.svelte';
+	import { Button } from 'bits-ui';
+	import Settings from './Settings.svelte';
+	import LogIn from './LogIn.svelte';
+	import { m } from '$lib/paraglide/messages';
+	import { getLocale } from '$lib/paraglide/runtime';
+	import { PUBLIC_HELP_URL } from '$app/env/public';
+	import Show from '@lucide/svelte/icons/eye';
+	import Hide from '@lucide/svelte/icons/eye-closed';
+	import { onDestroy, type Snippet } from 'svelte';
+	import { setNavBarContext } from '$lib/context';
 
 	let { data, children }: LayoutProps = $props();
+
+	let logOutOpen = $state(false);
+
+	let pageNavBarContent: Snippet | undefined = $state();
+
+	setNavBarContext({
+		setContent(snippet: Snippet) {
+			pageNavBarContent = snippet;
+			return onDestroy(() => {
+				pageNavBarContent = undefined;
+			});
+		}
+	});
 </script>
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
@@ -51,7 +75,58 @@
 	defaultMode="system"
 />
 
-<div class="nav-bar"><NavBar loggedIn={data.loggedIn} name={data.name} /></div>
+<div class="nav-bar">
+	{#if !barHidden.value && page.route.id !== '/error'}
+		<div class="fixed top-0 flex w-screen items-center border-b border-(--o) bg-(--bg) p-5">
+			<div class="flex w-full">
+				{#if data.loggedIn}
+					<a class="nav-bar-link" href="/student">{m.home()}</a>
+					<Settings />
+					<button class="nav-bar-link" onclick={() => (logOutOpen = true)}>
+						{m.log_out()}
+					</button>
+					<a class="nav-bar-link" href="{PUBLIC_HELP_URL}/{getLocale()}" target="_blank"
+						>{m.help()}</a
+					>
+				{:else}
+					<a class="nav-bar-link" href="/">Repaper</a>
+					<a class="nav-bar-link" href="/signup">{m.sign_up()}</a>
+					<Settings />
+					<LogIn />
+					<a class="nav-bar-link" href="{PUBLIC_HELP_URL}/{getLocale()}" target="_blank"
+						>{m.help()}</a
+					>
+				{/if}
+			</div>
+			<h1 class="text-4xl font-bold whitespace-nowrap">
+				{page.data.title ?? 'Repaper'}
+			</h1>
+			<div class="flex w-full items-center justify-end gap-4 text-right">
+				{#if pageNavBarContent}
+					{@render pageNavBarContent()}
+				{/if}
+				{#if page.route.id === '/student/assignment/[assignment]'}
+					<button
+						class="flex size-10 cursor-pointer items-center justify-center rounded-xl border border-(--o) bg-(--bg) p-2! hover:bg-(--a)
+			"
+						onclick={() => (barHidden.value = true)}
+					>
+						<Show size={20} />
+					</button>
+				{/if}
+			</div>
+		</div>
+
+		<div class="h-20"></div>
+	{:else if barHidden.value}
+		<button
+			class="fixed top-5 right-5 flex size-10 cursor-pointer items-center justify-center rounded-xl border border-(--o) bg-(--bg) p-2! hover:bg-(--a)"
+			onclick={() => (barHidden.value = false)}
+		>
+			<Hide size={20} />
+		</button>
+	{/if}
+</div>
 <main class="bg-(--bg) transition-colors">{@render children()}</main>
 
 <div style="display:none">
@@ -59,3 +134,12 @@
 		<a href={resolve(localizeHref(page.url.pathname, { locale }) as Pathname)}>{locale}</a>
 	{/each}
 </div>
+
+<AlertDialog bind:open={logOutOpen}>
+	<p class="mb-8 text-center text-lg">{m.are_you_sure()} {m.confirm_log_out()}</p>
+	{#snippet go()}
+		<form method="POST" action="/?/signOut">
+			<Button.Root type="submit">{m.go()}</Button.Root>
+		</form>
+	{/snippet}
+</AlertDialog>
