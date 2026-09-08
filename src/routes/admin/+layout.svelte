@@ -1,23 +1,16 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import SelectComponent from '$lib/components/Select.svelte';
-	import { Select } from 'bits-ui';
+	import { DropdownMenu } from 'bits-ui';
 	import { getNavBarContext } from '$lib/context';
 	import { m } from '$lib/paraglide/messages';
 	import Expand from '@lucide/svelte/icons/chevrons-up-down';
-	import { goto } from '$app/navigation';
+	import Dropdown from '$lib/components/Dropdown.svelte';
 
 	let { children, data, params } = $props();
 
 	const { setContent } = getNavBarContext();
 
 	setContent(navBarContent);
-
-	let selectedClass = $derived(params.class ?? '');
-
-	function goToClass(v: string) {
-		goto(`/admin/${data.organization.id}/${v}`);
-	}
 
 	const options = $derived([
 		...data.classes,
@@ -30,22 +23,30 @@
 
 {#snippet navBarContent()}
 	{#if data.organization}
-		<SelectComponent
-			onChange={goToClass}
-			{options}
-			value={selectedClass}
-			check={false}
-			placeholder={m.select_a_class()}
-		>
-			{#snippet trigger(text: string)}
-				<Select.Trigger
-					class="m-0! flex! w-fit! items-center gap-2 border-none! p-0! shadow-none!"
-				>
-					<p>{@html text}</p>
-					<Expand size={20} />
-				</Select.Trigger>
-			{/snippet}
-		</SelectComponent>
+		<div class="flex items-center gap-2">
+			<p>
+				{(options.find((a) => a.value === params.class) ?? { label: m.select_a_class() })
+					.label}
+			</p>
+			<Dropdown>
+				{#snippet trigger()}
+					<DropdownMenu.Trigger>
+						<Expand size={20} />
+					</DropdownMenu.Trigger>
+				{/snippet}
+				{#each options as option, i (option.value)}
+					<DropdownMenu.Item
+						data-select-item
+						class="border-x border-(--o) hover:bg-(--a)! {i === 0
+							? 'rounded-t-xl border-t'
+							: ''} {i === options.length - 1 ? 'rounded-b-xl border-b' : ''}"
+						><a href="/admin/{data.organization.id}/{option.value}"
+							>{@html option.label}</a
+						></DropdownMenu.Item
+					>
+				{/each}
+			</Dropdown>
+		</div>
 		<p>—</p>
 		<a href="/admin/{data.organization.id}" class="nav-bar-link">{data.organization.name}</a>
 		<p>—</p>

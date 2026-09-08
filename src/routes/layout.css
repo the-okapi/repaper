@@ -102,6 +102,17 @@ main * {
 	@apply bg-(--p)/40;
 }
 
+[data-dropdown-menu-trigger] {
+	border-radius: 0.5rem;
+	padding: 0.25rem;
+	cursor: pointer;
+
+	&:hover,
+	&:active {
+		background-color: var(--s);
+	}
+}
+
 [data-select-trigger] {
 	border: 1px var(--o) solid;
 	color: var(--fg);
@@ -131,6 +142,7 @@ main * {
 	outline: none;
 	height: fit-content;
 	background-color: var(--bg);
+	z-index: 50;
 }
 
 [data-select-item] {
