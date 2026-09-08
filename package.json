@@ -57,6 +57,7 @@
 		"loadersz": "^0.5.1",
 		"mode-watcher": "^1.1.0",
 		"resend": "^6.26.0",
+		"svelte-sonner": "^1.2.1",
 		"valibot": "^1.4.2"
 	}
 }

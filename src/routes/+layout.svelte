@@ -19,6 +19,7 @@
 	import Hide from '@lucide/svelte/icons/eye-closed';
 	import { onDestroy, type Snippet } from 'svelte';
 	import { setNavBarContext } from '$lib/context';
+	import { Toaster } from 'svelte-sonner';
 
 	let { data, children }: LayoutProps = $props();
 
@@ -74,6 +75,8 @@
 	defaultTheme="turquoise"
 	defaultMode="system"
 />
+
+<Toaster />
 
 <div class="nav-bar">
 	{#if !barHidden.value}
