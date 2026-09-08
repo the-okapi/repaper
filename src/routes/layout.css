@@ -407,6 +407,7 @@ textarea {
 
 .badge {
 	min-width: 6rem;
+	width: fit-content;
 	border-radius: calc(infinity * 1px);
 	padding-inline: 0.75rem;
 	padding-block: 0.125rem;

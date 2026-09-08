@@ -23,10 +23,8 @@
 		}
 	]);
 
-	let currentMode: any = $state(mode.current);
-
-	function onModeChange() {
-		setMode(currentMode);
+	function onModeChange(v: 'dark' | 'light' | 'system') {
+		setMode(v);
 	}
 
 	// Language
@@ -41,10 +39,8 @@
 		}
 	];
 
-	let currentLang = $state(getLocale());
-
-	function onLangChange() {
-		setLocale(currentLang);
+	function onLangChange(v: 'en' | 'fr') {
+		setLocale(v);
 	}
 
 	// Colors
@@ -75,10 +71,8 @@
 		}
 	];
 
-	let currentColor: any = $state(theme.current);
-
-	function onColorChange() {
-		setTheme(currentColor);
+	function onColorChange(v: string) {
+		setTheme(v);
 	}
 </script>
 
@@ -96,7 +90,7 @@
 										>{m.mode()}:
 										<Select
 											options={modes}
-											bind:value={currentMode}
+											value={mode.current}
 											onChange={onModeChange}
 										/></Label.Root
 									>
@@ -107,7 +101,7 @@
 										>{m.color()}:
 										<Select
 											options={colors}
-											bind:value={currentColor}
+											value={theme.current}
 											onChange={onColorChange}
 										/></Label.Root
 									>
@@ -118,7 +112,7 @@
 										>{m.language()}:
 										<Select
 											options={languages}
-											bind:value={currentLang}
+											value={getLocale()}
 											onChange={onLangChange}
 										/></Label.Root
 									>

@@ -82,11 +82,12 @@
 		>
 			<div class="flex w-full gap-4">
 				{#if data.loggedIn}
-					<a class="nav-bar-link" href="/student">{m.home()}</a>
-					<Settings />
 					<button class="nav-bar-link" onclick={() => (logOutOpen = true)}>
 						{m.log_out()}
 					</button>
+
+					<Settings />
+
 					<a class="nav-bar-link" href="{PUBLIC_HELP_URL}/{getLocale()}" target="_blank"
 						>{m.help()}</a
 					>

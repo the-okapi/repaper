@@ -4,7 +4,6 @@
 	import Loader from '$lib/components/Loader.svelte';
 	import { logIn } from './actions.remote';
 	import { m } from '$lib/paraglide/messages';
-	import { goto } from '$app/navigation';
 	import { Popover } from 'bits-ui';
 
 	let email = $state('');
@@ -13,6 +12,8 @@
 	let error = $state('');
 
 	let loading = $state(false);
+
+	let open = $state(false);
 
 	async function onsubmit(event: Event) {
 		event.preventDefault();
@@ -25,7 +26,7 @@
 		});
 
 		if (response.status === 200) {
-			return goto('/student', { replaceState: true });
+			window.location.assign('/student');
 		} else {
 			error = response.message ?? '';
 			loading = false;
@@ -33,7 +34,7 @@
 	}
 </script>
 
-<Popover.Root>
+<Popover.Root bind:open>
 	<Popover.Trigger class="nav-bar-link">{m.log_in()}</Popover.Trigger>
 	<Popover.Portal>
 		<Popover.Content sideOffset={10} forceMount>
