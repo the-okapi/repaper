@@ -1,9 +1,9 @@
 <script lang="ts">
+	import './layout.css';
 	import type { Pathname } from '$app/types';
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { locales, localizeHref } from '$lib/paraglide/runtime';
-	import './layout.css';
 	import { ModeWatcher } from 'mode-watcher';
 	import favicon from '$lib/assets/favicon.ico';
 	import { barHidden } from '$lib/state.svelte';
