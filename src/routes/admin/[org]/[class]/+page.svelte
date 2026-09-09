@@ -35,7 +35,7 @@
 	<div class="flex h-[80vh] w-full gap-4">
 		<div class="flex h-full w-full flex-col gap-4">
 			<div
-				class="flex h-full w-full items-center justify-center rounded-xl border border-(--o) bg-(--bg)"
+				class="border-o flex h-full w-full items-center justify-center rounded-xl bg-(--bg)"
 			>
 				{#await load(params.org)}
 					<div class="flex h-57 items-center justify-center">
@@ -106,7 +106,7 @@
 					</form>
 				{/await}
 			</div>
-			<div class="h-80 w-full rounded-xl border border-(--o) bg-(--bg)">
+			<div class="border-o h-80 w-full rounded-xl bg-(--bg)">
 				<a href={page.url.pathname + '/assignments'}>
 					<div
 						class="relative flex h-full w-full cursor-pointer items-center justify-center rounded-xl p-5 transition-colors hover:bg-(--a)"
@@ -123,7 +123,7 @@
 		</div>
 		<CreateAssignment />
 	</div>
-	<div class="relative z-10 h-[80vh] w-full rounded-xl border border-(--o) bg-(--bg) p-5">
+	<div class="border-o relative z-10 h-[80vh] w-full rounded-xl bg-(--bg) p-5">
 		<h2 class="text-center text-3xl font-bold">{m.class_list()}</h2>
 		{#each data.members as member, i (member.user.id)}
 			<div class="flex h-16 px-5 py-3">

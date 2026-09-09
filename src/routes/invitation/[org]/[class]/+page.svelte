@@ -11,7 +11,7 @@
 </svelte:head>
 
 <div class="flex h-[calc(100vh-5rem)] w-screen items-center justify-center">
-	<form class="relative rounded-xl border border-(--o) bg-(--bg) p-10" method="POST">
+	<form class="border-o relative rounded-xl bg-(--bg) p-10" method="POST">
 		<h2 class="mb-5 text-center text-3xl font-bold">{m.create_account()}</h2>
 		<div class="m-auto w-fit">
 			<Label.Root for="email">{m.email()}:</Label.Root><br />

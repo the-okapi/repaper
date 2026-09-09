@@ -11,7 +11,7 @@
 </script>
 
 <div
-	class="relative flex h-210 w-80 items-center justify-center rounded-xl border border-(--o) bg-(--bg) px-12"
+	class="border-o relative flex h-210 w-80 items-center justify-center rounded-xl bg-(--bg) px-12"
 >
 	{#if success || loading}
 		{#if loading || !form?.createSuccess}

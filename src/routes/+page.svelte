@@ -24,7 +24,7 @@
 <div class="h-20"></div>
 
 <div class="flex justify-center gap-7">
-	<div class="h-80 w-110 rounded-xl border border-(--o) bg-(--bg) p-7 pt-10">
+	<div class="border-o h-80 w-110 rounded-xl bg-(--bg) p-7 pt-10">
 		<h2 class="text-center text-4xl font-bold">{m.word_processing()}</h2>
 		<br />
 		<ul>
@@ -36,7 +36,7 @@
 		</ul>
 	</div>
 
-	<div class="h-80 w-110 rounded-xl border border-(--o) bg-(--bg) p-7 pt-10">
+	<div class="border-o h-80 w-110 rounded-xl bg-(--bg) p-7 pt-10">
 		<h2 class="text-center text-4xl font-bold">{m.no_more()}</h2>
 		<br />
 		<ul>
@@ -48,7 +48,7 @@
 		</ul>
 	</div>
 
-	<div class="relative h-80 w-110 rounded-xl border border-(--o) bg-(--bg) p-7 pt-8">
+	<div class="border-o relative h-80 w-110 rounded-xl bg-(--bg) p-7 pt-8">
 		<h2 class="text-center text-4xl font-bold">{m.assignments()}</h2>
 		<br />
 		<ul class={getLocale() === 'fr' ? '*:my-1.5 *:leading-6' : ''}>

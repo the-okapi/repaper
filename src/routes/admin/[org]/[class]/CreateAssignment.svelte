@@ -40,7 +40,7 @@
 </script>
 
 <div
-	class="relative flex h-full w-full items-center justify-center rounded-xl border border-(--o) bg-(--bg) p-5"
+	class="border-o relative flex h-full w-full items-center justify-center rounded-xl bg-(--bg) p-5"
 >
 	{#if loading}
 		<Loader />

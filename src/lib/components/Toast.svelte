@@ -6,9 +6,7 @@
 	let { state = 'default', message, closeToast } = $props();
 </script>
 
-<div
-	class="relative flex w-80 items-center gap-2 rounded-xl border border-(--o) bg-(--bg) p-5 shadow-2xl"
->
+<div class="border-o relative flex w-80 items-center gap-2 rounded-xl bg-(--bg) p-5 shadow-2xl">
 	{#if state === 'success'}
 		<CircleCheck size={20} color="var(--green)" />
 	{:else if state === 'error'}
