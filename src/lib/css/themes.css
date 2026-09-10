@@ -1,0 +1,69 @@
+.light {
+	color-scheme: light;
+	--bg: #ffffff;
+	--a: #eeeeee;
+	--fg: #000000;
+	--p-fg: var(--bg);
+	--o: #bfbfbf;
+	--r: #ee4400;
+	--s: #d9d9d9;
+	background-color: var(--bg);
+	color: var(--fg);
+
+	--red: #ee3340;
+	--yellow: #efbf3f;
+	--green: #00aa55;
+	--turquoise: #00af9f;
+	--blue: #0077dd;
+	--purple: #6f33af;
+}
+
+.dark {
+	color-scheme: dark;
+	--bg: #222222;
+	--a: #272727;
+	--fg: #fafafa;
+	--r: #de4e45;
+	--o: #444444;
+	--s: #313131;
+	--p-fg: var(--bg);
+	background-color: var(--bg);
+	color: var(--fg);
+
+	--red: #f04f5f;
+	--yellow: #ffdd00;
+	--green: #00aa55;
+	--turquoise: #00dfdf;
+	--blue: #00aaff;
+	--purple: #9f50cf;
+}
+
+[data-theme='red'] {
+	--p: var(--red);
+	--gradient: linear-gradient(to right, var(--purple), 20%, var(--red), 80%, var(--yellow));
+}
+
+[data-theme='yellow'] {
+	--p: var(--yellow);
+	--gradient: linear-gradient(to right, var(--red), 20%, var(--yellow), 80%, var(--green));
+}
+
+[data-theme='green'] {
+	--p: var(--green);
+	--gradient: linear-gradient(to right, var(--yellow), 25%, var(--green), 75%, var(--turquoise));
+}
+
+[data-theme='turquoise'] {
+	--p: var(--turquoise);
+	--gradient: linear-gradient(to right, var(--green), 20%, var(--turquoise), 80%, var(--blue));
+}
+
+[data-theme='blue'] {
+	--p: var(--blue);
+	--gradient: linear-gradient(to right, var(--turquoise), 20%, var(--blue), 75%, var(--purple));
+}
+
+[data-theme='purple'] {
+	--p: var(--purple);
+	--gradient: linear-gradient(to right, var(--blue), 25%, var(--purple), 85%, var(--red));
+}

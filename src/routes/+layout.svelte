@@ -1,5 +1,5 @@
 <script lang="ts">
-	import './layout.css';
+	import '$lib/css/main.css';
 	import type { Pathname } from '$app/types';
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
