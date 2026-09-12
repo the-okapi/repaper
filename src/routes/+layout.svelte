@@ -126,7 +126,7 @@
 		<div class="h-20"></div>
 	{:else if barHidden.value}
 		<button
-			class="border-o fixed top-5 right-5 flex size-10 cursor-pointer items-center justify-center rounded-xl bg-(--bg) p-2! hover:bg-(--a)"
+			class="border-o fixed top-5 right-3.25 flex size-10 cursor-pointer items-center justify-center rounded-xl bg-(--bg) p-2! hover:bg-(--a)"
 			onclick={() => (barHidden.value = false)}
 		>
 			<Hide size={20} />

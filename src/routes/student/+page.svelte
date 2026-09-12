@@ -7,7 +7,7 @@
 
 	let { data } = $props();
 
-	let assignments: Assignment[] = $state([]);
+	let assignments: Assignment[] | null = $state(null);
 
 	onMount(async () => {
 		const a = await loadAssignments();
@@ -28,7 +28,9 @@
 					>
 						<div class="w-fit text-center">
 							<h3 class="text-3xl font-bold">{classMembership.class.name}</h3>
-							{#if assignments.length !== 0}
+							{#if assignments === null}
+								<p>{m.loading()}</p>
+							{:else if assignments.length !== 0}
 								{let numAssignments = $derived(
 									assignments.filter((a: Assignment) => a.assignment.class).length
 								)}
@@ -101,21 +103,29 @@
 			</div>
 		{/snippet}
 		{#snippet toDo()}
-			{let assignmentsFiltered = $derived(
-				assignments.filter((a: Assignment) => a.submitted === null)
-			)}
-			{@render list(assignmentsFiltered)}
-			{#if assignmentsFiltered.length === 0}
-				<p class="mt-4 text-center text-lg">{m.no_assignments_here()}</p>
+			{#if assignments !== null}
+				{let assignmentsFiltered = $derived(
+					assignments.filter((a: Assignment) => a.submitted === null)
+				)}
+				{@render list(assignmentsFiltered)}
+				{#if assignmentsFiltered.length === 0}
+					<p class="mt-4 text-center text-lg">{m.no_assignments_here()}</p>
+				{/if}
+			{:else}
+				<p class="mt-4 text-center text-xl">{m.loading()}</p>
 			{/if}
 		{/snippet}
 		{#snippet submitted()}
-			{let assignmentsFiltered = $derived(
-				assignments.filter((a: Assignment) => a.submitted !== null)
-			)}
-			{@render list(assignmentsFiltered)}
-			{#if assignmentsFiltered.length === 0}
-				<p class="mt-4 text-center text-lg">{m.no_assignments_here()}</p>
+			{#if assignments !== null}
+				{let assignmentsFiltered = $derived(
+					assignments.filter((a: Assignment) => a.submitted !== null)
+				)}
+				{@render list(assignmentsFiltered)}
+				{#if assignmentsFiltered.length === 0}
+					<p class="mt-4 text-center text-lg">{m.no_assignments_here()}</p>
+				{/if}
+			{:else}
+				<p class="mt-4 text-center text-xl"></p>
 			{/if}
 		{/snippet}
 		<Tabs labels={[m.to_do(), m.submitted()]} snippets={[toDo, submitted]} />
