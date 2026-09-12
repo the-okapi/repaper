@@ -29,7 +29,9 @@
 						<div class="w-fit text-center">
 							<h3 class="text-3xl font-bold">{classMembership.class.name}</h3>
 							{#if assignments === null}
-								<p>{m.loading()}</p>
+								<p class="skeleton m-auto w-fit rounded-xl text-transparent">
+									0 {m.assignments()}
+								</p>
 							{:else if assignments.length !== 0}
 								{let numAssignments = $derived(
 									assignments.filter((a: Assignment) => a.assignment.class).length
@@ -39,7 +41,7 @@
 									{m.assignment()}{numAssignments === 1 ? '' : 's'}
 								</p>
 							{:else}
-								<p>0 {m.assignment()}s</p>
+								<p>0 {m.assignments()}</p>
 							{/if}
 						</div>
 						<div class="absolute bottom-2 w-full text-center">

@@ -1,9 +1,9 @@
 .tiptap-container {
 	display: inline-block;
 	border-radius: 0.85rem;
-	/*padding: 0.5rem;*/
-	/*background-color: var(--bg);*/
-	/*border: 1px solid var(--o);*/
+	padding: 0.5rem;
+	background-color: var(--bg);
+	border: 1px solid var(--o);
 	overflow-x: hidden;
 }
 
