@@ -134,21 +134,29 @@
 		event.preventDefault();
 	}
 
-	const wordCount = $derived(
-		editorState.editor
-			?.getText()
-			.split(' ')
-			.filter((word) => word !== '').length
-	);
+	function getWordCount(text: string | undefined): number {
+		if (!text) {
+			return 0;
+		}
+		return text
+			.trim()
+			.split(/\s/)
+			.filter((word) => word !== '').length;
+	}
+
+	const wordCount = $derived(getWordCount(editorState.editor?.getText()));
 
 	const selectionWordCount = $derived(
-		editorState.editor?.state.doc
-			.textBetween(
-				editorState.editor?.state.selection.from,
-				editorState.editor?.state.selection.to
-			)
-			.split(' ')
-			.filter((word) => word !== '').length
+		getWordCount(
+			!editorState.editor?.state.selection.empty
+				? editorState.editor
+						?.getText()
+						.substring(
+							editorState.editor?.state.selection.from - 1,
+							editorState.editor?.state.selection.to
+						)
+				: undefined
+		)
 	);
 </script>
 
@@ -262,10 +270,13 @@
 		{/if}
 		<div class="h-2"></div>
 		<div>
+			{const combinedWordCount: number = $derived(
+				selectionWordCount !== 0 ? selectionWordCount : wordCount
+			)}
 			<p class="text-xl leading-3 font-bold">
-				{selectionWordCount !== 0 ? selectionWordCount : wordCount}
+				{combinedWordCount}
 			</p>
-			<p>{m.words()}</p>
+			<p>{m.word()}{combinedWordCount !== 1 ? 's' : ''}</p>
 		</div>
 	{:else}
 		<Loader />

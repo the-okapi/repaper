@@ -8,14 +8,15 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && prettier --write . && eslint .",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --write . && eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"verify": "pnpm run check && pnpm run lint"
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
-		"@inlang/paraglide-js": "^2.25.1",
+		"@inlang/paraglide-js": "^2.25.2",
 		"@sveltejs/adapter-vercel": "^6.3.4",
 		"@sveltejs/kit": "^2.70.3",
 		"@sveltejs/vite-plugin-svelte": "^7.3.0",
@@ -33,10 +34,10 @@
 		"tailwindcss": "^4.3.3",
 		"typescript": "^6.0.3",
 		"typescript-eslint": "^8.70.0",
-		"vite": "^8.2.2"
+		"vite": "^8.3.0"
 	},
 	"dependencies": {
-		"@lucide/svelte": "^1.43.0",
+		"@lucide/svelte": "^1.45.0",
 		"@supabase/ssr": "^0.12.7",
 		"@supabase/supabase-js": "^2.116.0",
 		"@tiptap/core": "^3.31.3",
@@ -56,7 +57,7 @@
 		"bits-ui": "^2.19.2",
 		"loadersz": "^0.5.1",
 		"mode-watcher": "^1.1.0",
-		"resend": "^6.27.0",
+		"resend": "^6.28.0",
 		"svelte-sonner": "^1.2.1",
 		"valibot": "^1.5.0"
 	}
