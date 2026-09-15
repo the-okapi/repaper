@@ -3,6 +3,12 @@
 	import { m } from '$lib/paraglide/messages';
 	import { getLocale } from '$lib/paraglide/runtime';
 	import { Button } from 'bits-ui';
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+
+	onMount(() => {
+		goto('/');
+	});
 </script>
 
 <svelte:head>
@@ -19,6 +25,7 @@
 <div class="m-auto mt-10 flex h-10 w-fit items-center justify-center gap-6">
 	<Button.Root class="big-button" href={PUBLIC_HELP_URL}>{m.help()}</Button.Root>
 	<Button.Root href="/signup" class="big-button">{m.sign_up()}</Button.Root>
+	<Button.Root href="/?login" class="big-button">{m.log_in()}</Button.Root>
 </div>
 
 <div class="h-20"></div>

@@ -6,14 +6,14 @@
 	import { m } from '$lib/paraglide/messages';
 	import { Popover } from 'bits-ui';
 
+	let { open } = $props();
+
 	let email = $state('');
 	let password = $state('');
 
 	let error = $state('');
 
 	let loading = $state(false);
-
-	let open = $state(false);
 
 	async function onsubmit(event: Event) {
 		event.preventDefault();
