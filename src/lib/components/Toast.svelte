@@ -8,14 +8,16 @@
 
 <div class="border-o relative flex w-80 items-center gap-2 rounded-xl bg-(--bg) p-5 shadow-2xl">
 	{#if state === 'success'}
-		<CircleCheck size={20} color="var(--green)" />
+		<CircleCheck size={40} color="var(--green)" />
 	{:else if state === 'error'}
-		<CircleX size={20} color="var(--r)" />
+		<CircleX size={40} color="var(--r)" />
 	{/if}
-	{message}
+	<p class="leading-5">
+		{message}
+	</p>
 	<button
 		onclick={closeToast}
-		class="absolute top-2 right-2 cursor-pointer rounded-md p-1 text-right hover:bg-(--s)"
+		class="border-o absolute -top-2 -right-2 cursor-pointer rounded-full bg-(--bg) p-1 text-right hover:bg-(--a)"
 		><X size={15} /></button
 	>
 </div>

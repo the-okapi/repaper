@@ -21,6 +21,7 @@
 	import { extensions, editorExtensions } from '$lib/tiptap';
 	import { saveDocument, submitDocument, deleteFile } from './server.remote.ts';
 	import Accents from './Accents.svelte';
+	import { invalidateAll } from '$app/navigation';
 
 	let element: any = $state();
 	let editorState: { editor: Editor | null } = $state({ editor: null });
@@ -84,7 +85,7 @@
 	async function submitAssignment() {
 		await saveButton();
 		await submitDocument(assignment);
-		window.location.reload();
+		invalidateAll();
 	}
 
 	onMount(() => {

@@ -5,6 +5,7 @@
 	import { logIn } from './actions.remote';
 	import { m } from '$lib/paraglide/messages';
 	import { Popover } from 'bits-ui';
+	import { goto } from '$app/navigation';
 
 	let { open } = $props();
 
@@ -26,7 +27,7 @@
 		});
 
 		if (response.status === 200) {
-			window.location.assign('/student');
+			goto('/student', { invalidateAll: true });
 		} else {
 			error = response.message ?? '';
 			loading = false;

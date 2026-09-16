@@ -2,6 +2,7 @@
 	import { m } from '$lib/paraglide/messages';
 	import { Label, Button } from 'bits-ui';
 	import { fade } from 'svelte/transition';
+	import { goto } from '$app/navigation';
 
 	let { data, form } = $props();
 </script>
@@ -12,7 +13,7 @@
 			<div class="box">
 				<button
 					class="box absolute cursor-pointer transition-colors hover:bg-(--fg)/5!"
-					onclick={() => window.location.assign('/admin/' + data.organization.id)}
+					onclick={() => goto('/admin/' + data.organization.id, { invalidateAll: true })}
 				>
 					<div>
 						<h2 class="text-center text-4xl font-bold">
@@ -43,9 +44,9 @@
 				<button
 					class="box absolute cursor-pointer transition-colors hover:bg-(--fg)/5!"
 					onclick={() =>
-						window.location.assign(
-							'/admin/' + data.organization.id + '/' + classData.id
-						)}
+						goto('/admin/' + data.organization.id + '/' + classData.id, {
+							invalidateAll: true
+						})}
 				>
 					<div>
 						<h2 class="text-center text-4xl font-bold">{classData.name}</h2>

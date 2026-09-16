@@ -1,6 +1,7 @@
 import { redirect, error, type ActionResult } from '@sveltejs/kit';
 import { m } from '$lib/paraglide/messages';
 import { showToast } from './toast';
+import { applyAction } from '$app/forms';
 
 export class HttpError extends Error {
 	status: number;
@@ -40,15 +41,17 @@ export function error500() {
 	return error(500, m.something_happened());
 }
 
-export async function handleFormError({
+export const handleFormError = async ({
 	result,
 	update
 }: {
-	result: ActionResult;
+	result: ActionResult<Record<string, unknown> | undefined, Record<string, unknown> | undefined>;
 	update: () => void;
-}) {
-	if (result.status !== 200) {
+}) => {
+	if (result.type === 'failure') {
 		showToast(m.something_happened(), 'error');
+	} else {
+		await applyAction(result);
 	}
 	update();
-}
+};

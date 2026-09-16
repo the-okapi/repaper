@@ -4,6 +4,7 @@
 	import type { OrganizationMember } from '$lib/util';
 	import { enhance } from '$app/forms';
 	import { m } from '$lib/paraglide/messages';
+	import { invalidateAll } from '$app/navigation';
 
 	let { members, user } = $props();
 
@@ -188,7 +189,7 @@
 						<input type="hidden" name="userId" value={member.user.id} />
 					</form>
 				{:else}
-					<Button.Root onclick={() => window.location.reload()}>OK</Button.Root>
+					<Button.Root onclick={() => invalidateAll()}>OK</Button.Root>
 				{/if}
 			</div>
 		</div>
