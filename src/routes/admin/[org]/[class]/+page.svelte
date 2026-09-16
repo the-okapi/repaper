@@ -10,7 +10,7 @@
 	import CreateAssignment from './CreateAssignment.svelte';
 	import { page } from '$app/state';
 	import { enhance } from '$app/forms';
-	import { handleFormError } from '$lib/error';
+	import { enhanceHandleError } from '$lib/error';
 
 	let { data, params, form }: PageProps = $props();
 
@@ -164,13 +164,7 @@
 		{m.remove_from_class({ name: data.members[remove].user.name })}
 	</p>
 	{#snippet go()}
-		<form
-			action="?/remove"
-			use:enhance={() => {
-				return handleFormError;
-			}}
-			method="POST"
-		>
+		<form action="?/remove" use:enhance={enhanceHandleError} method="POST">
 			<input type="hidden" value={data.members[remove].user.id} name="userId" />
 			<Button.Root type="submit" class="red-button">{m.go()}</Button.Root>
 		</form>

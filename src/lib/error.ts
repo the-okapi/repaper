@@ -55,3 +55,7 @@ export const handleFormError = async ({
 	}
 	update();
 };
+
+export function enhanceHandleError() {
+	return handleFormError;
+}
