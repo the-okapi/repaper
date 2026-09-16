@@ -146,8 +146,6 @@ export const actions = {
 		return { success: true };
 	},
 	remove: async ({ request, locals, params }) => {
-		return fail(500, m.something_happened());
-
 		const formData = safeParse(UserIdSchema, Object.fromEntries(await request.formData()));
 
 		if (!formData.success) {
@@ -156,15 +154,15 @@ export const actions = {
 
 		const { userId } = formData.output;
 
+		const {
+			data: { user }
+		} = await locals.supabase.auth.getUser();
+
+		if (!user) {
+			return redirect(303, '/');
+		}
+
 		try {
-			const {
-				data: { user }
-			} = await locals.supabase.auth.getUser();
-
-			if (!user) {
-				return redirect(303, '/');
-			}
-
 			const check = unwrap(
 				await locals.supabase
 					.from('organization_memberships')

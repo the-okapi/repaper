@@ -118,7 +118,7 @@
 				<Calendar size={20} />
 			</Popover.Trigger>
 		</div>
-		<p class="my-auto ml-3 text-sm">
+		<p class="my-auto ml-3 text-sm leading-4">
 			{#if value !== ''}
 				{formatDate(value)}
 			{:else}
@@ -167,11 +167,12 @@
 											</Button.Root>
 										{:else}
 											<Button.Root
-												class="calendar-day {day?.year === year &&
+												class="calendar-day"
+												data-toggled={day?.year === year &&
 												day?.month === month &&
 												day?.day === num
-													? 'bg-(--p)! text-(--p-fg)!'
-													: ''}"
+													? 'true'
+													: 'false'}
 												onclick={() => click(num)}
 											>
 												{num}

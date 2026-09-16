@@ -294,6 +294,15 @@ textarea {
 	&:hover {
 		background-color: var(--s);
 	}
+
+	&[data-toggled='true'] {
+		background-color: var(--p);
+		color: var(--p-fg);
+
+		&:hover {
+			opacity: 0.9;
+		}
+	}
 }
 
 [data-alert-dialog-overlay] {
