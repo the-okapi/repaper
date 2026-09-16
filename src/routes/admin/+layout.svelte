@@ -23,7 +23,7 @@
 
 {#snippet navBarContent()}
 	{#if data.organization}
-		<div class="flex items-center gap-2">
+		<div class="flex items-center gap-1">
 			<p>
 				{(options.find((a) => a.value === params.class) ?? { label: m.select_a_class() })
 					.label}
@@ -31,7 +31,7 @@
 			<Dropdown>
 				{#snippet trigger()}
 					<DropdownMenu.Trigger>
-						<Expand size={20} />
+						<Expand size={18} />
 					</DropdownMenu.Trigger>
 				{/snippet}
 				{#each options as option, i (option.value)}
@@ -47,9 +47,9 @@
 				{/each}
 			</Dropdown>
 		</div>
-		<p>—</p>
+		<p class="mr-1.5">—</p>
 		<a href="/admin/{data.organization.id}" class="nav-bar-link">{data.organization.name}</a>
-		<p>—</p>
+		<p class="mx-1.5">—</p>
 	{/if}
 	<a href="/admin/account" class="nav-bar-link">{data.name}</a>
 {/snippet}

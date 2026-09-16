@@ -34,8 +34,8 @@ main * {
 }
 
 [data-dropdown-menu-trigger] {
-	border-radius: 0.5rem;
-	padding: 0.25rem;
+	border-radius: 0.4rem;
+	padding: 0.15rem;
 	cursor: pointer;
 
 	&:hover,

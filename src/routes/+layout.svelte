@@ -107,7 +107,7 @@
 			<h1 class="text-4xl font-bold whitespace-nowrap">
 				{page.data.title ?? 'Repaper'}
 			</h1>
-			<div class="flex w-full items-center justify-end gap-4 text-right">
+			<div class="flex w-full items-center justify-end gap-2 text-right">
 				{#if pageNavBarContent}
 					{@render pageNavBarContent()}
 				{/if}

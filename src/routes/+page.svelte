@@ -22,10 +22,10 @@
 </h1>
 <h2 class="relative text-center text-4xl">{m.have_trust()}</h2>
 
-<div class="m-auto mt-10 flex h-10 w-fit items-center justify-center gap-6">
+<div class="m-auto mt-10 flex h-10 w-fit items-center justify-center gap-3">
 	<Button.Root class="big-button" href={PUBLIC_HELP_URL}>{m.help()}</Button.Root>
-	<Button.Root href="/signup" class="big-button">{m.sign_up()}</Button.Root>
 	<Button.Root href="/?login" class="big-button">{m.log_in()}</Button.Root>
+	<Button.Root href="/signup" class="big-button">{m.sign_up()}</Button.Root>
 </div>
 
 <div class="h-20"></div>

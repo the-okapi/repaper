@@ -146,6 +146,8 @@ export const actions = {
 		return { success: true };
 	},
 	remove: async ({ request, locals, params }) => {
+		return fail(500, m.something_happened());
+
 		const formData = safeParse(UserIdSchema, Object.fromEntries(await request.formData()));
 
 		if (!formData.success) {
