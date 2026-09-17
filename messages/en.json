@@ -170,5 +170,7 @@
 	"view": "View",
 	"word": "Word",
 	"account": "Account",
-	"select_a_class": "Select a Class"
+	"select_a_class": "Select a Class",
+	"document": "Document",
+	"form": "Form"
 }

@@ -3,10 +3,13 @@
 	import Switch from '$lib/components/Switch.svelte';
 	import Combobox from '$lib/components/Combobox.svelte';
 	import DatePicker from '$lib/components/DatePicker.svelte';
+	import Tabs from '$lib/components/Tabs.svelte';
 	import { createAssignment, getStudents } from './server.remote';
 	import { Label, Button } from 'bits-ui';
 	import { m } from '$lib/paraglide/messages';
 	import { page } from '$app/state';
+	import Document from './Document.svelte';
+	import Form from './Form.svelte';
 
 	let loading = $state(false);
 	let everyone = $derived(createAssignment.result?.everyone ?? true);
@@ -40,7 +43,7 @@
 </script>
 
 <div
-	class="border-o relative flex h-full w-full items-center justify-center rounded-xl bg-(--bg) p-5"
+	class="border-o fixed top-25 left-5 flex h-[calc(100vh-7.5rem)] w-85 items-center justify-center rounded-2xl bg-(--bg) p-10"
 >
 	{#if loading}
 		<Loader />
@@ -53,7 +56,7 @@
 		</div>
 	{:else}
 		<div class="flex h-full w-full flex-col items-center">
-			<h1 class="mb-1 text-center text-2xl font-bold">{m.create_assignment()}</h1>
+			<h1 class="mb-1 text-center text-2xl font-bold">{m.assignment_details()}</h1>
 			<form
 				{...createAssignment.enhance(async (form: any) => {
 					if (!everyone && selectedStudents.length === 0) {
@@ -142,3 +145,17 @@
 		</div>
 	{/if}
 </div>
+
+{#snippet document()}
+	<Document />
+{/snippet}
+
+{#snippet form()}
+	<Form />
+{/snippet}
+
+<Tabs
+	snippets={[document, form]}
+	labels={[m.document(), m.form()]}
+	class="absolute top-25 right-5 left-95 w-[calc(100vw-25rem)]"
+/>

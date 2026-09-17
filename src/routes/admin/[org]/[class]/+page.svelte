@@ -7,7 +7,6 @@
 	import { load } from './load.remote';
 	import type { OrganizationMember } from '$lib/util';
 	import { m } from '$lib/paraglide/messages';
-	import CreateAssignment from './CreateAssignment.svelte';
 	import { page } from '$app/state';
 	import { enhance } from '$app/forms';
 	import { handleFormError } from '$lib/error';
@@ -123,7 +122,9 @@
 				</a>
 			</div>
 		</div>
-		<CreateAssignment />
+		<div class="border-xl border border-(--o) bg-(--bg)">
+			{m.create_assignment()}
+		</div>
 	</div>
 	<div class="border-o relative z-10 h-[80vh] w-full rounded-xl bg-(--bg) p-5">
 		<h2 class="text-center text-3xl font-bold">{m.class_list()}</h2>
