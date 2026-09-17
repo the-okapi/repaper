@@ -203,7 +203,7 @@ textarea {
 	font-size: 1.25rem;
 
 	&:hover {
-		outline-offset: 1.45px;
+		outline-offset: 1.5px;
 	}
 }
 
