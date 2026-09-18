@@ -19,8 +19,8 @@
 	import Submit from '@lucide/svelte/icons/send';
 	import { barHidden } from '$lib/state.svelte';
 	import { extensions, editorExtensions } from '$lib/tiptap';
-	import { saveDocument, submitDocument, deleteFile } from './server.remote.ts';
-	import Accents from './Accents.svelte';
+	import { saveDocument, submitDocument } from './server.remote.ts';
+	import Accents from '$lib/components/Accents.svelte';
 	import { invalidateAll } from '$app/navigation';
 
 	let element: any = $state();
@@ -104,14 +104,6 @@
 				changesMadeSinceSave = true;
 				if (editorState.editor?.isActive('link')) {
 					editorState.editor?.commands.unsetLink();
-				}
-			},
-			onDelete: async (data) => {
-				if (data.type === 'node' && data.node.type.name === 'image') {
-					await deleteFile({
-						assignment,
-						url: data.node.attrs.src
-					});
 				}
 			},
 			onSelectionUpdate: updateTextStyle

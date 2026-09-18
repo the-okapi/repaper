@@ -2,4 +2,4 @@
 	import { m } from '$lib/paraglide/messages';
 </script>
 
-<p>{m.feature_wip()}</p>
+<p class="mt-4 text-center">{m.feature_wip()}</p>

@@ -93,50 +93,50 @@ export const submitDocument = command(string(), async (assignment) => {
 	}
 });
 
-const DeleteFileSchema = object({
-	assignment: string(),
-	url: string()
-});
+// const DeleteFileSchema = object({
+// 	assignment: string(),
+// 	url: string()
+// });
 
-export const deleteFile = command(DeleteFileSchema, async ({ assignment, url }) => {
-	const { locals } = getRequestEvent();
+// export const deleteFile = command(DeleteFileSchema, async ({ assignment, url }) => {
+// 	const { locals } = getRequestEvent();
 
-	const {
-		data: { user }
-	} = await locals.supabase.auth.getUser();
+// 	const {
+// 		data: { user }
+// 	} = await locals.supabase.auth.getUser();
 
-	if (!user) {
-		return { status: 401 };
-	}
+// 	if (!user) {
+// 		return { status: 401 };
+// 	}
 
-	try {
-		const [check] = unwrap(
-			await locals.supabase
-				.from('assignment_submissions')
-				.select('document')
-				.eq('id', assignment)
-				.eq('user', user.id),
-			93
-		);
+// 	try {
+// 		const [check] = unwrap(
+// 			await locals.supabase
+// 				.from('assignment_submissions')
+// 				.select('document')
+// 				.eq('id', assignment)
+// 				.eq('user', user.id),
+// 			93
+// 		);
 
-		if (!check) {
-			return { status: 400 };
-		}
+// 		if (!check) {
+// 			return { status: 400 };
+// 		}
 
-		const [image] = unwrap(
-			await locals.supabase
-				.from('images')
-				.delete()
-				.eq('document', check.document)
-				.eq('url', url)
-				.select('path'),
-			94
-		);
+// 		const [image] = unwrap(
+// 			await locals.supabase
+// 				.from('images')
+// 				.delete()
+// 				.eq('document', check.document)
+// 				.eq('url', url)
+// 				.select('path'),
+// 			94
+// 		);
 
-		unwrapNoData(await locals.supabase.storage.from('images').remove(image.path), 95);
+// 		unwrapNoData(await locals.supabase.storage.from('images').remove(image.path), 95);
 
-		return { status: 200 };
-	} catch {
-		return { status: 500 };
-	}
-});
+// 		return { status: 200 };
+// 	} catch {
+// 		return { status: 500 };
+// 	}
+// });
