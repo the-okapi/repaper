@@ -16,17 +16,17 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
-		"@inlang/paraglide-js": "^2.25.2",
+		"@inlang/paraglide-js": "^2.25.4",
 		"@sveltejs/adapter-vercel": "^6.3.4",
 		"@sveltejs/kit": "^2.70.3",
 		"@sveltejs/vite-plugin-svelte": "^7.3.0",
 		"@tailwindcss/vite": "^4.3.3",
-		"@types/node": "^26.5.1",
+		"@types/node": "^26.6.1",
 		"eslint": "^10.10.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.23.0",
 		"globals": "^17.12.0",
-		"prettier": "^3.9.6",
+		"prettier": "^3.9.7",
 		"prettier-plugin-svelte": "^4.1.1",
 		"prettier-plugin-tailwindcss": "^0.8.1",
 		"svelte": "^5.57.0",
@@ -37,7 +37,7 @@
 		"vite": "^8.3.0"
 	},
 	"dependencies": {
-		"@lucide/svelte": "^1.45.0",
+		"@lucide/svelte": "^1.47.0",
 		"@supabase/ssr": "^0.12.7",
 		"@supabase/supabase-js": "^2.116.0",
 		"@tiptap/core": "^3.31.3",
@@ -57,7 +57,7 @@
 		"bits-ui": "^2.19.2",
 		"loadersz": "^0.5.1",
 		"mode-watcher": "^1.1.0",
-		"resend": "^6.28.0",
+		"resend": "^6.28.1",
 		"svelte-sonner": "^1.2.1",
 		"valibot": "^1.5.0"
 	}
